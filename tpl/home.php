@@ -30,7 +30,7 @@
 	<div class="<?=(isset($GLOBALS['content']['intro-texte']) ? 'row' : 'editable-hidden'); ?>">
 		
 		<article class="col brd-rad-top-left">
-			<?php media('intro-img', array('size' => '550', 'lazy' => true)); ?>
+			<?php media('intro-visuel', array('size' => '550', 'lazy' => true)); ?>
 		</article>
 		
 		<article class="col bg-color-alt brd-rad-bot-right">
@@ -71,13 +71,17 @@
 				?>
 				<li class="mw140p">
 
-					<div>
-						<?php media("enunclic-img-".$key, array('size' => '85x85', 'lazy' => true, 'class' => 'brd-rad-100'));?>
-					</div>
-					
-					<div class="ptm">
-						<?php txt("enunclic-text-".$key, array("tag" => "span"));?>
-					</div>
+					<a <?php href("enunclic-lien-".$key); ?> class="white tdn">
+
+						<div>
+							<?php media("enunclic-img-".$key, array('size' => '85x85', 'lazy' => true, 'class' => 'brd-rad-100'));?>
+						</div>
+						
+						<div class="ptm">
+							<?php txt("enunclic-texte-".$key, array("tag" => "span"));?>
+						</div>
+
+					</a>
 
 				</li>
 				<?php
@@ -97,10 +101,10 @@
 <!-- ACTUALITÉS -->
 <section class="mw1044p mod center ptl pbl pls prs">
 	
-	<?php h2('titre-actus', 'vague'); ?>
+	<?php h2('titre-actus', 'vague pbm'); ?>
 	
 	<!-- Actualité à la une -->
-	<article>
+	<article class="">
 		<?php
 		$sql_alaune="
 		SELECT ".$tc.".* FROM ".$tc."
@@ -122,34 +126,37 @@
 		
 		if(isset($articles))
 		foreach($articles as $key => $article)
-		{?>
-		<!-- Image -->
-		<figure class="fl">
-
-			<div class="cover" data-bg="<?= $content_fiche['visuel'] ?>" data-lazy="bg" style="width: 100%; height: 225px;">
-			</div>
-
-		</figure>
-
-		<div>
-			</div>
-			<!-- Titre -->
-			<h3 class="tl mtn">
-				<a href="<?php make_url($res_fiche['title'], array("domaine" => true)) ?>" class="tdn"></a>
-			</h3>
-			
-			<!-- Extrait texte -->
-			<div class="ptm">
-				<?php 
-			if(isset($text)) echo word_cut($text, '100', '...');
+		{
 			?>
-		</div>
-		
-		<div class="absolute bot15 bold">
-			
-			<a href="<?=make_url($url_title, array("domaine" => true));?>"><span class=""><?php _e("Read more")?></span></a>
-			
-		</div>
+
+			<div class="<?=(isset($article['title']) ? 'flex wrap space-l aic center pam brd brd-rad-bot-right mbl' : 'none'); ?>">
+
+				<!-- Image -->
+				<figure class="">
+
+					<div class="cover" data-bg="<?= $article['content']['visuel']; ?>" data-lazy="bg" style="width: 300px; height: 225px;">
+					</div>
+
+				</figure>
+
+				<div class="mw600p">
+
+					<!-- Titre -->
+					<h3 class="tl mtn">
+						<a href="<?= make_url($article['title'], array("domaine" => true)); ?>" class="tdn"><?= $article['title']; ?></a>
+					</h3>
+					
+					<!-- Extrait texte -->
+					<div class="pbm">
+						<?php 
+					if(isset($article['content']['texte'])) echo word_cut($article['content']['texte'], '100', '...');
+					?>
+				
+					<!-- Lien Lire la suite -->
+					<a href="<?=make_url($article['title'], array("domaine" => true));?>"><span class=""><?php _e("Read more")?></span></a>
+						
+				</div>
+			</div>
 		
 		<?php
 		}
@@ -157,7 +164,7 @@
 	</article>
 
 	<!-- Dernières actualités -->
-	<article>
+	<article class="clear">
 
 		<div class="grid-3 space-l">
 			

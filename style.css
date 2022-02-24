@@ -33,7 +33,7 @@ h3, .h3-like { font-weight: bold; }
 } */
 
 .vague:before {
-	content: url('/theme/theme-elgar/img/vaguelette.svg');
+	content: url('/theme/elgar/img/vaguelette.svg');
 	position: relative;
 	width: 60px;
 	display: block;
@@ -1106,7 +1106,7 @@ header #logo { transition: opacity .5s; }
 		margin-top: 2rem;
 	}
 		header nav li {
-			float: left;
+			/* float: left; */
 			margin: 0 0.5rem;
 		}
 		header nav a { text-decoration: none; }

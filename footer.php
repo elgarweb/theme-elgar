@@ -14,7 +14,7 @@
 
 		<?php _e('Share this page'); ?>
 
-		<!-- <?php txt('txt-reseaux-sociaux', 'plm'); ?> -->
+		<!-- <?php txt('texte-reseaux-sociaux', 'plm'); ?> -->
 
 		<?php				
 		$titre_encode = urlencode($title);
@@ -103,7 +103,8 @@
 				</div>
 				
 				<!-- Logo France Relance -->
-				<img src="/theme/<?= $GLOBALS['theme']; ?>/img/logo-france-relance.png" alt="Logo France Relance" style="width: 150px;" loading="lazy" class="ptm">
+				<?php media('logo-sponsor', array('size' => '150', 'lazy' => 'true', 'class' => 'ptm')); ?>
+				<!-- <img src="/theme/<?= $GLOBALS['theme']; ?>/img/logo-france-relance.png" alt="Logo France Relance" style="width: 150px;" loading="lazy" class="ptm"> -->
 
 			</article>
 
