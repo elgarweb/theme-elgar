@@ -18,29 +18,43 @@ if(php_sapi_name() !== 'cli')
 
 // supprime les caractères utf8 invalide des urls
 ini_set('mbstring.substitute_character', 'none');
-$sql = null;
+$sql_content = $sql_meta = null;
+$id_start = 1000000;
 
-// Url du fichier source
-$url = "https://api-v3.tourinsoft.com/api/syndications/cdt64.tourinsoft.com/95d33256-58ec-471e-b9f3-30f23dcbfd04?format=json";
 
 // Récupère le fichier json distant
-$json = file_get_contents($url);
+$json = file_get_contents($GLOBALS['flux_tourinsoft']);
 $array = json_decode($json, true);
 
 
-//highlight_string(print_r($array, true));
+highlight_string(print_r($array, true));
 
-// Construction de la requete mysql
-$sql_list="REPLACE LOW_PRIORITY INTO `".$db_prefix."content` (`id`, `state`, `lang`, `robots`, `type`, `tpl`, `url`, `title`, `description`, `content`, `user_update`, `date_update`, `user_insert`, `date_insert`) VALUES ";
+// Construction des requetes mysql
+$sql_init_content="REPLACE LOW_PRIORITY INTO `".$tc."` (`id`, `state`, `lang`, `robots`, `type`, `tpl`, `url`, `title`, `description`, `content`, `user_update`, `date_update`, `user_insert`, `date_insert`) VALUES ";
+$sql_init_meta="REPLACE LOW_PRIORITY INTO `".$tm."` (`id`, `type`, `cle`) VALUES ";
 
 
 if(is_array($array['value']))
 foreach($array['value'] as $key => $val) 
 {
-	//[ObjectTypeName] => Fêtes et manifestations // TAG
+	//[ObjectTypeName] => Fêtes et manifestations // TAG ?
 
 	// @todo ajouter le alt sur l'image $val['PHOTOSs'][0]['Photo']['Titre']
-	// @todo date $val['DATESs'][0]['Datededebut'] $val['DATESs'][0]['Heuredouverture1'] $val['DATESs'][0]['Heuredefermeture1']
+
+	// @todo date 
+	//$val['DATESs'][0]['Datededebut'] $val['DATESs'][0]['Heuredouverture1'] 
+	//$val['DATESs'][0]['Datedefin'] $val['DATESs'][0]['Heuredefermeture1']
+
+
+	// construction de l'url
+	$url = encode($val['SyndicObjectName']);
+	$url = mb_convert_encoding($url, 'UTF-8', 'UTF-8');// Supprime les caractères utf8 de l'url
+	
+	if(@$list_url[$url]) $url = $url.'-'.$key;// Si l'url existe on ajoute le numéro de la fiche en fin d'url
+	$list_url[$url] = true;
+
+	$url = str_replace('--','-', $url);// Supprime les double tiré lié à la suppression des caractères utf8
+
 
 	// Contenu de l'article
 	$content = array (
@@ -57,19 +71,9 @@ foreach($array['value'] as $key => $val)
     $json_content = json_encode($content, JSON_UNESCAPED_UNICODE);
 
 
-	// construction de l'url
-	$url = encode($val['SyndicObjectName']);
-	$url =mb_convert_encoding($url, 'UTF-8', 'UTF-8');// Supprime les caractères utf8 de l'url
-	
-	if(@$list_url[$url]) $url = $url.'-'.$key;// Si l'url existe on ajoute le numéro de la fiche en fin d'url
-	$list_url[$url] = true;
-
-	$url = str_replace('--','-', $url);// Supprime les double tiré lié à la suppression des caractères utf8
-
-
 	// Donnée de l'évènement
-	$fiche = array(
-		'id' => 1000000+$key,
+	$values = array(
+		'id' => $id_start+$key,
 		'state' => "'active'",
 		'lang' => "'fr'",
 		'robot' => "''",
@@ -86,18 +90,32 @@ foreach($array['value'] as $key => $val)
 	);
 
 
-    $sql.="(".implode(",", $fiche)."),";
+    $sql_content.="(".implode(",", $values)."),";
 
-	//$GLOBALS['connect']->query(trim($sql_list.$sql,','));
-	//if($GLOBALS['connect']->error) echo $sql_list.$sql.'<br><font color="red">'.$GLOBALS['connect']->error.'</font><br><br>';
+	//$GLOBALS['connect']->query(trim($sql_init_content.$sql_content,','));
+	//if($GLOBALS['connect']->error) echo $sql_init_content.$sql_content.'<br><font color="red">'.$GLOBALS['connect']->error.'</font><br><br>';
 
-    // @todo: Ajout des tag lié ?
+    // @todo Suppression des dates dans les méta avant ajout ?
+    
+    // Ajout des dates dans les métas
+    $sql_meta.="(".implode(",", array(
+		'id' => $id_start+$key,
+		'type' => "'aaaa-mm-jj'",
+		'cle' => "'".date('Y-m-d', strtotime(str_replace('-', '/', $val['DATESs'][0]['Datededebut'])))."'"
+	))."),";
+
+    
+     // @todo: Ajout des tag lié ?
     // Suppression des tag lié au évènement tourinsoft ?
 }
 
 
-// Insertion dans la table
-$GLOBALS['connect']->query(trim($sql_list.$sql,','));
+// Insertion dans la table CONTENT
+$GLOBALS['connect']->query(trim($sql_init_content.$sql_content,','));
+echo $GLOBALS['connect']->error;
+
+// Insertion dans la table META
+$GLOBALS['connect']->query(trim($sql_init_meta.$sql_meta,','));
 echo $GLOBALS['connect']->error;
 
 //echo '<br><br>'.str_replace('),','),<br><br>', $sql);
