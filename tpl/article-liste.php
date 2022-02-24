@@ -57,7 +57,7 @@
 
 		$sql.=" LIMIT ".$start.", ".$num_pp;
 
-
+		//echo $sql;
 		$sel_fiche = $connect->query($sql);
 
 		$num_total = $connect->query("SELECT FOUND_ROWS()")->fetch_row()[0];// Nombre total de fiche
