@@ -20,7 +20,7 @@ function block($url_img, $url_title, $title, $text, $date = null)
 	        <!-- Image -->
 	        <figure>
 
-	            <div class="cover" data-bg="<?= $GLOBALS['home'].$url_img ?>" data-lazy="bg" style="width: 100%; height: 225px;">
+	            <div class="cover" data-bg="<?=(isset(parse_url($url_img)['scheme'])?'':$GLOBALS['home']).$url_img?>" data-lazy="bg" style="width: 100%; height: 225px;">
 	            </div>
 
 	        </figure>
