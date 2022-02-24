@@ -51,15 +51,23 @@
 				
 				<div id="input-recherche" class="inbl">
 					
-					<label for="recherche"><?txt('label-recherche')?></label>	
+					<label for="recherche"><?_e("Search the site")?></label>	
 
 					<div class="flex">
 
-						<input type="search" name="recherche" id="recherche" required=""/>
+						<input type="search" name="recherche" id="recherche" required>
 						
-						<a href="javascript:$('#rechercher').submit();void(0)" class="bg-color bt pat pls prs">
-							<i class="fa fa-search pan"></i>
-						</a>
+						<button type="submit" class="bg-color bt pat pls prs" value="<?php _e("Search")?>" aria-label="<?php _e("Search")?>">
+							<i class="fa fa-search" aria-hidden="true"></i>
+						</button>
+
+						<script>
+							$("#rechercher").on("submit", function(event) {
+								event.preventDefault();
+								var url = "/recherche/" + $("#rechercher input").val().replace(/\s+/g, '-').toLowerCase();
+								document.location.href = url;
+							});
+						</script>
 
 					</div>
 
