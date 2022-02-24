@@ -2,6 +2,7 @@
 $add_translation = array(
 	// HEADER
 	"Accessibility" => array("fr" => "Accessibilité"),
+	"Search" => array("fr" => "Rechercher"),
 
 	// FOOTER
 	// Footer - partage Réseaux sociaux
