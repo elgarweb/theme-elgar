@@ -1,6 +1,8 @@
 <?
 if(!$GLOBALS['domain']) exit;
 
+//@todo Remettre le mot rechercher en cours dans l'input ou dans une phrase à côté du nombre de résultat
+
 function highlight($txt, $recherche)
 {
 	$explode = explode(" ", $recherche);
