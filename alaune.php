@@ -52,7 +52,7 @@ switch(@$_REQUEST['mode'])
 				<?
 				$sel_alaune = $connect->query("SELECT * FROM ".$table_meta." WHERE id='".$res['id']."' AND type='".$res['type']."' AND cle='alaune' LIMIT 1");
 				$res_alaune = $sel_alaune->fetch_assoc();
-				if($res_alaune['id'])
+				if(isset($res_alaune['id']))
 				{?>
 					$("#alaune").prop("checked", true);
 				<?}
