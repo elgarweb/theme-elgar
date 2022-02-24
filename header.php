@@ -47,7 +47,7 @@
 			<div><a href="<?=$GLOBALS['home']?>"><?php media('logo', array('size' => '330x70', 'lazy' => 'true'))?></a></div>
 			
 			<!-- Formulaire de recherche -->
-			<form role="search" id="rechercher" action="/rechercher" method="post">
+			<form role="search" id="rechercher" action="/recherche/" method="post">
 				
 				<div id="input-recherche" class="inbl">
 					
