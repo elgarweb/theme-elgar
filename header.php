@@ -33,7 +33,7 @@
 
 				<nav role="navigation" aria-label="<?php _e("Quick access")?>" class="inline"><a href="#main" class="acces-rapide"><?php _e("Skip to content")?></a></nav>
 				|
-				<input type="checkbox" name="high-contrast" id="high-contrast"<?=(@$_COOKIE['high-contrast']?'checked="checked"':'')?>> <label for="high-contrast"><?php _e("Accessibility")?></label>
+				<input type="checkbox" name="high-contrast" id="high-contrast"<?=(@$_COOKIE['high-contrast']?'checked="checked"':'')?>> <label for="high-contrast"><?php _e("Enhanced contrast")?></label>
 
 			</div>
 
@@ -47,7 +47,7 @@
 			<div><a href="<?=$GLOBALS['home']?>"><?php media('logo', array('size' => '330x70', 'lazy' => 'true'))?></a></div>
 			
 			<!-- Formulaire de recherche -->
-			<form role="search" id="rechercher" action="/rechercher" method="post">
+			<form role="search" id="rechercher" action="/recherche/" method="post">
 				
 				<div id="input-recherche" class="inbl">
 					
