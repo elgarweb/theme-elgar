@@ -178,7 +178,11 @@
 			// Construction de la requete
 			$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
 
-			$sql.=" WHERE ".$tc.".type='article' AND id!='".$article['id']."' AND ".$tc.".lang='".$lang."' ".$sql_state." ORDER BY ".$tc.".date_insert DESC
+			$sql.=" WHERE ".$tc.".type='article'";
+			if(isset($articles)){
+			$sql.=" AND id!='".$article['id']."'";
+			}
+			$sql.=" AND ".$tc.".lang='".$lang."' ".$sql_state." ORDER BY ".$tc.".date_insert DESC
 			LIMIT 3";
 
 			$sel_article = $connect->query($sql);
