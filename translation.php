@@ -38,7 +38,9 @@ $add_translation = array(
 	"Go back to the news" => array("fr" => "Retour aux actualités"),
 	"Go back to the agenda" => array("fr" => "Retour à l'agenda"),
 
-
+	// RECHERCHE
+	"result" => array("fr" => "résultat", "eu" => "emaitzak"),
+	"for" => array("fr" => "pour", "eu" => "rentzat"),
 	
 );
 ?>

@@ -16,17 +16,16 @@
 
 		<!-- <?php txt('texte-reseaux-sociaux', 'plm'); ?> -->
 
-		<?php				
-		$titre_encode = urlencode($title);
-		$url_encode = urlencode(make_url($res['url'], array("domaine" => true)));
-		?>
-
 		<div class="plm">
 
-			<a href="https://www.facebook.com/sharer/sharer.php?u=<?=$url_encode?>" target="_blank">Facebook<i class="fa fa-fw fa-facebook color-alt big pls prm"></i></a>
+			<?php				
+			$titre_encode = rawurlencode($title);
+			$url_encode = urlencode(make_url($res['url'], array("domaine" => true)));
+			?>
+
+			<a href="https://www.facebook.com/sharer/sharer.php?u=<?=$url_encode?>" target="_blank">Facebook<i class="fa fa-fw fa-facebook color-alt big pls prm" aria-hidden="true"></i></a>
 			
-			<!--@todo lien partage par mail -->
-			<a href="">Mail<i class="fa fa-fw fa-mail color-alt big pls prm"></i></a>
+			<a href="mailto:?subject=<?=$titre_encode?>&body=<?=$url_encode?>" target="_blank">Mail<i class="fa fa-fw fa-mail color-alt big pls prm" aria-hidden="true"></i></a>
 
 		</div>
 
