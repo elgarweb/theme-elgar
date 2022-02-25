@@ -2,7 +2,7 @@
 
 <!--
 @todo Stéphanie :
-- en 1 clic : modules ?
+- actualaune : vérif qu'elle n'apparaisse pas aussi dans les 3 actus de dessous
 -->
 
 <!-- ZONE ALERTE -->
@@ -112,6 +112,7 @@
 			".$tm." ON ".$tc.".id = ".$tm.".id AND ".$tm.".type = 'article' 
 		WHERE 
 			".$tc.".type = 'article' AND ".$tc.".lang = '".$lang."' AND state = 'active'
+		ORDER BY ".$tc.".date_insert DESC
 		LIMIT 1";
 
 		//echo $sql_alaune."<br>";
@@ -127,6 +128,7 @@
 		if(isset($articles))
 		foreach($articles as $key => $article)
 		{
+			// var_dump($article['id']);
 			?>
 
 			<div class="<?=(isset($article['title']) ? 'flex wrap space-l aic center pam brd brd-rad-bot-right mbl' : 'none'); ?>">
@@ -176,7 +178,11 @@
 			// Construction de la requete
 			$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
 
-			$sql.=" WHERE ".$tc.".type='article' AND ".$tc.".lang='".$lang."' ".$sql_state." ORDER BY ".$tc.".date_insert DESC
+			$sql.=" WHERE ".$tc.".type='article'";
+			if(isset($articles)){
+			$sql.=" AND id!='".$article['id']."'";
+			}
+			$sql.=" AND ".$tc.".lang='".$lang."' ".$sql_state." ORDER BY ".$tc.".date_insert DESC
 			LIMIT 3";
 
 			$sel_article = $connect->query($sql);
