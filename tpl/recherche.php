@@ -1,8 +1,6 @@
 <?
 if(!$GLOBALS['domain']) exit;
 
-//@todo Remettre le mot rechercher en cours dans l'input ou dans une phrase à côté du nombre de résultat
-
 function highlight($txt, $recherche)
 {
 	$explode = explode(" ", $recherche);
@@ -10,6 +8,7 @@ function highlight($txt, $recherche)
 	else return $txt;
 }
 ?>
+
 <section class="w960p mod center ptl mbl">
 
 
@@ -71,7 +70,13 @@ function highlight($txt, $recherche)
 	$num_total = $connect->query("SELECT FOUND_ROWS()")->fetch_row()[0];// Nombre total de fiche
 	?>
 
-	<div class="tc"><?=$num_total." ".__("résultat").($num_total>1?'s':'');?></div>
+
+	<div class="tc">
+		<?=$num_total.' '.__("result").($num_total>1?'s':'')?>
+		<?=__("for")?>
+		<strong><?=htmlspecialchars(strip_tags(@$_POST['recherche']));?></strong>
+	</div>
+
 
 	<?
 	while($res_fiche = $sel_fiche->fetch_assoc())
@@ -105,6 +110,6 @@ function highlight($txt, $recherche)
 	$(function()
 	{
 		// Remplis l'input recherche avec les mots-clés de la recherche
-		<?if(@$_POST['recherche']) {?>$("#recherche input").val("<?=htmlspecialchars($_POST['recherche'])?>")<?}?>
+		<?if(@$_POST['recherche']) {?>$("#rechercher input").val("<?=htmlspecialchars($_POST['recherche'])?>")<?}?>
 	});
 </script>
