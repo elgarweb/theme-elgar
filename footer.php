@@ -57,11 +57,9 @@
 			<article>
 
 				<!-- @todo Formulaire newsletter -->
-				<div class="pbm">
+				<div class="pbm">	
 
-					<?php _e('Subscribe to the newsletter of your city') ?>
-
-					<form id="newsletter" method="post" action="" target="_blank" class="pts">
+					<form id="newsletter" method="post" action="" target="_blank">
 
 						<input type="email" name="email" style="display:none" />
 
@@ -69,11 +67,13 @@
 
 						<!-- <input type="hidden" name="webform_id" value="<?=$GLOBALS['newsletter-id'][$lang]?>"> -->
 
-						<div class="flex">
+						<label for="email_newsletter"><?php _e('Subscribe to the newsletter of your city') ?></label>
 
-							<input type="email" name="inf[1]" data-inf-meta = "1" data-inf-error = "Merci de renseigner une adresse email" required="required" placeholder="<?php _e("Your email")?>" class="w400p pts pbs pls">	
+						<div class="flex pts">
+
+							<input type="email" name="inf[1]" id="email_newsletter" data-inf-meta="1" data-inf-error="Merci de renseigner une adresse email" required="required" placeholder="<?php _e("Your email")?>" class="w400p pts pbs pls">	
 							
-							<button type="submit" name="" value="Valider" class="bt bg-color-alt bold pts pbs plm prm">
+							<button type="submit" class="bt bg-color-alt bold pts pbs plm prm">
 								<?php _e("Subscribe"); ?>
 							</button>
 
