@@ -55,7 +55,7 @@
 
 					<div class="flex">
 
-						<input type="search" name="recherche" id="recherche" required>
+						<input type="search" name="recherche" id="recherche">
 						
 						<button type="submit" class="bg-color bt pat pls prs" value="<?php _e("Search")?>" aria-label="<?php _e("Search")?>">
 							<i class="fa fa-search" aria-hidden="true"></i>
