@@ -44,11 +44,15 @@
 
 		// Pour le tri par date pour les events
 		if($res['url']=='agenda')
-		$sql.=" JOIN ".$tm." AS event ON event.id=".$tc.".id AND event.type='aaaa-mm-jj'";//aaaa-mm-jjTh:m:s
+			$sql.=" JOIN ".$tm." AS event ON event.id=".$tc.".id AND event.type='aaaa-mm-jj'";
 
-		
-		$sql.=" WHERE ".$tc.".type='".($res['url']=='agenda'?"event":"article")."' AND ".$tc.".lang='".$lang."' ".$sql_state;//event-tourinsoft
-		
+		$sql.=" WHERE ".$tc.".lang='".$lang."' ".$sql_state." AND";
+
+		// Type de contenu event ou article
+		if($res['url']=='agenda') 
+			$sql.=" (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft')";
+		else
+			$sql.=" ".$tc.".type='article'";
 
 		// Si event on tri par date de l'evenement
 		if($res['url']=='agenda') $sql.=" ORDER BY event.cle DESC";

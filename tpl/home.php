@@ -226,7 +226,7 @@
 			// Pour le tri par date pour les events
 			$sql.=" JOIN ".$tm." AS event ON event.id=".$tc.".id AND event.type='aaaa-mm-jj'";
 
-			$sql.=" WHERE ".$tc.".type='event' AND ".$tc.".lang='".$lang."' ".$sql_state;
+			$sql.=" WHERE (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft') AND ".$tc.".lang='".$lang."' ".$sql_state;
 			
 			// Tri par date de l'evenement
 			$sql.=" ORDER BY event.cle DESC";
