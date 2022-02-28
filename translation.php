@@ -4,6 +4,9 @@ $add_translation = array(
 	"Accessibility" => array("fr" => "Accessibilité"),
 	"Search" => array("fr" => "Rechercher"),
 	"Search the site" => array("fr" => "Rechercher sur le site"),
+	
+	"Breadcrumb" => array("fr" => "Fil d'Ariane"),
+	"Home" => array("fr" => "Accueil"),
 
 	// FOOTER
 	// Footer - partage Réseaux sociaux

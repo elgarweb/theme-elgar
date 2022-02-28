@@ -12,22 +12,25 @@
 	<!-- PARTAGE RÉSEAUX SOCIAUX -->
 	<section id="partage" class="mw1044p flex wrap jcc center tc ptl pbl pls prs">
 
-		<?php _e('Share this page'); ?>
+		<?if(isset($res['url'])){?>
 
-		<!-- <?php txt('texte-reseaux-sociaux', 'plm'); ?> -->
+			<?php _e('Share this page'); ?>
 
-		<div class="plm">
+			<!-- <?php txt('texte-reseaux-sociaux', 'plm'); ?> -->
+			<div class="plm">
 
-			<?php				
-			$titre_encode = rawurlencode($title);
-			$url_encode = urlencode(make_url($res['url'], array("domaine" => true)));
-			?>
+				<?php				
+				$titre_encode = rawurlencode($title);
+				$url_encode = urlencode(make_url($res['url'], array("domaine" => true)));
+				?>
 
-			<a href="https://www.facebook.com/sharer/sharer.php?u=<?=$url_encode?>" target="_blank">Facebook<i class="fa fa-fw fa-facebook color-alt big pls prm" aria-hidden="true"></i></a>
+				<a href="https://www.facebook.com/sharer/sharer.php?u=<?=$url_encode?>" target="_blank">Facebook<i class="fa fa-fw fa-facebook color-alt big pls prm" aria-hidden="true"></i></a>
+				
+				<a href="mailto:?subject=<?=$titre_encode?>&body=<?=$url_encode?>" target="_blank">Mail<i class="fa fa-fw fa-mail color-alt big pls prm" aria-hidden="true"></i></a>
+
+			</div>
 			
-			<a href="mailto:?subject=<?=$titre_encode?>&body=<?=$url_encode?>" target="_blank">Mail<i class="fa fa-fw fa-mail color-alt big pls prm" aria-hidden="true"></i></a>
-
-		</div>
+		<?}?>
 
 	</section>
 

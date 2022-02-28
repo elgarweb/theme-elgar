@@ -18,16 +18,18 @@ if(php_sapi_name() !== 'cli')
 
 // supprime les caractères utf8 invalide des urls
 ini_set('mbstring.substitute_character', 'none');
-$sql_content = $sql_meta = null;
+$sql_content = $sql_meta = $visuel_dest = null;
 $id_start = -1000000000;
-$limit = 50;
+$limit = 50;// 50
+
+$chemin_visuel = $GLOBALS['media_dir'].'/tourinsoft';
+$racine = '../../';
+$new_width = 320;
 
 
 // Récupère le fichier json distant
 $json = file_get_contents($GLOBALS['flux_tourinsoft']);
 $array = json_decode($json, true)['value'];
-
-
 
 
 // Construction des requetes mysql
@@ -47,6 +49,14 @@ $GLOBALS['connect']->query("DELETE FROM ".$tc." WHERE type='event-tourinsoft'");
 
 if(is_array($array))
 {
+	// Création du dossier pour les images
+	@mkdir($_SERVER['DOCUMENT_ROOT'].$chemin_visuel, 0755, true);//.$GLOBALS['path'] /resize
+	
+	// Nettoie les images dans le dossier
+	array_map('unlink', array_filter((array) glob($_SERVER['DOCUMENT_ROOT'].$chemin_visuel.'/*')));
+	array_map('unlink', array_filter((array) glob($_SERVER['DOCUMENT_ROOT'].$GLOBALS['media_dir'].'/resize/tourinsoft/*')));
+
+
 	// TRI PAR DATE
 	// Mets la date à un niveau plus haut pour le tri simplifier
 	foreach($array as $key => $val) 
@@ -63,7 +73,7 @@ if(is_array($array))
 	}, $array), SORT_ASC, $array);
 
 
-	highlight_string(print_r($array, true));
+	//highlight_string(print_r($array, true));
 
 
 	// CRÉATION DE LA REQUÊTE D'AJOUT DES CONTENUS
@@ -71,10 +81,7 @@ if(is_array($array))
 	{
 		$key = $key + 1;
 
-		//[ObjectTypeName] => Fêtes et manifestations // TAG ?
-
-		// @todo ajouter le alt sur l'image $val['PHOTOSs'][0]['Photo']['Titre']
-
+		echo '<hr><h2>'.$key.'. '.$val['SyndicObjectName'].'</h2>';
 
 		// construction de l'url
 		$url = encode($val['SyndicObjectName']);
@@ -86,6 +93,44 @@ if(is_array($array))
 		$url = str_replace('--','-', $url);// Supprime les double tiré lié à la suppression des caractères utf8
 
 
+		// Retravaille des images
+		if(@$val['PHOTOSs'][0]['Photo']['Url']) 
+		{
+			$visuel_source = $val['PHOTOSs'][0]['Photo']['Url'];
+
+			$visuel_dest = $chemin_visuel.'/'.basename($visuel_source);
+
+			// Copie de l'image distante
+			if(copy($visuel_source, $racine.$visuel_dest))
+			{
+				$source_size = round(filesize($racine.$visuel_dest)/1024);
+
+				echo '✅ copy '.$visuel_source.' '.$source_size.'ko<br>';
+
+				// Taille de l'image source rapatrier
+				list($source_width, $source_height, $type, $attr) = getimagesize($racine.$visuel_dest);
+				
+				// Si l'image est plus grande que la taille limtie on la resize
+				if($source_width > $new_width) 
+				{
+					$visuel_source = $racine.$visuel_dest;
+
+					// Resize
+					$visuel_dest = resize($racine.$visuel_dest, $new_width, null, 'tourinsoft');	
+
+					// Supp l'image source si resize
+					unlink($visuel_source);
+
+					$new_size = round(filesize($racine.strtok($visuel_dest, '?'))/1024);
+					$p100 = 100-round($new_size*100/$source_size);
+
+					echo 'ℹ️ resize '.$new_size.'ko ('.$p100.'%)<br>';
+				} 
+			}
+			else echo '❌ copy error '.$visuel_source;
+		}
+
+
 		// @todo date 
 		// $val['DATESs'][0]['Datededebut'] 
 		// $val['DATESs'][0]['Heuredouverture1'] $val['DATESs'][0]['Heuredefermeture1']
@@ -95,7 +140,8 @@ if(is_array($array))
 		// Contenu de l'article
 		$content = array (
 			'title' => $val['SyndicObjectName'],
-			'visuel' => @$val['PHOTOSs'][0]['Photo']['Url'],
+			'visuel' => $visuel_dest,
+			'visuel-alt' => @$val['PHOTOSs'][0]['Photo']['Titre'].' - '.@$val['PHOTOSs'][0]['Photo']['Credit'],
 			'texte' => $val['DESCRIPTIFSs'][0]['Descriptioncommerciale'],
 			'dates' => $val['DATESs'][0]['Datededebut'],
 			'contact' => @$val['MOYENSCOMs'][0]['CoordonneesTelecom'],
@@ -145,6 +191,7 @@ if(is_array($array))
 
 	    
 	     // @todo: Ajout des tag lié ?
+		//[ObjectTypeName] => Fêtes et manifestations
 
 	    if($key >= $limit) break;
 	}

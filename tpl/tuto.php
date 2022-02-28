@@ -1,3 +1,17 @@
+<?
+/*
+@todo:
+
+lors de la création du site créer les pages suivantes pour le bon fonctionnement du site
+- recherche
+- navigation
+- ....
+
+=> voir en fonction des traductions, et si plusieur (3 langues)
+
+*/
+?>
+
 <style>
 
 .tpl-tuto h2, .tpl-tuto .h2-like,
