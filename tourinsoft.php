@@ -39,10 +39,10 @@ $sql_init_meta="REPLACE LOW_PRIORITY INTO `".$tm."` (`id`, `type`, `cle`) VALUES
 $GLOBALS['connect']->query("DELETE FROM ".$tt." WHERE zone='agenda' AND id<=0");
 
 // Suppression des dates dans les méta avant ajout ?
-$GLOBALS['connect']->query("DELETE FROM ".$tm." WHERE type='aaaa-mm-jjTh:m:s' AND id<=0");
+$GLOBALS['connect']->query("DELETE FROM ".$tm." WHERE type='aaaa-mm-jj' AND id<=0");
 
 // Suppression des contenus
-$GLOBALS['connect']->query("DELETE FROM ".$tc." WHERE type='event-tourinsoft' AND id<=0");
+$GLOBALS['connect']->query("DELETE FROM ".$tc." WHERE type='event-tourinsoft'");// AND id<=0
 
 
 if(is_array($array))
@@ -63,7 +63,7 @@ if(is_array($array))
 	}, $array), SORT_ASC, $array);
 
 
-	//highlight_string(print_r($array, true));
+	highlight_string(print_r($array, true));
 
 
 	// CRÉATION DE LA REQUÊTE D'AJOUT DES CONTENUS
@@ -139,7 +139,7 @@ if(is_array($array))
 			//'type' => "'aaaa-mm-jj'",
 			//'cle' => "'".date('Y-m-d', strtotime(str_replace('-', '/', $val['DATESs'][0]['Datededebut'])))."'"
 			'id' => -$key,
-			'type' => "'aaaa-mm-jjTh:m:s'",
+			'type' => "'aaaa-mm-jj'",
 			'cle' => "'".$val['datedebut']."'"
 		))."),";
 
