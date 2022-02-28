@@ -5,7 +5,7 @@
 	<?php 
 	h1('title');
 	
-	txt('texte-intro', 'mw1180p mod center ptm plm prm');
+	txt('description', 'mw1180p mod center ptm plm prm');
 	?>
 	
 </section>
