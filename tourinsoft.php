@@ -81,7 +81,7 @@ if(is_array($array))
 	{
 		$key = $key + 1;
 
-		echo '<hr><h2>'.$val['SyndicObjectName'].'</h2>';
+		echo '<hr><h2>'.$key.'. '.$val['SyndicObjectName'].'</h2>';
 
 		// construction de l'url
 		$url = encode($val['SyndicObjectName']);
@@ -122,9 +122,9 @@ if(is_array($array))
 					unlink($visuel_source);
 
 					$new_size = round(filesize($racine.strtok($visuel_dest, '?'))/1024);
-					$p100 = $new_size*100/$source_size;
+					$p100 = 100-round($new_size*100/$source_size);
 
-					echo 'ℹ️ resize '.$visuel_source.' '.$new_size.'ko ('.$p100.'%)<br>';
+					echo 'ℹ️ resize '.$new_size.'ko ('.$p100.'%)<br>';
 				} 
 			}
 			else echo '❌ copy error '.$visuel_source;
