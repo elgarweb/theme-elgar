@@ -23,6 +23,11 @@ h1 {
 h3, .h3-like { font-weight: bold; }
 
 
+/* Fil d'ariane */
+.ariane { border-bottom: 2px solid #f2f2f2; }
+.ariane .tdn { text-decoration: underline !important; }
+
+
 /* .vague:before {
 	font-family: 'FontAwesome';
 	content: '\e86c';
@@ -31,6 +36,7 @@ h3, .h3-like { font-weight: bold; }
 	color: #46cfc0;
 	margin: auto;
 } */
+
 
 .vague:before {
 	content: url('/theme/elgar/img/vaguelette.svg');
@@ -42,10 +48,9 @@ h3, .h3-like { font-weight: bold; }
 	/* color: #46cfc0; */
 }
 
+
 /* Mots en langue basque */
-span[lang="eu"] {
-	border-bottom: dotted 1px #31455D;
-}
+span[lang="eu"] { border-bottom: dotted 1px #31455D; }
 
 
 /* bouton pour les liens */
