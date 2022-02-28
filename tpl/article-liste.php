@@ -80,7 +80,7 @@
 
 	</div>
 
-	<div class="tc">
+	<div class="tc mtl">
 
 		<?php
 		page($num_total, $page);
