@@ -34,7 +34,9 @@ switch(@$_GET['mode'])
 		</style>
 
 
-		<section class="mw960p mod center mtm">
+		<section class="mw960p mod center">
+
+			<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 
 			<article class="w80 center">
 

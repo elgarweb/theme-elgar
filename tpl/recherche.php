@@ -9,7 +9,9 @@ function highlight($txt, $recherche)
 }
 ?>
 
-<section class="w960p mod center ptl mbl">
+<section class="mw960p mod center">
+
+	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 
 
 	<h1 class="tc"><?txt('title')?></h1>
