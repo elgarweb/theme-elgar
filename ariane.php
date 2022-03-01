@@ -14,7 +14,7 @@ if(!$GLOBALS['domain']) exit;
 		// Si page "navigation" on récupère le nom du tag/filtre
 
 		// Sinon on propose de saisir le tag correspondant
-		tag('navigation', array('tag' => 'span'));
+		tag('navigation', array('tag' => 'span', 'separator' => ' / '));//'itemprop' => 'breadcrumb',
 		?>
 	</nav>
 
