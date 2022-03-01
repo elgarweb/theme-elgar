@@ -40,10 +40,26 @@ $add_translation = array(
 	"Read more" => array("fr" => "Lire la suite"),
 	"Go back to the news" => array("fr" => "Retour aux actualités"),
 	"Go back to the agenda" => array("fr" => "Retour à l'agenda"),
+	"Edit event" => array("fr" => "Edition d'un événement"),
+	"Category" => array("fr" => "Catégorie"),
 
 	// RECHERCHE
 	"result" => array("fr" => "résultat", "eu" => "emaitzak"),
 	"for" => array("fr" => "pour", "eu" => "rentzat"),
-	
+
+	// ANNUAIRE
+	"Add annuaire" => array("fr" => "Ajouter un annuaire"),
+	"Edit annuaire" => array("fr" => "Edition d'un annuaire"),
+	"directory" => array("fr" => "annuaire"),
+	"Go back to the directory" => array("fr" => "Retour à l'annuaire"),
+
+	// ARRETES
+	"Add arrete" => array("fr" => "Ajouter un arrêté"),
+	"Edit arrete" => array("fr" => "Edition d'un arrêté"),
+	"See the sheet" => array("fr" => "Voir la fiche"),
+
+	// TOURINSOFT
+	"Add event-tourinsoft" => array("fr" => "Ajouter un événement Tourinsoft"),
+	"Edit event-tourinsoft" => array("fr" => "Edition d'un événement Tourinsoft"),
 );
 ?>

@@ -13,7 +13,7 @@ function block($url_img, $url_title, $title, $text, $date = null)
 
     ?>
 
-    <div id="block" class="mw320p relative brd-top-alt brd brd-rad-bot-right pbl">
+    <div class="mw320p relative brd-top-alt brd brd-rad-bot-right pbl">
 
 	    <article>
 
@@ -38,7 +38,7 @@ function block($url_img, $url_title, $title, $text, $date = null)
 				}
 
 
-				if($res['tpl'] == 'article-liste')
+				if($res['tpl'] == 'article-liste' or $res['tpl'] == 'annuaire-liste')
 				{
 					echo
 				'<h2 class="h3-like tl">
@@ -71,6 +71,7 @@ function block($url_img, $url_title, $title, $text, $date = null)
 
 				?>
 
+				<!-- Lien vers détail -->
 				<div class="absolute bot15 bold">
 
 					<a href="<?=make_url($url_title, array("domaine" => true));?>"><span class=""><?php _e("Read more")?></span></a>

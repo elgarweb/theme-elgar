@@ -26,15 +26,15 @@
 
 <section class="mw1044p mod center plm prm">
 
-	<div class="grid-3 space-xl">
+	<div>
 		
 		<?php 
 		// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs
-		if(!@$_SESSION['auth']['edit-article']) $sql_state = "AND state='active'";
+		if(!@$_SESSION['auth']['edit-annuaire']) $sql_state = "AND state='active'";
 		else $sql_state = "";
 
 		// Navigation par page
-		$num_pp = 6;
+		$num_pp = 3;
 
 		if(isset($GLOBALS['filter']['page'])) $page = (int)$GLOBALS['filter']['page']; else $page = 1;
 
@@ -51,25 +51,14 @@
 		ON
 		(
 			".$tt.".id = ".$tc.".id AND
+			".$tt.".zone = 'annuaire' AND
 			".$tt.".encode = '".$tag."'
 		)";
-
-
-		// Pour le tri par date pour les events
-		if($res['url']=='agenda')
-			$sql.=" JOIN ".$tm." AS event ON event.id=".$tc.".id AND event.type='aaaa-mm-jj'";
 
 		$sql.=" WHERE ".$tc.".lang='".$lang."' ".$sql_state." AND";
 
 		// Type de contenu event ou article
-		if($res['url']=='agenda') 
-			$sql.=" (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft')";
-		else
-			$sql.=" ".$tc.".type='article'";
-
-		// Si event on tri par date de l'evenement
-		if($res['url']=='agenda') $sql.=" ORDER BY event.cle DESC";
-		else $sql.=" ORDER BY ".$tc.".date_insert DESC";
+		$sql.=" ".$tc.".type='annuaire'";
 
 		$sql.=" LIMIT ".$start.", ".$num_pp;
 
@@ -85,8 +74,51 @@
 			else $state = "";
 
 			$content_fiche = json_decode($res_fiche['content'], true);
+			?>
 
-			block(@$content_fiche['visuel'], $res_fiche['url'], $res_fiche['title'], @$content_fiche['texte-chapo'], @$content_fiche['aaaa-mm-jj']);
+
+			<div class="brd-top-alt brd brd-rad-bot-right pbl">
+
+				<article class="flex">
+
+					<!-- Image -->
+					<figure>
+
+						<div class="cover" data-bg="<?=(isset(parse_url($content_fiche['visuel'])['scheme'])?'':$GLOBALS['home']).$content_fiche['visuel']; ?>" data-lazy="bg" style="width: 100%; height: 225px;">
+						</div>
+
+					</figure>
+
+					<!-- Titre -->
+					<div class=" pam brd-top">
+		
+						<h2 class="h3-like tl">
+							<a href="<?=make_url($res_fiche['url'], array("domaine" => true)); ?>" class="tdn"><?=$res_fiche['title']?>
+							</a>
+						</h2>
+
+						<!-- Extrait texte -->
+						<div class="ptm">
+							<?php 
+							if(isset($content_fiche['texte-chapo'])) echo word_cut($content_fiche['texte-chapo'], '100', '...');
+							?>
+						</div>
+
+						<!-- Lien vers détail -->
+						<div class="">
+
+							<a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>"><span class=""><?php _e("See the sheet")?></span></a>
+							
+						</div>
+
+					</div>
+
+				</article>
+
+			</div>
+
+
+		<?php	
 		}
 		?>
 
