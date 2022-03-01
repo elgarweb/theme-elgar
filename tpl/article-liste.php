@@ -2,6 +2,8 @@
 
 <section class="mw1180p mod center mbl plm prm">
 
+	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
+	
 	<?php 
 	h1('title');
 	

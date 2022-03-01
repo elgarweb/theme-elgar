@@ -3,7 +3,9 @@ if(!$GLOBALS['domain']) exit;
 if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['content']['title'];
 ?>
 
-<section class="mw960p mod center mtm mbl">
+<section class="mw960p mod center">
+
+	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 
 	<?php h1('titre')?>
 
