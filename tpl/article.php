@@ -24,14 +24,34 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 
 			<!-- Tag -->
 
-			<div class="bold"><?php _e("Catégories")?></div>
+			<div class="editable-hidden bold"><?php _e("Category")?></div>
 
-			<?php tag('actualites'); ?>
+			<?php 
+			if($res['tpl']=='article')
+				tag('actualites'); 
+			elseif ($res['tpl']=='event')
+				tag('agenda'); 
+			else
+				tag('annuaire'); 
+			?>
 
-			<script>
-			if(!$(".editable-tag").text()) $("#actualites").prev("h3").hide();
-			else $("#actualites").addClass("mbm");
-			</script>
+			<?php if($res['tpl']=='article') { ?>
+				<script>
+				if(!$(".editable-tag").text()) $("#actualites").prev("h3").hide();
+				else $("#actualites").addClass("mbm");
+				</script>
+
+			<?php } elseif($res['tpl']=='event') { ?>
+				<script>
+				if(!$(".editable-tag").text()) $("#agenda").prev("h3").hide();
+				else $("#agenda").addClass("mbm");
+				</script>
+
+			<?php } else ?>
+				<script>
+				if(!$(".editable-tag").text()) $("#annuaire").prev("h3").hide();
+				else $("#annuaire").addClass("mbm");
+				</script>
 
 			<!-- Chapô -->
 			<?php txt('texte-chapo', 'pbm'); ?>
@@ -77,11 +97,15 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 		
 	</article>
 	
-	<!-- Bouton vers toutes les actualités -->
+	<!-- Bouton vers toutes les actualités/agenda/annuaire -->
 	<div class="tc ptl">
-		<a href="<?=make_url(($res['type']=='event'?__('agenda'):__('news')), array("domaine" => true))?>" class="bt pas">
-			<? echo ($res['type']=='event'?__("Go back to the agenda"):__("Go back to the news")); ?>
+
+		<a href="<?= make_url(($res['type']=='event' ? __('agenda') : ($res['type']=='article' ? __('news') : __('directory'))), array("domaine" => true))?>" class="bt pas">
+
+			<?= ($res['type']=='event' ? __("Go back to the agenda") : ($res['type']=='article' ? __("Go back to the news") : __("Go back to the directory"))); ?>
+
 		</a>
+
 	</div>
 
 </section>
