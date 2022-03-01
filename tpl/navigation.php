@@ -1,8 +1,4 @@
-<?php
-if(!$GLOBALS['domain']) exit;
-//@todo: stylisé la liste avec des fleches vertes
-//@todo voire pour surligner dans le menu le bon éléments en fonction de la ou on se trouve (page tag + page interne qui passe par un tag)
-?>
+<?php if(!$GLOBALS['domain']) exit;?>
 
 <section class="mw960p center">
 
@@ -12,7 +8,7 @@ if(!$GLOBALS['domain']) exit;
 
 		<?php h1('title', 'tl');?>
 
-		<ul class="">
+		<ul class="navigation">
 	 	<?php
 		// Récupération du filtre dans l'url pour rechercher les pages connexes
 

@@ -87,14 +87,14 @@
 				<span class="open">Menu</span>
 				<span class="close none"><?php _e("Close")?></span>
 			</button>
-			
+
 			<ul id="header-menu" class="flex space-l aic bold pll prl">
-				<?php
+				<?php				
 				// Extraction du menu
 				foreach($GLOBALS['nav'] as $cle => $val)
 				{
-					// Menu sélectionné si page en cours ou article (actu)
-					if(get_url() == $val['href'] or (@$res['type'] == "article" and $val['href'] == "actualites"))
+					// Menu sélectionné si page en cours // @$res['type'] == "article" and $val['href'] == "actualites"  or ()
+					if(get_url() == $val['href'] or @array_keys($GLOBALS['filter'])[0] == basename($val['href']))
 						$selected = " selected";
 					else
 						$selected = "";
