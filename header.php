@@ -23,7 +23,7 @@
 
 	<section class="mw1044p mod center relative pls prs">
 
-		<article class="flex wrap jcsa brd-bot ptm pbs">
+		<article class="flex wrap jcsa brd-bot-alt ptm pbs">
 
 			<!-- Conformité -->
 			<?php txt('texte-conformite'); ?>
@@ -33,7 +33,7 @@
 
 				<nav role="navigation" aria-label="<?php _e("Quick access")?>" class="inline"><a href="#main" class="acces-rapide"><?php _e("Skip to content")?></a></nav>
 				|
-				<input type="checkbox" name="high-contrast" id="high-contrast"<?=(@$_COOKIE['high-contrast']?'checked="checked"':'')?>> <label for="high-contrast"><?php _e("Enhanced contrast")?></label>
+				<input type="checkbox" name="high-contrast" id="high-contrast"<?=(@$_COOKIE['high-contrast']?'checked="checked"':'')?>> <label class="tdu" for="high-contrast"><?php _e("Enhanced contrast")?></label>
 
 			</div>
 
@@ -78,8 +78,8 @@
 		</article>
 	</section>
 		
-		<!-- Menu principal -->
-		<section class="bg-color">
+	<!-- Menu principal -->
+	<section class="bg-color">
 
 		<nav role="navigation" class="mw1044p center brd-top-alt mtl tc" aria-label="<?php _e("Browsing menu")?>">
 
@@ -99,7 +99,7 @@
 					else
 						$selected = "";
 
-					echo"<li class='relative pbm ".$selected."'><a href=\"".make_url($val['href'], array("domaine" => true))."\"".($val['id']?" id='".$val['id']."'":"")."".($val['target']?" target='".$val['target']."'":"")." class='white''".($selected?' title="'.$val['text'].' - '.__("current page").'"':'').">".$val['text']."</a></li>";
+					echo"<li class='relative pbm ".$selected."'><a href=\"".make_url($val['href'], array("domaine" => true))."\"".($val['id']?" id='".$val['id']."'":"")."".($val['target']?" target='".$val['target']."'":"")." class='white tdn''".($selected?' title="'.$val['text'].' - '.__("current page").'"':'').">".$val['text']."</a></li>";
 				}
 				?>
 			</ul>

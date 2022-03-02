@@ -109,7 +109,7 @@ button { border: solid 1px #26D691; }
 .brd { border: 1px solid #00253F; }
 .brd-top { border-top: solid 3px #00253F; }
 .brd-top-alt { border-top: solid 3px #26D691; }
-.brd-bot { border-bottom: solid 1px #00253F; }
+.brd-bot-alt { border-bottom: solid 1px #26D691; }
 
 /* Border-radius */
 .brd-rad-top-left, 
@@ -200,7 +200,7 @@ body {
 	margin: 0;
 	box-sizing: border-box;	
 	background-color: #fff;
-	color: #00253F;
+	color: #000;
 	font-family: 'Montserrat', sans-serif;
 	line-height: 1.5;
 	/* letter-spacing: 0.12em; Accessible */
@@ -630,6 +630,7 @@ input[type="reset"].unstyled:focus {
 /* Lien */
 .tdn, .tdn a { text-decoration: none !important; }
 .tdn:hover { text-decoration: none !important; }
+.tdu { text-decoration: underline; }
 
 
 /* Pour ajouter des pictos dans les menus select */
@@ -1136,7 +1137,7 @@ header #logo { transition: opacity .5s; }
 			/* float: left; */
 			margin: 0 0.5rem;
 		}
-		header nav a { text-decoration: none; }
+		/* header #menu-principal nav a { text-decoration: none; } */
 
 
 	/* BOUTON BURGER & Animation */
