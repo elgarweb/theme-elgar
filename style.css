@@ -1129,6 +1129,7 @@ header #logo { transition: opacity .5s; }
 			position: relative;
 			display: flex;
 			margin: auto;
+			padding: 0 0.5rem;
 			min-height: 90px;
 			align-items: center;
 		}
