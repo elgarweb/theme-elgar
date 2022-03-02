@@ -57,7 +57,7 @@
 
 						<input type="search" name="recherche" id="recherche">
 						
-						<button type="submit" class="bg-color bt pat pls prs" value="<?php _e("Search")?>" aria-label="<?php _e("Search")?>">
+						<button type="submit" class="bg-color-alt pat pls prs" value="<?php _e("Search")?>" aria-label="<?php _e("Search")?>">
 							<i class="fa fa-search" aria-hidden="true"></i>
 						</button>
 
@@ -79,9 +79,9 @@
 	</section>
 		
 		<!-- Menu principal -->
-		<section class="bg-color-alt">
+		<section class="bg-color">
 
-		<nav role="navigation" class="mw1044p center brd-top mtl tc" aria-label="<?php _e("Browsing menu")?>">
+		<nav role="navigation" class="mw1044p center brd-top-alt mtl tc" aria-label="<?php _e("Browsing menu")?>">
 
 			<button type="button" class="burger" aria-expanded="false" aria-controls="header-menu">
 				<span class="open">Menu</span>
@@ -99,7 +99,7 @@
 					else
 						$selected = "";
 
-					echo"<li class='relative pbm ".$selected."'><a href=\"".make_url($val['href'], array("domaine" => true))."\"".($val['id']?" id='".$val['id']."'":"")."".($val['target']?" target='".$val['target']."'":"")." class='color-nav'".($selected?' title="'.$val['text'].' - '.__("current page").'"':'').">".$val['text']."</a></li>";
+					echo"<li class='relative pbm ".$selected."'><a href=\"".make_url($val['href'], array("domaine" => true))."\"".($val['id']?" id='".$val['id']."'":"")."".($val['target']?" target='".$val['target']."'":"")." class='white''".($selected?' title="'.$val['text'].' - '.__("current page").'"':'').">".$val['text']."</a></li>";
 				}
 				?>
 			</ul>

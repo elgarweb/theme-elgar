@@ -76,7 +76,7 @@
 
 							<input type="email" name="inf[1]" id="email_newsletter" data-inf-meta="1" data-inf-error="Merci de renseigner une adresse email" required="required" placeholder="<?php _e("Your email")?>" class="w400p pts pbs pls">	
 							
-							<button type="submit" class="bt bg-color-alt bold pts pbs plm prm">
+							<button type="submit" class="bg-color-alt bold pts pbs plm prm">
 								<?php _e("Subscribe"); ?>
 							</button>
 
