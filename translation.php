@@ -4,7 +4,9 @@ $add_translation = array(
 	"Accessibility" => array("fr" => "Accessibilité"),
 	"Search" => array("fr" => "Rechercher"),
 	"Search the site" => array("fr" => "Rechercher sur le site"),
+	"Home other language" => array("fr" => "Harrera euskaraz", "eu" => "Accueil Basque"),
 	
+
 	"Breadcrumb" => array("fr" => "Fil d'Ariane"),
 	"Home" => array("fr" => "Accueil", "eu" => "Harrera", "oc" => "Acuèlh"),
 
