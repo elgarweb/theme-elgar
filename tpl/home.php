@@ -57,7 +57,7 @@
 
 	<div class="mw1044p mod center ptl pbl pls prs">
 
-		<?php h2('titre-clic'); ?>
+		<?php h2('titre-clic', 'color-alt'); ?>
 
 		<div>
 
@@ -71,7 +71,7 @@
 				?>
 				<li class="mw140p">
 
-					<a <?php href("enunclic-lien-".$key); ?> class="white tdn">
+					<a <?php href("enunclic-lien-".$key); ?> class="white">
 
 						<div>
 							<?php media("enunclic-img-".$key, array('size' => '85x85', 'lazy' => true, 'class' => 'brd-rad-100'));?>
@@ -204,7 +204,7 @@
 		
 	<!-- Bouton vers toutes les actualités -->
 	<div class="tc ptl">
-		<a href="<?=make_url(__('news'), array("domaine" => true))?>" class="bt pas">
+		<a href="<?=make_url(__('news'), array("domaine" => true))?>" class="bt">
 			<?= __("Read all the news"); ?>
 		</a>
 	</div>
@@ -256,7 +256,7 @@
 
 		<!-- Bouton vers tous les événements -->
 		<div class="tc ptl">
-			<a href="<?=make_url(__('agenda'), array("domaine" => true))?>" class="bt pas">
+			<a href="<?=make_url(__('agenda'), array("domaine" => true))?>" class="bt">
 				<?= __("See all the events"); ?>
 			</a>
 		</div>
