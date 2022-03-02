@@ -38,7 +38,11 @@
 			</div>
 
 			<!-- Changement de site en fonction de la langue -->
-			<a href="<?=$GLOBALS['scheme'].($lang=='fr'?$GLOBALS['domain_lang']['eu']:$GLOBALS['domain_lang']['fr']).$GLOBALS['path'];?>" lang="<?=($lang=='fr'?'eu':'fr')?>"><?php _e("Home other language"); ?></a>
+			<?
+			if($lang=='fr') $switch_lang='eu';
+			else $switch_lang='fr';
+			?>
+			<a href="<?=$GLOBALS['scheme'].$GLOBALS['domain_lang'][$switch_lang].$GLOBALS['path'];?>" lang="<?=$switch_lang?>"><?=$GLOBALS['translation']['home other language'][$switch_lang]?></a>
 
 		</article>
 
