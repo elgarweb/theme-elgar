@@ -7,7 +7,7 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 
-	<?php h1('titre')?>
+	<?php h1('title')?>
 
 	<article class="pbm">
 
@@ -54,7 +54,14 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 				</script>
 
 			<!-- Chapô -->
-			<?php txt('texte-chapo', 'pbm'); ?>
+			<?php 
+			if($res['tpl']=='article' or  $res['tpl']=='event') 
+				txt('texte-chapo', 'pbm');
+			else 
+				txt('texte-coordonnees-intro', 'pbm');
+				txt('texte-coordonnees-suite');
+			?>
+
 
 			<!-- Infos événement -->
 			<?php 

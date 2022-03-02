@@ -115,19 +115,9 @@
 	</section>
 
 	<!-- Liens -->
-	<section class="mw1044p mod flex wrap jcc space center tc ptm pbm pls prs">
-		
-		<a href="<?=make_url(__('contact'), array("domaine" => true))?>" class="tdu">
-			<?= __("Contact"); ?>
-		</a>
-		 - 
-		<a href="<?=make_url(__('sitemap'), array("domaine" => true))?>" class="tdu">
-			<?= __("Site map"); ?>
-		</a>
-		 - 
-		<a href="<?=make_url(__('legal-notices'), array("domaine" => true))?>" class="tdu">
-			<?= __("Legal notices"); ?>
-		</a>
+	<section class="mw1044p center tc ptm pbm pls prs">
+
+		<?php txt('footer-liens-webmaster'); ?>
 
 	</section>
 

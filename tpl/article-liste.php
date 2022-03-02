@@ -1,3 +1,8 @@
+<!--
+	@todo Stéphanie :
+	- Affichage tag sur chaque actu
+-->
+
 <?php  if(!$GLOBALS['domain']) exit; ?>
 
 <section class="mw1044p mod center mbl plm prm">
@@ -14,7 +19,7 @@
 		//echo $connect->error;
 
 		while($res_tag_list = $sel_tag_list->fetch_assoc()) {
-			echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="color tdn dash">'.$res_tag_list['name'].'</a>';
+			echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="color tdn dash prs">'.$res_tag_list['name'].'</a>';
 			$i++;
 		}
 		?>
@@ -51,6 +56,7 @@
 		ON
 		(
 			".$tt.".id = ".$tc.".id AND
+			".$tt.".zone = '".$res['url']."' AND
 			".$tt.".encode = '".$tag."'
 		)";
 

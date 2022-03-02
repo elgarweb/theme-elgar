@@ -1,3 +1,7 @@
+<!--
+	@todo Stéphanie :
+	- Affichage tag sur chaque actu
+-->
 <?php  if(!$GLOBALS['domain']) exit; ?>
 
 <section class="mw1044p mod center mbl plm prm">
@@ -14,7 +18,7 @@
 		//echo $connect->error;
 
 		while($res_tag_list = $sel_tag_list->fetch_assoc()) {
-			echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="color tdn dash">'.$res_tag_list['name'].'</a>';
+			echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="color tdn dash prs">'.$res_tag_list['name'].'</a>';
 			$i++;
 		}
 		?>
@@ -40,10 +44,8 @@
 
 		$start = ($page * $num_pp) - $num_pp;
 
-
 		// Construction de la requete
 		$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
-
 
 		// Si filtre tag
 		if(isset($tag))
@@ -51,13 +53,12 @@
 		ON
 		(
 			".$tt.".id = ".$tc.".id AND
-			".$tt.".zone = 'annuaire' AND
+			".$tt.".zone = '".$res['url']."' AND
 			".$tt.".encode = '".$tag."'
 		)";
 
 		$sql.=" WHERE ".$tc.".lang='".$lang."' ".$sql_state." AND";
 
-		// Type de contenu event ou article
 		$sql.=" ".$tc.".type='annuaire'";
 
 		$sql.=" LIMIT ".$start.", ".$num_pp;
@@ -74,38 +75,37 @@
 			else $state = "";
 
 			$content_fiche = json_decode($res_fiche['content'], true);
+			
 			?>
 
 
-			<div class="brd-top-alt brd brd-rad-bot-right pbl">
+			<div class="brd brd-rad-bot-right mbm">
 
 				<article class="flex">
 
 					<!-- Image -->
-					<figure>
+					<figure class="w30">
 
 						<div class="cover" data-bg="<?=(isset(parse_url($content_fiche['visuel'])['scheme'])?'':$GLOBALS['home']).$content_fiche['visuel']; ?>" data-lazy="bg" style="width: 100%; height: 225px;">
 						</div>
 
 					</figure>
 
-					<!-- Titre -->
-					<div class=" pam brd-top">
-		
+					<div class="w70 pam">
+						
+						<!-- <div><?= $content_fiche['name']; ?></div> -->
+
+						<!-- Titre -->
 						<h2 class="h3-like tl">
 							<a href="<?=make_url($res_fiche['url'], array("domaine" => true)); ?>" class="tdn"><?=$res_fiche['title']?>
 							</a>
 						</h2>
 
 						<!-- Extrait texte -->
-						<div class="ptm">
-							<?php 
-							if(isset($content_fiche['texte-chapo'])) echo word_cut($content_fiche['texte-chapo'], '100', '...');
-							?>
-						</div>
+						<p class="mbn"><?= $content_fiche['texte-coordonnees-intro']; ?></p>
 
 						<!-- Lien vers détail -->
-						<div class="">
+						<div class="fr">
 
 							<a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>"><span class=""><?php _e("See the sheet")?></span></a>
 							
