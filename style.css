@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 a {
-	color: #31455D;
+	color: #00253F;
 	text-decoration: underline;
 	transition: color .3s;
 }
-	a:hover { color: #31455D; }
-	/* .selected { border-bottom: solid 3px #31455D; } */
+	a:hover { color: #00253F; }
+	.selected a { color: #26D691 !important; }
 
 h1, .h1-like, 
 h2, .h2-like { 
@@ -16,7 +16,7 @@ h2, .h2-like {
 }
 
 h1 {
-	color: #31455D;
+	color: #00253F;
 	margin: 0.67em 0;
 }
 
@@ -33,7 +33,7 @@ h3, .h3-like { font-weight: bold; }
 	.navigation li::before {
 		font: normal normal normal 14px/1 FontAwesome;
 	    content: '\e829';
-	    color: #46cfc0;
+	    color: #26D691;
 	    margin-right: 1rem;
 	    margin-left: -1.7rem;
 	    transform: rotate(90deg);
@@ -45,7 +45,7 @@ h3, .h3-like { font-weight: bold; }
 	content: '\e86c';
 	position: relative;
 	display: block;
-	color: #46cfc0;
+	color: #26D691;
 	margin: auto;
 } */
 
@@ -57,49 +57,59 @@ h3, .h3-like { font-weight: bold; }
 	display: block;
 	margin: auto;
 	top: 15px;
-	/* color: #46cfc0; */
+	/* color: #26D691; */
 }
 
 
 /* Mots en langue basque */
-span[lang="eu"] { border-bottom: dotted 1px #31455D; }
+span[lang="eu"] { border-bottom: dotted 1px #00253F; }
 
 
 /* bouton pour les liens */
 .bt, .bt.internal {
-	background-color: #fff;
-	color: #31455D;
-
-	border: 1px solid #31455D;
+	background-color: #00253F;
+	color: #26D691;
+	
+	/* border: 1px solid #00253F; */
 	/* border-radius: 0.5em; */
 }
+
+.bt:not(.fixed) { 
+	font-weight: bold;
+	padding: 1rem 3rem; 
+	border-bottom-right-radius: 2.5rem;
+	border-top-left-radius: 2.5rem;
+}
+
 	.bt:hover, .bt.selected {
-		background-color: #31455D;
-		color: #fff;
+		background-color: #26D691;
+		color: #00253F;
 	}
 
+button { border: solid 1px #26D691; }
+
 /* Couleur */
-.color { color: #31455D; }
-.color-alt { color: #46CFC0; }
-.color-nav { color: #353842; }
+.color { color: #00253F; }
+.color-alt { color: #26D691; }
+/* .color-nav { color: #353842; } */
 
 .bg-color {
-	background-color: #31455D;
+	background-color: #00253F;
 	color: #fff;
 }
 	a.bg-color:hover, a .bg-color:hover {
 		background-color: #fff;
-		color: #31455D;
+		color: #00253F;
 	}
 
-.bg-color-alt { background-color: #46CFC0; }
-.bg-color-grey { background-color: #eaecee; }
+.bg-color-alt { background-color: #26D691; }
+.bg-color-grey { background-color: #00253F1A; }
 
 /* Bordures */
-.brd { border: 1px solid #31455D; }
-.brd-top { border-top: solid 3px #31455D; }
-.brd-top-alt { border-top: solid 3px #46CFC0; }
-.brd-bot { border-bottom: solid 1px #31455D; }
+.brd { border: 1px solid #00253F; }
+.brd-top { border-top: solid 3px #00253F; }
+.brd-top-alt { border-top: solid 3px #26D691; }
+.brd-bot-alt { border-bottom: solid 1px #26D691; }
 
 /* Border-radius */
 .brd-rad-top-left, 
@@ -141,8 +151,8 @@ span[lang="eu"] { border-bottom: dotted 1px #31455D; }
 		/* display: block; */
 		width: 100%;
 		/* height: 3px;
-		background-color: #31455D; */
-		border-bottom: solid 3px #31455D;
+		background-color: #00253F; */
+		border-bottom: solid 3px #26D691;
 		position: absolute;
 		bottom: 0;
 		left: 0;
@@ -190,7 +200,7 @@ body {
 	margin: 0;
 	box-sizing: border-box;	
 	background-color: #fff;
-	color: #31455D;
+	color: #000;
 	font-family: 'Montserrat', sans-serif;
 	line-height: 1.5;
 	/* letter-spacing: 0.12em; Accessible */
@@ -620,6 +630,7 @@ input[type="reset"].unstyled:focus {
 /* Lien */
 .tdn, .tdn a { text-decoration: none !important; }
 .tdn:hover { text-decoration: none !important; }
+.tdu { text-decoration: underline; }
 
 
 /* Pour ajouter des pictos dans les menus select */
@@ -1133,7 +1144,7 @@ header #logo { transition: opacity .5s; }
 			min-height: 90px;
 			align-items: center;
 		}
-		header nav a { text-decoration: none; }
+		/* header #menu-principal nav a { text-decoration: none; } */
 
 
 	/* BOUTON BURGER & Animation */
@@ -1157,7 +1168,7 @@ header #logo { transition: opacity .5s; }
 		cursor: pointer;
 		transition: background 0.3s;
 
-		background-color: #31455D;
+		background-color: #00253F;
 	}
 		.burger span {
 			position: absolute;
