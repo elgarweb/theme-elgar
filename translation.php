@@ -6,7 +6,7 @@ $add_translation = array(
 	"Search the site" => array("fr" => "Rechercher sur le site"),
 	
 	"Breadcrumb" => array("fr" => "Fil d'Ariane"),
-	"Home" => array("fr" => "Accueil"),
+	"Home" => array("fr" => "Accueil", "eu" => "Harrera", "oc" => "Acuèlh"),
 
 	// FOOTER
 	// Footer - partage Réseaux sociaux
