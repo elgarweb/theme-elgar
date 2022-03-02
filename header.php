@@ -37,8 +37,8 @@
 
 			</div>
 
-			<!-- Choix langue -->
-			<a href="<?=$GLOBALS['scheme'].$GLOBALS['domain_lang']['eu'].$GLOBALS['path'];?>"><?php _e("Accueil basque"); ?></a>
+			<!-- Changement de site en fonction de la langue -->
+			<a href="<?=$GLOBALS['scheme'].($lang=='fr'?$GLOBALS['domain_lang']['eu']:$GLOBALS['domain_lang']['fr']).$GLOBALS['path'];?>" lang="<?=($lang=='fr'?'eu':'fr')?>"><?php _e("Home other language"); ?></a>
 
 		</article>
 
@@ -88,7 +88,7 @@
 				<span class="close none"><?php _e("Close")?></span>
 			</button>
 
-			<ul id="header-menu" class="flex space-l aic bold pll prl">
+			<ul id="header-menu" class="flex space-l bold pll prl">
 				<?php				
 				// Extraction du menu
 				foreach($GLOBALS['nav'] as $cle => $val)
@@ -99,7 +99,7 @@
 					else
 						$selected = "";
 
-					echo"<li class='relative pbm ".$selected."'><a href=\"".make_url($val['href'], array("domaine" => true))."\"".($val['id']?" id='".$val['id']."'":"")."".($val['target']?" target='".$val['target']."'":"")." class='color-nav'".($selected?' title="'.$val['text'].' - '.__("current page").'"':'').">".$val['text']."</a></li>";
+					echo"<li class='".$selected."'><a href=\"".make_url($val['href'], array("domaine" => true))."\"".($val['id']?" id='".$val['id']."'":"")."".($val['target']?" target='".$val['target']."'":"")." class='color-nav'".($selected?' title="'.$val['text'].' - '.__("current page").'"':'').">".$val['text']."</a></li>";
 				}
 				?>
 			</ul>
