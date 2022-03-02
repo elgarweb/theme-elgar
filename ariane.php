@@ -28,11 +28,32 @@ if(!$GLOBALS['domain']) exit;
 		<?}?>
 	</script>
 	
-	
 
-	<?php
-	// @todo Si une traduction de la page courante existe on propose le lien vers la page traduite
-	?>
-	<a href="" class="fr">Version basque</a>
+
+	<ul class="unstyled fr">
+	 	<?php
+	 	// @todo finalisé pour faire la connexion dans les 2 sens
+	 	// Si une traduction de la page courante existe on propose le lien vers la page traduite
+		$sql='SELECT '.$tc.'.lang, '.$tc.'.url FROM '.$tc;
+		$sql.=' RIGHT JOIN '.$tm.'
+		ON
+		(
+			'.$tm.'.id = '.$id.' AND
+			'.$tm.'.type = "traduction" AND
+			'.$tm.'.cle != "'.$lang.'" AND
+			'.$tc.'.id = '.$tm.'.val
+
+		)';
+		$sql.=' WHERE state="active"';
+		$sql.=' ORDER BY '.$tc.'.lang ASC';
+		//echo $sql;
+		$sel_lang = $connect->query($sql);
+		while($res_lang = $sel_lang->fetch_assoc())
+		{
+			echo'<li><a href="'.make_url($res_lang['url'], array('domaine' => $GLOBALS['scheme'].$GLOBALS['domain_lang'][$res_lang['lang']].$GLOBALS['path'])).'" lang="'.$res_lang['lang'].'">'.$GLOBALS['translation']['other language'][$res_lang['lang']].'</a></li>';
+		}
+		?>
+	</ul>
+	
 
 </div>
