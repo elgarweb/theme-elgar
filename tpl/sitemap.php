@@ -1,4 +1,6 @@
-<?php if(!$GLOBALS['domain']) exit;?>
+<?php if(!$GLOBALS['domain']) exit;
+//@todo: ajouter à la fin les élément de navigation dans le footer (contact, plan...)
+?>
 
 <section class="mw960p center">
 

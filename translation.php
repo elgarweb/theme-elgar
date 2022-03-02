@@ -4,9 +4,11 @@ $add_translation = array(
 	"Accessibility" => array("fr" => "Accessibilité"),
 	"Search" => array("fr" => "Rechercher"),
 	"Search the site" => array("fr" => "Rechercher sur le site"),
-	
+	"Home other language" => array("fr" => "Accueil Français", "eu" => "Harrera euskaraz"),
+
 	"Breadcrumb" => array("fr" => "Fil d'Ariane"),
 	"Home" => array("fr" => "Accueil", "eu" => "Harrera", "oc" => "Acuèlh"),
+	"Other language" => array("fr" => "Version Française", "eu" => "Euskarazko bertsioa", "oc" => "Version en Gascon"),
 
 	// FOOTER
 	// Footer - partage Réseaux sociaux
