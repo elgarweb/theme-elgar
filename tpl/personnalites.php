@@ -6,52 +6,46 @@
 
 	<article class="pal ptm">
 
-		<!-- .module pour bien identifier que ce sont les elements à dupliquer et a sauvegardé -->
-		<ul id="groupe" class="module unstyled pan">
-			<?php
-			// nom du module "personnalite" = id du module, et au début des id des txt() media() ...
+		<ul class="unstyled pan">
+		<?php
+		$groupe = 5;
+		for($i=1; $i<=$groupe; $i++)
+		{
+			?>
+			<li>
 
-			// Module groupe de personnalités
-			$moduleGroupe = module("groupe");
+				<?php h2('groupe-titre-'.$i, 'tl'); ?>
+				<?php h3('groupe-sstitre-'.$i); ?>
 
-			// Module personnalité du groupe
-			$modulePersonnalite = module("personnalite");
+				<ul id="personnalite-<?=$i?>" class="module unstyled grid-3 space-xl jic tc">					
+				<?php 
+				$module = module("personnalite-".$i);
+				//print_r($modulePersonnalite);
+				foreach ($module as $key => $value) 
+				{					
+					?>
+					<li>
+						<a <?php href("personnalite-".$i."-lien-".$key); ?> class="tdn">
+							
+							<?php media("personnalite-".$i."-visuel-".$key, array('size' => '150x150', 'lazy' => true, 'crop' => 'true', 'class' => 'brd-rad-100 brd-alt'));?>
 
-			foreach($moduleGroupe as $keyGroupe => $val)
-			{
-				?>
-
-				<li>
-
-					<?php txt('groupe-titre-'.$keyGroupe); ?>
-
-					<ul id="personnalite" class="module unstyled grid-3 space-xl jic tc">
-						
-						<?php 
-						foreach($modulePersonnalite as $keyPersonnalite => $value); 
-						{ 
-							?>
-
-							<li>
-
-								<a <?php href("personnalite-lien-".$keyPersonnalite.'-'.$keyGroupe); ?> class="tdn">
-									
-									<?php media("personnalite-visuel-".$keyPersonnalite.'-'.$keyGroupe, array('size' => '150x150', 'lazy' => true, 'crop' => 'true', 'class' => 'brd-rad-100 brd-alt'));?>
-									
-									<?php txt("personnalite-texte-prenom-".$keyPersonnalite.'-'.$keyGroupe, array("tag" => "span", "class" => "block bold pts"));?>
-									
-									<?php txt("personnalite-texte-nom-".$keyPersonnalite.'-'.$keyGroupe, array("tag" => "span", "class" => "block bold ptt"));?>
-									
-									<?php txt("personnalite-texte-".$keyPersonnalite.'-'.$keyGroupe, array("tag" => "span", "class" => "block ptm"));?>
-									
-								</a>
-							</li>
-							<?php
-						}; ?>
-					</ul>
-				</li>
+							<?php txt("personnalite-".$i."-prenom-".$key, array("tag" => "span", "class" => "block bold pts"));?>
+							
+							<?php txt("personnalite-".$i."-nom-".$key, array("tag" => "span", "class" => "block bold ptt"));?>
+							
+							<?php txt("personnalite-".$i."-texte-".$key, array("tag" => "span", "class" => "block ptm"));?>
+							
+						</a>
+					</li>
 				<?php
-			}; ?>
+				}
+				?>
+				</ul>
+
+			</li>
+		<?php
+		}
+		?>
 		</ul>
 
 	</article>
