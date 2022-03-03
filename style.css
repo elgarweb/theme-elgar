@@ -60,6 +60,12 @@ h3, .h3-like { font-weight: bold; }
 	/* color: #26D691; */
 }
 
+body:not(.lucide) .fa { 
+	color: #26D691;
+	padding-right: 0.7rem; 
+	font-size: 2rem; 
+}
+
 
 /* Mots en langue basque */
 span[lang="eu"] { border-bottom: dotted 1px #00253F; }
@@ -163,10 +169,10 @@ button { border: solid 1px #26D691; }
 	footer #contacts a { color: white; }
 
 	/* Suppression bordures bouton et input */
-	footer button.bt,
+	/* footer button.bt,
 	footer input {
 		border: 0;
-	}
+	} */
 
 	/* Affichage liens éditables */
 	footer input.editable-href { position: relative; }
