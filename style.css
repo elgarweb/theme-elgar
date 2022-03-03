@@ -970,7 +970,6 @@ input[type="reset"].unstyled:focus {
 .mw320p { max-width: 320px; }
 .mw600p { max-width: 600px; }
 .mw960p { max-width: 960px; }
-.mw1044p { max-width: 1044px; }
 .mw1140p { max-width: 1140px; }
 .wauto { width: auto; }
 
@@ -1365,6 +1364,11 @@ header #logo { transition: opacity .5s; }
 	.editable img {
 		max-width: 100%;
 		height: auto;
+	}
+
+	.mw960p {
+		padding-left: 1rem;
+		padding-right: 1rem;
 	}
 }
 

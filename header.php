@@ -21,7 +21,7 @@
 
 <header role="banner">
 
-	<section class="mw1044p mod center relative pls prs">
+	<section class="mw960p mod center relative">
 
 		<article class="flex wrap jcsa brd-bot-alt ptm pbs">
 
@@ -61,7 +61,7 @@
 
 						<input type="search" name="recherche" id="recherche">
 						
-						<button type="submit" class="bg-color-alt pat pls prs" value="<?php _e("Search")?>" aria-label="<?php _e("Search")?>">
+						<button type="submit" class="bg-color-alt pat" value="<?php _e("Search")?>" aria-label="<?php _e("Search")?>">
 							<i class="fa fa-search" aria-hidden="true"></i>
 						</button>
 
@@ -85,7 +85,7 @@
 	<!-- Menu principal -->
 	<section class="bg-color">
 
-		<nav role="navigation" class="mw1044p center brd-top-alt mtl tc" aria-label="<?php _e("Browsing menu")?>">
+		<nav role="navigation" class="mw960p center brd-top-alt mtl tc" aria-label="<?php _e("Browsing menu")?>">
 
 			<button type="button" class="burger" aria-expanded="false" aria-controls="header-menu">
 				<span class="open">Menu</span>
