@@ -20,12 +20,22 @@ function block($url_img, $url_title, $title, $text, $date = null)
 	    <article>
 
 	        <!-- Image -->
-	        <figure>
+			<?php if($res['url'] == 'actualites') { ?>
+				
+				<figure>
 
-	            <div class="cover" data-bg="<?=(isset(parse_url($url_img)['scheme'])?'':$GLOBALS['home']).$url_img?>" data-lazy="bg" style="width: 100%; height: 225px;">
-	            </div>
+					<div class="cover" data-bg="<?=(isset(parse_url($url_img)['scheme'])?'':$GLOBALS['home']).$url_img?>" data-lazy="bg" style="width: 100%; height: 225px;">
+					</div>
 
-	        </figure>
+				</figure>
+
+			<?php } else { ?>
+
+				<div class="tc">
+					<img src="<?=(isset(parse_url($url_img)['scheme'])?'':$GLOBALS['home']).$url_img?>" class="pts pbs" alt="" style="max-width: 300px; height: 225px;">
+				</div>
+
+			<?php } ?>
 
 			<div class="grid3row pam brd-top">
 				<?php

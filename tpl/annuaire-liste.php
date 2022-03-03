@@ -84,14 +84,17 @@
 				<article class="flex">
 
 					<!-- Image -->
-					<figure class="w30">
+					<div class="w30 asc tc">
+						<img src="<?=(isset(parse_url($content_fiche['visuel'])['scheme'])?'':$GLOBALS['home']).$content_fiche['visuel']; ?>" class="pts pbs" alt="">
+					</div>
+					<!-- <figure class="w30">
 
-						<div class="cover" data-bg="<?=(isset(parse_url($content_fiche['visuel'])['scheme'])?'':$GLOBALS['home']).$content_fiche['visuel']; ?>" data-lazy="bg" style="width: 100%; height: 225px;">
+						<div class="nor" data-bg="<?=(isset(parse_url($content_fiche['visuel'])['scheme'])?'':$GLOBALS['home']).$content_fiche['visuel']; ?>" data-lazy="bg" style="width: 100%; height: 225px;">
 						</div>
 
-					</figure>
+					</figure> -->
 
-					<div class="w70 pam">
+					<div class="w70 pam brd-left">
 						
 						<!-- <div><?= $content_fiche['name']; ?></div> -->
 
