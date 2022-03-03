@@ -12,22 +12,12 @@ switch(@$_REQUEST['mode'])
 
 		login('high', 'edit-page');// Vérifie que l'on a le droit d'éditer les contenus
 
-		// Création de la table de connexion des traductions si pas existante
-		$GLOBALS['connect']->query("
-			CREATE TABLE IF NOT EXISTS `".$GLOBALS['table_lang']."` (
-				`id` bigint(20) NOT NULL DEFAULT '0',
-				`trad` bigint(20) NOT NULL DEFAULT '0',
-				`lang` varchar(6) DEFAULT NULL,
-				PRIMARY KEY (`id`,`trad`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-		");
-
-		/*if($_REQUEST['checked'] == 'true')
+		if($_REQUEST['checked'] == 'true')
 			$sql = "INSERT INTO ".$table_meta." SET id='".(int)$_REQUEST['id']."', type='".encode($_REQUEST['type'])."', cle='alaune'";
 		else 
 			$sql = "DELETE FROM ".$table_meta." WHERE id='".(int)$_REQUEST['id']."' AND type='".encode($_REQUEST['type'])."' AND cle='alaune'";
 
-		$connect->query($sql);*/
+		$connect->query($sql);
 
 		echo $connect->error;
 
@@ -35,18 +25,7 @@ switch(@$_REQUEST['mode'])
 		
 	break;
 
-	case"info":
-		// bouton dans la barre du haut avec icon trad + lang en cours
-		// au clique sur le bouton un layer/popin pour 
-		// - proposer de créer la meme page dans une autre langue (menu select de langue), checkbox pour copier le contenu de la page en cours. si toutes les lang prise on ne propose pas d'ajout
-			// -> créer la page + copie le contenu + créer les connexions dans table lang
-		// - propose de relier un contenu existant comme traduction (champs avec autocomplete), saisie du titre, ou id
-		// - liste les pages connecters : affichage du titre, et de la lang, lien
-
-	break;
-
 	default:
-
 		?>
 		<style>
 			#admin-bar .alaune.switch label
@@ -84,7 +63,7 @@ switch(@$_REQUEST['mode'])
 				{					
 					$.ajax({
 						type: "POST",
-						url: path+"theme/<?=$GLOBALS['theme']?>/alaune.php?mode=save",
+						url: path+"theme/<?=$GLOBALS['theme']?>/admin/alaune.php?mode=save",
 						data: {
 							"id": id,
 							"type": "<?=$res['type']?>",
