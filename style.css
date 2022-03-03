@@ -51,7 +51,7 @@ h3, .h3-like { font-weight: bold; }
 
 
 .vague:before {
-	content: url('/theme/elgar/img/vaguelette.svg');
+	content: url('/media/vaguelette.svg');
 	position: relative;
 	width: 60px;
 	display: block;
@@ -196,7 +196,7 @@ figure div {
 	/* Icônes footer */
 	footer .fa {
 		color: #26D691;
-		padding-right: 0.7rem;
+		padding-right: 1.8rem;
 		font-size: 2rem;
 	}
 

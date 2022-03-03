@@ -92,7 +92,7 @@
 				<span class="close none"><?php _e("Close")?></span>
 			</button>
 
-			<ul id="header-menu" class="flex space-l bold pll prl">
+			<ul id="header-menu" class="flex space bold plm prm">
 				<?php				
 				// Extraction du menu
 				foreach($GLOBALS['nav'] as $cle => $val)
