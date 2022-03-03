@@ -113,6 +113,7 @@ button { border: solid 1px #26D691; }
 
 /* Bordures */
 .brd { border: 1px solid #00253F; }
+.brd-alt { border: 2px solid #26D691; }
 .brd-top { border-top: solid 3px #00253F; }
 .brd-top-alt { border-top: solid 3px #26D691; }
 .brd-bot-alt { border-bottom: solid 1px #26D691; }
@@ -163,6 +164,18 @@ button { border: solid 1px #26D691; }
 		bottom: 0;
 		left: 0;
 	}
+
+/* Home */
+	/** En un clic **/
+	/*** Effet zoom pictos ***/
+	#enunclic img {
+		transition: transform .1s;
+	}
+		#enunclic img:hover {
+			-ms-transform: scale(1.1);
+			-webkit-transform: scale(1.1); 	
+			transform: scale(1.1);
+		}
 
 /* Footer */
 
