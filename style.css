@@ -60,12 +60,6 @@ h3, .h3-like { font-weight: bold; }
 	/* color: #26D691; */
 }
 
-a:not(.fixed) .fa:not(header .fa-search) { 
-	color: #26D691;
-	padding-right: 0.7rem; 
-	font-size: 2rem; 
-}
-
 
 /* Mots en langue basque */
 span[lang="eu"] { border-bottom: dotted 1px #00253F; }
@@ -189,6 +183,13 @@ button { border: solid 1px #26D691; }
 
 	/* Affichage liens éditables */
 	footer input.editable-href { position: relative; }
+
+	/* Icônes footer */
+	footer .fa {
+		color: #26D691;
+		padding-right: 0.7rem;
+		font-size: 2rem;
+	}
 
 /* Home */
 	/* En 1 clic */
