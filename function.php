@@ -5,7 +5,7 @@ if(!isset($GLOBALS['domain'])) exit;
 $GLOBALS['table_lang'] = $GLOBALS['tl'] = $GLOBALS['db_prefix'].'lang';
 
 // Fonction affichage blocs img + titre + extrait texte
-function block($url_img, $url_title, $title, $text, $date = null)
+function block($url_img, $url_title, $title, $text, $date = null, $tag = null)
 {
 	global $res, $articles;
 
@@ -39,6 +39,10 @@ function block($url_img, $url_title, $title, $text, $date = null)
 
 			<div class="grid3row pam brd-top">
 				<?php
+				// Tags, que sur le listing des articles car query + longue
+				if($tag) echo $tag;// encode($tag) => pour le lien si besoin
+
+
 				/* Titre */
 				if($res['tpl'] == 'home')
 				{

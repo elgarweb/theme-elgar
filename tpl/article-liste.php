@@ -47,8 +47,15 @@
 
 
 		// Construction de la requete
-		$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
+		$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".*, tags.name AS tag FROM ".$tc;
 
+		// Pour avoir les tags dans le listings
+		$sql.=" LEFT JOIN ".$tt." AS tags
+		ON
+		(
+			tags.id = ".$tc.".id AND
+			tags.zone = '".$res['url']."'
+		)";
 
 		// Si filtre tag
 		if(isset($tag))
@@ -92,7 +99,7 @@
 
 			$content_fiche = json_decode($res_fiche['content'], true);
 
-			block(@$content_fiche['visuel'], $res_fiche['url'], $res_fiche['title'], @$content_fiche['texte-chapo'], @$content_fiche['aaaa-mm-jj']);
+			block(@$content_fiche['visuel'], $res_fiche['url'], $res_fiche['title'], @$content_fiche['texte-chapo'], @$content_fiche['aaaa-mm-jj'], @$res_fiche['tag']);
 		}
 		?>
 
