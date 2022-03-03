@@ -14,7 +14,7 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 		<div class="fl prm">
 
 			<figure>
-				<?php media('visuel', array('size' => '300x220', 'lazy' => true)); ?>
+				<?php media('visuel', array('size' => '300x225', 'lazy' => true)); ?>
 				<figcaption><?php txt('texte-legende-visuel', 'italic'); ?></figcaption>
 			</figure>
 			

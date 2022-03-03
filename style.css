@@ -119,8 +119,7 @@ button { border: solid 1px #26D691; }
 	border-top-left-radius: 25px;
 }
 
-.brd-rad-bot-right,
-.brd-rad-bot-right img {
+.brd-rad-bot-right {
 	border-bottom-right-radius: 25px;
 }
 
