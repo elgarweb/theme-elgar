@@ -107,6 +107,7 @@ button { border: solid 1px #26D691; }
 
 /* Bordures */
 .brd { border: 1px solid #00253F; }
+.brd-left { border-left: 1px solid #00253F; }
 .brd-alt { border: 2px solid #26D691; }
 .brd-top { border-top: solid 3px #00253F; }
 .brd-top-alt { border-top: solid 3px #26D691; }
