@@ -46,9 +46,9 @@
 	</section>
 
 	<!-- CONTACTS -->
-	<section id="contacts" class="bg-color ptl pbm">
+	<section id="contacts" class="bg-color ptl pbl">
 
-		<div class="mw960p center grid space-xl">
+		<div class="mw960p center flex space-l">
 
 			<article>
 
@@ -74,9 +74,9 @@
 
 						<div class="flex pts">
 
-							<input type="email" name="inf[1]" id="email_newsletter" data-inf-meta="1" data-inf-error="Merci de renseigner une adresse email" required="required" placeholder="<?php _e("Your email")?>" class="w400p pts pbs pls">	
+							<input type="email" name="inf[1]" id="email_newsletter" data-inf-meta="1" data-inf-error="Merci de renseigner une adresse email" required="required" placeholder="<?php _e("Your email")?>" class="w200p pts pbs pls">	
 							
-							<button type="submit" class="bg-color-alt bold pts pbs plm prm">
+							<button type="submit" class="bg-color-alt bold pas">
 								<?php _e("Subscribe"); ?>
 							</button>
 
