@@ -105,7 +105,7 @@
 				</div>
 				
 				<!-- Logo France Relance -->
-				<?php media('logo-sponsor', array('size' => '150', 'lazy' => 'true', 'class' => 'ptm')); ?>
+				<?php media('logo-sponsor', array('size' => '150', 'lazy' => 'true')); ?>
 				<!-- <img src="/theme/<?= $GLOBALS['theme']; ?>/img/logo-france-relance.png" alt="Logo France Relance" style="width: 150px;" loading="lazy" class="ptm"> -->
 
 			</article>
