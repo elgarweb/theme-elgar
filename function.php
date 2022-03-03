@@ -1,8 +1,10 @@
 <?
 if(!isset($GLOBALS['domain'])) exit;
 
-/* Fonction affichage blocs img + titre + extrait texte */
+// Table des traductions
+$GLOBALS['table_lang'] = $GLOBALS['tl'] = $GLOBALS['db_prefix'].'lang';
 
+// Fonction affichage blocs img + titre + extrait texte
 function block($url_img, $url_title, $title, $text, $date = null)
 {
 	global $res, $articles;
