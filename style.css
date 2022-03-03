@@ -143,6 +143,8 @@ button { border: solid 1px #26D691; }
 	/* padding-bottom: 10rem; */
 }
 
+[src*='.svg'] { min-width: 330px; }
+
 /* Header */
 
 	/* Problème pour mettre soulignement au même niveau si 1 ou 2 lignes :
