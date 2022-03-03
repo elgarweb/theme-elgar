@@ -8,7 +8,7 @@
 <!-- ZONE ALERTE -->
 <section class="<?=(isset($GLOBALS['content']['alerte-texte']) ? 'bg-color-grey' : 'editable-hidden'); ?>">
 	
-	<div class="mw1044p mod flex wrap space-l aic jcc center ptl pbl pll prl">
+	<div class="mw960p mod flex wrap space-l aic jcc center pam">
 		
 		<article class="">
 			<?php media('alerte-img', array('size' => '300', 'lazy' => true)); ?>
@@ -23,7 +23,7 @@
 </section>
 
 <!-- ENCART INTRO -->
-<section class="mw1044p mod center ptm pbl pll prl">
+<section class="mw960p mod center ptm pbl pll prl">
 	
 	<?php h1('titre', 'vague mtn pbm'); ?>
 
@@ -55,7 +55,7 @@
 <!-- EN 1 CLIC -->
 <section class="bg-color">
 
-	<div class="mw1044p mod center ptl pbl pls prs">
+	<div class="mw960p mod center ptl pbl">
 
 		<?php h2('titre-clic', 'color-alt'); ?>
 
@@ -99,7 +99,7 @@
 
 
 <!-- ACTUALITÉS -->
-<section class="mw1044p mod center ptl pbl pls prs">
+<section class="mw960p mod center ptl pbl">
 	
 	<?php h2('titre-actus', 'vague pbm'); ?>
 	
@@ -215,7 +215,7 @@
 <!-- AGENDA -->
 <section class="bg-color-grey ptl pbl">
 
-	<div class="mw1044p mod center pls prs">
+	<div class="mw960p mod center">
 
 		<?php h2('titre-events', 'vague')?>
 

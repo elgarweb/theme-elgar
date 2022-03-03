@@ -10,7 +10,7 @@
 <footer role="contentinfo">
 
 	<!-- PARTAGE RÉSEAUX SOCIAUX -->
-	<section id="partage" class="mw1044p flex wrap jcc center tc ptl pbl pls prs">
+	<section id="partage" class="mw960p flex wrap jcc center tc ptl pbl">
 
 		<?if(isset($res['url'])){?>
 
@@ -37,7 +37,7 @@
 	<!-- RENSEIGNEMENTS COMPLEMENTAIRES -->
 	<section class="<?=(isset($GLOBALS['content']['texte-renseignements']) ? 'bg-color-alt ptl pbl' : 'editable-hidden'); ?>">
 
-		<article class="mw1044p center pls prs">
+		<article class="mw960p center">
 
 			<?php txt('texte-renseignements', 'bold tc'); ?>
 
@@ -46,9 +46,9 @@
 	</section>
 
 	<!-- CONTACTS -->
-	<section id="contacts" class="bg-color ptl pbm">
+	<section id="contacts" class="bg-color ptl pbl">
 
-		<div class="mw1044p center grid space-xl pls prs">
+		<div class="mw960p center flex space-l">
 
 			<article>
 
@@ -74,9 +74,9 @@
 
 						<div class="flex pts">
 
-							<input type="email" name="inf[1]" id="email_newsletter" data-inf-meta="1" data-inf-error="Merci de renseigner une adresse email" required="required" placeholder="<?php _e("Your email")?>" class="w400p pts pbs pls">	
+							<input type="email" name="inf[1]" id="email_newsletter" data-inf-meta="1" data-inf-error="Merci de renseigner une adresse email" required="required" placeholder="<?php _e("Your email")?>" class="w200p pts pbs pls">	
 							
-							<button type="submit" class="bg-color-alt bold pts pbs plm prm">
+							<button type="submit" class="bg-color-alt bold pas">
 								<?php _e("Subscribe"); ?>
 							</button>
 
@@ -105,7 +105,7 @@
 				</div>
 				
 				<!-- Logo France Relance -->
-				<?php media('logo-sponsor', array('size' => '150', 'lazy' => 'true', 'class' => 'ptm')); ?>
+				<?php media('logo-sponsor', array('size' => '150', 'lazy' => 'true')); ?>
 				<!-- <img src="/theme/<?= $GLOBALS['theme']; ?>/img/logo-france-relance.png" alt="Logo France Relance" style="width: 150px;" loading="lazy" class="ptm"> -->
 
 			</article>
@@ -115,7 +115,7 @@
 	</section>
 
 	<!-- Liens -->
-	<section class="mw1044p center tc ptm pbm pls prs">
+	<section class="mw960p center tc ptm pbm">
 
 		<?php txt('footer-liens-webmaster'); ?>
 

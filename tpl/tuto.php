@@ -31,7 +31,7 @@ lors de la création du site créer les pages suivantes pour le bon fonctionneme
 </style>
 
 <!-- SOMMAIRE -->
-<section class="mw1044p center pls prs">
+<section class="mw960p center">
     
     <h1>Tutoriel CMS Translucide</h1>
 
@@ -60,7 +60,7 @@ lors de la création du site créer les pages suivantes pour le bon fonctionneme
 </section>
 
 <!-- TUTO -->
-<section class="mw1044p center pls prs pbl">
+<section class="mw960p center pbl">
 
     <h2><i class="fa fa-pencil"></i> Mode édition</h2>
 

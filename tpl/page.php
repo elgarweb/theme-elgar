@@ -1,6 +1,6 @@
 <?php if(!$GLOBALS['domain']) exit;?>
 
-<section class="mw1044p mod center plm prm">
+<section class="mw960p mod center">
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 
