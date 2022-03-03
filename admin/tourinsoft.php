@@ -23,7 +23,7 @@ $id_start = -1000000000;
 $limit = 50;// 50
 
 $chemin_visuel = $GLOBALS['media_dir'].'/tourinsoft';
-$racine = '../../';
+$racine = '../../../';
 $new_width = 320;
 
 
