@@ -9,6 +9,10 @@ $add_translation = array(
 	"Breadcrumb" => array("fr" => "Fil d'Ariane"),
 	"Home" => array("fr" => "Accueil", "eu" => "Harrera", "oc" => "Acuèlh"),
 	"Other language" => array("fr" => "Version Française", "eu" => "Euskarazko bertsioa", "oc" => "Version en Gascon"),
+	"Language" => array("fr" => "Langue"),
+	"Duplicate" => array("fr" => "Dupliquer"),
+	"fr" => array("fr" => "Français"),
+	"eu" => array("fr" => "Basque"),
 
 	// FOOTER
 	// Footer - partage Réseaux sociaux
