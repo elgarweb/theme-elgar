@@ -15,27 +15,17 @@ function block($url_img, $url_title, $title, $text, $date = null)
 
     ?>
 
-    <div class="mw320p relative brd-top-alt brd brd-rad-bot-right pbl">
+    <div class="relative brd-top-alt brd brd-rad-bot-right pbl">
 
 	    <article>
 
 	        <!-- Image -->
-			<?php if($res['url'] == 'actualites') { ?>
-				
-				<figure>
+			<figure>
 
-					<div class="cover" data-bg="<?=(isset(parse_url($url_img)['scheme'])?'':$GLOBALS['home']).$url_img?>" data-lazy="bg" style="width: 100%; height: 225px;">
-					</div>
-
-				</figure>
-
-			<?php } else { ?>
-
-				<div class="tc">
-					<img src="<?=(isset(parse_url($url_img)['scheme'])?'':$GLOBALS['home']).$url_img?>" class="pts pbs" alt="" style="max-width: 300px; height: 225px;">
+				<div class="nor" data-bg="<?=(isset(parse_url($url_img)['scheme'])?'':$GLOBALS['home']).$url_img?>" data-lazy="bg" style="width: 100%; height: 225px;">
 				</div>
 
-			<?php } ?>
+			</figure>
 
 			<div class="grid3row pam brd-top">
 				<?php

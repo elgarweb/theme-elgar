@@ -5,7 +5,7 @@
 
 <?php  if(!$GLOBALS['domain']) exit; ?>
 
-<section class="mw960p mod center mbl plm prm">
+<section class="mw960p mod center mbl">
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 	
@@ -29,9 +29,9 @@
 	
 </section>
 
-<section class="mw960p mod center plm prm">
+<section class="mw960p mod center">
 
-	<div class="grid-3 space-xl">
+	<div class="grid-3 space-l">
 		
 		<?php 
 		// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs
