@@ -10,7 +10,7 @@
 <footer role="contentinfo">
 
 	<!-- PARTAGE RÉSEAUX SOCIAUX -->
-	<section id="partage" class="mw1044p flex wrap jcc center tc ptl pbl pls prs">
+	<section id="partage" class="mw960p flex wrap jcc center tc ptl pbl">
 
 		<?if(isset($res['url'])){?>
 
@@ -37,7 +37,7 @@
 	<!-- RENSEIGNEMENTS COMPLEMENTAIRES -->
 	<section class="<?=(isset($GLOBALS['content']['texte-renseignements']) ? 'bg-color-alt ptl pbl' : 'editable-hidden'); ?>">
 
-		<article class="mw1044p center pls prs">
+		<article class="mw960p center">
 
 			<?php txt('texte-renseignements', 'bold tc'); ?>
 
@@ -48,7 +48,7 @@
 	<!-- CONTACTS -->
 	<section id="contacts" class="bg-color ptl pbm">
 
-		<div class="mw1044p center grid space-xl pls prs">
+		<div class="mw960p center grid space-xl">
 
 			<article>
 
@@ -115,7 +115,7 @@
 	</section>
 
 	<!-- Liens -->
-	<section class="mw1044p center tc ptm pbm pls prs">
+	<section class="mw960p center tc ptm pbm">
 
 		<?php txt('footer-liens-webmaster'); ?>
 

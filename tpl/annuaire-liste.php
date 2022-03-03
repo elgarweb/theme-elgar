@@ -4,13 +4,13 @@
 -->
 <?php  if(!$GLOBALS['domain']) exit; ?>
 
-<section class="mw1044p mod center mbl plm prm">
+<section class="mw960p mod center mbl">
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 	
 	<?php h1('title'); ?>
 
-	<nav role="navigation" class="mts tc italic">
+	<nav role="navigation" class="tc ptm">
 		<?php 
 		// Liste les tags pour filtrer la page
 		$i = 1;
@@ -24,11 +24,11 @@
 		?>
 	</nav>
 	
-	<?php txt('description'); ?>
+	<?php txt('description', 'tc ptl'); ?>
 	
 </section>
 
-<section class="mw1044p mod center plm prm">
+<section class="mw960p mod center">
 
 	<div>
 		
@@ -84,17 +84,14 @@
 				<article class="flex">
 
 					<!-- Image -->
-					<div class="w30 asc tc">
-						<img src="<?=(isset(parse_url($content_fiche['visuel'])['scheme'])?'':$GLOBALS['home']).$content_fiche['visuel']; ?>" class="pts pbs" alt="">
-					</div>
-					<!-- <figure class="w30">
+					<figure class="">
 
 						<div class="nor" data-bg="<?=(isset(parse_url($content_fiche['visuel'])['scheme'])?'':$GLOBALS['home']).$content_fiche['visuel']; ?>" data-lazy="bg" style="width: 100%; height: 225px;">
 						</div>
 
-					</figure> -->
+					</figure>
 
-					<div class="w70 pam brd-left">
+					<div class="pam brd-left">
 						
 						<!-- <div><?= $content_fiche['name']; ?></div> -->
 

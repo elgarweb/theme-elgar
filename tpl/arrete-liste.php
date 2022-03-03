@@ -1,6 +1,6 @@
 <?php  if(!$GLOBALS['domain']) exit; ?>
 
-<section class="mw1044p mod center mbl plm prm">
+<section class="mw960p mod center mbl">
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 	
@@ -10,7 +10,7 @@
 	
 </section>
 
-<section class="mw1044p mod center plm prm">
+<section class="mw960p mod center">
 
 	<ul>
 		
