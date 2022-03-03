@@ -10,7 +10,7 @@
 	
 	<?php h1('title'); ?>
 
-	<nav role="navigation" class="mts tc italic">
+	<nav role="navigation" class="tc ptm">
 		<?php 
 		// Liste les tags pour filtrer la page
 		$i = 1;
@@ -24,7 +24,7 @@
 		?>
 	</nav>
 	
-	<?php txt('description'); ?>
+	<?php txt('description', 'tc ptl'); ?>
 	
 </section>
 
