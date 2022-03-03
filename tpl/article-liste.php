@@ -74,7 +74,7 @@
 			$sql.=" ".$tc.".type='article'";
 
 		// Si event on tri par date de l'evenement
-		if($res['url']=='agenda') $sql.=" ORDER BY event.cle DESC";
+		if($res['url']=='agenda') $sql.=" ORDER BY event.cle ASC";
 		else $sql.=" ORDER BY ".$tc.".date_insert DESC";
 
 		$sql.=" LIMIT ".$start.", ".$num_pp;
