@@ -122,3 +122,5 @@
 	</section>
 
 </footer>
+
+<? include("theme/".$GLOBALS['theme']."/admin/lang.php"); ?>

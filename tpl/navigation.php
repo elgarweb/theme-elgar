@@ -17,7 +17,7 @@
 		else $sql_state = "";
 
 		// Navigation par page
-		$num_pp = 50;
+		$num_pp = 20;
 
 		if(isset($GLOBALS['filter']['page'])) $page = (int)$GLOBALS['filter']['page']; else $page = 1;
 
