@@ -60,7 +60,7 @@ h3, .h3-like { font-weight: bold; }
 	/* color: #26D691; */
 }
 
-body:not(.lucide) .fa { 
+body:not(.lucide) .fa:not(header .fa-search) { 
 	color: #26D691;
 	padding-right: 0.7rem; 
 	font-size: 2rem; 
