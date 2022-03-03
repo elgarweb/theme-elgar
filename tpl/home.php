@@ -74,7 +74,7 @@
 					<a <?php href("enunclic-lien-".$key); ?> class="white">
 
 						<div>
-							<?php media("enunclic-img-".$key, array('size' => '85x85', 'lazy' => true, 'class' => 'brd-rad-100'));?>
+							<?php media("enunclic-img-".$key, array('size' => '85x85', 'lazy' => true, 'class' => 'brd-alt brd-rad-100'));?>
 						</div>
 						
 						<div class="ptm">

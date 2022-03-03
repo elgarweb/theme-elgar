@@ -60,13 +60,19 @@ h3, .h3-like { font-weight: bold; }
 	/* color: #26D691; */
 }
 
+a:not(.fixed) .fa:not(header .fa-search) { 
+	color: #26D691;
+	padding-right: 0.7rem; 
+	font-size: 2rem; 
+}
+
 
 /* Mots en langue basque */
 span[lang="eu"] { border-bottom: dotted 1px #00253F; }
 
 
 /* bouton pour les liens */
-.bt, .bt.internal {
+.bt:not(.vam), .bt.internal {
 	background-color: #00253F;
 	color: #26D691;
 	
@@ -74,14 +80,14 @@ span[lang="eu"] { border-bottom: dotted 1px #00253F; }
 	/* border-radius: 0.5em; */
 }
 
-.bt:not(.fixed) { 
+.bt:not(.fixed):not(.vam) { 
 	font-weight: bold;
 	padding: 1rem 3rem; 
 	border-bottom-right-radius: 2.5rem;
 	border-top-left-radius: 2.5rem;
 }
 
-	.bt:hover, .bt.selected {
+	.bt:not(.vam):hover, .bt.selected {
 		background-color: #26D691;
 		color: #00253F;
 	}
@@ -107,6 +113,7 @@ button { border: solid 1px #26D691; }
 
 /* Bordures */
 .brd { border: 1px solid #00253F; }
+.brd-alt { border: 2px solid #26D691; }
 .brd-top { border-top: solid 3px #00253F; }
 .brd-top-alt { border-top: solid 3px #26D691; }
 .brd-bot-alt { border-bottom: solid 1px #26D691; }
@@ -158,15 +165,27 @@ button { border: solid 1px #26D691; }
 		left: 0;
 	}
 
+/* Home */
+	/** En un clic **/
+	/*** Effet zoom pictos ***/
+	#enunclic img {
+		transition: transform .1s;
+	}
+		#enunclic img:hover {
+			-ms-transform: scale(1.1);
+			-webkit-transform: scale(1.1); 	
+			transform: scale(1.1);
+		}
+
 /* Footer */
 
 	footer #contacts a { color: white; }
 
 	/* Suppression bordures bouton et input */
-	footer button.bt,
+	/* footer button.bt,
 	footer input {
 		border: 0;
-	}
+	} */
 
 	/* Affichage liens éditables */
 	footer input.editable-href { position: relative; }

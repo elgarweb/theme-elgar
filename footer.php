@@ -24,9 +24,9 @@
 				$url_encode = urlencode(make_url($res['url'], array("domaine" => true)));
 				?>
 
-				<a href="https://www.facebook.com/sharer/sharer.php?u=<?=$url_encode?>" target="_blank">Facebook<i class="fa fa-fw fa-facebook color-alt big pls prm" aria-hidden="true"></i></a>
+				<a href="https://www.facebook.com/sharer/sharer.php?u=<?=$url_encode?>" target="_blank">Facebook<i class="fa fa-fw fa-facebook big pls prm" aria-hidden="true"></i></a>
 				
-				<a href="mailto:?subject=<?=$titre_encode?>&body=<?=$url_encode?>" target="_blank">Mail<i class="fa fa-fw fa-mail color-alt big pls prm" aria-hidden="true"></i></a>
+				<a href="mailto:?subject=<?=$titre_encode?>&body=<?=$url_encode?>" target="_blank">Mail<i class="fa fa-fw fa-mail big pls prm" aria-hidden="true"></i></a>
 
 			</div>
 			
