@@ -34,7 +34,7 @@ if(!$GLOBALS['domain']) exit;
 	 	<?php
 	 	// Si une traduction de la page courante existe on propose le lien vers la page traduite
 		$sql='SELECT '.$tc.'.url, '.$tc.'.lang FROM '.$tc;
-		$sql.=' RIGHT JOIN '.$tl.'
+		$sql.=' JOIN '.$tl.'
 		ON
 		(
 			'.$tl.'.id = '.$id.' AND
@@ -43,6 +43,7 @@ if(!$GLOBALS['domain']) exit;
 		)';
 		$sql.=' WHERE state="active"';
 		$sql.=' ORDER BY '.$tc.'.lang ASC';
+		$sql.=' LIMIT '.count($GLOBALS['language']);
 		//echo $sql;
 		$sel_lang = $connect->query($sql);
 		if(!empty($sel_lang->num_rows))// Si des résultat & que la table existe
