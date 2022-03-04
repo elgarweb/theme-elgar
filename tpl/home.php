@@ -190,7 +190,7 @@
 
 				$content_article = json_decode($res_article['content'], true);
 
-				block(@$content_article['visuel'], $res_article['url'], $res_article['title'], @$content_article['texte-chapo'], @$content_article['aaaa-mm-jj']);
+				block(@$content_article['visuel'], $res_article['url'], $res_article['title'], @$content_article['description'], @$content_article['aaaa-mm-jj']);
 			}
 			?>
 
@@ -243,7 +243,7 @@
 
 				$content_event = json_decode($res_event['content'], true);
 
-				block(@$content_event['visuel'], $res_event['url'], $res_event['title'], @$content_event['texte-chapo'], @$content_event['aaaa-mm-jj']);
+				block(@$content_event['visuel'], $res_event['url'], $res_event['title'], @$content_event['description'], @$content_event['aaaa-mm-jj']);
 			}
 			?>
 

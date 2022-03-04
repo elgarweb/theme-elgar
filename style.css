@@ -114,6 +114,7 @@ button { border: solid 1px #26D691; }
 .brd-bot-alt { border-bottom: solid 1px #26D691; }
 
 /* Border-radius */
+.brd-rad { border-radius: 25px;}
 .brd-rad-top-left, 
 .brd-rad-top-left img{
 	border-top-left-radius: 25px;
@@ -504,10 +505,17 @@ em, .italic, address, cite, i, var { font-style: italic; }
 .nowrap, .nw { white-space: nowrap; }
 .short { text-overflow: ellipsis; }
 
+	/* Alignements horizontaux */
 	.grid3row {
 		display: grid;
-		-ms-grid-rows: 1fr auto 1fr;
-		grid-template-rows: 90px 90px auto;
+		-ms-grid-rows: 120px 90px auto;
+		grid-template-rows: 120px 90px auto;
+	}
+
+	.grid4row {
+		display: grid;
+		-ms-grid-rows: 70px 120px 120px auto;
+		grid-template-rows: 70px 120px 120px auto;
 	}
 
 	/* Alignement grids */
