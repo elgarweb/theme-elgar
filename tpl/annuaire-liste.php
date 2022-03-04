@@ -24,7 +24,7 @@
 		?>
 	</nav>
 	
-	<?php txt('description', 'tc ptm'); ?>
+	<?php txt('description', 'tc ptm pbm'); ?>
 	
 </section>
 
