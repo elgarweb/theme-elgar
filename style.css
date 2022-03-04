@@ -1186,7 +1186,7 @@ header #logo { transition: opacity .5s; }
 		/* margin-top: 2rem; */
 		min-height: 90px;
 	}
-		header nav li {
+		header nav > ul li {
 			/* float: left; */
 			/* margin: 0 0.5rem; */
 			position: relative;
