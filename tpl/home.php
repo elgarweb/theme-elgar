@@ -1,10 +1,5 @@
 <?php if(!$GLOBALS['domain']) exit;?>
 
-<!--
-@todo Stéphanie :
-- actualaune : vérif qu'elle n'apparaisse pas aussi dans les 3 actus de dessous
--->
-
 <!-- ZONE ALERTE -->
 <section class="<?=(isset($GLOBALS['content']['alerte-texte']) ? 'bg-color-grey' : 'editable-hidden'); ?>">
 	
@@ -168,7 +163,7 @@
 	<!-- Dernières actualités -->
 	<article class="clear">
 
-		<div class="grid-3 space-l">
+		<div class="grid-3 space-xl">
 			
 			<?php 
 			// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs
@@ -195,7 +190,7 @@
 
 				$content_article = json_decode($res_article['content'], true);
 
-				block(@$content_article['visuel'], $res_article['url'], $res_article['title'], @$content_article['texte-chapo'], @$content_article['aaaa-mm-jj']);
+				block(@$content_article['visuel'], $res_article['url'], $res_article['title'], @$content_article['description'], @$content_article['aaaa-mm-jj']);
 			}
 			?>
 
@@ -219,7 +214,7 @@
 
 		<?php h2('titre-events', 'vague')?>
 
-		<div class="grid-3 space-l">
+		<div class="grid-3 space-xl">
 			
 			<?php 
 			// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs
@@ -248,7 +243,7 @@
 
 				$content_event = json_decode($res_event['content'], true);
 
-				block(@$content_event['visuel'], $res_event['url'], $res_event['title'], @$content_event['texte-chapo'], @$content_event['aaaa-mm-jj']);
+				block(@$content_event['visuel'], $res_event['url'], $res_event['title'], @$content_event['description'], @$content_event['aaaa-mm-jj']);
 			}
 			?>
 

@@ -10,7 +10,7 @@
 	
 	<?php h1('title'); ?>
 
-	<nav role="navigation" class="tc ptm">
+	<nav role="navigation" class="flex space-xl jcc tc ptl pbl">
 		<?php 
 		// Liste les tags pour filtrer la page
 		$i = 1;
@@ -18,13 +18,13 @@
 		//echo $connect->error;
 
 		while($res_tag_list = $sel_tag_list->fetch_assoc()) {
-			echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="color tdn dash prs">'.$res_tag_list['name'].'</a>';
+			echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="inbl tc bg-color-alt brd-rad tdn pts pbs plm prm">'.$res_tag_list['name'].'</a>';
 			$i++;
 		}
 		?>
 	</nav>
 	
-	<?php txt('description', 'tc ptl'); ?>
+	<?php txt('description', 'tc ptm pbm'); ?>
 	
 </section>
 
@@ -124,7 +124,7 @@
 
 	</div>
 
-	<div class="tc mtl">
+	<div class="tc ptm mtl pbl">
 
 		<?php
 		page($num_total, $page);

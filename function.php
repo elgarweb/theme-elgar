@@ -5,9 +5,9 @@ if(!isset($GLOBALS['domain'])) exit;
 $GLOBALS['table_lang'] = $GLOBALS['tl'] = $GLOBALS['db_prefix'].'lang';
 
 // Fonction affichage blocs img + titre + extrait texte
-function block($url_img, $url_title, $title, $text, $date = null, $tag = null)
+function block($url_img, $url_title, $title, $description, $date = null, $tag = null)
 {
-	global $res, $articles;
+	global $res, $articles, $state;
 
     /* Ajout espaces insécables */
     $search = array("« ", " »", " ?");
@@ -17,7 +17,12 @@ function block($url_img, $url_title, $title, $text, $date = null, $tag = null)
 
     <div class="relative brd-top-alt brd brd-rad-bot-right pbl">
 
-	    <article>
+		<!-- Affichage état article si désactivé -->
+		<div class="color-alt tc bold">
+			<?=$state?>
+		</div>
+	    
+		<article>
 
 	        <!-- Image -->
 			<figure>
@@ -26,18 +31,33 @@ function block($url_img, $url_title, $title, $text, $date = null, $tag = null)
 				</div>
 
 			</figure>
+			
+			<div class="<?= ($res['tpl'] == 'home') ? 'grid3row ' :'grid4row ' ?>pam brd-top">
 
-			<div class="grid3row pam brd-top">
+				<!-- Tag  (que sur le listing des articles car query + longue)-->
+				<?php if($res['tpl'] == 'article-liste' or $res['tpl'] == 'annuaire-liste') { ?>
+
+					<div class="mbm">
+
+						<?php if(isset($tag)){ ?>
+						<p class="inbl tc bg-color-alt brd-rad pts pbs plm prm">
+
+							<?= $tag;// encode($tag) => pour le lien si besoin ?>
+
+						</p>
+
+						<?php } ?>
+
+					</div>
+
+				<?php } ?>
+
 				<?php
-				// Tags, que sur le listing des articles car query + longue
-				if($tag) echo $tag;// encode($tag) => pour le lien si besoin
-
-
 				/* Titre */
 				if($res['tpl'] == 'home')
 				{
 					echo
-					'<h3 class="tl mtn">
+					'<h3 class="tl mtn mbn">
 						<a href="'.make_url($url_title, array("domaine" => true)).'" class="tdn">'.str_replace($search, $replace, $title).
 						'</a>
 					</h3>';
@@ -54,10 +74,10 @@ function block($url_img, $url_title, $title, $text, $date = null, $tag = null)
 				} 
 					?>
 
-				<!-- Extrait texte -->
-				<div class="ptm">
+				<!-- Description -->
+				<div class="">
 					<?php 
-					if(isset($text)) echo word_cut($text, '100', '...');
+					if(isset($description)) echo word_cut($description, '80', '...');
 					?>
 				</div>
 
@@ -66,7 +86,7 @@ function block($url_img, $url_title, $title, $text, $date = null, $tag = null)
 				if(isset($date))
 				{
 					echo 
-					'<div class="bold pts">';
+					'<div class="bold">';
 					
 						$date = strftime("%d %B %Y", strtotime($date));
 						// Convertir en utf8 si besoin en fonction du serveur
