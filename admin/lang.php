@@ -3,6 +3,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/config.php');// Les variables si on aja
 include_once($_SERVER['DOCUMENT_ROOT'].'/api/function.php');// Les fonctions si on ajax
 include_once($_SERVER['DOCUMENT_ROOT'].'/api/db.php');// Connexion à la db
 
+// @todo finir le test suppression, ajout avec autocomplete + duplication + gestion des erreurs lors de l'ajout
+
 switch(@$_REQUEST['mode'])
 {
 	default:
@@ -156,20 +158,30 @@ switch(@$_REQUEST['mode'])
 				// Autocomplete pour l'ajout d'une traduction existante à la page courante
 				$("#connecteur").autocomplete({
 					minLength: 0,
-					source: path+"theme/<?=$GLOBALS['theme']?>/admin/lang.php?mode=links&nonce="+ $("#nonce").val(),
+					source: path+"theme/<?=$GLOBALS['theme']?>/admin/lang.php?mode=links&id=<?=(int)$_REQUEST['id']?>&nonce="+ $("#nonce").val(),
 					select: function(event, ui) 
-					{ 
-						// S'il y a déjà un chemin présent ont ajouté à la suite avec juste la dernière partie | Cas tag
-						if($(this).val().indexOf("/") !== -1)
-						{
-							// Ajoute le dernier terme au contenu courant (moins la saisie de recherche)
-							$(this).val(function(index, value) {
-								return value.substring(0, value.lastIndexOf('/')) +'/'+ ui.item.value.split("/").pop();
-							});
-						}
-						else 
-							$(this).val(ui.item.value);
-			
+					{ 				
+						console.log(ui)	;
+
+						// Ajout à la bdd
+						$.ajax({
+							type: "POST",
+							url: path+"theme/<?=$GLOBALS['theme']?>/admin/lang.php?mode=add",
+							data: {
+								"id-source": '<?=(int)$_REQUEST['id']?>',
+								"lang-source": $("html").attr("lang"),
+								"id-dest": ui.item.id,
+								"lang-dest": ui.item.lang,
+								"nonce": $("#nonce").val()
+							},
+							success: function(html){ 
+								if(!html) 
+									$("#list-trad").append('<li data-id="'+ui.item.id+'"><a href="'+ui.item.value+'">'+ui.item.label+'</a> '+ui.item.lang+' <i class="fa fa-trash pointer grey"></i></li>');
+								else 
+									$("#list-trad").append(html);
+							}
+						});
+
 						return false;// Coupe l'execution automatique d'ajout du terme
 					}
 				})
@@ -177,14 +189,14 @@ switch(@$_REQUEST['mode'])
 					$(this).data("uiAutocomplete").search($(this).val());// Ouvre les suggestions au focus
 				})
 				.autocomplete("instance")._renderItem = function(ul, item) {// Mise en page des résultats
-			      	return $("<li>").append("<div title='"+item.value+"'>"+item.label+" <span class='grey italic'>"+item.type+"</span></div>").appendTo(ul);
+			      	return $("<li>").append("<div title='"+item.value+"'>"+item.label+" <span class='grey italic'>"+item.lang+"</span></div>").appendTo(ul);
 			    };
 
 
 			    // Supprime une connexion de traduction
-				$("#list-trad .fa-trash").on("click", function() 
+				$("#list-trad").on("click", ".fa-trash", function() 
 				{	
-					if(confirm("Supprimer la connexion de traduction ?"))
+					if(confirm("Supprimer la connexion de traduction "+$(this).parent().closest("li").text()+" ?"))
 					{
 						$.ajax({
 							type: "POST",
@@ -219,7 +231,10 @@ switch(@$_REQUEST['mode'])
 
 
 		// LES CONTENUS
-		$sql = "SELECT id, title, type, url FROM ".$GLOBALS['table_content']." WHERE title LIKE '%".$term."%' OR url LIKE '%".$term."%'";
+		$sql = "
+		SELECT id, title, lang, url
+		FROM ".$GLOBALS['table_content']."
+		WHERE id!='".(int)$_REQUEST['id']."' AND (title LIKE '%".$term."%' OR url LIKE '%".$term."%')";
 		if(!$term) $sql .= " ORDER BY date_update DESC"; else $sql .= " ORDER BY title ASC";
 		$sql .= " LIMIT 50";
 		$sel = $connect->query($sql);
@@ -227,7 +242,7 @@ switch(@$_REQUEST['mode'])
 			$data[$res['url']] = array(
 				'id' => $res['id'],
 				'label' => $res['title'],
-				'type' => $res['type'],
+				'lang' => $res['lang'],
 				'value' => make_url($res['url'], array("absolu" => true))//, array("domaine" => true)
 			);
 		}
@@ -280,7 +295,7 @@ switch(@$_REQUEST['mode'])
 	break;
 
 
-	case"save":
+	case"add":
 
 		//$lang = get_lang();// Sélectionne  la langue
 		//load_translation('api');// Chargement des traductions du système
@@ -304,7 +319,13 @@ switch(@$_REQUEST['mode'])
 
 		$connect->query($sql);*/
 
-		echo $connect->error;
+		$sql = "INSERT INTO ".$tl." (`id`, `trad`, `lang`) VALUES
+		('".(int)$_REQUEST['id-source']."', '".(int)$_REQUEST['id-dest']."', '".encode($_REQUEST['lang-dest'])."'),
+		('".(int)$_REQUEST['id-dest']."', '".(int)$_REQUEST['id-source']."', '".encode($_REQUEST['lang-source'])."')";
+
+		$connect->query($sql);
+
+		if($connect->error) echo $connect->error;
 
 		exit;
 		
