@@ -13,7 +13,7 @@ switch(@$_REQUEST['mode'])
 			edit.push(function()
 			{
 				// Ajout du bouton langue avec la langue en cours
-				$("#admin-bar #del").before('<div id="lang" class="fr"><button class="mat small o50 ho1 t5" title="<?_e("Language")?>"><span class="noss"><?_e("Language")?></span> '+$("html").attr("lang")+' <i class="fa fa-fw fa-language"></i></button></div>');
+				$("#admin-bar #del").after('<div id="lang" class="fr"><button class="mat small o50 ho1 t5" title="<?_e("Language")?>"><span class="noss"><?_e("Language")?></span> '+$("html").attr("lang")+' <i class="fa fa-fw fa-language"></i></button></div>');
 
 				// Ouverture de l'admin des langues au clique sur le bouton
 				$("#lang button").on("click",// mouseenter touchstart
@@ -100,7 +100,7 @@ switch(@$_REQUEST['mode'])
 
 						if($res_lang['state'] != "active") echo' <i class="fa fa-eye-off" title="'.__("Deactivate").'"></i>';
 
-						echo'<i class="fa fa-trash pointer grey"></i>';
+						echo' <i class="fa fa-trash pointer grey"></i>';
 
 					echo'</li>';
 				}
@@ -108,11 +108,11 @@ switch(@$_REQUEST['mode'])
 			else echo'<li class="empty">'.__("Aucune").'</li>';
 			?>
 			</ul>
-			<hr class="mbs">
 
 
 			<!-- Ajouter une connexion -->
 			<div class="connecteur">
+				<hr class="mbs">
 				<div>Connecter une traduction</div>
 				<input type="text" id="connecteur" placeholder="Nom de la page" class="w50">
 				<button id="connecter" class="small"><?_e("Ajouter")?> <i class="fa fa-fw fa-plus"></i></button>
@@ -206,6 +206,52 @@ switch(@$_REQUEST['mode'])
 		<?php 
 
 	break;
+
+
+	case "links":// Suggère des pages existante
+
+		login('medium');// Vérifie que l'on a le droit d'éditer une page
+
+		// Si on a déjà un bout d'url de saisie (cas des tags) on prend le dernier bout
+		if(strstr($_GET["term"], "/")) $_GET["term"] = basename($_GET["term"]);
+
+		$term = $connect->real_escape_string(trim($_GET["term"]));
+
+
+		// LES CONTENUS
+		$sql = "SELECT id, title, type, url FROM ".$GLOBALS['table_content']." WHERE title LIKE '%".$term."%' OR url LIKE '%".$term."%'";
+		if(!$term) $sql .= " ORDER BY date_update DESC"; else $sql .= " ORDER BY title ASC";
+		$sql .= " LIMIT 50";
+		$sel = $connect->query($sql);
+		while($res = $sel->fetch_assoc()) {
+			$data[$res['url']] = array(
+				'id' => $res['id'],
+				'label' => $res['title'],
+				'type' => $res['type'],
+				'value' => make_url($res['url'], array("absolu" => true))//, array("domaine" => true)
+			);
+		}
+
+
+		// LES TAGS
+		/*$sql = "SELECT * FROM ".$GLOBALS['tt']." WHERE name LIKE '%".$term."%' GROUP BY encode ORDER BY encode ASC LIMIT 50";
+		$sel = $connect->query($sql);
+		while($res = $sel->fetch_assoc()) {
+			$data[$res['encode'].$res['zone']] = array(
+				'id' => 'tag',
+				'label' => $res['name'],
+				'type' => 'Tag '.$res['zone'],
+				'value' => make_url($res['zone'], array($res['encode'], "absolu" => true))//, array("domaine" => true)
+			);
+		}*/
+
+		header("Content-Type: application/json; charset=utf-8");
+
+		if(@$data)
+			echo json_encode($data);
+
+	break;
+
 
 
 	case"del":
