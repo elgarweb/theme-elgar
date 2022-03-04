@@ -180,6 +180,22 @@ figure div {
 			transform: scale(1.1);
 		}
 
+
+/* Actualités... */
+		/** Pagination **/
+		.page .bt {
+			background-color: transparent;
+			color: #00253F;
+			font-weight: normal !important;
+			padding: 0 1rem !important;
+		}
+			.page .bt.selected {
+				text-decoration: underline;
+			}
+			.page .bt:hover {
+				background-color: transparent;
+			}
+
 /* Footer */
 
 	footer #contacts a { color: white; }

@@ -62,7 +62,7 @@
 
 	</div>
 
-	<div class="tc mtl">
+	<div class="tc ptm mtl pbl">
 
 		<?php
 		page($num_total, $page);
