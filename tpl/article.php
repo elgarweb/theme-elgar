@@ -57,9 +57,10 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 			<?php 
 			if($res['tpl']=='article' or  $res['tpl']=='event') 
 				txt('description', 'pbm');
-			else 
+			else {
 				txt('texte-coordonnees-intro', 'pbm');
 				txt('texte-coordonnees-suite');
+			}
 			?>
 
 

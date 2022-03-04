@@ -1,10 +1,5 @@
 <?php if(!$GLOBALS['domain']) exit;?>
 
-<!--
-@todo Stéphanie :
-- actualaune : vérif qu'elle n'apparaisse pas aussi dans les 3 actus de dessous
--->
-
 <!-- ZONE ALERTE -->
 <section class="<?=(isset($GLOBALS['content']['alerte-texte']) ? 'bg-color-grey' : 'editable-hidden'); ?>">
 	
@@ -168,7 +163,7 @@
 	<!-- Dernières actualités -->
 	<article class="clear">
 
-		<div class="grid-3 space-l">
+		<div class="grid-3 space-xl">
 			
 			<?php 
 			// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs
@@ -219,7 +214,7 @@
 
 		<?php h2('titre-events', 'vague')?>
 
-		<div class="grid-3 space-l">
+		<div class="grid-3 space-xl">
 			
 			<?php 
 			// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs
