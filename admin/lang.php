@@ -1,4 +1,8 @@
 <?
+include_once($_SERVER['DOCUMENT_ROOT'].'/config.php');// Les variables si on ajax
+include_once($_SERVER['DOCUMENT_ROOT'].'/api/function.php');// Les fonctions si on ajax
+include_once($_SERVER['DOCUMENT_ROOT'].'/api/db.php');// Connexion à la db
+
 switch(@$_REQUEST['mode'])
 {
 	default:
@@ -48,9 +52,6 @@ switch(@$_REQUEST['mode'])
 
 
 	case"tool":
-		include_once($_SERVER['DOCUMENT_ROOT'].'/config.php');// Les variables si on ajax
-		include_once($_SERVER['DOCUMENT_ROOT'].'/api/function.php');// Les fonctions si on ajax
-		include_once($_SERVER['DOCUMENT_ROOT'].'/api/db.php');// Connexion à la db
 
 		$lang = get_lang();// Sélectionne  la langue
 		load_translation('api');// Chargement des traductions du système
@@ -61,6 +62,7 @@ switch(@$_REQUEST['mode'])
 		// - proposer de créer la meme page dans une autre langue (menu select de langue), checkbox pour copier le contenu de la page en cours. si toutes les lang prise on ne propose pas d'ajout
 			// -> créer la page + copie le contenu + créer les connexions dans table lang
 		// - propose de relier un contenu existant comme traduction (champs avec autocomplete), saisie du titre, ou id
+		// - suppression d'une connexion
 
 		// @todo : lors de la suppression d'un contenu supp aussi les liaisons
 
@@ -69,9 +71,9 @@ switch(@$_REQUEST['mode'])
 
 			<!-- Liste les pages connecter -->
 			<div>Traduction :</div>
-			<ul>
+			<ul id="list-trad">
 		 	<?php
-			$sql='SELECT '.$tc.'.url, '.$tc.'.lang AS lang, '.$tc.'.title, '.$tc.'.state FROM '.$tc;
+			$sql='SELECT '.$tc.'.id, '.$tc.'.url, '.$tc.'.lang AS lang, '.$tc.'.title, '.$tc.'.state FROM '.$tc;
 			$sql.=' JOIN '.$tl.'
 			ON
 			(
@@ -90,13 +92,15 @@ switch(@$_REQUEST['mode'])
 					// Pour savoir les traductions déjà disponible
 					$traduction[$res_lang['lang']] = true;
 
-					echo'<li>';
+					echo'<li data-id="'.$res_lang['id'].'">';
 
 						echo'<a href="'.make_url($res_lang['url'], array('domaine' => $GLOBALS['scheme'].$GLOBALS['domain_lang'][$res_lang['lang']].$GLOBALS['path'])).'" lang="'.$res_lang['lang'].'">'.$res_lang['title'].'</a>';
 
 						echo ' - '.$res_lang['lang'];
 
 						if($res_lang['state'] != "active") echo' <i class="fa fa-eye-off" title="'.__("Deactivate").'"></i>';
+
+						echo'<i class="fa fa-trash pointer grey"></i>';
 
 					echo'</li>';
 				}
@@ -118,7 +122,7 @@ switch(@$_REQUEST['mode'])
 			<!-- Dupliquer pour traduire -->	
 			<div class="duplicateur">
 				<hr class="mbs">	
-				<div>Dupliquer cette page pour la traduire</div>
+				<div class="bold">Dupliquer cette page pour la traduire</div>
 				<div>Sélectionner une langue destination :</div>
 				<?
 				$i = 1;
@@ -149,7 +153,7 @@ switch(@$_REQUEST['mode'])
 
 			$(function()
 			{
-				
+				// Autocomplete pour l'ajout d'une traduction existante à la page courante
 				$("#connecteur").autocomplete({
 					minLength: 0,
 					source: path+"theme/<?=$GLOBALS['theme']?>/admin/lang.php?mode=links&nonce="+ $("#nonce").val(),
@@ -175,6 +179,26 @@ switch(@$_REQUEST['mode'])
 				.autocomplete("instance")._renderItem = function(ul, item) {// Mise en page des résultats
 			      	return $("<li>").append("<div title='"+item.value+"'>"+item.label+" <span class='grey italic'>"+item.type+"</span></div>").appendTo(ul);
 			    };
+
+
+			    // Supprime une connexion de traduction
+				$("#list-trad .fa-trash").on("click", function() 
+				{	
+					if(confirm("Supprimer la connexion de traduction ?"))
+					{
+						$.ajax({
+							type: "POST",
+							url: path+"theme/"+theme+"/admin/lang.php?mode=del",
+							data: {
+								"id": $(this).closest("li").data("id"),
+								"nonce": $("#nonce").val()
+							},
+							success: function(html){
+								$("body").append(html);
+							}
+						});
+					}
+				});	
 				
 
 			});
@@ -184,14 +208,36 @@ switch(@$_REQUEST['mode'])
 	break;
 
 
+	case"del":
+
+		login('high', 'edit-page');// Vérifie que l'on a le droit d'éditer les contenus
+
+		//highlight_string(print_r($_REQUEST['partenaire'], true));
+
+		$connect->query("DELETE FROM ".$tl." WHERE id='".(int)$_REQUEST['id']."' OR trad='".(int)$_REQUEST['id']."'");
+
+		if($connect->error) echo $connect->error;
+		else 
+		{
+			?>
+			<script>
+				$("#list-trad data-id['<?=(int)$_REQUEST['id']?>']")
+				.slideUp("700", function(){
+					$(this).remove();
+				});
+			</script>
+			<?
+		}
+
+		exit;
+		
+	break;
+
+
 	case"save":
 
-		include_once($_SERVER['DOCUMENT_ROOT'].'/config.php');// Les variables si on ajax
-		include_once($_SERVER['DOCUMENT_ROOT'].'/api/function.php');// Les fonctions si on ajax
-		include_once($_SERVER['DOCUMENT_ROOT'].'/api/db.php');// Connexion à la db
-
-		$lang = get_lang();// Sélectionne  la langue
-		load_translation('api');// Chargement des traductions du système
+		//$lang = get_lang();// Sélectionne  la langue
+		//load_translation('api');// Chargement des traductions du système
 
 		login('high', 'edit-page');// Vérifie que l'on a le droit d'éditer les contenus
 
