@@ -3,6 +3,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/config.php');// Les variables si on aja
 include_once($_SERVER['DOCUMENT_ROOT'].'/api/function.php');// Les fonctions si on ajax
 include_once($_SERVER['DOCUMENT_ROOT'].'/api/db.php');// Connexion à la db
 
+// @todo finir le test suppression, ajout avec autocomplete + duplication + gestion des erreurs lors de l'ajout
+
 switch(@$_REQUEST['mode'])
 {
 	default:
@@ -13,7 +15,7 @@ switch(@$_REQUEST['mode'])
 			edit.push(function()
 			{
 				// Ajout du bouton langue avec la langue en cours
-				$("#admin-bar #del").before('<div id="lang" class="fr"><button class="mat small o50 ho1 t5" title="<?_e("Language")?>"><span class="noss"><?_e("Language")?></span> '+$("html").attr("lang")+' <i class="fa fa-fw fa-language"></i></button></div>');
+				$("#admin-bar #del").after('<div id="lang" class="fr"><button class="mat small o50 ho1 t5" title="<?_e("Language")?>"><span class="noss"><?_e("Language")?></span> '+$("html").attr("lang")+' <i class="fa fa-fw fa-language"></i></button></div>');
 
 				// Ouverture de l'admin des langues au clique sur le bouton
 				$("#lang button").on("click",// mouseenter touchstart
@@ -100,7 +102,7 @@ switch(@$_REQUEST['mode'])
 
 						if($res_lang['state'] != "active") echo' <i class="fa fa-eye-off" title="'.__("Deactivate").'"></i>';
 
-						echo'<i class="fa fa-trash pointer grey"></i>';
+						echo' <i class="fa fa-trash pointer grey"></i>';
 
 					echo'</li>';
 				}
@@ -108,11 +110,11 @@ switch(@$_REQUEST['mode'])
 			else echo'<li class="empty">'.__("Aucune").'</li>';
 			?>
 			</ul>
-			<hr class="mbs">
 
 
 			<!-- Ajouter une connexion -->
 			<div class="connecteur">
+				<hr class="mbs">
 				<div>Connecter une traduction</div>
 				<input type="text" id="connecteur" placeholder="Nom de la page" class="w50">
 				<button id="connecter" class="small"><?_e("Ajouter")?> <i class="fa fa-fw fa-plus"></i></button>
@@ -156,20 +158,30 @@ switch(@$_REQUEST['mode'])
 				// Autocomplete pour l'ajout d'une traduction existante à la page courante
 				$("#connecteur").autocomplete({
 					minLength: 0,
-					source: path+"theme/<?=$GLOBALS['theme']?>/admin/lang.php?mode=links&nonce="+ $("#nonce").val(),
+					source: path+"theme/<?=$GLOBALS['theme']?>/admin/lang.php?mode=links&id=<?=(int)$_REQUEST['id']?>&nonce="+ $("#nonce").val(),
 					select: function(event, ui) 
-					{ 
-						// S'il y a déjà un chemin présent ont ajouté à la suite avec juste la dernière partie | Cas tag
-						if($(this).val().indexOf("/") !== -1)
-						{
-							// Ajoute le dernier terme au contenu courant (moins la saisie de recherche)
-							$(this).val(function(index, value) {
-								return value.substring(0, value.lastIndexOf('/')) +'/'+ ui.item.value.split("/").pop();
-							});
-						}
-						else 
-							$(this).val(ui.item.value);
-			
+					{ 				
+						console.log(ui)	;
+
+						// Ajout à la bdd
+						$.ajax({
+							type: "POST",
+							url: path+"theme/<?=$GLOBALS['theme']?>/admin/lang.php?mode=add",
+							data: {
+								"id-source": '<?=(int)$_REQUEST['id']?>',
+								"lang-source": $("html").attr("lang"),
+								"id-dest": ui.item.id,
+								"lang-dest": ui.item.lang,
+								"nonce": $("#nonce").val()
+							},
+							success: function(html){ 
+								if(!html) 
+									$("#list-trad").append('<li data-id="'+ui.item.id+'"><a href="'+ui.item.value+'">'+ui.item.label+'</a> '+ui.item.lang+' <i class="fa fa-trash pointer grey"></i></li>');
+								else 
+									$("#list-trad").append(html);
+							}
+						});
+
 						return false;// Coupe l'execution automatique d'ajout du terme
 					}
 				})
@@ -177,14 +189,14 @@ switch(@$_REQUEST['mode'])
 					$(this).data("uiAutocomplete").search($(this).val());// Ouvre les suggestions au focus
 				})
 				.autocomplete("instance")._renderItem = function(ul, item) {// Mise en page des résultats
-			      	return $("<li>").append("<div title='"+item.value+"'>"+item.label+" <span class='grey italic'>"+item.type+"</span></div>").appendTo(ul);
+			      	return $("<li>").append("<div title='"+item.value+"'>"+item.label+" <span class='grey italic'>"+item.lang+"</span></div>").appendTo(ul);
 			    };
 
 
 			    // Supprime une connexion de traduction
-				$("#list-trad .fa-trash").on("click", function() 
+				$("#list-trad").on("click", ".fa-trash", function() 
 				{	
-					if(confirm("Supprimer la connexion de traduction ?"))
+					if(confirm("Supprimer la connexion de traduction "+$(this).parent().closest("li").text()+" ?"))
 					{
 						$.ajax({
 							type: "POST",
@@ -206,6 +218,55 @@ switch(@$_REQUEST['mode'])
 		<?php 
 
 	break;
+
+
+	case "links":// Suggère des pages existante
+
+		login('medium');// Vérifie que l'on a le droit d'éditer une page
+
+		// Si on a déjà un bout d'url de saisie (cas des tags) on prend le dernier bout
+		if(strstr($_GET["term"], "/")) $_GET["term"] = basename($_GET["term"]);
+
+		$term = $connect->real_escape_string(trim($_GET["term"]));
+
+
+		// LES CONTENUS
+		$sql = "
+		SELECT id, title, lang, url
+		FROM ".$GLOBALS['table_content']."
+		WHERE id!='".(int)$_REQUEST['id']."' AND (title LIKE '%".$term."%' OR url LIKE '%".$term."%')";
+		if(!$term) $sql .= " ORDER BY date_update DESC"; else $sql .= " ORDER BY title ASC";
+		$sql .= " LIMIT 50";
+		$sel = $connect->query($sql);
+		while($res = $sel->fetch_assoc()) {
+			$data[$res['url']] = array(
+				'id' => $res['id'],
+				'label' => $res['title'],
+				'lang' => $res['lang'],
+				'value' => make_url($res['url'], array("absolu" => true))//, array("domaine" => true)
+			);
+		}
+
+
+		// LES TAGS
+		/*$sql = "SELECT * FROM ".$GLOBALS['tt']." WHERE name LIKE '%".$term."%' GROUP BY encode ORDER BY encode ASC LIMIT 50";
+		$sel = $connect->query($sql);
+		while($res = $sel->fetch_assoc()) {
+			$data[$res['encode'].$res['zone']] = array(
+				'id' => 'tag',
+				'label' => $res['name'],
+				'type' => 'Tag '.$res['zone'],
+				'value' => make_url($res['zone'], array($res['encode'], "absolu" => true))//, array("domaine" => true)
+			);
+		}*/
+
+		header("Content-Type: application/json; charset=utf-8");
+
+		if(@$data)
+			echo json_encode($data);
+
+	break;
+
 
 
 	case"del":
@@ -234,7 +295,7 @@ switch(@$_REQUEST['mode'])
 	break;
 
 
-	case"save":
+	case"add":
 
 		//$lang = get_lang();// Sélectionne  la langue
 		//load_translation('api');// Chargement des traductions du système
@@ -258,7 +319,13 @@ switch(@$_REQUEST['mode'])
 
 		$connect->query($sql);*/
 
-		echo $connect->error;
+		$sql = "INSERT INTO ".$tl." (`id`, `trad`, `lang`) VALUES
+		('".(int)$_REQUEST['id-source']."', '".(int)$_REQUEST['id-dest']."', '".encode($_REQUEST['lang-dest'])."'),
+		('".(int)$_REQUEST['id-dest']."', '".(int)$_REQUEST['id-source']."', '".encode($_REQUEST['lang-source'])."')";
+
+		$connect->query($sql);
+
+		if($connect->error) echo $connect->error;
 
 		exit;
 		
