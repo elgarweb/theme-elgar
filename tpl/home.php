@@ -1,10 +1,5 @@
 <?php if(!$GLOBALS['domain']) exit;?>
 
-<!--
-@todo Stéphanie :
-- actualaune : vérif qu'elle n'apparaisse pas aussi dans les 3 actus de dessous
--->
-
 <!-- ZONE ALERTE -->
 <section class="<?=(isset($GLOBALS['content']['alerte-texte']) ? 'bg-color-grey' : 'editable-hidden'); ?>">
 	

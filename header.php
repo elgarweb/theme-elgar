@@ -5,8 +5,6 @@
 - bouton choix langue
 - formulaire de recherche
 
-@todo Stéphanie :
-- soulignement nav selected : pb si une seule ligne
 -->
 
 <style>
