@@ -5,13 +5,13 @@
 
 <?php  if(!$GLOBALS['domain']) exit; ?>
 
-<section class="mw960p mod center mbl">
+<section class="mw960p mod center pbm">
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 	
 	<?php h1('title'); ?>
 
-	<nav role="navigation" class="mts tc italic">
+	<nav role="navigation" class="flex space-xl jcc tc ptl pbl">
 		<?php 
 		// Liste les tags pour filtrer la page
 		$i = 1;
@@ -19,13 +19,13 @@
 		//echo $connect->error;
 
 		while($res_tag_list = $sel_tag_list->fetch_assoc()) {
-			echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="color tdn dash prs">'.$res_tag_list['name'].'</a>';
+			echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="inbl tc bg-color-alt brd-rad tdn pts pbs plm prm">'.$res_tag_list['name'].'</a>';
 			$i++;
 		}
 		?>
 	</nav>
 	
-	<?php txt('description'); ?>
+	<?php txt('description', 'tc ptm'); ?>
 	
 </section>
 
@@ -99,7 +99,7 @@
 
 			$content_fiche = json_decode($res_fiche['content'], true);
 
-			block(@$content_fiche['visuel'], $res_fiche['url'], $res_fiche['title'], @$content_fiche['texte-chapo'], @$content_fiche['aaaa-mm-jj'], @$res_fiche['tag']);
+			block(@$content_fiche['visuel'], $res_fiche['url'], $res_fiche['title'], @$content_fiche['description'], @$content_fiche['aaaa-mm-jj'], @$res_fiche['tag']);
 		}
 		?>
 
