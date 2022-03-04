@@ -7,7 +7,7 @@ $GLOBALS['table_lang'] = $GLOBALS['tl'] = $GLOBALS['db_prefix'].'lang';
 // Fonction affichage blocs img + titre + extrait texte
 function block($url_img, $url_title, $title, $description, $date = null, $tag = null)
 {
-	global $res, $articles;
+	global $res, $articles, $state;
 
     /* Ajout espaces insécables */
     $search = array("« ", " »", " ?");
@@ -17,7 +17,12 @@ function block($url_img, $url_title, $title, $description, $date = null, $tag = 
 
     <div class="relative brd-top-alt brd brd-rad-bot-right pbl">
 
-	    <article>
+		<!-- Affichage état article si désactivé -->
+		<div class="color-alt tc bold">
+			<?=$state?>
+		</div>
+	    
+		<article>
 
 	        <!-- Image -->
 			<figure>
