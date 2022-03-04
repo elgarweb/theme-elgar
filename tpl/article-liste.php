@@ -31,7 +31,7 @@
 
 <section class="mw960p mod center">
 
-	<div class="grid-3 space-l">
+	<div class="grid-3 space-xl">
 		
 		<?php 
 		// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs
