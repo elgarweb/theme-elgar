@@ -3,12 +3,24 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/config.php');// Les variables si on aja
 include_once($_SERVER['DOCUMENT_ROOT'].'/api/function.php');// Les fonctions si on ajax
 include_once($_SERVER['DOCUMENT_ROOT'].'/api/db.php');// Connexion à la db
 
-// @todo finir le test suppression, ajout avec autocomplete + duplication + gestion des erreurs lors de l'ajout
+
+function creat_table_lang(){
+	$GLOBALS['connect']->query("
+		CREATE TABLE IF NOT EXISTS `".$GLOBALS['table_lang']."` (
+			`id` bigint(20) NOT NULL DEFAULT '0',
+			`trad` bigint(20) NOT NULL DEFAULT '0',
+			`lang` varchar(6) DEFAULT NULL,
+			PRIMARY KEY (`id`,`trad`)
+		) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+	");
+}
+
 
 switch(@$_REQUEST['mode'])
 {
 	default:
-
+		if(strpos(@$res['tpl'], '-liste') === false) 
+		{
 		?>
 		<script>
 			// Action si on lance le mode d'edition
@@ -24,49 +36,58 @@ switch(@$_REQUEST['mode'])
 						event.stopPropagation();
 						event.preventDefault();		
 
-						if(!$("#lang .absolute").length)// Si pas de layer on l'inject
+						// Si ouvert => on ferme
+						if($("#lang .absolute").is(":visible")) $("#lang .absolute").fadeOut("fast");
+						else
 						{
+							// On ajax le contenu des options d'edition des langues
 							$.ajax({
 								type: "POST",
-								url: path+"theme/<?=$GLOBALS['theme']?>/admin/lang.php?mode=tool&id=<?=$id?>",
-								data: {"nonce": $("#nonce").val()},
+								url: path+"theme/"+theme+"/admin/lang.php?mode=view",
+								data: {
+									"id": "<?=$id?>",
+									"type": type,
+									"nonce": $("#nonce").val()
+								},
 								success: function(html){ 
-									$("#lang").append(html);						
-									close = false;
+									// Si pas de layer on l'inject // Sinon on remplace le contenu et ouvre
+									if(!$("#lang .absolute").length) $("#lang").append(html);
+									else $("#lang .absolute").replaceWith(html).fadeIn();
 								}
 							});
 						}
-
-						// Si on click et que l'ajax a déjà été fait
-						else if($("#lang .absolute").length && !$("#lang .absolute").is(":visible") && close == true)
-							$("#lang .absolute").fadeIn("fast", function(){ close = false; });
-
-						// Si on click sur le bt lang de l'admin-bar
-						else if(event.type == 'click' && $("#lang .absolute").is(":visible") && close == false )
-							$("#lang .absolute").fadeOut("fast", function(){ close = true; });
 					}
 				);
+			});
 
+			// Action avant la supp
+			before_del.push(function()
+			{
+				$.ajax({
+					type: "POST",
+					url: path+"theme/"+theme+"/admin/lang.php?mode=del",
+					data: {
+						"id": "<?=$id?>",
+						"nonce": $("#nonce").val()
+					},
+					success: function(html){
+						$("body").append(html);
+					}
+				});
 			});
 		</script>
-	<?
+		<?
+		}
 	break;
 
 
-	case"tool":
+	case"view":
 
 		$lang = get_lang();// Sélectionne  la langue
 		load_translation('api');// Chargement des traductions du système
 		load_translation('theme');// Chargement des traductions du theme
 
-		login('high', 'edit-page');// Vérifie que l'on a le droit d'éditer les contenus
-
-		// - proposer de créer la meme page dans une autre langue (menu select de langue), checkbox pour copier le contenu de la page en cours. si toutes les lang prise on ne propose pas d'ajout
-			// -> créer la page + copie le contenu + créer les connexions dans table lang
-		// - propose de relier un contenu existant comme traduction (champs avec autocomplete), saisie du titre, ou id
-		// - suppression d'une connexion
-
-		// @todo : lors de la suppression d'un contenu supp aussi les liaisons
+		login('high', 'edit-'.encode($_REQUEST['type']));// Vérifie que l'on a le droit d'éditer les contenus de ce type
 
 		?>
 		<div class="absolute tooltip pas mas mlt small mod">
@@ -84,7 +105,7 @@ switch(@$_REQUEST['mode'])
 
 			)';
 			$sql.=' ORDER BY '.$tc.'.lang ASC';
-			$sql.=' LIMIT '.count($GLOBALS['language']);
+			$sql.=' LIMIT 20';//.count($GLOBALS['language'])
 			//echo $sql;
 			$sel_lang = $connect->query($sql);
 			if(!empty($sel_lang->num_rows))// Si des résultat & que la table existe
@@ -96,7 +117,7 @@ switch(@$_REQUEST['mode'])
 
 					echo'<li data-id="'.$res_lang['id'].'">';
 
-						echo'<a href="'.make_url($res_lang['url'], array('domaine' => $GLOBALS['scheme'].$GLOBALS['domain_lang'][$res_lang['lang']].$GLOBALS['path'])).'" lang="'.$res_lang['lang'].'">'.$res_lang['title'].'</a>';
+						echo'<a href="'.make_url($res_lang['url'], array('domaine' => $GLOBALS['scheme'].$GLOBALS['domain_lang'][$res_lang['lang']].$GLOBALS['path'])).'" lang="'.$res_lang['lang'].'" target="_blank">'.$res_lang['title'].'</a>';
 
 						echo ' - '.$res_lang['lang'];
 
@@ -115,9 +136,9 @@ switch(@$_REQUEST['mode'])
 			<!-- Ajouter une connexion -->
 			<div class="connecteur">
 				<hr class="mbs">
-				<div>Connecter une traduction</div>
-				<input type="text" id="connecteur" placeholder="Nom de la page" class="w50">
-				<button id="connecter" class="small"><?_e("Ajouter")?> <i class="fa fa-fw fa-plus"></i></button>
+				Connecter : 
+				<input type="text" id="connecteur" placeholder="Nom de la traduction" class="w60">
+				<!-- <button id="connecter" class="small"><?_e("Ajouter")?> <i class="fa fa-fw fa-plus"></i></button> -->
 			</div>
 
 
@@ -133,7 +154,7 @@ switch(@$_REQUEST['mode'])
 					// Si la langue n'a pas encore de traduction on la propose
 					if($value != $lang and !isset($traduction[$value])) 
 					{
-						?><input type="radio" name="dupliquer" id="lang-<?$value?>" value="<?$value?>"<?=($i==1?' checked':'')?>> <label for="lang-<?$value?>"><?_e($value)?></label> <?
+						?><input type="radio" name="dupliquer" id="lang-<?=$value?>" value="<?=$value?>"<?=($i==1?' checked':'')?>> <label for="lang-<?=$value?>"><?_e($value)?></label> <?
 						$i++;
 					}
 				}
@@ -143,6 +164,8 @@ switch(@$_REQUEST['mode'])
 
 
 		</div>
+
+
 
 		<script>
 			// Si pas de radio pour dupliquer on masque l'option
@@ -155,44 +178,6 @@ switch(@$_REQUEST['mode'])
 
 			$(function()
 			{
-				// Autocomplete pour l'ajout d'une traduction existante à la page courante
-				$("#connecteur").autocomplete({
-					minLength: 0,
-					source: path+"theme/<?=$GLOBALS['theme']?>/admin/lang.php?mode=links&id=<?=(int)$_REQUEST['id']?>&nonce="+ $("#nonce").val(),
-					select: function(event, ui) 
-					{ 				
-						console.log(ui)	;
-
-						// Ajout à la bdd
-						$.ajax({
-							type: "POST",
-							url: path+"theme/<?=$GLOBALS['theme']?>/admin/lang.php?mode=add",
-							data: {
-								"id-source": '<?=(int)$_REQUEST['id']?>',
-								"lang-source": $("html").attr("lang"),
-								"id-dest": ui.item.id,
-								"lang-dest": ui.item.lang,
-								"nonce": $("#nonce").val()
-							},
-							success: function(html){ 
-								if(!html) 
-									$("#list-trad").append('<li data-id="'+ui.item.id+'"><a href="'+ui.item.value+'">'+ui.item.label+'</a> '+ui.item.lang+' <i class="fa fa-trash pointer grey"></i></li>');
-								else 
-									$("#list-trad").append(html);
-							}
-						});
-
-						return false;// Coupe l'execution automatique d'ajout du terme
-					}
-				})
-				.focus(function(){
-					$(this).data("uiAutocomplete").search($(this).val());// Ouvre les suggestions au focus
-				})
-				.autocomplete("instance")._renderItem = function(ul, item) {// Mise en page des résultats
-			      	return $("<li>").append("<div title='"+item.value+"'>"+item.label+" <span class='grey italic'>"+item.lang+"</span></div>").appendTo(ul);
-			    };
-
-
 			    // Supprime une connexion de traduction
 				$("#list-trad").on("click", ".fa-trash", function() 
 				{	
@@ -211,6 +196,73 @@ switch(@$_REQUEST['mode'])
 						});
 					}
 				});	
+
+
+				// Autocomplete pour l'ajout d'une traduction existante à la page courante
+				$("#connecteur").autocomplete({
+					minLength: 0,
+					source: path+"theme/"+theme+"/admin/lang.php?mode=links&id=<?=(int)$_REQUEST['id']?>&nonce="+ $("#nonce").val(),
+					select: function(event, ui) 
+					{ 				
+						console.log(ui)	;
+
+						// Ajout à la bdd
+						$.ajax({
+							type: "POST",
+							url: path+"theme/"+theme+"/admin/lang.php?mode=add",
+							data: {
+								"id-source": '<?=(int)$_REQUEST['id']?>',
+								"lang-source": $("html").attr("lang"),
+								"id-dest": ui.item.id,
+								"lang-dest": ui.item.lang,
+								"nonce": $("#nonce").val()
+							},
+							success: function(html){ 
+								if(!html) {
+									// Ajout de la ligne
+									$("#list-trad").append('<li data-id="'+ui.item.id+'"><a href="'+ui.item.value+'" target="_blank">'+ui.item.label+'</a> '+ui.item.lang+' <i class="fa fa-trash pointer grey"></i></li>');
+
+									// Supp la ligne vide
+									$("#list-trad .empty").remove();
+								}
+								else 
+									$("#list-trad").append(html);
+							}
+						});
+
+						return false;// Coupe l'execution automatique d'ajout du terme
+					}
+				})
+				.focus(function(){
+					$(this).data("uiAutocomplete").search($(this).val());// Ouvre les suggestions au focus
+				})
+				.autocomplete("instance")._renderItem = function(ul, item) {// Mise en page des résultats
+			      	return $("<li>").append("<div title='"+item.value+"'>"+item.label+" <span class='grey italic'>"+item.lang+"</span></div>").appendTo(ul);
+			    };
+
+
+			    // Duplique la page en cours
+				$("#dupliquer").click(function() 
+				{	
+					// Animation duplication en cours (loading)
+					$("#dupliquer i").removeClass("fa-doc-text").addClass("fa-spin fa-cog");
+
+					// Envoi de la requête de duplication
+					$.ajax({
+						type: "POST",
+						url: path+"theme/"+theme+"/admin/lang.php?mode=duplique",
+						data: {
+							"type": type,
+							"id": "<?=(int)$_REQUEST['id']?>",
+							"lang-dest": $(".duplicateur input[name='dupliquer']:checked").val(),
+							"lang-source": $("html").attr("lang"),
+							"nonce": $("#nonce").val()
+						},
+						success: function(html){
+							$("body").append(html);// Affichage/exécution du retour
+						}
+					});
+				});
 				
 
 			});
@@ -269,12 +321,82 @@ switch(@$_REQUEST['mode'])
 
 
 
+	case "duplique":
+
+		login('high', 'edit-'.encode($_REQUEST['type']));// Vérifie que l'on a le droit d'éditer les contenus
+
+
+		// Récupération des données de la fiche en cours
+		$sel = $connect->query("SELECT * FROM ".$tc." WHERE id='".(int)$_REQUEST['id']."'");
+		$res = $sel->fetch_assoc();
+		$fiche = json_decode($res['content'], true);
+
+		$fiche['title'] = $fiche['title'].' '.strtoupper(encode($_REQUEST['lang-dest']));// Changement du titre H1
+		//unset($fiche['og-image'], $fiche['visuel']);
+
+		$json_content = json_encode($fiche, JSON_UNESCAPED_UNICODE);
+
+
+		// Création de la fiche avec les données copier
+		$sql = "INSERT ".$table_content." SET ";
+		$sql .= "lang = '".encode($_REQUEST['lang-dest'])."', ";
+		$sql .= "type = '".$res['type']."', ";
+		$sql .= "tpl = '".$res['tpl']."', ";
+		$sql .= "url = '".encode($fiche['title'])."', ";
+		$sql .= "title = '".addslashes($fiche['title'])."', ";
+		$sql .= "description = '".addslashes($res['description'])."', ";
+		$sql .= "content = '".addslashes($json_content)."', ";
+		$sql .= "user_insert = '".(int)$_SESSION['uid']."', ";
+		$sql .= "date_insert = NOW() ";
+		
+		$connect->query($sql);
+
+
+		// Si il y a une erreur
+		if($connect->error)
+			echo htmlspecialchars($sql)."\n<script>error(\"".htmlspecialchars($connect->error)."\");</script>";
+
+		// Sauvegarde réussit
+		else 
+		{
+			$id = $connect->insert_id;
+
+			// Création de la table de connexion des traductions si pas existante
+			creat_table_lang();
+
+			// Connexion table traduction
+			$sql = "INSERT LOW_PRIORITY INTO ".$tl." (`id`, `trad`, `lang`) VALUES
+			('".(int)$_REQUEST['id']."', '".$id."', '".encode($_REQUEST['lang-dest'])."'),
+			('".$id."', '".(int)$_REQUEST['id']."', '".encode($_REQUEST['lang-source'])."')";
+
+			$connect->query($sql);
+
+			if($connect->error) echo $connect->error;
+
+			
+			// Pose un cookie pour demander l'ouverture de l'admin automatiquement au chargement
+			setcookie("autoload_edit", "true", time() + 60*60, $GLOBALS['path'], $GLOBALS['domain']);
+			
+			?>
+			<script>
+			$(function()
+			{		
+				// Redirection vers la page crée
+				document.location.href = "<?=make_url(encode($fiche['title']), array("domaine" => $GLOBALS['scheme'].$GLOBALS['domain_lang'][encode($_REQUEST['lang-dest'])].$GLOBALS['path']));?>";
+			});
+			</script>
+			<?
+		}
+
+	break;
+
+
+
 	case"del":
 
 		login('high', 'edit-page');// Vérifie que l'on a le droit d'éditer les contenus
 
 		//highlight_string(print_r($_REQUEST['partenaire'], true));
-
 		$connect->query("DELETE FROM ".$tl." WHERE id='".(int)$_REQUEST['id']."' OR trad='".(int)$_REQUEST['id']."'");
 
 		if($connect->error) echo $connect->error;
@@ -282,7 +404,7 @@ switch(@$_REQUEST['mode'])
 		{
 			?>
 			<script>
-				$("#list-trad data-id['<?=(int)$_REQUEST['id']?>']")
+				$("#list-trad [data-id='<?=(int)$_REQUEST['id']?>']")
 				.slideUp("700", function(){
 					$(this).remove();
 				});
@@ -295,31 +417,16 @@ switch(@$_REQUEST['mode'])
 	break;
 
 
-	case"add":
 
-		//$lang = get_lang();// Sélectionne  la langue
-		//load_translation('api');// Chargement des traductions du système
+	case"add":
 
 		login('high', 'edit-page');// Vérifie que l'on a le droit d'éditer les contenus
 
 		// Création de la table de connexion des traductions si pas existante
-		$GLOBALS['connect']->query("
-			CREATE TABLE IF NOT EXISTS `".$GLOBALS['table_lang']."` (
-				`id` bigint(20) NOT NULL DEFAULT '0',
-				`trad` bigint(20) NOT NULL DEFAULT '0',
-				`lang` varchar(6) DEFAULT NULL,
-				PRIMARY KEY (`id`,`trad`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-		");
+		creat_table_lang();
 
-		/*if($_REQUEST['checked'] == 'true')
-			$sql = "INSERT INTO ".$table_meta." SET id='".(int)$_REQUEST['id']."', type='".encode($_REQUEST['type'])."', cle='alaune'";
-		else 
-			$sql = "DELETE FROM ".$table_meta." WHERE id='".(int)$_REQUEST['id']."' AND type='".encode($_REQUEST['type'])."' AND cle='alaune'";
-
-		$connect->query($sql);*/
-
-		$sql = "INSERT INTO ".$tl." (`id`, `trad`, `lang`) VALUES
+		// Ajout de la connexion
+		$sql = "INSERT LOW_PRIORITY INTO ".$tl." (`id`, `trad`, `lang`) VALUES
 		('".(int)$_REQUEST['id-source']."', '".(int)$_REQUEST['id-dest']."', '".encode($_REQUEST['lang-dest'])."'),
 		('".(int)$_REQUEST['id-dest']."', '".(int)$_REQUEST['id-source']."', '".encode($_REQUEST['lang-source'])."')";
 
