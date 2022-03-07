@@ -40,7 +40,7 @@ switch(@$_GET['mode'])
 
 			<article class="w80 center">
 
-				<?php h1('titre', 'tc')?>
+				<?php h1('title', 'vague mtn pbm'); ?>
 
 				<?php txt('texte', 'mbl')?>
 

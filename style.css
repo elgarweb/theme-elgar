@@ -9,19 +9,15 @@ a {
 	.selected a { color: #26D691 !important; }
 
 h1, .h1-like, 
-h2, .h2-like { 
+h2, .h2-like,
+h3, .h3-like { 
+	color: #00253F;
 	font-weight: bold;
-	text-align: center;
 	margin-top: 0;
 }
 
-h1 {
-	color: #00253F;
-	margin: 0.67em 0;
-}
-
-h3, .h3-like { font-weight: bold; }
-
+h1, .h1-like,
+.tpl-home h2 { text-align: center; }
 
 /* Fil d'ariane */
 .ariane { border-bottom: 2px solid #eaecee; }
@@ -181,7 +177,6 @@ figure div {
 			transform: scale(1.1);
 		}
 
-
 /* Actualités... */
 		/** Pagination **/
 		.page .bt {
@@ -197,7 +192,20 @@ figure div {
 				background-color: transparent;
 			}
 
+		/* Alignements figures */
+		article [id^='texte'] figure.center {
+			text-align: center;
+		}
+		article [id^='texte'] figure.fl {
+			padding-right: 2rem;
+		}
+		article [id^='texte'] figure.fr {
+			padding-left: 2rem;
+		}
+
 /* Footer */
+
+	footer #contacts { font-size: 1.4rem; }
 
 	footer #contacts a { color: white; }
 
@@ -223,6 +231,15 @@ figure div {
 		width: 85px;
 		height: 85px;
 	}
+
+/* Tags */
+.editable-tag a {
+	display: inline-block;
+	text-align: center;
+	background-color: #26D691;
+	border-radius: 25px;
+	padding: 1rem 2rem;
+}
 
 /* Formulaire contact */
 #contact input[name='reponse'] { display: none; }

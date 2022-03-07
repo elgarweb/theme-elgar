@@ -44,12 +44,12 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 
 						<div class="mbm">
 
-							<?php if(isset($tags))
+							<?php if(isset($tags) and isset($res_fiche['id']))
 							{ 
 								$sel_tag = $GLOBALS['connect']->query("SELECT * FROM ".$GLOBALS['tt']."
 									WHERE zone = '".$res['url']."' AND id='".$res_fiche['id']."' LIMIT 5");
 								while($res_tag = $sel_tag->fetch_assoc()) {
-									echo '<a href="'.make_url($res_tag['zone'], array($res_tag['encode'], 'domaine' => true)).'" class="inbl tc bg-color-alt brd-rad pts pbs plm prm">'.$res_tag['name']."</a> ";
+									echo '<span class="inbl tc bg-color-alt brd-rad pts pbs plm prm">'.$res_tag['name']."</span> ";
 								}
 							} 
 							?>

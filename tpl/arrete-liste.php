@@ -4,7 +4,7 @@
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 	
-	<?php h1('title'); ?>
+	<?php h1('title', 'vague mtn pbm'); ?>
 
 	<?php txt('description'); ?>
 	
