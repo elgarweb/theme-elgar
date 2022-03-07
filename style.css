@@ -199,6 +199,8 @@ figure div {
 
 /* Footer */
 
+	footer #contacts { font-size: 1.4rem; }
+
 	footer #contacts a { color: white; }
 
 	/* Suppression bordures bouton et input */
@@ -223,6 +225,15 @@ figure div {
 		width: 85px;
 		height: 85px;
 	}
+
+/* Tags */
+.editable-tag a {
+	display: inline-block;
+	text-align: center;
+	background-color: #26D691;
+	border-radius: 25px;
+	padding: 1rem 2rem;
+}
 
 /* Formulaire contact */
 #contact input[name='reponse'] { display: none; }

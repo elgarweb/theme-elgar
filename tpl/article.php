@@ -7,15 +7,23 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 
-	<?php h1('title')?>
+	<?php h1('title', 'vague')?>
 
-	<article class="pbm">
+	<article class="flex space-xl ptl pbm">
 
-		<div class="fl prm">
+		<div class="prm">
 
 			<figure>
+
 				<?php media('visuel', array('size' => '300x225', 'lazy' => true)); ?>
-				<figcaption><?php txt('texte-legende-visuel', 'italic'); ?></figcaption>
+
+				<figcaption>
+
+					<?php txt('texte-legende-visuel', 'italic ptt plt'); ?>
+
+				</figcaption>
+
+
 			</figure>
 			
 		</div>
@@ -23,16 +31,15 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 		<div>
 
 			<!-- Tag -->
-
 			<div class="editable-hidden bold"><?php _e("Category")?></div>
 
 			<?php 
 			if($res['tpl']=='article')
-				tag('actualites'); 
+				tag('actualites', array('tag' => 'span')); 
 			elseif ($res['tpl']=='event')
-				tag('agenda'); 
+				tag('agenda', array('tag' => 'span')); 
 			else
-				tag('annuaire'); 
+				tag('annuaire', array('tag' => 'span')); 
 			?>
 
 			<?php if($res['tpl']=='article') { ?>
@@ -56,13 +63,12 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 			<!-- Chapô -->
 			<?php 
 			if($res['tpl']=='article' or  $res['tpl']=='event') 
-				txt('description', 'pbm');
+				txt('description', 'ptm pbm');
 			else {
-				txt('texte-coordonnees-intro', 'pbm');
+				txt('texte-coordonnees-intro', 'ptm pbm');
 				txt('texte-coordonnees-suite');
 			}
 			?>
-
 
 			<!-- Infos événement -->
 			<?php 
@@ -70,8 +76,6 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 				if(stristr($res['tpl'], 'event'))
 				{
 			?>
-
-
 					<div class="mbm">
 						<?php 
 							if(@$GLOBALS["content"]["aaaa-mm-jj"])
@@ -92,21 +96,19 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 					}
 				?>
 
-				
-
 		</div>
-
 
 	</article>
 
-	<article class="clear ptm">
+	<!-- Contenu de l'article -->
+	<article class="clear ptl">
 
 		<?php txt('texte'); ?>
 		
 	</article>
 	
 	<!-- Bouton vers toutes les actualités/agenda/annuaire -->
-	<div class="tc ptl">
+	<div class="tc ptl pbl">
 
 		<a href="<?= make_url(($res['type']=='event' ? __('agenda') : ($res['type']=='article' ? __('news') : __('directory'))), array("domaine" => true))?>" class="bt pas">
 

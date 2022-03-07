@@ -9,7 +9,7 @@
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 	
-	<?php h1('title'); ?>
+	<?php h1('title', 'vague'); ?>
 
 	<nav role="navigation" class="flex space-xl jcc tc ptl pbl">
 		<?php 
