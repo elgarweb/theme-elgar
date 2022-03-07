@@ -382,7 +382,7 @@ switch(@$_REQUEST['mode'])
 			$(function()
 			{		
 				// Redirection vers la page crée
-				document.location.href = "<?=make_url(encode($fiche['titre']), array("domaine" => $GLOBALS['scheme'].$GLOBALS['domain_lang'][encode($_REQUEST['lang-dest'])].$GLOBALS['path']));?>";
+				document.location.href = "<?=make_url(encode($fiche['title']), array("domaine" => $GLOBALS['scheme'].$GLOBALS['domain_lang'][encode($_REQUEST['lang-dest'])].$GLOBALS['path']));?>";
 			});
 			</script>
 			<?
