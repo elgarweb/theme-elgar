@@ -3,8 +3,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/config.php');// Les variables si on aja
 include_once($_SERVER['DOCUMENT_ROOT'].'/api/function.php');// Les fonctions si on ajax
 include_once($_SERVER['DOCUMENT_ROOT'].'/api/db.php');// Connexion à la db
 
-// @todo : lors de la suppression d'un contenu supp aussi les liaisons
-// @todo: pas de bouton de traduction sur les listings de tag
 
 function creat_table_lang(){
 	$GLOBALS['connect']->query("
@@ -17,10 +15,12 @@ function creat_table_lang(){
 	");
 }
 
+
 switch(@$_REQUEST['mode'])
 {
 	default:
-
+		if(strpos(@$res['tpl'], '-liste') === false) 
+		{
 		?>
 		<script>
 			// Action si on lance le mode d'edition
@@ -45,7 +45,7 @@ switch(@$_REQUEST['mode'])
 								type: "POST",
 								url: path+"theme/"+theme+"/admin/lang.php?mode=view",
 								data: {
-									"id": '<?=$id?>',
+									"id": "<?=$id?>",
 									"type": type,
 									"nonce": $("#nonce").val()
 								},
@@ -58,10 +58,26 @@ switch(@$_REQUEST['mode'])
 						}
 					}
 				);
+			});
 
+			// Action avant la supp
+			before_del.push(function()
+			{
+				$.ajax({
+					type: "POST",
+					url: path+"theme/"+theme+"/admin/lang.php?mode=del",
+					data: {
+						"id": "<?=$id?>",
+						"nonce": $("#nonce").val()
+					},
+					success: function(html){
+						$("body").append(html);
+					}
+				});
 			});
 		</script>
-	<?
+		<?
+		}
 	break;
 
 
@@ -236,6 +252,7 @@ switch(@$_REQUEST['mode'])
 						type: "POST",
 						url: path+"theme/"+theme+"/admin/lang.php?mode=duplique",
 						data: {
+							"type": type,
 							"id": "<?=(int)$_REQUEST['id']?>",
 							"lang-dest": $(".duplicateur input[name='dupliquer']:checked").val(),
 							"lang-source": $("html").attr("lang"),
@@ -314,7 +331,7 @@ switch(@$_REQUEST['mode'])
 		$res = $sel->fetch_assoc();
 		$fiche = json_decode($res['content'], true);
 
-		$fiche['titre'] = $fiche['titre'].' '.strtoupper(encode($_REQUEST['lang-dest']));// Changement du titre H1
+		$fiche['title'] = $fiche['title'].' '.strtoupper(encode($_REQUEST['lang-dest']));// Changement du titre H1
 		//unset($fiche['og-image'], $fiche['visuel']);
 
 		$json_content = json_encode($fiche, JSON_UNESCAPED_UNICODE);
@@ -325,8 +342,8 @@ switch(@$_REQUEST['mode'])
 		$sql .= "lang = '".encode($_REQUEST['lang-dest'])."', ";
 		$sql .= "type = '".$res['type']."', ";
 		$sql .= "tpl = '".$res['tpl']."', ";
-		$sql .= "url = '".encode($fiche['titre'])."', ";
-		$sql .= "title = '".addslashes($fiche['titre'])."', ";
+		$sql .= "url = '".encode($fiche['title'])."', ";
+		$sql .= "title = '".addslashes($fiche['title'])."', ";
 		$sql .= "description = '".addslashes($res['description'])."', ";
 		$sql .= "content = '".addslashes($json_content)."', ";
 		$sql .= "user_insert = '".(int)$_SESSION['uid']."', ";
