@@ -48,7 +48,7 @@
 	<!-- CONTACTS -->
 	<section id="contacts" class="bg-color ptl pbl">
 
-		<div class="mw960p center flex space-l">
+		<div class="mw960p center flex jcsb">
 
 			<article>
 

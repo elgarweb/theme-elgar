@@ -199,6 +199,8 @@ figure div {
 
 /* Footer */
 
+	footer { font-size: 1.4rem; }
+	
 	footer #contacts a { color: white; }
 
 	/* Suppression bordures bouton et input */
