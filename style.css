@@ -9,22 +9,15 @@ a {
 	.selected a { color: #26D691 !important; }
 
 h1, .h1-like, 
-h2, .h2-like { 
+h2, .h2-like,
+h3, .h3-like { 
+	color: #00253F;
 	font-weight: bold;
 	margin-top: 0;
 }
 
 h1, .h1-like,
 .tpl-home h2 { text-align: center; }
-
-h1 {
-	color: #00253F;
-	margin: 0.67em 0;
-}
-
-h3, .h3-like { font-weight: bold; }
-
-
 
 /* Fil d'ariane */
 .ariane { border-bottom: 2px solid #eaecee; }
