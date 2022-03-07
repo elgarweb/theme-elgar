@@ -81,39 +81,42 @@
 
 			<div class="brd brd-rad-bot-right mbm">
 
-				<article class="flex">
+				<a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" title="<?=$res_fiche['title']?>" class="tdn">
 
-					<!-- Image -->
-					<figure class="">
+					<article class="flex">
 
-						<div class="nor" data-bg="<?=(isset(parse_url($content_fiche['visuel'])['scheme'])?'':$GLOBALS['home']).$content_fiche['visuel']; ?>" data-lazy="bg" style="width: 100%; height: 225px;">
-						</div>
+						<!-- Image -->
+						<figure class="">
 
-					</figure>
+							<div class="nor" data-bg="<?=(isset(parse_url($content_fiche['visuel'])['scheme'])?'':$GLOBALS['home']).$content_fiche['visuel']; ?>" data-lazy="bg" style="width: 100%; height: 225px;">
+							</div>
 
-					<div class="pam brd-left">
-						
-						<!-- <div><?= $content_fiche['name']; ?></div> -->
+						</figure>
 
-						<!-- Titre -->
-						<h2 class="h3-like tl">
-							<a href="<?=make_url($res_fiche['url'], array("domaine" => true)); ?>" class="tdn"><?=$res_fiche['title']?>
-							</a>
-						</h2>
-
-						<!-- Extrait texte -->
-						<p class="mbn"><?= $content_fiche['texte-coordonnees-intro']; ?></p>
-
-						<!-- Lien vers détail -->
-						<div class="fr">
-
-							<a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>"><span class=""><?php _e("See the sheet")?></span></a>
+						<div class="pam brd-left">
 							
+							<!-- <div><?= $content_fiche['name']; ?></div> -->
+
+							<!-- Titre -->
+							<h2 class="h3-like tl">
+								<?=$res_fiche['title']?>
+							</h2>
+
+							<!-- Extrait texte -->
+							<p class="mbn"><?= $content_fiche['texte-coordonnees-intro']; ?></p>
+
+							<!-- Lien vers détail -->
+							<div class="fr">
+
+								<?php _e("See the sheet")?>
+								
+							</div>
+
 						</div>
 
-					</div>
+					</article>
 
-				</article>
+				</a>
 
 			</div>
 
