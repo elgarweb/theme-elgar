@@ -39,15 +39,7 @@
 		else $sql_state = "";
 
 		// Construction de la requete
-		$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".*, tags.name AS tag FROM ".$tc;
-
-		// Pour avoir les tags dans le listings
-		$sql.=" LEFT JOIN ".$tt." AS tags
-		ON
-		(
-			tags.id = ".$tc.".id AND
-			tags.zone = '".$res['url']."'
-		)";
+		$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
 
 		// Si filtre tag
 		if(isset($tag))
@@ -58,7 +50,6 @@
 			".$tt.".zone = '".$res['url']."' AND
 			".$tt.".encode = '".$tag."'
 		)";
-
 
 		// Pour le tri par date pour les events
 		if($res['url']=='agenda')
@@ -110,7 +101,7 @@
 
 			$content_fiche = json_decode($res_fiche['content'], true);
 
-			block(@$content_fiche['visuel'], $res_fiche['url'], $res_fiche['title'], @$content_fiche['description'], @$content_fiche['aaaa-mm-jj'], @$res_fiche['tag']);
+			block(@$content_fiche['visuel'], $res_fiche['url'], $res_fiche['title'], @$content_fiche['description'], @$content_fiche['aaaa-mm-jj'], 'tags');
 		}
 		?>
 
@@ -139,7 +130,7 @@
 
 			@$content_fiche['visuel'] = '';
 
-			block(@$content_fiche['visuel'], $res_fiche_suite['url'], $res_fiche_suite['title'], @$content_fiche_suite['description'], @$content_fiche_suite['aaaa-mm-jj'], @$res_fiche_suite['tag']);
+			block(@$content_fiche['visuel'], $res_fiche_suite['url'], $res_fiche_suite['title'], @$content_fiche_suite['description'], @$content_fiche_suite['aaaa-mm-jj'], 'tags');
 		}
 		?>
 
