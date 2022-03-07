@@ -5,9 +5,9 @@ if(!isset($GLOBALS['domain'])) exit;
 $GLOBALS['table_lang'] = $GLOBALS['tl'] = $GLOBALS['db_prefix'].'lang';
 
 // Fonction affichage blocs img + titre + extrait texte
-function block($url_img, $url_title, $title, $description, $date = null, $tag = null)
+function block($url_img, $url_title, $title, $description, $date = null, $tags = null)
 {
-	global $res, $articles, $state;
+	global $res, $res_fiche, $state;
 
     /* Ajout espaces insécables */
     $search = array("« ", " »", " ?");
@@ -44,14 +44,15 @@ function block($url_img, $url_title, $title, $description, $date = null, $tag = 
 
 						<div class="mbm">
 
-							<?php if(isset($tag)){ ?>
-							<p class="inbl tc bg-color-alt brd-rad pts pbs plm prm">
-
-								<?= $tag;// encode($tag) => pour le lien si besoin ?>
-
-							</p>
-
-							<?php } ?>
+							<?php if(isset($tags))
+							{ 
+								$sel_tag = $GLOBALS['connect']->query("SELECT * FROM ".$GLOBALS['tt']."
+									WHERE zone = '".$res['url']."' AND id='".$res_fiche['id']."' LIMIT 5");
+								while($res_tag = $sel_tag->fetch_assoc()) {
+									echo '<a href="'.make_url($res_tag['zone'], array($res_tag['encode'], 'domaine' => true)).'" class="inbl tc bg-color-alt brd-rad pts pbs plm prm">'.$res_tag['name']."</a> ";
+								}
+							} 
+							?>
 
 						</div>
 
@@ -109,4 +110,4 @@ function block($url_img, $url_title, $title, $description, $date = null, $tag = 
 
     <?php
 }
-    ?>
+?>
