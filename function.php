@@ -27,14 +27,17 @@ function block($url_img, $url_title, $title, $description, $date = null, $tag = 
 			<article>
 
 				<!-- Image -->
+				<?php //Affichage images des 3 premières actus seulement
+				if($url_img != '') { ?>
 				<figure>
 
 					<div class="nor" data-bg="<?=(isset(parse_url($url_img)['scheme'])?'':$GLOBALS['home']).$url_img?>" data-lazy="bg" style="width: 100%; height: 225px;">
 					</div>
 
 				</figure>
+				<?php } ?>
 				
-				<div class="<?= ($res['tpl'] == 'home') ? 'grid3row ' :'grid4row ' ?>pam brd-top">
+				<div class="<?= ($res['tpl'] == 'home') ? 'grid3row ' :'grid4row ' ?>pam<?= ($url_img != '') ? ' brd-top' : '' ?>">
 
 					<!-- Tag  (que sur le listing des articles car query + longue)-->
 					<?php if($res['tpl'] == 'article-liste' or $res['tpl'] == 'annuaire-liste') { ?>
@@ -84,7 +87,7 @@ function block($url_img, $url_title, $title, $description, $date = null, $tag = 
 							// Convertir en utf8 si besoin en fonction du serveur
 							echo iconv(mb_detect_encoding($date, mb_detect_order(), true), 'UTF-8', $date);
 							?>
-							
+
 						</div>
 						<?php 
 					} ?>
