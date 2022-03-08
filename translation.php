@@ -50,6 +50,20 @@ $add_translation = array(
 	"Categories" => array("fr" => "Catégories/Tags"),
 	"Start date" => array("fr" => "Date de début"),
 
+	"january" => array("fr" => "janvier"),
+	"february" => array("fr" => "février"),
+	"march" => array("fr" => "mars"),
+	"april" => array("fr" => "avril"),
+	"may" => array("fr" => "mai"),
+	"june" => array("fr" => "juin"),
+	"july" => array("fr" => "juillet"),
+	"august" => array("fr" => "août"),
+	"september" => array("fr" => "septembre"),
+	"october" => array("fr" => "octobre"),
+	"november" => array("fr" => "novembre"),
+	"december" => array("fr" => "décembre"),
+	"st" => array("fr" => "er"),
+
 	// RECHERCHE
 	"result" => array("fr" => "résultat", "eu" => "emaitzak"),
 	"for" => array("fr" => "pour", "eu" => "rentzat"),
