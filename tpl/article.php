@@ -31,70 +31,91 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 		<div>
 
 			<!-- Tag -->
-			<div class="editable-hidden bold"><?php _e("Category")?></div>
+			<div>
+				
+				<div class="editable-hidden bold"><?php _e("Categories"); ?></div>
 
+				<!-- Champs saisie tags -->
+				<div class="pbm">
+
+					<?php 
+					// Champs saisie tags
+					if($res['tpl']=='article')
+						tag('actualites', array('tag' => 'span')); 
+					elseif ($res['tpl']=='event')
+						tag('agenda', array('tag' => 'span')); 
+					else
+						tag('annuaire', array('tag' => 'span')); 
+				
+					// Scripts		
+					if($res['tpl']=='article') { ?>
+						<script>
+						if(!$(".editable-tag").text()) $("#actualites").prev("h3").hide();
+						else $("#actualites").addClass("mbm");
+						</script>
+
+					<?php } elseif($res['tpl']=='event') { ?>
+						<script>
+						if(!$(".editable-tag").text()) $("#agenda").prev("h3").hide();
+						else $("#agenda").addClass("mbm");
+						</script>
+
+					<?php } else ?>
+						<script>
+						if(!$(".editable-tag").text()) $("#annuaire").prev("h3").hide();
+						else $("#annuaire").addClass("mbm");
+						</script>
+
+				</div>
+
+			</div>
+
+			<!-- Date événement -->
 			<?php 
-			if($res['tpl']=='article')
-				tag('actualites', array('tag' => 'span')); 
-			elseif ($res['tpl']=='event')
-				tag('agenda', array('tag' => 'span')); 
-			else
-				tag('annuaire', array('tag' => 'span')); 
+				if(stristr($res['tpl'], 'event'))
+				{
 			?>
+					<div class="editable-hidden bold"><?= _e("Start date");?></div>
 
-			<?php if($res['tpl']=='article') { ?>
-				<script>
-				if(!$(".editable-tag").text()) $("#actualites").prev("h3").hide();
-				else $("#actualites").addClass("mbm");
-				</script>
+					<div>
+						<?php 
+							if(@$GLOBALS["content"]["aaaa-mm-jj"])
+							{
+								$date_debut = strftime("%e %B %Y", strtotime($GLOBALS["content"]["aaaa-mm-jj"]));
+								// Convertir en utf8 si besoin en fonction du serveur
+								echo '<div>'.iconv(mb_detect_encoding($date_debut, mb_detect_order(), true), 'UTF-8', $date_debut).'</div>';
+							}
 
-			<?php } elseif($res['tpl']=='event') { ?>
-				<script>
-				if(!$(".editable-tag").text()) $("#agenda").prev("h3").hide();
-				else $("#agenda").addClass("mbm");
-				</script>
+							input("aaaa-mm-jj", array("type" => "hidden", "class" => "meta tc"));
+						?>
 
-			<?php } else ?>
-				<script>
-				if(!$(".editable-tag").text()) $("#annuaire").prev("h3").hide();
-				else $("#annuaire").addClass("mbm");
-				</script>
+					</div>
+					
+			<?php 
+				}
+			?>
 
 			<!-- Chapô -->
 			<?php 
+			// Description : s'affiche sur la liste
 			if($res['tpl']=='article' or  $res['tpl']=='event') 
-				txt('description', 'ptm pbm');
+
+				txt('description', 'ptm');
+
+			// Détails de l'événement (horaires, contact...)
+			if($res['tpl']=='event')
+
+				txt('texte-details-evenement', 'ptm');
+
+			// Coordonnées pour l'annuaire
 			else {
+
 				txt('texte-coordonnees-intro', 'ptm pbm');
+
 				txt('texte-coordonnees-suite');
 			}
 			?>
 
-			<!-- Infos événement -->
-			<?php 
-				// Date évènement
-				if(stristr($res['tpl'], 'event'))
-				{
-			?>
-					<div class="mbm">
-						<?php 
-							if(@$GLOBALS["content"]["aaaa-mm-jj"])
-							{
-								//@todo faire une transformation de la date en une ligne au lieu du explode
-								$date_debut = explode("-", $GLOBALS["content"]["aaaa-mm-jj"]);
-								echo'<div class="bold">'.__("Date").'</div>'.$date_debut['2'].'/'.$date_debut['1'].'/'.$date_debut['0'].'<br>';
-							}
-
-							input("aaaa-mm-jj", array("type" => "hidden", "class" => "meta tc"));
-
-						?>
-					</div>
-
-					<?php txt('texte-evenement'); ?>
-					
-				<?php 
-					}
-				?>
 
 		</div>
 
