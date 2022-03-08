@@ -4,6 +4,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/api/function.php');// Les fonctions si 
 include_once($_SERVER['DOCUMENT_ROOT'].'/api/db.php');// Connexion à la db
 
 
+//@todo pour plus de 2 langues : lors de l'ajout de connexion de langue : scanner les trad existante/connexe de l'id dest, pour listé ses connexions et les ajouters à la nouvelles (cas de 3 trad ou +)
+
+
 function creat_table_lang(){
 	$GLOBALS['connect']->query("
 		CREATE TABLE IF NOT EXISTS `".$GLOBALS['table_lang']."` (
