@@ -136,12 +136,14 @@ if(is_array($array))
 		// $val['DATESs'][0]['Heuredouverture1'] $val['DATESs'][0]['Heuredefermeture1']
 		// $val['DATESs'][0]['Heuredouverture2'] $val['DATESs'][0]['Heuredefermeture2']
 		// $val['DATESs'][0]['Datedefin'] 
+		$date = explode($val['datedebut'], 'T')[0];
 
 		// Contenu de l'article
 		$content = array (
 			'title' => $val['SyndicObjectName'],
 			'visuel' => $visuel_dest,
 			'visuel-alt' => @$val['PHOTOSs'][0]['Photo']['Titre'].' - '.@$val['PHOTOSs'][0]['Photo']['Credit'],
+			'aaaa-mm-jj' => $date,
 			'texte' => $val['DESCRIPTIFSs'][0]['Descriptioncommerciale'],
 			'dates' => $val['DATESs'][0]['Datededebut'],
 			'contact' => @$val['MOYENSCOMs'][0]['CoordonneesTelecom'],
@@ -186,7 +188,7 @@ if(is_array($array))
 			//'cle' => "'".date('Y-m-d', strtotime(str_replace('-', '/', $val['DATESs'][0]['Datededebut'])))."'"
 			'id' => -$key,
 			'type' => "'aaaa-mm-jj'",
-			'cle' => "'".$val['datedebut']."'"
+			'cle' => "'".$date."'"
 		))."),";
 
 	    
