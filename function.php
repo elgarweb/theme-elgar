@@ -84,11 +84,7 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 					{ ?>
 						<div class="bold">
 						
-							<?php
-							$date = strftime("%e %B %Y", strtotime($date));
-							// Convertir en utf8 si besoin en fonction du serveur
-							echo iconv(mb_detect_encoding($date, mb_detect_order(), true), 'UTF-8', $date);
-							?>
+							<?php echo date_lang($date);?>
 
 						</div>
 						<?php 

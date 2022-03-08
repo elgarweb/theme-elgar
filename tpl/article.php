@@ -80,11 +80,7 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 					<div>
 						<?php 
 							if(@$GLOBALS["content"]["aaaa-mm-jj"])
-							{
-								$date_debut = strftime("%e %B %Y", strtotime($GLOBALS["content"]["aaaa-mm-jj"]));
-								// Convertir en utf8 si besoin en fonction du serveur
-								echo '<div>'.iconv(mb_detect_encoding($date_debut, mb_detect_order(), true), 'UTF-8', $date_debut).'</div>';
-							}
+								echo '<div>'.date_lang($GLOBALS["content"]["aaaa-mm-jj"]).'</div>';						
 
 							input("aaaa-mm-jj", array("type" => "hidden", "class" => "meta tc"));
 						?>
