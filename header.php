@@ -19,9 +19,10 @@
 
 <header role="banner">
 
+
 	<section class="mw960p mod center relative">
 
-		<article class="flex wrap jcsa brd-bot-alt ptm pbs">
+		<div class="flex wrap jcsa brd-bot-alt ptm pbs">
 
 			<!-- Conformité -->
 			<?php txt('texte-conformite'); ?>
@@ -42,9 +43,10 @@
 			?>
 			<a href="<?=$GLOBALS['scheme'].$GLOBALS['domain_lang'][$switch_lang].$GLOBALS['path'];?>" lang="<?=$switch_lang?>"><?=$GLOBALS['translation']['home other language'][$switch_lang]?></a>
 
-		</article>
+		</div>
 
-		<article class="flex wrap jcsb aic ptm">
+
+		<div class="flex wrap jcsb aic ptm">
 
 			<div><a href="<?=$GLOBALS['home']?>"><?php media('logo', array('size' => '330x70', 'lazy' => 'true'))?></a></div>
 			
@@ -77,9 +79,12 @@
 				
 			</form>
 
-		</article>
+		</div>
+
 	</section>
 		
+
+
 	<!-- Menu principal -->
 	<section class="bg-color">
 
