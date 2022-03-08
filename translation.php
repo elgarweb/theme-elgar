@@ -47,7 +47,8 @@ $add_translation = array(
 	"Go back to the news" => array("fr" => "Retour aux actualités"),
 	"Go back to the agenda" => array("fr" => "Retour à l'agenda"),
 	"Edit event" => array("fr" => "Edition d'un événement"),
-	"Category" => array("fr" => "Catégorie"),
+	"Categories" => array("fr" => "Catégories/Tags"),
+	"Start date" => array("fr" => "Date de début"),
 
 	// RECHERCHE
 	"result" => array("fr" => "résultat", "eu" => "emaitzak"),
