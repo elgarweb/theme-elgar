@@ -83,7 +83,7 @@
 
 				<a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" title="<?=$res_fiche['title']?>" class="tdn">
 
-					<article class="flex">
+					<article class="relative flex">
 
 						<!-- Image -->
 						<figure class="">
@@ -106,7 +106,7 @@
 							<p class="mbn"><?= $content_fiche['texte-coordonnees-intro']; ?></p>
 
 							<!-- Lien vers détail -->
-							<div class="fr">
+							<div class="absolute bot15 right15 tdu">
 
 								<?php _e("See the sheet")?>
 								

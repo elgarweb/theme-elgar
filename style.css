@@ -123,6 +123,7 @@ button { border: solid 1px #26D691; }
 .brd-rad-100 { border-radius: 100%; }
 
 .bot15 {bottom: 15px; }
+.right15 {right: 15px; }
 
 /* Table layout */
 .row {

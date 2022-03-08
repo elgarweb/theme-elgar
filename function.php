@@ -95,7 +95,7 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 					} ?>
 
 					<!-- Lien vers détail -->
-					<div class="absolute bot15 bold">
+					<div class="absolute bot15 bold tdu">
 
 						<?php _e("Read more")?>
 						
