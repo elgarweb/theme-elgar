@@ -181,13 +181,15 @@ figure div {
 /* Actualités... */
 		/** Pagination **/
 		.page .bt {
+			text-decoration: underline;
 			background-color: transparent;
 			color: #00253F;
 			font-weight: normal !important;
 			padding: 0 1rem !important;
 		}
 			.page .bt.selected {
-				text-decoration: underline;
+				font-weight: bold !important;
+				text-decoration: none;
 			}
 			.page .bt:hover {
 				background-color: transparent;
