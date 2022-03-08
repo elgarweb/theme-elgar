@@ -9,6 +9,10 @@ lors de la création du site créer les pages suivantes pour le bon fonctionneme
 
 => voir en fonction des traductions, et si plusieur (3 langues)
 
+
+voir pour le nom des zone tag en multilangue
+=> dire de bien créer les pages liste-* avec le nom de la zone tag
+
 */
 ?>
 
