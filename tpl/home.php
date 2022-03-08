@@ -64,7 +64,7 @@
 			foreach($module as $key => $val)
 			{
 				?>
-				<li class="mw140p">
+				<li class="mw150p">
 
 					<a <?php href("enunclic-lien-".$key); ?> class="white">
 
