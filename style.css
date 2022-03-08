@@ -1019,7 +1019,7 @@ input[type="reset"].unstyled:focus {
 .w960p { width: 960px; }
 .w1140p { width: 1140px; } */
 
-.mw140p { max-width: 140px; }
+.mw150p { max-width: 150px; }
 .mw320p { max-width: 320px; }
 .mw600p { max-width: 600px; }
 .mw960p { max-width: 960px; }
@@ -1211,7 +1211,7 @@ header #logo { transition: opacity .5s; }
 			/* margin: 0 0.5rem; */
 			position: relative;
 			display: flex;
-			margin: auto;
+			/* margin: auto; */
 			padding: 0 0.5rem;
 			min-height: 90px;
 			align-items: center;

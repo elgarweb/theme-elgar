@@ -90,7 +90,7 @@
 				<span class="close none"><?php _e("Close")?></span>
 			</button>
 
-			<ul id="header-menu" class="flex space bold plm prm">
+			<ul id="header-menu" class="flex wrap space bold plm prm">
 				<?php				
 				// Extraction du menu
 				foreach($GLOBALS['nav'] as $cle => $val)
@@ -101,7 +101,7 @@
 					else
 						$selected = "";
 
-					echo"<li class='".$selected."'><a href=\"".make_url($val['href'], array("domaine" => true))."\"".($val['id']?" id='".$val['id']."'":"")."".($val['target']?" target='".$val['target']."'":"")." class='white tdn''".($selected?' title="'.$val['text'].' - '.__("current page").'"':'').">".$val['text']."</a></li>";
+					echo"<li class='mw150p ".$selected."'><a href=\"".make_url($val['href'], array("domaine" => true))."\"".($val['id']?" id='".$val['id']."'":"")."".($val['target']?" target='".$val['target']."'":"")." class='white tdn''".($selected?' title="'.$val['text'].' - '.__("current page").'"':'').">".$val['text']."</a></li>";
 				}
 				?>
 			</ul>
