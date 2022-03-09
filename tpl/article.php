@@ -7,7 +7,7 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 
-	<?php h1('title', 'vague mtn pbm'); ?>
+	<?php h1('title', 'picto mtn pbm'); ?>
 
 	<article class="flex space-xl ptl pbm">
 
@@ -94,22 +94,31 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 			<!-- Chapô -->
 			<?php 
 			// Description : s'affiche sur la liste
-			if($res['tpl']=='article' or  $res['tpl']=='event') 
+			if($res['tpl']=='article') 
 
 				txt('description', 'ptm');
+
+			if($res['tpl']=='annuaire' or  $res['tpl']=='event') { ?>
+
+				<div class="bold"><?= _e('Website'); ?></div>
+				<?php txt('site-web', 'pbm'); ?>
+
+				<div class="bold"><?= _e('Telephone'); ?></div>
+				<?php txt('tel', 'pbm'); ?>
+
+				<div class="bold"><?= _e('Mail'); ?></div>
+				<?php txt('mail', 'pbm'); ?>
+
+				<div class="bold"><?= _e('Address'); ?></div>
+				<?php txt('adresse', 'pbm');
+
+			}
 
 			// Détails de l'événement (horaires, contact...)
 			if($res['tpl']=='event')
 
 				txt('texte-details-evenement', 'ptm');
 
-			// Coordonnées pour l'annuaire
-			else {
-
-				txt('texte-coordonnees-intro', 'ptm pbm');
-
-				txt('texte-coordonnees-suite');
-			}
 			?>
 
 

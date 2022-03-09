@@ -9,7 +9,7 @@
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 	
-	<?php h1('title', 'vague mtn pbm'); ?>
+	<?php h1('title', 'picto mtn pbm'); ?>
 
 	<nav role="navigation" class="flex space-xl jcc tc ptl pbl">
 		<?php 
@@ -19,7 +19,7 @@
 		//echo $connect->error;
 
 		while($res_tag_list = $sel_tag_list->fetch_assoc()) {
-			echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="inbl tc bg-color-alt brd-rad tdn pts pbs plm prm">'.$res_tag_list['name'].'</a>';
+			echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="inbl tc bg-green brd-rad tdn pts pbs plm prm">'.$res_tag_list['name'].'</a>';
 			$i++;
 		}
 		?>
@@ -37,6 +37,14 @@
 		// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs
 		if(!@$_SESSION['auth']['edit-article']) $sql_state = "AND state='active'";
 		else $sql_state = "";
+
+		// Navigation par page
+		$num_pp = 6;
+
+		if(isset($GLOBALS['filter']['page'])) $page = (int)$GLOBALS['filter']['page']; else $page = 1;
+
+		$start = ($page * $num_pp) - $num_pp;
+
 
 		// Construction de la requete
 		$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
@@ -67,32 +75,15 @@
 		if($res['url']=='agenda') $sql.=" ORDER BY event.cle ASC";
 		else $sql.=" ORDER BY ".$tc.".date_insert DESC";
 
-		// On ressort les 3 premiers articles à afficher avec les images
-		$sql_prems = $sql;
-
-		$sql_prems.=" LIMIT 3";
+		$sql.=" LIMIT ".$start.", ".$num_pp;
 
 		//echo $sql;
-		$sel_fiche = $connect->query($sql_prems);
+		$sel_fiche = $connect->query($sql);
 
-		// Navigation par page
-		if(isset($GLOBALS['filter']['page'])) $page = (int)$GLOBALS['filter']['page']; else $page = 1;
-		
-		if($page == 1)
-		$num_pp = 3;
-		else
-		$num_pp = 6;
+		$num_total = $connect->query("SELECT FOUND_ROWS()")->fetch_row()[0];// Nombre total de fiche
 
-		if($page == 1)
-		$start = ($page * $num_pp) - $num_pp + 3;
-		else
-		$start = ($page * $num_pp) - $num_pp;
+		$num_fiche = 1;
 
-		// Nombre total de fiche
-		$num_total = $connect->query("SELECT FOUND_ROWS()")->fetch_row()[0];
-
-		// On n'affiche les 3 premières actus avec images que sur la première page
-		if($page == 1)
 		while($res_fiche = $sel_fiche->fetch_assoc())
 		{
 			// Affichage du message pour dire si l'article est invisible ou pas
@@ -102,35 +93,8 @@
 			$content_fiche = json_decode($res_fiche['content'], true);
 
 			block(@$content_fiche['visuel'], $res_fiche['url'], $res_fiche['title'], @$content_fiche['description'], @$content_fiche['aaaa-mm-jj'], 'tags');
-		}
-		?>
 
-	</div>
-		<div class="grid-3 space-xl ptl">
-		
-		<?php 
-		// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs
-		if(!@$_SESSION['auth']['edit-article']) $sql_state = "AND state='active'";
-		else $sql_state = "";
-
-		// Construction de la requete
-		$sql_suite = $sql;
-		$sql_suite.=" LIMIT ".$start.", ".$num_pp;
-
-		//echo $sql;
-		$sel_fiche_suite = $connect->query($sql_suite);
-
-		while($res_fiche_suite = $sel_fiche_suite->fetch_assoc())
-		{
-			// Affichage du message pour dire si l'article est invisible ou pas
-			if($res_fiche_suite['state'] != "active") $state = " <span class='deactivate pat'>".__("Article d&eacute;sactiv&eacute;")."</span>";
-			else $state = "";
-
-			$content_fiche_suite = json_decode($res_fiche_suite['content'], true);
-
-			@$content_fiche['visuel'] = '';
-
-			block(@$content_fiche['visuel'], $res_fiche_suite['url'], $res_fiche_suite['title'], @$content_fiche_suite['description'], @$content_fiche_suite['aaaa-mm-jj'], 'tags');
+			$num_fiche++;
 		}
 		?>
 

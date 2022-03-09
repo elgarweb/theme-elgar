@@ -8,7 +8,7 @@
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 	
-	<?php h1('title', 'vague mtn pbm'); ?>
+	<?php h1('title', 'picto mtn pbm'); ?>
 
 	<nav role="navigation" class="flex space-xl jcc tc ptl pbl">
 		<?php 
@@ -18,7 +18,7 @@
 		//echo $connect->error;
 
 		while($res_tag_list = $sel_tag_list->fetch_assoc()) {
-			echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="inbl tc bg-color-alt brd-rad tdn pts pbs plm prm">'.$res_tag_list['name'].'</a>';
+			echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="inbl tc bg-green brd-rad tdn pts pbs plm prm">'.$res_tag_list['name'].'</a>';
 			$i++;
 		}
 		?>
@@ -102,8 +102,26 @@
 								<?=$res_fiche['title']?>
 							</h2>
 
-							<!-- Extrait texte -->
-							<p class="mbn"><?= $content_fiche['texte-coordonnees-intro']; ?></p>
+							<!-- Coordonnées -->
+							<?php if(isset($content_fiche['site-web'])) { ?>
+								<div class="bold"><?php _e('Website'); ?></div>
+								<p><?= $content_fiche['site-web']; ?></p>
+							<?php } ?>
+
+							<?php if(isset($content_fiche['tel'])) { ?>
+								<div class="bold"><?= _e('Telephone'); ?></div>
+								<p><?= $content_fiche['tel']; ?></p>
+							<?php } ?>
+
+							<?php if(isset($content_fiche['mail'])) { ?>
+								<div class="bold"><?= _e('Mail'); ?></div>
+								<p><?= $content_fiche['mail']; ?></p>
+							<?php } ?>
+
+							<?php if(isset($content_fiche['adresse'])) { ?>
+								<div class="bold"><?= _e('Address'); ?></div>
+								<p><?= $content_fiche['adresse']; ?></p>
+							<?php } ?>
 
 							<!-- Lien vers détail -->
 							<div class="absolute bot15 right15 tdu">

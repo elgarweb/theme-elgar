@@ -5,7 +5,7 @@ a {
 	text-decoration: underline;
 	transition: color .3s;
 }
-	a:hover { color: #00253F; }
+	/* a:hover { color: #26D691; } */
 	.selected a { color: #26D691 !important; }
 
 h1, .h1-like, 
@@ -36,7 +36,7 @@ h1, .h1-like,
 	    display: inline-block;
 	}
 
-/* .vague:before {
+/* .picto:before {
 	font-family: 'FontAwesome';
 	content: '\e86c';
 	position: relative;
@@ -46,7 +46,7 @@ h1, .h1-like,
 } */
 
 
-.vague:before {
+.picto:before {
 	content: url('/media/vaguelette.svg');
 	position: relative;
 	width: 60px;
@@ -98,8 +98,8 @@ button { border: solid 1px #26D691; }
 		color: #00253F;
 	}
 
-.bg-color-alt { background-color: #26D691; }
-.bg-color-grey { background-color: #00253F1A; }
+.bg-green { background-color: #26D691; }
+.bg-grey { background-color: #00253F1A; }
 
 /* Bordures */
 .brd { border: 1px solid #00253F; }
@@ -150,21 +150,6 @@ figure div {
 	background-position: center center;
 }
 
-/* Header */
-
-	/* Problème pour mettre soulignement au même niveau si 1 ou 2 lignes :
-	- si relative sur ul, un seul trait sur toute la longueur même si le before est sur le li */
-	header nav li.selected::before {
-		content: "";
-		/* display: block; */
-		width: 100%;
-		/* height: 3px;
-		background-color: #00253F; */
-		border-bottom: solid 3px #26D691;
-		position: absolute;
-		bottom: 0;
-		left: 0;
-	}
 
 /* Home */
 	/** En un clic **/
@@ -177,6 +162,15 @@ figure div {
 			-webkit-transform: scale(1.1); 	
 			transform: scale(1.1);
 		}
+
+	/** Couleurs blocs **/
+	#home-actualites #block {
+		background-color: #00253F1A;
+	}
+	
+	#home-agenda.bg-grey #block {
+		background-color: white;
+	}
 
 /* Actualités... */
 		/** Pagination **/
@@ -515,7 +509,7 @@ em, .italic, address, cite, i, var { font-style: italic; }
 .short { text-overflow: ellipsis; }
 
 	/* Alignements horizontaux */
-	.grid3row {
+	/* .grid3row {
 		display: grid;
 		-ms-grid-rows: 120px 90px auto;
 		grid-template-rows: 120px 90px auto;
@@ -525,7 +519,7 @@ em, .italic, address, cite, i, var { font-style: italic; }
 		display: grid;
 		-ms-grid-rows: 70px 120px 120px auto;
 		grid-template-rows: 70px 120px 120px auto;
-	}
+	} */
 
 	/* Alignement grids */
 	.jcc { justify-content: center; }
@@ -1196,6 +1190,7 @@ header #logo { transition: opacity .5s; }
 		padding: 0;
 		/* margin-top: 2rem; */
 		min-height: 90px;
+		justify-content: center;
 	}
 		header nav > ul li {
 			/* float: left; */
@@ -1204,10 +1199,30 @@ header #logo { transition: opacity .5s; }
 			display: flex;
 			/* margin: auto; */
 			padding: 0 0.5rem;
+			max-width: 150px;
 			min-height: 90px;
 			align-items: center;
 		}
-		/* header #menu-principal nav a { text-decoration: none; } */
+			/* Soulignement menu sélectionné */
+			header nav > ul li.selected::before {
+				content: "";
+				width: 100%;
+				border-bottom: solid 3px #26D691;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+			}
+			.lucide header nav > ul li {
+				white-space: normal;
+			}
+			header nav > ul li a { 
+				color: #fff;
+				text-decoration: none; 
+			}
+				header nav>ul li a:hover {
+					color: #26D691;
+				}
+		
 
 
 	/* BOUTON BURGER & Animation */

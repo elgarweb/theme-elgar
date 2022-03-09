@@ -1,7 +1,7 @@
 <?php if(!$GLOBALS['domain']) exit;?>
 
 <!-- ZONE ALERTE -->
-<section class="<?=(isset($GLOBALS['content']['alerte-texte']) ? 'bg-color-grey' : 'editable-hidden'); ?>">
+<section class="<?=(isset($GLOBALS['content']['alerte-texte']) ? 'bg-grey' : 'editable-hidden'); ?>">
 	
 	<div class="mw960p mod flex wrap space-l aic jcc center pam">
 		
@@ -20,7 +20,7 @@
 <!-- ENCART INTRO -->
 <section class="mw960p mod center ptm pbl pll prl">
 	
-	<?php h1('titre', 'vague mtn pbm'); ?>
+	<?php h1('titre', 'picto mtn pbm'); ?>
 
 	<div class="<?=(isset($GLOBALS['content']['intro-texte']) ? 'row' : 'editable-hidden'); ?>">
 		
@@ -28,12 +28,12 @@
 			<?php media('intro-visuel', array('size' => '550', 'lazy' => true)); ?>
 		</article>
 		
-		<article class="col bg-color-alt brd-rad-bot-right">
+		<article class="col bg-green brd-rad-bot-right">
 			<?php txt('intro-texte', 'pal'); ?>
 		</article>
 		
 	</div>
-	<!-- <div class="grid aic bg-color-alt">
+	<!-- <div class="grid aic bg-green">
 		
 		<article class="brd-r-tl">
 			<?php media('intro-img', '550'); ?>
@@ -94,9 +94,9 @@
 
 
 <!-- ACTUALITÉS -->
-<section class="mw960p mod center ptl pbl">
+<section id="home-actualites" class="mw960p mod center ptl pbl">
 	
-	<?php h2('titre-actus', 'vague pbm'); ?>
+	<?php h2('titre-actus', 'picto pbm'); ?>
 	
 	<!-- Actualité à la une -->
 	<article class="">
@@ -208,11 +208,11 @@
 
 
 <!-- AGENDA -->
-<section class="bg-color-grey ptl pbl">
+<section id="home-agenda" class="bg-grey ptl pbl">
 
 	<div class="mw960p mod center">
 
-		<?php h2('titre-events', 'vague')?>
+		<?php h2('titre-events', 'picto')?>
 
 		<div class="grid-3 space-xl">
 			
