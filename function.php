@@ -7,7 +7,7 @@ $GLOBALS['table_lang'] = $GLOBALS['tl'] = $GLOBALS['db_prefix'].'lang';
 // Fonction affichage blocs img + titre + extrait texte
 function block($url_img, $url_title, $title, $description, $date = null, $tags = null)
 {
-	global $res, $res_fiche, $state;
+	global $res, $res_fiche, $state, $num_fiche;
 
     /* Ajout espaces insécables */
     $search = array("« ", " »", " ?");
@@ -28,7 +28,7 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 
 				<!-- Image -->
 				<?php //Affichage images des 3 premières actus seulement
-				if($url_img != '') { ?>
+				if($num_fiche <= 3) { ?>
 				<figure>
 
 					<div class="nor" data-bg="<?=(isset(parse_url($url_img)['scheme'])?'':$GLOBALS['home']).$url_img?>" data-lazy="bg" style="width: 100%; height: 225px;">
@@ -37,7 +37,7 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 				</figure>
 				<?php } ?>
 				
-				<div class="pam<?= ($url_img != '') ? ' brd-top' : '' ?>">
+				<div class="pam<?= ($num_fiche <= 3) ? ' brd-top' : '' ?>">
 
 					<!-- Tag  (que sur le listing des articles car query + longue)-->
 					<?php if($res['tpl'] == 'article-liste' or $res['tpl'] == 'annuaire-liste') { ?>

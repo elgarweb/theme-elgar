@@ -98,7 +98,7 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 
 				txt('description', 'ptm');
 
-			if($res['tpl']=='annuaire' or  $res['tpl']=='event') ?>
+			if($res['tpl']=='annuaire' or  $res['tpl']=='event') { ?>
 
 				<div class="bold"><?= _e('Website'); ?></div>
 				<?php txt('site-web', 'pbm'); ?>
@@ -111,6 +111,8 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 
 				<div class="bold"><?= _e('Address'); ?></div>
 				<?php txt('adresse', 'pbm');
+
+			}
 
 			// Détails de l'événement (horaires, contact...)
 			if($res['tpl']=='event')
