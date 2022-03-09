@@ -15,7 +15,7 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 
     ?>
 
-    <div class="relative brd-top-alt brd brd-rad-bot-right pbl">
+    <div id="block" class="relative brd-top-alt brd brd-rad-bot-right">
 
 		<!-- Affichage état article si désactivé -->
 		<div class="color-alt tc bold">
@@ -24,7 +24,7 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 	    
 		<a href="<?=make_url($url_title, array("domaine" => true));?>" title="<?=$title?>" class="tdn">
 
-			<article>
+			<article class="pbm">
 
 				<!-- Image -->
 				<?php //Affichage images des 3 premières actus seulement
@@ -37,7 +37,7 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 				</figure>
 				<?php } ?>
 				
-				<div class="<?= ($res['tpl'] == 'home') ? 'grid3row ' :'grid4row ' ?>pam<?= ($url_img != '') ? ' brd-top' : '' ?>">
+				<div class="pam<?= ($url_img != '') ? ' brd-top' : '' ?>">
 
 					<!-- Tag  (que sur le listing des articles car query + longue)-->
 					<?php if($res['tpl'] == 'article-liste' or $res['tpl'] == 'annuaire-liste') { ?>
@@ -49,7 +49,7 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 								$sel_tag = $GLOBALS['connect']->query("SELECT * FROM ".$GLOBALS['tt']."
 									WHERE zone = '".$res['url']."' AND id='".$res_fiche['id']."' LIMIT 5");
 								while($res_tag = $sel_tag->fetch_assoc()) {
-									echo '<span class="inbl tc bg-green brd-rad pts pbs plm prm">'.$res_tag['name']."</span> ";
+									echo '<span class="inbl tc bg-green brd-rad pts pbs plm prm mbs">'.$res_tag['name']."</span> ";
 								}
 							} 
 							?>
@@ -62,17 +62,17 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 					/* Titre */
 					if($res['tpl'] == 'home')
 					{ ?>
-						<h3 class="tl mtn mbn"><?= str_replace($search, $replace, $title); ?></h3>
+						<h3 class="tl pbm"><?= str_replace($search, $replace, $title); ?></h3>
 					<?php 
 					}
 
 					if($res['tpl'] == 'article-liste' or $res['tpl'] == 'annuaire-liste')
 					{ ?>
-						<h2 class="h3-like tl"><?= str_replace($search, $replace, $title); ?></h2>
+						<h2 class="h3-like tl pbm"><?= str_replace($search, $replace, $title); ?></h2>
 					<?php } ?>
 
 					<!-- Description -->
-					<div class="">
+					<div class="pbm">
 						<?php 
 						if(isset($description)) echo word_cut($description, '80', '...');
 						?>
@@ -82,7 +82,7 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 					<?php
 					if(isset($date))
 					{ ?>
-						<div class="bold">
+						<div class="bold mbm">
 						
 							<?php echo date_lang($date);?>
 

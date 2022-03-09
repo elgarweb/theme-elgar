@@ -5,7 +5,7 @@ a {
 	text-decoration: underline;
 	transition: color .3s;
 }
-	a:hover { color: #26D691; }
+	/* a:hover { color: #26D691; } */
 	.selected a { color: #26D691 !important; }
 
 h1, .h1-like, 
@@ -150,9 +150,6 @@ figure div {
 	background-position: center center;
 }
 
-/* Header */
-
-
 
 /* Home */
 	/** En un clic **/
@@ -165,6 +162,15 @@ figure div {
 			-webkit-transform: scale(1.1); 	
 			transform: scale(1.1);
 		}
+
+	/** Couleurs blocs **/
+	#home-actualites #block {
+		background-color: #00253F1A;
+	}
+	
+	#home-agenda.bg-grey #block {
+		background-color: white;
+	}
 
 /* Actualités... */
 		/** Pagination **/
@@ -503,7 +509,7 @@ em, .italic, address, cite, i, var { font-style: italic; }
 .short { text-overflow: ellipsis; }
 
 	/* Alignements horizontaux */
-	.grid3row {
+	/* .grid3row {
 		display: grid;
 		-ms-grid-rows: 120px 90px auto;
 		grid-template-rows: 120px 90px auto;
@@ -513,7 +519,7 @@ em, .italic, address, cite, i, var { font-style: italic; }
 		display: grid;
 		-ms-grid-rows: 70px 120px 120px auto;
 		grid-template-rows: 70px 120px 120px auto;
-	}
+	} */
 
 	/* Alignement grids */
 	.jcc { justify-content: center; }
@@ -1210,9 +1216,12 @@ header #logo { transition: opacity .5s; }
 				white-space: normal;
 			}
 			header nav > ul li a { 
-				color: white;
+				color: #fff;
 				text-decoration: none; 
 			}
+				header nav>ul li a:hover {
+					color: #26D691;
+				}
 		
 
 

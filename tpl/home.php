@@ -94,7 +94,7 @@
 
 
 <!-- ACTUALITÉS -->
-<section class="mw960p mod center ptl pbl">
+<section id="home-actualites" class="mw960p mod center ptl pbl">
 	
 	<?php h2('titre-actus', 'picto pbm'); ?>
 	
@@ -208,7 +208,7 @@
 
 
 <!-- AGENDA -->
-<section class="bg-grey ptl pbl">
+<section id="home-agenda" class="bg-grey ptl pbl">
 
 	<div class="mw960p mod center">
 
