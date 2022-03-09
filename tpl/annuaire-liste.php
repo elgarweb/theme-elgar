@@ -102,8 +102,26 @@
 								<?=$res_fiche['title']?>
 							</h2>
 
-							<!-- Extrait texte -->
-							<p class="mbn"><?= $content_fiche['texte-coordonnees-intro']; ?></p>
+							<!-- Coordonnées -->
+							<?php if(isset($content_fiche['site-web'])) { ?>
+								<div class="bold"><?php _e('Website'); ?></div>
+								<p><?= $content_fiche['site-web']; ?></p>
+							<?php } ?>
+
+							<?php if(isset($content_fiche['tel'])) { ?>
+								<div class="bold"><?= _e('Telephone'); ?></div>
+								<p><?= $content_fiche['tel']; ?></p>
+							<?php } ?>
+
+							<?php if(isset($content_fiche['mail'])) { ?>
+								<div class="bold"><?= _e('Mail'); ?></div>
+								<p><?= $content_fiche['mail']; ?></p>
+							<?php } ?>
+
+							<?php if(isset($content_fiche['adresse'])) { ?>
+								<div class="bold"><?= _e('Address'); ?></div>
+								<p><?= $content_fiche['adresse']; ?></p>
+							<?php } ?>
 
 							<!-- Lien vers détail -->
 							<div class="absolute bot15 right15 tdu">

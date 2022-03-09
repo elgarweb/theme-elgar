@@ -49,6 +49,10 @@ $add_translation = array(
 	"Edit event" => array("fr" => "Edition d'un événement"),
 	"Categories" => array("fr" => "Catégories/Tags"),
 	"Start date" => array("fr" => "Date de début"),
+	"Website" => array("fr" => "Site web"),
+	"Telephone" => array("fr" => "Téléphone"),
+	"Mail" => array("fr" => "Mail"),
+	"Address" => array("fr" => "Adresse"),
 
 	"january" => array("fr" => "janvier"),
 	"february" => array("fr" => "février"),
