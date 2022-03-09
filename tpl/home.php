@@ -20,7 +20,7 @@
 <!-- ENCART INTRO -->
 <section class="mw960p mod center ptm pbl pll prl">
 	
-	<?php h1('titre', 'vague mtn pbm'); ?>
+	<?php h1('titre', 'picto mtn pbm'); ?>
 
 	<div class="<?=(isset($GLOBALS['content']['intro-texte']) ? 'row' : 'editable-hidden'); ?>">
 		
@@ -96,7 +96,7 @@
 <!-- ACTUALITÉS -->
 <section class="mw960p mod center ptl pbl">
 	
-	<?php h2('titre-actus', 'vague pbm'); ?>
+	<?php h2('titre-actus', 'picto pbm'); ?>
 	
 	<!-- Actualité à la une -->
 	<article class="">
@@ -212,7 +212,7 @@
 
 	<div class="mw960p mod center">
 
-		<?php h2('titre-events', 'vague')?>
+		<?php h2('titre-events', 'picto')?>
 
 		<div class="grid-3 space-xl">
 			

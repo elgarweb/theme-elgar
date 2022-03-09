@@ -36,7 +36,7 @@ h1, .h1-like,
 	    display: inline-block;
 	}
 
-/* .vague:before {
+/* .picto:before {
 	font-family: 'FontAwesome';
 	content: '\e86c';
 	position: relative;
@@ -46,7 +46,7 @@ h1, .h1-like,
 } */
 
 
-.vague:before {
+.picto:before {
 	content: url('/media/vaguelette.svg');
 	position: relative;
 	width: 60px;

@@ -7,7 +7,7 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 
-	<?php h1('title', 'vague mtn pbm'); ?>
+	<?php h1('title', 'picto mtn pbm'); ?>
 
 	<article class="flex space-xl ptl pbm">
 

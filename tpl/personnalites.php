@@ -2,7 +2,7 @@
 
 <section class="mw960p mod center">
 
-	<?php h1('title', 'vague mtn pbm'); ?>
+	<?php h1('title', 'picto mtn pbm'); ?>
 
 	<article>
 
