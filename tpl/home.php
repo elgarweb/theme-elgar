@@ -1,7 +1,7 @@
 <?php if(!$GLOBALS['domain']) exit;?>
 
 <!-- ZONE ALERTE -->
-<section class="<?=(isset($GLOBALS['content']['alerte-texte']) ? 'bg-color-grey' : 'editable-hidden'); ?>">
+<section class="<?=(isset($GLOBALS['content']['alerte-texte']) ? 'bg-grey' : 'editable-hidden'); ?>">
 	
 	<div class="mw960p mod flex wrap space-l aic jcc center pam">
 		
@@ -28,12 +28,12 @@
 			<?php media('intro-visuel', array('size' => '550', 'lazy' => true)); ?>
 		</article>
 		
-		<article class="col bg-color-alt brd-rad-bot-right">
+		<article class="col bg-green brd-rad-bot-right">
 			<?php txt('intro-texte', 'pal'); ?>
 		</article>
 		
 	</div>
-	<!-- <div class="grid aic bg-color-alt">
+	<!-- <div class="grid aic bg-green">
 		
 		<article class="brd-r-tl">
 			<?php media('intro-img', '550'); ?>
@@ -208,7 +208,7 @@
 
 
 <!-- AGENDA -->
-<section class="bg-color-grey ptl pbl">
+<section class="bg-grey ptl pbl">
 
 	<div class="mw960p mod center">
 

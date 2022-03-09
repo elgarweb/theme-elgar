@@ -98,8 +98,8 @@ button { border: solid 1px #26D691; }
 		color: #00253F;
 	}
 
-.bg-color-alt { background-color: #26D691; }
-.bg-color-grey { background-color: #00253F1A; }
+.bg-green { background-color: #26D691; }
+.bg-grey { background-color: #00253F1A; }
 
 /* Bordures */
 .brd { border: 1px solid #00253F; }

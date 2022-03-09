@@ -61,7 +61,7 @@
 
 						<input type="search" name="recherche" id="recherche">
 						
-						<button type="submit" class="bg-color-alt pat" value="<?php _e("Search")?>" aria-label="<?php _e("Search")?>">
+						<button type="submit" class="bg-green pat" value="<?php _e("Search")?>" aria-label="<?php _e("Search")?>">
 							<i class="fa fa-fw fa-search" aria-hidden="true"></i>
 						</button>
 

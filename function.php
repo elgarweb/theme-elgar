@@ -49,7 +49,7 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 								$sel_tag = $GLOBALS['connect']->query("SELECT * FROM ".$GLOBALS['tt']."
 									WHERE zone = '".$res['url']."' AND id='".$res_fiche['id']."' LIMIT 5");
 								while($res_tag = $sel_tag->fetch_assoc()) {
-									echo '<span class="inbl tc bg-color-alt brd-rad pts pbs plm prm">'.$res_tag['name']."</span> ";
+									echo '<span class="inbl tc bg-green brd-rad pts pbs plm prm">'.$res_tag['name']."</span> ";
 								}
 							} 
 							?>
