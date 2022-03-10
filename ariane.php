@@ -14,7 +14,10 @@ if(!$GLOBALS['domain']) exit;
 
 		<?php tag('navigation', array('tag' => 'span', 'separator' => ' > '));?>
 
-		<?php if(isset($GLOBALS['tags']) and isset($res['title'])) echo' > <span aria-current="page">'.$res['title'].'</span>';?>
+		<?php 
+		if(isset($GLOBALS['tags']) and isset($res['title'])) echo' > ';
+		if(isset($res['title'])) echo'<span aria-current="page">'.$res['title'].'</span>';
+		?>
 	</nav>
 
 
