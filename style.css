@@ -173,21 +173,34 @@ figure div {
 	}
 
 /* Actualités... */
-		/** Pagination **/
-		.page .bt {
-			text-decoration: underline;
-			background-color: transparent;
-			color: #00253F;
-			font-weight: normal !important;
-			padding: 0 1rem !important;
+	/** Pagination **/
+	.page .bt {
+		text-decoration: underline;
+		background-color: transparent;
+		color: #00253F;
+		font-weight: normal !important;
+		padding: 0 1rem !important;
+	}
+		.page .bt.selected {
+			font-weight: bold !important;
+			text-decoration: none;
 		}
-			.page .bt.selected {
-				font-weight: bold !important;
-				text-decoration: none;
-			}
-			.page .bt:hover {
+		.page .bt:hover {
+			background-color: transparent;
+		}
+
+		/** Tags **/
+		#tags:not(a) {
+			color: #fff; /* masque virgule */
+		}
+			/** affichage tags normal en mode édition **/
+			.lucide #tags:not(a) { color: inherit; }
+
+			.lucide #tags a {
 				background-color: transparent;
+				padding: 0;
 			}
+
 
 /* Footer */
 
