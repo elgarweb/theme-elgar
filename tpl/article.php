@@ -31,7 +31,7 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 		<div>
 
 			<!-- Tag -->
-			<div>
+			<div id="tags">
 				
 				<div class="editable-hidden bold"><?php _e("Categories"); ?></div>
 
