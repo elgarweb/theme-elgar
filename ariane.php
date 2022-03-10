@@ -7,12 +7,19 @@ if(!$GLOBALS['domain']) exit;
 <div class="ariane mod ptm pbm">
 
 	<nav role="navigation" aria-label="<?php _e("Breadcrumb")?>" class="fl" itemprop="breadcrumb">
+
 		<a href="/"><?php _e("Home")?></a> >
 
 		<?php if(@$res['type']=='article'){?><a href="/<?=encode(__("Actualités"))?>"><?php _e("Actualités")?></a> > <?}?>
 		<?php if(@$res['type']=='event' or @$res['type']=='event-tourinsoft'){?><a href="/<?encode(__("Agenda"))?>"><?php _e("Agenda")?></a> > <?}?>
 
 		<?php tag('navigation', array('tag' => 'span', 'separator' => ' > '));?>
+
+		<?php 
+		if(isset($GLOBALS['tags']) and isset($res['title'])) echo' > ';
+		if(isset($res['title'])) echo'<span aria-current="page">'.$res['title'].'</span>';
+		?>
+		
 	</nav>
 
 
