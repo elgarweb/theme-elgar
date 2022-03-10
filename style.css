@@ -232,7 +232,7 @@ figure div {
 	}
 
 /* Tags */
-.editable-tag a {
+#tags .editable-tag a {
 	display: inline-block;
 	text-align: center;
 	background-color: #26D691;
