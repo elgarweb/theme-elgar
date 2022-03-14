@@ -1,12 +1,5 @@
 <?php if(!$GLOBALS['domain']) exit;?>
 
-<!--
-@todo Simon :
-- bouton choix langue
-- formulaire de recherche
-
--->
-
 <style>
 	/* 
 	Bug style="width: 1024px;" se met en mode édition ??? 
@@ -34,7 +27,7 @@
 				|
 				<input type="checkbox" name="high-contrast" id="high-contrast"<?=(@$_COOKIE['high-contrast']?'checked="checked"':'')?>> <label class="color tdu" for="high-contrast"><?php _e("Enhanced contrast")?></label>
 				|
-				<a href="/contact"><?php _e("Contact")?></a>
+				<a href="/<?=encode(__("Contact"))?>"><?php _e("Contact")?></a>
 				
 			</div>
 
@@ -50,6 +43,7 @@
 
 		<div class="flex wrap jcsb aic ptm">
 
+			<!-- Logo -->
 			<div><a href="<?=$GLOBALS['home']?>"><?php media('logo', array('size' => '330x70', 'lazy' => 'true'))?></a></div>
 			
 			<!-- Formulaire de recherche -->
@@ -121,7 +115,26 @@
 
 		</nav>
 
+	</section>
+
+
+
+	<!-- ZONE ALERTE -->
+	<section class="<?=((isset($GLOBALS['content']['alerte-texte']) and date('Y-m-d') >= @$GLOBALS['content']['alert-date-debut'] and date('Y-m-d') <= @$GLOBALS['content']['alert-date-fin']) ? 'bg-grey' : 'editable-hidden'); ?>">
+		<div class="editable-hidden pts tc">
+			<label for="alert-date-debut">Date de début d'affichage de l'alerte</label> <?input('alert-date-debut', array('type' => 'date'))?>
+		 	<label for="alert-date-fin">Date de fin</label> <?input('alert-date-fin', array('type' => 'date'))?>
+		</div>
+
+		<article class="mw960p mod flex wrap space-l aic jcc center pam">
+						
+			<?php media('alerte-img', array('size' => '300', 'lazy' => true)); ?>
+						
+			<?php txt('alerte-texte', 'mw600p bold bigger'); ?>
+			
+		</article>
 
 	</section>
+
 
 </header>

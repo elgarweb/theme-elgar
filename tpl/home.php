@@ -1,40 +1,25 @@
 <?php if(!$GLOBALS['domain']) exit;?>
 
-<!-- ZONE ALERTE -->
-<section class="<?=(isset($GLOBALS['content']['alerte-texte']) ? 'bg-grey' : 'editable-hidden'); ?>">
-	
-	<div class="mw960p mod flex wrap space-l aic jcc center pam">
-		
-		<article>
-			<?php media('alerte-img', array('size' => '300', 'lazy' => true)); ?>
-		</article>
-		
-		<article class="mw600p">
-			<?php txt('alerte-texte', 'bold bigger'); ?>
-		</article>
-		
-	</div>
-
-</section>
 
 <!-- ENCART INTRO -->
 <section class="mw960p mod center ptm pbl pll prl">
 	
 	<?php h1('titre', 'picto'); ?>
 
-	<div class="<?=(isset($GLOBALS['content']['intro-texte']) ? 'row' : 'editable-hidden'); ?>">
+	<article class="<?=(isset($GLOBALS['content']['intro-texte']) ? 'row' : 'editable-hidden'); ?>">
 		
-		<article class="col brd-rad-top-left">
+		<div class="col brd-rad-top-left">
 			<?php media('intro-visuel', array('size' => '550', 'lazy' => true)); ?>
-		</article>
+		</div>
 		
-		<article class="col bg-green brd-rad-bot-right">
+		<div class="col bg-green brd-rad-bot-right">
 			<?php txt('intro-texte', 'pal'); ?>
-		</article>
+		</div>
 		
-	</div>
+	</article>
 
 </section>
+
 
 
 <!-- EN 1 CLIC -->
@@ -76,11 +61,10 @@
 
 		</div>
 
-
 	</div>
 
-
 </section>
+
 
 
 <!-- ACTUALITÉS -->
@@ -150,6 +134,7 @@
 		?>
 	</article>
 
+
 	<!-- Dernières actualités -->
 	<article class="clear">
 
@@ -185,6 +170,7 @@
 			?>
 
 		</div>
+
 	</article>
 		
 	<!-- Bouton vers toutes les actualités -->
@@ -197,10 +183,11 @@
 </section>
 
 
+
 <!-- AGENDA -->
 <section id="home-agenda" class="bg-grey ptl pbl">
 
-	<div class="mw960p mod center">
+	<article class="mw960p mod center">
 
 		<?php h2('titre-events', 'picto')?>
 
@@ -244,15 +231,9 @@
 			<a href="<?=make_url(__('agenda'), array("domaine" => true))?>" class="bt">
 				<?= __("See all the events"); ?>
 			</a>
-		</div>
-		
+		</div>		
 
-	</div>
-
+	</article>
 
 </section>
 <!-- Fin Event -->
-
-
-
-

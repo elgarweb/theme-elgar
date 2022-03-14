@@ -86,6 +86,8 @@ function highlight($txt, $recherche)
 	<?
 	while($res_fiche = $sel_fiche->fetch_assoc())
 	{
+		$texte = null;
+
 		// Affichage du message pour dire si l'article est invisible ou pas
 		if($res_fiche['state'] != "active") $state = " <span class='deactivate pat'>".__("Article d&eacute;sactiv&eacute;")."</span>";
 		else $state = "";
@@ -96,8 +98,16 @@ function highlight($txt, $recherche)
 		<article class="mod mtl">
 
 			<h2 class="up bigger"><a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" class="tdn"><?=highlight($res_fiche['title'], strip_tags(@$_POST['recherche']))?></a><?=$state?></h2>
+			
 
-			<?if(isset($content_fiche['texte'])) echo highlight(word_cut($content_fiche['texte'], '350', '...', '<br><div>'), strip_tags(@$_POST['recherche']));?>
+			<?
+			if(isset($content_fiche['description'])) $texte = $content_fiche['description'];
+			elseif(isset($content_fiche['texte'])) $texte = $content_fiche['texte'];
+			
+			if(isset($texte))
+				echo highlight(word_cut($texte, '350', '...', '<br><div>'), strip_tags(@$_POST['recherche']));
+			?>
+
 
 			<div class="fr mtm"><a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" class="bt bold"><?_e("Lire")?></a></div>
 
