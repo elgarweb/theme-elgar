@@ -1,7 +1,3 @@
-<!--
-	@todo Stéphanie :
-	- Affichage tag sur chaque actu
--->
 <?php  if(!$GLOBALS['domain']) exit; ?>
 
 <section class="mw960p mod center mbl">
@@ -93,7 +89,22 @@
 
 						<div class="pam brd-left">
 							
-							<!-- <div><?= $content_fiche['name']; ?></div> -->
+							<!-- Tags -->
+							<div class="mbm">
+
+								<?php 
+								if(isset($tags) and isset($res_fiche['id']))
+								global $tags;
+								{ 
+									$sel_tag = $GLOBALS['connect']->query("SELECT * FROM ".$GLOBALS['tt']."
+										WHERE zone = '".$res['url']."' AND id='".$res_fiche['id']."' LIMIT 5");
+									while($res_tag = $sel_tag->fetch_assoc()) {
+										echo '<span class="inbl tc bg-green brd-rad pts pbs plm prm mbs">'.$res_tag['name']."</span> ";
+									}
+								} 
+								?>
+
+							</div>
 
 							<!-- Titre -->
 							<h2 class="h3-like tl">
