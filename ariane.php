@@ -12,8 +12,8 @@ if(!$GLOBALS['domain']) exit;
 
 		<?php 
 		if(@$res['type']=='article'){?><a href="/<?=encode(__("Actualités"))?>"><?php _e("Actualités")?></a><?}
-		elseif(@$res['type']=='event' or @$res['type']=='event-tourinsoft'){?><a href="/<?encode(__("Agenda"))?>"><?php _e("Agenda")?></a><?}
-		elseif(@$res['type']=='annuaire'){?><a href="/<?encode(__("Annuaire"))?>"><?php _e("Annuaire")?></a><?}
+		elseif(@$res['type']=='event' or @$res['type']=='event-tourinsoft'){?><a href="/<?=encode(__("Agenda"))?>"><?php _e("Agenda")?></a><?}
+		elseif(@$res['type']=='annuaire'){?><a href="/<?=encode(__("Annuaire"))?>"><?php _e("Annuaire")?></a><?}
 		?>
 
 		<?php tag('navigation', array('tag' => 'span', 'separator' => ' > '));?>
@@ -65,6 +65,5 @@ if(!$GLOBALS['domain']) exit;
 		}
 		?>
 	</ul>
-	
 
 </div>
