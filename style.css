@@ -10,7 +10,7 @@ a {
 	text-decoration: underline;
 	transition: color .3s;
 }
-	/* a:hover { color: #26D691; } */
+	a:hover { font-weight: bold; }
 	
 
 /* Titres */
