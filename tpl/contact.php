@@ -26,14 +26,6 @@ switch(@$_GET['mode'])
 		</script>
 		
 
-		<style>
-			#email_contact, #message, #question {
-				border: 0.1em solid #35747f;
-				background-color: #f7f7f7;
-			}
-		</style>
-
-
 		<section class="mw960p mod center">
 
 			<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
@@ -77,13 +69,14 @@ switch(@$_GET['mode'])
 						?>
 						<div>
 							<label for="question">
-								<?php _e("For security reasons, please solve the following calculation")?><span class="red">*</span> :
+								<?php _e("For security reasons, please solve the following calculation")?><span class="red">*</span><br>
 								<?=($chiffre[$nb1]." ".($operator=='-'?'−':$operator)." ".$chiffre[$nb2]);?> = 
 							</label>
 							<input type="text" name="question" id="question" placeholder="?" class="w50p tc" autocomplete="off" required>
 
 							<input type="hidden" name="question_hash" value="<?=$question_hash;?>">
 						</div>
+
 
 						<!-- RGPD -->
 						<div class="mtm">
