@@ -1,13 +1,19 @@
+/* GÉNÉRAL */
+
+/* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
+
+/* Liens */
 a {
 	color: #00253F;
 	text-decoration: underline;
 	transition: color .3s;
 }
 	/* a:hover { color: #26D691; } */
-	.selected a { color: #26D691 !important; }
+	
 
+/* Titres */
 h1, .h1-like, 
 h2, .h2-like,
 h3, .h3-like { 
@@ -19,6 +25,17 @@ h3, .h3-like {
 h1, .h1-like,
 .tpl-home h2 { text-align: center; }
 
+	/** Picto déco titres **/
+	.picto:before {
+		content: url('/media/vaguelette.svg');
+		position: relative;
+		width: 60px;
+		display: block;
+		margin: auto;
+		top: 15px;
+	}
+
+
 /* Fil d'ariane */
 .ariane { border-bottom: 2px solid #eaecee; }
 	.ariane .tdn { text-decoration: underline !important; }
@@ -27,6 +44,7 @@ h1, .h1-like,
 		padding: 0 0.25em 0 0.5em;
 		content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 14' width='7' height='10'%3e%3cpath d='M-.4 12l2 2 7-7-7-7-2 2 5 5z'/%3e%3c/svg%3e");
 	}
+
 
 /* Page intermédiaire de navigation */
 .navigation { list-style: none; }
@@ -40,26 +58,6 @@ h1, .h1-like,
 	    display: inline-block;
 	}
 
-/* .picto:before {
-	font-family: 'FontAwesome';
-	content: '\e86c';
-	position: relative;
-	display: block;
-	color: #26D691;
-	margin: auto;
-} */
-
-
-.picto:before {
-	content: url('/media/vaguelette.svg');
-	position: relative;
-	width: 60px;
-	display: block;
-	margin: auto;
-	top: 15px;
-	/* color: #26D691; */
-}
-
 
 /* Mots en langue basque */
 span[lang="eu"] { border-bottom: dotted 1px #00253F; }
@@ -69,9 +67,6 @@ span[lang="eu"] { border-bottom: dotted 1px #00253F; }
 .bt:not(.vam), .bt.internal {
 	background-color: #00253F;
 	color: #26D691;
-	
-	/* border: 1px solid #00253F; */
-	/* border-radius: 0.5em; */
 }
 
 .bt:not(.fixed):not(.vam) { 
@@ -81,29 +76,34 @@ span[lang="eu"] { border-bottom: dotted 1px #00253F; }
 	border-top-left-radius: 2.5rem;
 }
 
-	.bt:not(.vam):hover, .bt.selected {
+	.bt:not(.vam):hover, 
+	.bt.selected {
 		background-color: #26D691;
 		color: #00253F;
 	}
 
 button { border: solid 1px #26D691; }
 
-/* Couleur */
+
+/* Couleurs */
 .color { color: #00253F; }
 .color-alt { color: #26D691; }
 /* .color-nav { color: #353842; } */
 
-.bg-color {
-	background-color: #00253F;
-	color: #fff;
-}
-	a.bg-color:hover, a .bg-color:hover {
-		background-color: #fff;
-		color: #00253F;
-	}
 
-.bg-green { background-color: #26D691; }
-.bg-grey { background-color: #00253F1A; }
+	/** Background **/
+	.bg-color {
+		background-color: #00253F;
+		color: #fff;
+	}
+		a.bg-color:hover, a .bg-color:hover {
+			background-color: #fff;
+			color: #00253F;
+		}
+
+	.bg-green { background-color: #26D691; }
+	.bg-grey { background-color: #00253F1A; }
+
 
 /* Bordures */
 .brd { border: 1px solid #00253F; }
@@ -113,71 +113,70 @@ button { border: solid 1px #26D691; }
 .brd-top-alt { border-top: solid 3px #26D691; }
 .brd-bot-alt { border-bottom: solid 1px #26D691; }
 
+
 /* Border-radius */
 .brd-rad { border-radius: 25px;}
+
 .brd-rad-top-left, 
 .brd-rad-top-left img{
 	border-top-left-radius: 25px;
 }
-
 .brd-rad-bot-right {
 	border-bottom-right-radius: 25px;
 }
-
 .brd-rad-100 { border-radius: 100%; }
 
+
+/* Positions */
 .bot15 {bottom: 15px; }
 .right15 {right: 15px; }
+
 
 /* Table layout */
 .row {
 	display: table;
 	table-layout: fixed;
-	/* width: 100%; */
-	/* border-spacing: 2rem; */
 }
 
 .row>*,
 .col {
 	display: table-cell;
 	vertical-align: middle;
-	/* padding-top: 10rem; */
-	/* padding-bottom: 10rem; */
-}
-
-header #logo [src*='.svg'] { min-width: 330px; }
-
-/* Affichage images en background */
-.tpl-annuaire-liste figure { width: 300px; }
-figure div {
-	/* background-size: auto 100%; */
-	background-position: center center;
 }
 
 
-/* Home */
-	/** En un clic **/
-	/*** Effet zoom pictos ***/
+/* HEADER */
+	/** Logo **/
+	header #logo { transition: opacity .5s; }
+	header #logo [src*='.svg'] { min-width: 330px; }
+		header #logo:hover { opacity: 0.6; }
+
+
+/* HOME */
+	/* En un clic */
 	#enunclic img {
+		width: 85px;
+		height: 85px;
 		transition: transform .1s;
 	}
+		/** Effet zoom img **/
 		#enunclic img:hover {
 			-ms-transform: scale(1.1);
 			-webkit-transform: scale(1.1); 	
 			transform: scale(1.1);
 		}
 
-	/** Couleurs blocs **/
-	#home-actualites #block {
-		background-color: #00253F1A;
-	}
+	/* Couleurs blocs image + texte */
+	#home-actualites #block { background-color: #00253F1A; }
 	
-	#home-agenda.bg-grey #block {
-		background-color: white;
-	}
+	#home-agenda.bg-grey #block { background-color: white;	}
 
-/* Actualités... */
-	/** Pagination **/
+	/* Affichage img actus et agenda en background */
+	figure div { background-position: center center; }
+
+
+/* ACTUALITÉS... */
+	/* Pagination */
 	.page .bt {
 		text-decoration: underline;
 		background-color: transparent;
@@ -193,11 +192,22 @@ figure div {
 			background-color: transparent;
 		}
 
-		/** Tags **/
-		#tags:not(a) {
-			color: #fff; /* masque virgule */
-		}
-			/** affichage tags normal en mode édition **/
+		/* Tags */
+			/** affichage tags en mode bouton **/
+			#tags .editable-tag a {
+				display: inline-block;
+				text-align: center;
+				background-color: #26D691;
+				border-radius: 25px;
+				padding: 1rem 2rem;
+			}
+
+			/** masquage virgule **/
+			#tags:not(a) {
+				color: #fff; 
+			}
+
+			/** affichage tags sans CSS en mode édition **/
 			.lucide #tags:not(a) { color: inherit; }
 
 			.lucide #tags a {
@@ -205,18 +215,14 @@ figure div {
 				padding: 0;
 			}
 
+		/* Affichage images en background */
+		.tpl-annuaire-liste figure { width: 300px; }
 
-/* Footer */
 
-	footer #contacts { font-size: 1.4rem; }
+/* FOOTER */
+footer #contacts { font-size: 1.4rem; }
 
 	footer #contacts a { color: white; }
-
-	/* Suppression bordures bouton et input */
-	/* footer button.bt,
-	footer input {
-		border: 0;
-	} */
 
 	/* Affichage liens éditables */
 	footer input.editable-href { position: relative; }
@@ -228,24 +234,12 @@ figure div {
 		font-size: 2rem;
 	}
 
-/* Home */
-	/* En 1 clic */
-	#enunclic img {
-		width: 85px;
-		height: 85px;
-	}
 
-/* Tags */
-#tags .editable-tag a {
-	display: inline-block;
-	text-align: center;
-	background-color: #26D691;
-	border-radius: 25px;
-	padding: 1rem 2rem;
-}
+/* CONTACT */
+	/* Formulaire contact */
+	#contact input[name='reponse'] { display: none; }
 
-/* Formulaire contact */
-#contact input[name='reponse'] { display: none; }
+
 
 
 
@@ -1196,10 +1190,6 @@ div.editable {
 	header .acces-rapide:focus { top: 0; left: 0; } */
 
 
-header #logo { transition: opacity .5s; }
-	header #logo:hover { opacity: 0.6; }
-
-
 /* MENU DE NAVIGATION */
 	header nav ul {
 		list-style: none;
@@ -1238,6 +1228,9 @@ header #logo { transition: opacity .5s; }
 			}
 				header nav>ul li a:hover {
 					color: #26D691;
+				}
+				header .selected a {
+					color: #26D691 !important;
 				}
 		
 

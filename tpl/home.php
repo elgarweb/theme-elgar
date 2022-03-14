@@ -5,7 +5,7 @@
 	
 	<div class="mw960p mod flex wrap space-l aic jcc center pam">
 		
-		<article class="">
+		<article>
 			<?php media('alerte-img', array('size' => '300', 'lazy' => true)); ?>
 		</article>
 		
@@ -33,17 +33,7 @@
 		</article>
 		
 	</div>
-	<!-- <div class="grid aic bg-green">
-		
-		<article class="brd-r-tl">
-			<?php media('intro-img', '550'); ?>
-		</article>
-		
-		<article class="brd-r-br">
-			<?php txt('intro-texte', 'pal'); ?>
-		</article>
-		
-	</div> -->
+
 </section>
 
 
@@ -99,7 +89,7 @@
 	<?php h2('titre-actus', 'picto pbm'); ?>
 	
 	<!-- Actualité à la une -->
-	<article class="">
+	<article>
 		<?php
 		$sql_alaune="
 		SELECT ".$tc.".* FROM ".$tc."
@@ -129,7 +119,7 @@
 			<div class="<?=(isset($article['title']) ? 'flex wrap space-l aic center pam brd brd-rad-bot-right mbl' : 'none'); ?>">
 
 				<!-- Image -->
-				<figure class="">
+				<figure>
 
 					<div class="cover" data-bg="<?= $article['content']['visuel']; ?>" data-lazy="bg" style="width: 300px; height: 225px;">
 					</div>

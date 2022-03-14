@@ -75,9 +75,7 @@
 			else $state = "";
 
 			$content_fiche = json_decode($res_fiche['content'], true);
-			
 			?>
-
 
 			<div class="brd brd-rad-bot-right mbm">
 
@@ -86,7 +84,7 @@
 					<article class="relative flex">
 
 						<!-- Image -->
-						<figure class="">
+						<figure>
 
 							<div class="nor" data-bg="<?=(isset(parse_url($content_fiche['visuel'])['scheme'])?'':$GLOBALS['home']).$content_fiche['visuel']; ?>" data-lazy="bg" style="width: 100%; height: 225px;">
 							</div>
