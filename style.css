@@ -19,7 +19,8 @@ h2, .h2-like,
 h3, .h3-like { 
 	color: #00253F;
 	font-weight: bold;
-	margin-top: 0;
+	margin-top: 1rem;
+	margin-bottom: 2rem;
 }
 
 h1, .h1-like,
@@ -103,6 +104,7 @@ button { border: solid 1px #26D691; }
 
 	.bg-green { background-color: #26D691; }
 	.bg-grey { background-color: #00253F1A; }
+	.bg-white { background-color: #fff; }
 
 
 /* Bordures */
@@ -118,7 +120,7 @@ button { border: solid 1px #26D691; }
 .brd-rad { border-radius: 25px;}
 
 .brd-rad-top-left, 
-.brd-rad-top-left img{
+.brd-rad-top-left #intro-visuel img{
 	border-top-left-radius: 25px;
 }
 .brd-rad-bot-right {

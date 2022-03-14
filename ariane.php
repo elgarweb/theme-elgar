@@ -4,7 +4,7 @@ if(!$GLOBALS['domain']) exit;
 // @todo voir pour mettre le fil d'ariane dans une ol/li => problème avec système de tag+edition
 // Peut-être injecter accueil dans la liste de tag et le supp au moment du save...
 ?>
-<div class="ariane mod ptm pbm">
+<div class="mw960p ariane mod center ptl pbl">
 
 	<nav role="navigation" aria-label="<?php _e("Breadcrumb")?>" class="fl" itemprop="breadcrumb">
 

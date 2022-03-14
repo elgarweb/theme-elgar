@@ -2,7 +2,7 @@
 
 <section class="mw960p mod center">
 
-	<?php h1('title', 'picto mtn pbm'); ?>
+	<?php h1('title', 'picto'); ?>
 
 	<article>
 
@@ -29,7 +29,8 @@
 				foreach ($module as $key => $value) 
 				{					
 					?>
-					<li class="ptm">
+					<li class="w300p bg-grey mtm pal brd-rad-top-left brd-rad-bot-right">
+
 						<a <?php href("personnalite-".$i."-lien-".$key); ?> class="tdn">
 							
 							<?php media("personnalite-".$i."-visuel-".$key, array('size' => '150x150', 'lazy' => true, 'crop' => 'true', 'class' => 'brd-rad-100 brd-alt'));?>
@@ -41,6 +42,7 @@
 							<?php txt("personnalite-".$i."-texte-".$key, array("tag" => "span", "class" => "block ptm"));?>
 							
 						</a>
+
 					</li>
 				<?php
 				}

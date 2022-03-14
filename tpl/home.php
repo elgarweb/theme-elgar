@@ -20,7 +20,7 @@
 <!-- ENCART INTRO -->
 <section class="mw960p mod center ptm pbl pll prl">
 	
-	<?php h1('titre', 'picto mtn pbm'); ?>
+	<?php h1('titre', 'picto'); ?>
 
 	<div class="<?=(isset($GLOBALS['content']['intro-texte']) ? 'row' : 'editable-hidden'); ?>">
 		
