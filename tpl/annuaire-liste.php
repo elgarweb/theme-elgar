@@ -14,7 +14,7 @@
 		//echo $connect->error;
 
 		while($res_tag_list = $sel_tag_list->fetch_assoc()) {
-			echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="inbl tc bg-green brd-rad tdn pts pbs plm prm">'.$res_tag_list['name'].'</a>';
+			echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="bt-tag">'.$res_tag_list['name'].'</a>';
 			$i++;
 		}
 		?>
@@ -99,7 +99,7 @@
 									$sel_tag = $GLOBALS['connect']->query("SELECT * FROM ".$GLOBALS['tt']."
 										WHERE zone = '".$res['url']."' AND id='".$res_fiche['id']."' LIMIT 5");
 									while($res_tag = $sel_tag->fetch_assoc()) {
-										echo '<span class="inbl tc bg-green brd-rad pts pbs plm prm mbs">'.$res_tag['name']."</span> ";
+										echo '<span class="bt-tag">'.$res_tag['name']."</span> ";
 									}
 								} 
 								?>
