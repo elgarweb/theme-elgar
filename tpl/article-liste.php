@@ -5,33 +5,41 @@
 
 <?php  if(!$GLOBALS['domain']) exit; ?>
 
-<section class="mw960p mod center pbm">
+<section>
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
-	
-	<?php h1('title', 'picto mtn pbm'); ?>
 
-	<nav role="navigation" class="flex space-xl jcc tc ptl pbl">
-		<?php 
-		// Liste les tags pour filtrer la page
-		$i = 1;
-		$sel_tag_list = $connect->query("SELECT distinct encode, name FROM ".$table_tag." WHERE zone='".$res['url']."' GROUP BY encode, name ORDER BY encode ASC");
-		//echo $connect->error;
+	<div class="<?= $res['url'] == 'agenda' ? 'bg-grey' : ''; ?>">
 
-		while($res_tag_list = $sel_tag_list->fetch_assoc()) {
-			echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="inbl tc bg-green brd-rad tdn pts pbs plm prm">'.$res_tag_list['name'].'</a>';
-			$i++;
-		}
-		?>
-	</nav>
-	
-	<?php txt('description', 'tc ptm pbm'); ?>
+		<div class="mw960p mod center">
+
+			<?php h1('title', 'picto'); ?>
+			
+			<nav role="navigation" class="flex space-xl jcc tc ptl pbl">
+				<?php 
+				// Liste les tags pour filtrer la page
+				$i = 1;
+				$sel_tag_list = $connect->query("SELECT distinct encode, name FROM ".$table_tag." WHERE zone='".$res['url']."' GROUP BY encode, name ORDER BY encode ASC");
+				//echo $connect->error;
+				
+				while($res_tag_list = $sel_tag_list->fetch_assoc()) {
+					echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="inbl tc bg-green brd-rad tdn pts pbs plm prm">'.$res_tag_list['name'].'</a>';
+					$i++;
+				}
+				?>
+			</nav>
+			
+			<?php txt('description', 'tc ptm pbm'); ?>
+
+		</div>
+
+	</div>
 	
 </section>
 
-<section class="mw960p mod center">
+<section class="<?= $res['url'] == 'agenda' ? 'bg-grey' : ''; ?>">
 
-	<div class="grid-3 space-xl">
+	<div class="mw960p mod center grid-3 space-xl">
 		
 		<?php 
 		// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs

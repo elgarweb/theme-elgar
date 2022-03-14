@@ -12,7 +12,7 @@
 
 		<?php txt('texte');?>
 
-		<ul class="">
+		<ul>
 	 	<?php
 	 	$ul = null;
 		// Boucle sur les éléments du menu

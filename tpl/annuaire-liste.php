@@ -1,14 +1,10 @@
-<!--
-	@todo Stéphanie :
-	- Affichage tag sur chaque actu
--->
 <?php  if(!$GLOBALS['domain']) exit; ?>
 
 <section class="mw960p mod center mbl">
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 	
-	<?php h1('title', 'picto mtn pbm'); ?>
+	<?php h1('title', 'picto'); ?>
 
 	<nav role="navigation" class="flex space-xl jcc tc ptl pbl">
 		<?php 
@@ -75,9 +71,7 @@
 			else $state = "";
 
 			$content_fiche = json_decode($res_fiche['content'], true);
-			
 			?>
-
 
 			<div class="brd brd-rad-bot-right mbm">
 
@@ -86,7 +80,7 @@
 					<article class="relative flex">
 
 						<!-- Image -->
-						<figure class="">
+						<figure>
 
 							<div class="nor" data-bg="<?=(isset(parse_url($content_fiche['visuel'])['scheme'])?'':$GLOBALS['home']).$content_fiche['visuel']; ?>" data-lazy="bg" style="width: 100%; height: 225px;">
 							</div>
@@ -95,7 +89,22 @@
 
 						<div class="pam brd-left">
 							
-							<!-- <div><?= $content_fiche['name']; ?></div> -->
+							<!-- Tags -->
+							<div class="mbm">
+
+								<?php 
+								if(isset($tags) and isset($res_fiche['id']))
+								global $tags;
+								{ 
+									$sel_tag = $GLOBALS['connect']->query("SELECT * FROM ".$GLOBALS['tt']."
+										WHERE zone = '".$res['url']."' AND id='".$res_fiche['id']."' LIMIT 5");
+									while($res_tag = $sel_tag->fetch_assoc()) {
+										echo '<span class="inbl tc bg-green brd-rad pts pbs plm prm mbs">'.$res_tag['name']."</span> ";
+									}
+								} 
+								?>
+
+							</div>
 
 							<!-- Titre -->
 							<h2 class="h3-like tl">
