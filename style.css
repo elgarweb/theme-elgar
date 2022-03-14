@@ -83,6 +83,19 @@ span[lang="eu"] { border-bottom: dotted 1px #00253F; }
 		color: #00253F;
 	}
 
+.bt-tag {
+	display: inline-block;
+	text-align: center;
+	background-color: #26D691;
+	border-radius: 25px;
+	text-decoration: none;
+	padding: 1rem 2rem;
+}
+	.bt-tag:hover {
+		background-color: #00253F;
+		color: #26D691;
+	}
+
 button { border: solid 1px #26D691; }
 
 

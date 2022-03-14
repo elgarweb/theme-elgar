@@ -23,7 +23,7 @@
 				//echo $connect->error;
 				
 				while($res_tag_list = $sel_tag_list->fetch_assoc()) {
-					echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="inbl tc bg-green brd-rad tdn pts pbs plm prm">'.$res_tag_list['name'].'</a>';
+					echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="bt-tag">'.$res_tag_list['name'].'</a>';
 					$i++;
 				}
 				?>
