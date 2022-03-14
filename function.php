@@ -15,7 +15,7 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 
     ?>
 
-    <div id="block" class="<?= $res['url'] == 'actualites' ? 'bg-grey ' : 'bg-white '; ?>relative brd-top-alt brd brd-rad-bot-right">
+    <div class="<?= $res['url'] == 'actualites' ? 'bg-grey ' : 'bg-white '; ?>relative brd-top-alt brd brd-rad-bot-right">
 
 		<!-- Affichage état article si désactivé -->
 		<div class="color-alt tc bold">

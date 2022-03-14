@@ -90,6 +90,7 @@ span[lang="eu"] { border-bottom: dotted 1px #00253F; }
 	border-radius: 25px;
 	text-decoration: none;
 	padding: 1rem 2rem;
+	margin-bottom: 1rem;
 }
 	.bt-tag:hover {
 		background-color: #00253F;
@@ -163,12 +164,18 @@ button { border: solid 1px #26D691; }
 /* HEADER */
 	/** Logo **/
 	header #logo { transition: opacity .5s; }
-	header #logo [src*='.svg'] { min-width: 330px; }
+	header #logo [src*='.svg'] { min-width: 320px; }
 		header #logo:hover { opacity: 0.6; }
 
 
 /* HOME */
 	/* En un clic */
+	#enunclic li { 
+		max-width: 150px; 
+		padding-bottom: 1rem; 
+		margin: auto;
+	}
+
 	#enunclic img {
 		width: 85px;
 		height: 85px;
@@ -207,31 +214,40 @@ button { border: solid 1px #26D691; }
 			background-color: transparent;
 		}
 
-		/* Tags */
-			/** affichage tags en mode bouton **/
-			#tags .editable-tag a {
-				display: inline-block;
-				text-align: center;
-				background-color: #26D691;
-				border-radius: 25px;
-				padding: 1rem 2rem;
-			}
+	/* Tags */
+		/** affichage tags en mode bouton **/
+		#tags .editable-tag a {
+			display: inline-block;
+			text-align: center;
+			background-color: #26D691;
+			border-radius: 25px;
+			padding: 1rem 2rem;
+		}
 
-			/** masquage virgule **/
-			#tags:not(a) {
-				color: #fff; 
-			}
+		/** masquage virgule **/
+		#tags:not(a) {
+			color: #fff; 
+		}
 
-			/** affichage tags sans CSS en mode édition **/
-			.lucide #tags:not(a) { color: inherit; }
+		/** affichage tags sans CSS en mode édition **/
+		.lucide #tags:not(a) { color: inherit; }
 
-			.lucide #tags a {
-				background-color: transparent;
-				padding: 0;
-			}
+		.lucide #tags a {
+			background-color: transparent;
+			padding: 0;
+		}
 
-		/* Affichage images en background */
-		.tpl-annuaire-liste figure { width: 300px; }
+	/* Affichage images en background */
+	.tpl-annuaire-liste figure { width: 299px; }
+
+	.tpl-personnalites .blocks li {
+		width: 300px;
+		background-color: #00253F1A;
+		margin-top: 2rem;
+		padding: 4rem;
+		border-top-left-radius: 25px;
+		border-bottom-right-radius: 25px;
+	}
 
 
 /* FOOTER */
@@ -590,7 +606,7 @@ img.fl, img.fr { margin-bottom: 0.5rem; }
 
 figure.center {	text-align: center; }
 
-article img { max-width: 100%; } /* Pour que les images ne dépassent pas la taille du contener */
+#logo img, article img { max-width: 100% !important; } /* Pour que les images ne dépassent pas la taille du contener */
 
 /* Pour que l'image au clic soit bien centré dans le figure*/
 figure img { display: inline-block !important; }
@@ -1409,6 +1425,30 @@ div.editable {
 		border-spacing: 0;
 	}
 
+	.mw960p {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+
+	/* Liste actus... */
+	.blocks, .tpl-annuaire-liste article { display: block; }
+		.blocks > div, 
+		.blocks article,
+		.tpl-annuaire-liste section > div > div,
+		.blocks li {
+			width: 300px;
+			min-height: 300px;
+			margin: auto;
+			margin-bottom: 2rem;
+		}
+
+	.tpl-annuaire-liste figure { border-bottom: 1px solid #00253F; }
+
+	.tpl-annuaire-liste .brd-left { border: none; }
+
+	/* Footer */
+	#contacts div { display: block; }
+
 }
 
 /* RESPONSIVE medium */
@@ -1442,8 +1482,8 @@ div.editable {
 
 	article {
 		/*display: inline-block; Crée un bug collateral avec l'editeur de menu ... utile ?*/
-		padding-left: 0.5rem !important;
-		padding-right: 0.5rem !important;
+		/* padding-left: 0.5rem !important; */
+		/* padding-right: 0.5rem !important; */
 	}
 		
 	.editable img.fl, .editable img.fr {
@@ -1456,10 +1496,9 @@ div.editable {
 		height: auto;
 	}
 
-	.mw960p {
-		padding-left: 1rem;
-		padding-right: 1rem;
-	}
+
+
+
 }
 
 /* RESPONSIVE small */

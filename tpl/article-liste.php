@@ -15,7 +15,7 @@
 
 			<?php h1('title', 'picto'); ?>
 			
-			<nav role="navigation" class="flex space-xl jcc tc ptl pbl">
+			<nav role="navigation" class="flex wrap space jcc tc ptl pbm">
 				<?php 
 				// Liste les tags pour filtrer la page
 				$i = 1;
@@ -39,7 +39,7 @@
 
 <section class="<?= $res['url'] == 'agenda' ? 'bg-grey' : ''; ?>">
 
-	<div class="mw960p mod center grid-3 space-xl">
+	<div class="blocks mw960p mod center grid-3 space-xl">
 		
 		<?php 
 		// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs

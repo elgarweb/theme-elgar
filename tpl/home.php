@@ -54,7 +54,7 @@
 			foreach($module as $key => $val)
 			{
 				?>
-				<li class="mw150p">
+				<li>
 
 					<a <?php href("enunclic-lien-".$key); ?> class="white">
 
@@ -153,7 +153,7 @@
 	<!-- Dernières actualités -->
 	<article class="clear">
 
-		<div class="grid-3 space-xl">
+		<div class="blocks grid-3 space-xl">
 			
 			<?php 
 			// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs
@@ -204,7 +204,7 @@
 
 		<?php h2('titre-events', 'picto')?>
 
-		<div class="grid-3 space-xl">
+		<div class="blocks grid-3 space-xl">
 			
 			<?php 
 			// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs
