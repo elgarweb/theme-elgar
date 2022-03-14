@@ -6,7 +6,7 @@
 	
 	<?php h1('title', 'picto'); ?>
 
-	<nav role="navigation" class="flex space-xl jcc tc ptl pbl">
+	<nav role="navigation" class="flex wrap space jcc tc ptl pbm">
 		<?php 
 		// Liste les tags pour filtrer la page
 		$i = 1;
