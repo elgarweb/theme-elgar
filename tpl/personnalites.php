@@ -2,6 +2,8 @@
 
 <section class="mw960p mod center">
 
+	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
+
 	<?php h1('title', 'picto'); ?>
 
 	<article>
@@ -22,16 +24,15 @@
 					<?php h3('groupe-sstitre-'.$i); ?>
 				</div>
 
-				<ul id="personnalite-<?=$i?>" class="module unstyled grid-3 space-xl jic tc pln">					
+				<ul id="personnalite-<?=$i?>" class="blocks module unstyled grid-3 space-xl jic tc pln">					
 				<?php 
 				$module = module("personnalite-".$i);
 				//print_r($modulePersonnalite);
 				foreach ($module as $key => $value) 
 				{					
 					?>
-					<li class="w300p bg-grey mtm pal brd-rad-top-left brd-rad-bot-right">
 
-						<a <?php href("personnalite-".$i."-lien-".$key); ?> class="tdn">
+						<li>
 							
 							<?php media("personnalite-".$i."-visuel-".$key, array('size' => '150x150', 'lazy' => true, 'crop' => 'true', 'class' => 'brd-rad-100 brd-alt'));?>
 
@@ -41,9 +42,8 @@
 							
 							<?php txt("personnalite-".$i."-texte-".$key, array("tag" => "span", "class" => "block ptm"));?>
 							
-						</a>
+						</li>
 
-					</li>
 				<?php
 				}
 				?>

@@ -46,18 +46,18 @@
 	</section>
 
 	<!-- CONTACTS -->
-	<section id="contacts" class="bg-color ptl pbl">
+	<section id="contacts" class="bg-color ptl pbm">
 
 		<div class="mw960p center flex jcsb">
 
-			<article>
+			<article class="pbm">
 
 				<?php txt('texte-coordonnees')?>
 
 			</article>
 
 
-			<article>
+			<article class="pbm">
 
 				<!-- @todo Formulaire newsletter -->
 				<div class="pbm">	
@@ -96,7 +96,7 @@
 			</article>
 
 
-			<article>
+			<article class="pbm">
 				<!-- Liens -->
 				<div class="pbl">
 

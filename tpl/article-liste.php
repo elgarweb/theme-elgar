@@ -15,7 +15,7 @@
 
 			<?php h1('title', 'picto'); ?>
 			
-			<nav role="navigation" class="flex space-xl jcc tc ptl pbl">
+			<nav role="navigation" class="flex wrap space jcc tc ptl pbm">
 				<?php 
 				// Liste les tags pour filtrer la page
 				$i = 1;
@@ -23,7 +23,7 @@
 				//echo $connect->error;
 				
 				while($res_tag_list = $sel_tag_list->fetch_assoc()) {
-					echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="inbl tc bg-green brd-rad tdn pts pbs plm prm">'.$res_tag_list['name'].'</a>';
+					echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="bt-tag">'.$res_tag_list['name'].'</a>';
 					$i++;
 				}
 				?>
@@ -39,7 +39,7 @@
 
 <section class="<?= $res['url'] == 'agenda' ? 'bg-grey' : ''; ?>">
 
-	<div class="mw960p mod center grid-3 space-xl">
+	<div class="blocks mw960p mod center grid-3 space-xl">
 		
 		<?php 
 		// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs
