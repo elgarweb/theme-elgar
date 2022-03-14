@@ -34,7 +34,7 @@
 				|
 				<input type="checkbox" name="high-contrast" id="high-contrast"<?=(@$_COOKIE['high-contrast']?'checked="checked"':'')?>> <label class="color tdu" for="high-contrast"><?php _e("Enhanced contrast")?></label>
 				|
-				<a href="/contact"><?php _e("Contact")?></a>
+				<a href="/<?=encode(__("Contact"))?>"><?php _e("Contact")?></a>
 				
 			</div>
 
