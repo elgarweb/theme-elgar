@@ -86,5 +86,10 @@ $add_translation = array(
 	// TOURINSOFT
 	"Add event-tourinsoft" => array("fr" => "Ajouter un événement Tourinsoft"),
 	"Edit event-tourinsoft" => array("fr" => "Edition d'un événement Tourinsoft"),
+
+	// CONTACT
+	"For security reasons, please solve the following calculation" => array("fr" => "Pour des questions de sécurité, merci de résoudre le calcul suivant"),
+	"Please check your entry and tick the box to accept the storage and processing of this information" => array("fr" => "Merci de vérifier votre saisie et de cocher la case afin d’accepter le stockage et le traitement de ces informations"),
+
 );
 ?>

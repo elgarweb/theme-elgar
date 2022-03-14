@@ -77,7 +77,7 @@ switch(@$_GET['mode'])
 						?>
 						<div>
 							<label for="question">
-								<?php span('texte-label-question')?><span class="red">*</span> :
+								<?php _e("For security reasons, please solve the following calculation")?><span class="red">*</span> :
 								<?=($chiffre[$nb1]." ".($operator=='-'?'−':$operator)." ".$chiffre[$nb2]);?> = 
 							</label>
 							<input type="text" name="question" id="question" placeholder="?" class="w50p tc" autocomplete="off" required>
@@ -87,7 +87,7 @@ switch(@$_GET['mode'])
 
 						<!-- RGPD -->
 						<div class="mtm">
-							<label for="rgpdcheckbox" class="inline" style="text-transform: none;"><?php span('rgpd')?><span class="red">*</span></label>
+							<label for="rgpdcheckbox" class="inline" style="text-transform: none;"><?php _e("Please check your entry and tick the box to accept the storage and processing of this information")?><span class="red">*</span></label>
 							<input type="checkbox" name="rgpdcheckbox" id="rgpdcheckbox" required>
 						</div>
 
@@ -95,7 +95,7 @@ switch(@$_GET['mode'])
 
 
 					<!-- Bouton envoyer -->
-					<div class="fr mtm mbl">
+					<div class="tc mtm mbl">
 						<button type="submit" id="send" class="bt bold">
 							<?php _e(array("Send" => array("fr" => "Envoyer")))?>
 							<i class="fa fa-mail-alt mlt" aria-hidden="true"></i>
