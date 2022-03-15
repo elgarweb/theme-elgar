@@ -14,13 +14,42 @@
 		//echo $connect->error;
 		
 		while($res_tag_list = $sel_tag_list->fetch_assoc()) {
-			echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="bt-tag">'.$res_tag_list['name'].'</a>';
+			echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="bt-tag'.($tag==$res_tag_list['encode']?' selected':'').'">'.$res_tag_list['name'].'</a>';
 			$i++;
 		}
 		?>
 	</nav>
 
 	<?php txt('description'); ?>
+
+
+	<form id="filtre-date-arrete" class="tc">
+
+		<div class="mbt"><?_e("Filter by date (format DD/MM/YYYY)")?> :</div>
+
+		<label for="start"><?_e("Start")?></label>
+		<input type="date" id="start" value="<?=@$GLOBALS['filter']['start']?>" placeholder="jj-mm-aaaa" autocomplete="off">
+
+		<label for="end"><?_e("End")?></label>
+		<input type="date" id="end" value="<?=@$GLOBALS['filter']['end']?>" placeholder="jj-mm-aaaa" autocomplete="off">
+		
+		<button type="submit" class="bg-green pat"><?_e("Search")?></button>
+
+	</form>
+	<script>
+		$("#filtre-date-arrete").on("submit", function(event) {
+			event.preventDefault();
+
+			var url = "/<?=encode(__("Arrêtés"))?>";
+
+			if(tag) url = url+'/'+tag;
+
+			if($("#start").val()) url = url + '/start_' + $("#start").val();
+			if($("#end").val()) url = url + '/end_' + $("#end").val();
+
+			document.location.href = url;
+		});
+	</script>
 	
 </section>
 
@@ -44,11 +73,37 @@
 		// Construction de la requete
 		$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
 
+		// Si filtre tag
+		if(isset($tag))
+			$sql.=" RIGHT JOIN ".$tt."
+			ON
+			(
+				".$tt.".id = ".$tc.".id AND
+				".$tt.".zone = '".$res['url']."' AND
+				".$tt.".encode = '".$tag."'
+			)";
+
+
+		// Filtre par date
+		if(@$GLOBALS['filter']['start'] or @$GLOBALS['filter']['end']) {
+			$sql.=" JOIN ".$tm." ON (
+				".$tm.".id=".$tc.".id AND
+				".$tm.".type='aaaa-mm-jj' AND";
+
+				if(@$GLOBALS['filter']['start']) $sql.=" ".$tm.".cle>='".date("Y-m-d", strtotime(encode($GLOBALS['filter']['start'])))."'";
+				if(@$GLOBALS['filter']['start'] and @$GLOBALS['filter']['end']) $sql.=" AND ";
+				if(@$GLOBALS['filter']['end']) $sql.=" ".$tm.".cle<='".date("Y-m-d", strtotime(encode($GLOBALS['filter']['end'])))."'";
+
+			$sql.=")";
+		}
+
+
 		$sql.=" WHERE ".$tc.".lang='".$lang."' ".$sql_state." AND";
 
 		$sql.=" ".$tc.".type='arrete'";
 
 		$sql.=" LIMIT ".$start.", ".$num_pp;
+
 
 		//echo $sql;
 		$sel_fiche = $connect->query($sql);
@@ -65,9 +120,7 @@
 			?>
 
 			<li>
-				<a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>">
-					<?=$res_fiche['title']; ?>
-				</a>
+				<a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>"><?=$res_fiche['title']; ?></a> - <?=date_lang($content_fiche['aaaa-mm-jj']); ?>
 			</li>
 
 		<?php	

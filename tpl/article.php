@@ -93,7 +93,7 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 							if(@$GLOBALS["content"]["aaaa-mm-jj"])
 								echo '<div>'.date_lang($GLOBALS["content"]["aaaa-mm-jj"]).'</div>';						
 
-							input("aaaa-mm-jj", array("type" => "hidden", "class" => "meta tc"));
+							input("aaaa-mm-jj", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
 						?>
 
 					</div>

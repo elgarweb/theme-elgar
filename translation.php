@@ -82,6 +82,9 @@ $add_translation = array(
 	"Add arrete" => array("fr" => "Ajouter un arrêté"),
 	"Edit arrete" => array("fr" => "Edition d'un arrêté"),
 	"See the sheet" => array("fr" => "Voir la fiche"),
+	"Filter by date (format DD/MM/YYYY)" => array("fr" => "Filtrer par date (format JJ/MM/AAAA)"),
+	"Start" => array("fr" => "Début"),
+	"End" => array("fr" => "Fin"),
 
 	// TOURINSOFT
 	"Add event-tourinsoft" => array("fr" => "Ajouter un événement Tourinsoft"),
