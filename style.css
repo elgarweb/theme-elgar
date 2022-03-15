@@ -99,7 +99,7 @@ span[lang="eu"] { border-bottom: dotted 1px #00253F; }
 	padding: 1rem 2rem;
 	margin-bottom: 1rem;
 }
-	.bt-tag:hover {
+	.bt-tag:hover, .bt-tag.selected {
 		background-color: #00253F;
 		color: #26D691;
 	}
