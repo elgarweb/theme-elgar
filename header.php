@@ -12,16 +12,15 @@
 
 <header role="banner">
 
-
 	<section class="mw960p mod center relative">
 
-		<div class="flex wrap jcsa brd-bot-alt ptm pbs">
+		<div class="flex wrap center space-l jcc tc brd-bot-alt ptm pbs">
 
 			<!-- Conformité -->
-			<?php txt('texte-conformite'); ?>
+			<?php txt('texte-conformite', 'prm'); ?>
 
 			<!-- Accessibilité -->
-			<div>
+			<div class="prm">
 
 				<nav role="navigation" aria-label="<?php _e("Quick access")?>" class="inline"><a href="#main" class="acces-rapide"><?php _e("Skip to content")?></a></nav>
 				|

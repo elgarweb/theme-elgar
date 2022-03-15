@@ -2,7 +2,7 @@
 
 
 <!-- ENCART INTRO -->
-<section class="mw960p mod center ptm pbl pll prl">
+<section id="encart" class="mw960p mod center ptm pbl pll prl">
 	
 	<?php h1('titre', 'picto'); ?>
 
