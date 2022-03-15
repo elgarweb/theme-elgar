@@ -17,7 +17,7 @@
 		<div class="flex wrap center space-l jcc tc brd-bot-alt ptm pbs">
 
 			<!-- Conformité -->
-			<?php txt('texte-conformite', 'prm'); ?>
+			<?php txt('texte-conformite', 'mrm'); ?>
 
 			<!-- Accessibilité -->
 			<div class="prm">
@@ -119,7 +119,23 @@
 
 
 	<!-- ZONE ALERTE -->
-	<section class="<?=((isset($GLOBALS['content']['alerte-texte']) and date('Y-m-d') >= @$GLOBALS['content']['alert-date-debut'] and date('Y-m-d') <= @$GLOBALS['content']['alert-date-fin']) ? 'bg-grey' : 'editable-hidden'); ?>">
+	<?php
+	
+	$alert_view = false;
+	
+	if(
+		isset($GLOBALS['content']['alerte-texte']) and
+		date('Y-m-d') >= @$GLOBALS['content']['alert-date-debut'] and
+		date('Y-m-d') <= @$GLOBALS['content']['alert-date-fin']
+	)
+		$alert_view = true;
+
+	if(!$alert_view){?>
+		<button class="editable-hidden tc w100" onclick="$('#alert').slideToggle();">Éditer l'alerte <i class="fa fa-attention grey" aria-hidden="true"></i></button>
+	<?php }?>
+
+	<section id="alert" class="bg-grey<?=(!$alert_view?' none':'');?>">
+
 		<div class="editable-hidden pts tc">
 			<label for="alert-date-debut">Date de début d'affichage de l'alerte</label> <?input('alert-date-debut', array('type' => 'date'))?>
 		 	<label for="alert-date-fin">Date de fin</label> <?input('alert-date-fin', array('type' => 'date'))?>
