@@ -120,7 +120,6 @@
 
 	<!-- ZONE ALERTE -->
 	<?php
-	
 	$alert_view = false;
 	
 	if(
