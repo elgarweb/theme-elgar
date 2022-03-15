@@ -11,6 +11,7 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 
 	<article class="flex space-xl ptl pbm">
 
+		<?php if($res['tpl']=='article' or $res['tpl']=='event') { ?>
 		<div class="prm">
 
 			<figure>
@@ -27,6 +28,7 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 			</figure>
 			
 		</div>
+		<?php } ?>
 	
 		<div>
 
@@ -44,8 +46,10 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 						tag('actualites', array('tag' => 'span')); 
 					elseif ($res['tpl']=='event')
 						tag('agenda', array('tag' => 'span')); 
-					else
+					elseif ($res['tpl']=='annuaire')
 						tag('annuaire', array('tag' => 'span')); 
+					else
+						tag('arretes', array('tag' => 'span'));
 				
 					// Scripts		
 					if($res['tpl']=='article') { ?>
@@ -60,11 +64,18 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 						else $("#agenda").addClass("mbm");
 						</script>
 
-					<?php } else ?>
+					<?php } else if($res['tpl']=='annuaire') { ?>
 						<script>
 						if(!$(".editable-tag").text()) $("#annuaire").prev("h3").hide();
 						else $("#annuaire").addClass("mbm");
 						</script>
+
+					<?php } else { ?>
+						<script>
+						if(!$(".editable-tag").text()) $("#arretes").prev("h3").hide();
+						else $("#arretes").addClass("mbm");
+						</script>
+					<?php } ?>
 
 				</div>
 
@@ -72,10 +83,10 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 
 			<!-- Date événement -->
 			<?php 
-				if(stristr($res['tpl'], 'event'))
+				if(stristr($res['tpl'], 'event') or stristr($res['tpl'], 'arrete'))
 				{
 			?>
-					<div class="editable-hidden bold"><?= _e("Start date");?></div>
+					<div class="editable-hidden bold"><?= _e("Date");?></div>
 
 					<div>
 						<?php 

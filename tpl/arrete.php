@@ -1,5 +1,5 @@
 <?php 
 if(!$GLOBALS['domain']) exit;
 
-include_once("page.php");
+include_once("article.php");
 ?>
