@@ -28,7 +28,7 @@ h1, .h1-like,
 
 	/** Picto déco titres **/
 	.picto:before {
-		content: url('/media/vaguelette.svg');
+		content: url('/theme/elgar/img/vaguelette.svg');
 		position: relative;
 		width: 60px;
 		display: block;
@@ -36,6 +36,13 @@ h1, .h1-like,
 		top: 15px;
 	}
 
+/* Mise en avant contenu */
+.highlight {
+	width: 60%;
+	margin: auto;	
+	background-color: #00253F1A;
+	padding: 2.5rem 2rem;
+}
 
 /* Fil d'ariane */
 .ariane { border-bottom: 2px solid #eaecee; }
