@@ -2,6 +2,7 @@
 /*
 @todo:
 
+--> MISE EN PLACE DU SITE (DEV)
 lors de la création du site créer les pages suivantes pour le bon fonctionnement du site
 - recherche
 - navigation
@@ -12,6 +13,59 @@ lors de la création du site créer les pages suivantes pour le bon fonctionneme
 
 voir pour le nom des zone tag en multilangue
 => dire de bien créer les pages liste-* avec le nom de la zone tag
+
+-> Installation CMS
+
+-> Arborescence
+
+-> Création templates
+
+-> Fonctions 
+- media()
+- txt()
+- hx()
+- bg()
+- make_url()
+- tag()
+- _e()
+- span()
+- module()
+- href()
+
+-> Admin (config.php)
+- édition barre d'outils
+- connexion BDD
+- type de contenu ajoutable
+
+
+--> EDITION DU SITE
+- ajout page dans un sous-menu
+- ajouter un tag (event, article, annuaire...)
+- ajouter une figure avec sous-titre
+- ajouter/supprimer/déplacer un module
+
+-> Mise en forme texte
+- ajouter un titre
+- ajouter un paragraphe
+- ajouter une liste à puces
+- aligner du contenu
+- ajouter un picto
+- ajouter une langue
+- ajouter un lien
+
+- mode brouillon / en ligne
+
+- description pour référencement
+- image réseaux sociaux
+
+- modifier la date d'un article
+
+- no index / no follow ?
+
+-> Utilisateurs
+- modifier mot de passe
+- modifier droits utilisateurs
+
 
 */
 ?>
