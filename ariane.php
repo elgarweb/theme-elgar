@@ -11,10 +11,17 @@ if(!$GLOBALS['domain']) exit;
 		<a href="/"><?php _e("Home")?></a>
 
 		<?php 
-		if(@$res['type']=='article'){?><a href="/<?=encode(__("Actualités"))?>"><?php _e("Actualités")?></a><?}
-		elseif(@$res['type']=='event' or @$res['type']=='event-tourinsoft'){?><a href="/<?=encode(__("Agenda"))?>"><?php _e("Agenda")?></a><?}
-		elseif(@$res['type']=='annuaire'){?><a href="/<?=encode(__("Annuaire"))?>"><?php _e("Annuaire")?></a><?}
-		elseif(@$res['type']=='arrete'){?><a href="/<?=encode(__("Arrêtés"))?>"><?php _e("Arrêtés")?></a><?}
+		if(@$res['type']=='article' or ($res['url'] == encode(__("Actualités")) and $tag))
+			{?><a href="/<?=encode(__("Actualités"))?>"><?php _e("Actualités")?></a><?}
+
+		elseif(@$res['type']=='event' or @$res['type']=='event-tourinsoft' or ($res['url'] == encode(__("Agenda")) and $tag))
+			{?><a href="/<?=encode(__("Agenda"))?>"><?php _e("Agenda")?></a><?}
+
+		elseif(@$res['type']=='annuaire' or ($res['url'] == encode(__("Annuaire")) and $tag))
+			{?><a href="/<?=encode(__("Annuaire"))?>"><?php _e("Annuaire")?></a><?}
+
+		elseif(@$res['type']=='arrete' or ($res['url'] == encode(__("Arrêtés")) and $tag))
+			{?><a href="/<?=encode(__("Arrêtés"))?>"><?php _e("Arrêtés")?></a><?}
 		?>
 
 		<?php tag('navigation', array('tag' => 'span', 'separator' => ' > '));?>
