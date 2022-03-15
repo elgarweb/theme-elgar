@@ -28,7 +28,7 @@ h1, .h1-like,
 
 	/** Picto déco titres **/
 	.picto:before {
-		content: url('/media/vaguelette.svg');
+		content: url('/theme/elgar/img/vaguelette.svg');
 		position: relative;
 		width: 60px;
 		display: block;
