@@ -174,4 +174,4 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 </script>
 
 <!-- Actualité à la une -->
-<? include("theme/".$GLOBALS['theme']."/admin/alaune.php"); ?>
+<? if($res['type'] == 'article') include("theme/".$GLOBALS['theme']."/admin/alaune.php");?>
