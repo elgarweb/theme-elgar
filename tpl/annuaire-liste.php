@@ -82,7 +82,7 @@
 						<!-- Image -->
 						<figure>
 
-							<div class="nor" data-bg="<?=(isset(parse_url($content_fiche['visuel'])['scheme'])?'':$GLOBALS['home']).$content_fiche['visuel']; ?>" data-lazy="bg" style="width: 100%; height: 225px;">
+							<div class="nor" data-bg="<?=(isset(parse_url(@$content_fiche['visuel'])['scheme'])?'':$GLOBALS['home']).@$content_fiche['visuel']; ?>" data-lazy="bg" style="width: 100%; height: 225px;">
 							</div>
 
 						</figure>
