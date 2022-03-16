@@ -56,6 +56,7 @@ h1, .h1-like,
 
 /* Page intermédiaire de navigation */
 .navigation { list-style: none; }
+	.navigation li { padding-bottom: 1.5rem; }
 	.navigation li::before {
 		font: normal normal normal 14px/1 FontAwesome;
 	    content: '\e829';
