@@ -75,75 +75,67 @@
 
 			<div class="brd brd-rad-bot-right mbm">
 
-				<a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" title="<?=$res_fiche['title']?>" class="tdn">
+			
 
-					<article class="relative flex">
+				<article class="relative flex">
 
-						<!-- Image -->
-						<figure>
+					<!-- Image -->
+					<figure>
 
-							<div class="nor" data-bg="<?=(isset(parse_url(@$content_fiche['visuel'])['scheme'])?'':$GLOBALS['home']).@$content_fiche['visuel']; ?>" data-lazy="bg" style="width: 100%; height: 225px;">
-							</div>
+						<div class="nor" data-bg="<?=(isset(parse_url(@$content_fiche['visuel'])['scheme'])?'':$GLOBALS['home']).@$content_fiche['visuel']; ?>" data-lazy="bg" style="width: 100%; height: 225px;">
+						</div>
 
-						</figure>
+					</figure>
 
-						<div class="pam brd-left">
-							
-							<!-- Tags -->
-							<div class="mbm">
+					<div class="pam brd-left">
+						
+						<!-- Tags -->
+						<div class="mbm">
 
-								<?php 
-								if(isset($tags) and isset($res_fiche['id']))
-								global $tags;
-								{ 
-									$sel_tag = $GLOBALS['connect']->query("SELECT * FROM ".$GLOBALS['tt']."
-										WHERE zone = '".$res['url']."' AND id='".$res_fiche['id']."' LIMIT 5");
-									while($res_tag = $sel_tag->fetch_assoc()) {
-										echo '<span class="bt-tag">'.$res_tag['name']."</span> ";
-									}
-								} 
-								?>
-
-							</div>
-
-							<!-- Titre -->
-							<h2 class="h3-like tl">
-								<?=$res_fiche['title']?>
-							</h2>
-
-							<!-- Coordonnées -->
-							<?php if(isset($content_fiche['site-web'])) { ?>
-								<div class="bold"><?php _e('Website'); ?></div>
-								<p><?= $content_fiche['site-web']; ?></p>
-							<?php } ?>
-
-							<?php if(isset($content_fiche['tel'])) { ?>
-								<div class="bold"><?= _e('Telephone'); ?></div>
-								<p><?= $content_fiche['tel']; ?></p>
-							<?php } ?>
-
-							<?php if(isset($content_fiche['mail'])) { ?>
-								<div class="bold"><?= _e('Mail'); ?></div>
-								<p><?= $content_fiche['mail']; ?></p>
-							<?php } ?>
-
-							<?php if(isset($content_fiche['adresse'])) { ?>
-								<div class="bold"><?= _e('Address'); ?></div>
-								<p><?= $content_fiche['adresse']; ?></p>
-							<?php } ?>
-
-							<!-- Lien vers détail -->
-							<div class="absolute bot15 right15 tdu">
-
-								<?php _e("See the sheet")?>
-								
-							</div>
+							<?php 
+							if(isset($tags) and isset($res_fiche['id']))
+							global $tags;
+							{ 
+								$sel_tag = $GLOBALS['connect']->query("SELECT * FROM ".$GLOBALS['tt']."
+									WHERE zone = '".$res['url']."' AND id='".$res_fiche['id']."' LIMIT 5");
+								while($res_tag = $sel_tag->fetch_assoc()) {
+									echo '<span class="bt-tag">'.$res_tag['name']."</span> ";
+								}
+							} 
+							?>
 
 						</div>
 
-					</article>
+						<!-- Titre -->
+						<h2 class="h3-like tl">
+							<?=$res_fiche['title']?>
+						</h2>
 
-				</a>
+						<!-- Coordonnées -->
+						<?php 
+						if(isset($content_fiche['url-site-web']))
+							echo '<div class="bold"><i class="fa fa-fw fa-globe" aria-hidden="true"></i> <a href="'.$content_fiche['url-site-web'].'" target="_blank">'.__('Website').'</a></div>';
+
+						if(isset($content_fiche['telephone']))
+							echo '<div class="bold pts"><i class="fa fa-fw fa-phone" aria-hidden="true"></i> <a href="javascript:void(0)" class="tel" data-encode="'.$content_fiche['telephone'].'">'.__('Telephone').'</a></div>';
+
+						if(isset($content_fiche['mail-contact']))
+							echo '<div class="bold pts"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i> <a href="javascript:void(0)" class="mailto" data-encode="'.$content_fiche['mail-contact'].'">'.__('Mail').'</a></div>';
+
+						if(isset($content_fiche['adresse']))
+							echo '<div class="bold pts"><i class="fa fa-fw fa-location" aria-hidden="true"></i> '.__('Address').'</div><div class="plt">'.$content_fiche['adresse'].'</div>';
+						?>
+
+						<!-- Lien vers détail -->
+						<div class="absolute bot15 right15">
+
+							<a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" title="<?=$res_fiche['title']?>"><?php _e("See the sheet")?></a>
+							
+						</div>
+
+					</div>
+
+				</article>				
 
 			</div>
 
@@ -163,3 +155,14 @@
 	</div>
 
 </section>
+
+<script>
+$(function()
+{
+	// Décode
+	$(".tel, .mailto").on("click", function(event) { 
+		//event.preventDefault();
+		document.location.href = $(event.target).attr("class") + ":" + atob($(event.target).data("encode"));
+	});
+});
+</script>

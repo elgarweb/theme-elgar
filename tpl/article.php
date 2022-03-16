@@ -109,21 +109,29 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 
 				txt('description', 'ptm');
 
-			if($res['tpl']=='annuaire' or  $res['tpl']=='event') { ?>
 
-				<div class="bold"><?= _e('Website'); ?></div>
-				<?php txt('site-web', 'pbm'); ?>
+			if($res['tpl']=='annuaire' or  $res['tpl']=='event') 
+			{ 
+				echo '<div class="bold'.(!@$GLOBALS['content']['url-site-web']?' editable-hidden':'').'"><i class="fa fa-fw fa-globe" aria-hidden="true"></i> <a href="'.$GLOBALS['content']['url-site-web'].'" target="_blank">'.__('Website').'</a></div>';
 
-				<div class="bold"><?= _e('Telephone'); ?></div>
-				<?php txt('tel', 'pbm'); ?>
+				input('url-site-web', array('type' => 'hidden'));
 
-				<div class="bold"><?= _e('Mail'); ?></div>
-				<?php txt('mail', 'pbm'); ?>
 
-				<div class="bold"><?= _e('Address'); ?></div>
-				<?php txt('adresse', 'pbm');
+				echo '<div class="bold pts'.(!@$GLOBALS['content']['telephone']?' editable-hidden':'').'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i> <a href="javascript:void(0)" class="tel">'.__('Telephone').'</a></div>';
 
+				input('telephone', array('type' => 'hidden', 'class' => 'encode'));
+	
+
+				echo '<div class="bold pts'.(!@$GLOBALS['content']['mail-contact']?' editable-hidden':'').'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i> <a href="javascript:void(0)" class="mailto">'.__('Mail').'</a></div>';
+
+				input('mail-contact', array('type' => 'hidden', 'class' => 'encode'));
+
+
+				echo '<div class="bold pts'.(!@$GLOBALS['content']['adresse']?' editable-hidden':'').'"><i class="fa fa-fw fa-location" aria-hidden="true"></i> '.__('Address').'</div>';
+
+				txt('adresse', 'plt');
 			}
+
 
 			// Détails de l'événement (horaires, contact...)
 			if($res['tpl']=='event')
@@ -158,9 +166,32 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 </section>
 
 <script>
+$(function()
+{
+	// Décode
+	$(".tel, .mailto").on("click", function(event) { 
+		//event.preventDefault();
+		document.location.href = $(event.target).attr("class") + ":" + atob($(event.target).parent().next(".encode").val());
+	});
+
+	// Avant la sauvegarde
+	before_save.push(function() {
+		// Encode
+		if(data["content"]["mail-contact"] != undefined) 
+			data["content"]["mail-contact"] = btoa(data["content"]["mail-contact"]);
+
+		if(data["content"]["telephone"] != undefined)
+			data["content"]["telephone"] = btoa(data["content"]["telephone"]);
+	});
+
 	// Action si on lance le mode d'edition
 	edit.push(function()
 	{
+		// Décode
+		$("#mail-contact, #telephone").val(function(index, value) {
+			if(value) return atob(value);
+		});
+
 		// DATEPIKER pour la date de l'event
 		$.datepicker.setDefaults({
 	        altField: "#datepicker",
@@ -171,6 +202,7 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 	    });
 		$("#aaaa-mm-jj").datepicker();
 	});
+});
 </script>
 
 <!-- Actualité à la une -->
