@@ -1568,7 +1568,7 @@ div.editable {
 /* PRINT RESET */
 @media print {
 	* {
-		background: transparent !important;
+		background-color: transparent !important;
 		box-shadow: none !important;
 		text-shadow: none !important;
 	}
@@ -1579,6 +1579,7 @@ div.editable {
 		font-family: serif;
 		font-size: 12pt;
 	}
+
 	p, .p-like,
 	h1, .h1-like,
 	h2, .h2-like,
@@ -1588,10 +1589,16 @@ div.editable {
 	h6, .h6-like,
 	blockquote,
 	ul,
-	ol {
-		color: #000;
+	ol,
+	.fa,
+	.bt,
+	a,
+	.white,
+	.bg-color {
+		color: #000 !important;
 		margin: auto;
 	}
+
 	.print { display: block; }
 	.no-print { display: none; }
 	/* no orphans, no widows */
@@ -1614,7 +1621,6 @@ div.editable {
 	caption {
 		page-break-after: avoid;
 	}
-	a {	color: #000; }
 	/* displaying URLs
 	a[href]::after {
 	content: " (" attr(href) ")";
@@ -1624,6 +1630,14 @@ div.editable {
 	a[href^="#"]::after {
 		content: "";
 	}
+
+	[class*='brd'] {
+		border-color: #000 !important;
+	}
+	
+	.ptl { padding-top: 1rem; }
+	.pbl { padding-bottom: 1rem; }
+
 }
 
 
