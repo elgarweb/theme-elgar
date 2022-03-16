@@ -56,6 +56,7 @@ h1, .h1-like,
 
 /* Page intermédiaire de navigation */
 .navigation { list-style: none; }
+	.navigation li { padding-bottom: 1.5rem; }
 	.navigation li::before {
 		font: normal normal normal 14px/1 FontAwesome;
 	    content: '\e829';
@@ -1367,7 +1368,7 @@ div.editable {
 	header nav > ul {
 		background-color: #fff;
 
-		display: block;
+		display: block !important;
 		visibility: hidden;
 
 		position: fixed !important;
@@ -1392,6 +1393,11 @@ div.editable {
 		transform: translateX(-100%);
 		-webkit-transform: translateX(-100%);
 	}
+		header nav > ul li {
+			display: block;
+			max-width: 100%;
+			min-height: 30px;
+		}
 		header nav li {
 			float: none;
 			padding: 0;
@@ -1403,6 +1409,7 @@ div.editable {
 			header nav li a {
 				display: block;
 				padding: 0.5rem;
+				color: #00253F !important;
 			}
 
 	/* Raz du header */
@@ -1568,7 +1575,7 @@ div.editable {
 /* PRINT RESET */
 @media print {
 	* {
-		background: transparent !important;
+		background-color: transparent !important;
 		box-shadow: none !important;
 		text-shadow: none !important;
 	}
@@ -1579,6 +1586,7 @@ div.editable {
 		font-family: serif;
 		font-size: 12pt;
 	}
+
 	p, .p-like,
 	h1, .h1-like,
 	h2, .h2-like,
@@ -1588,10 +1596,16 @@ div.editable {
 	h6, .h6-like,
 	blockquote,
 	ul,
-	ol {
-		color: #000;
+	ol,
+	.fa,
+	.bt,
+	a,
+	.white,
+	.bg-color {
+		color: #000 !important;
 		margin: auto;
 	}
+
 	.print { display: block; }
 	.no-print { display: none; }
 	/* no orphans, no widows */
@@ -1614,7 +1628,6 @@ div.editable {
 	caption {
 		page-break-after: avoid;
 	}
-	a {	color: #000; }
 	/* displaying URLs
 	a[href]::after {
 	content: " (" attr(href) ")";
@@ -1624,6 +1637,14 @@ div.editable {
 	a[href^="#"]::after {
 		content: "";
 	}
+
+	[class*='brd'] {
+		border-color: #000 !important;
+	}
+	
+	.ptl { padding-top: 1rem; }
+	.pbl { padding-bottom: 1rem; }
+
 }
 
 
