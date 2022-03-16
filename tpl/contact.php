@@ -11,7 +11,13 @@ switch(@$_GET['mode'])
 	// AFFICHAGE DU FORMULAIRE DE CONTACT
 	default :
 
-		if(!$GLOBALS['domain']) exit;		
+		if(!$GLOBALS['domain']) exit;	
+
+		// Encrypte le mail pour permettre des envois de mail que vers des mails ajoutés par l'admin
+		$GLOBALS['content']['email-hash'] = hash("sha256", base64_decode(@$GLOBALS['content']['email-to']) . $GLOBALS['pub_hash']);
+
+		// Si pas de sujet on reprend le title de la page
+		if(!@$GLOBALS['content']['sujet']) $GLOBALS['content']['sujet'] = @$GLOBALS['content']['title'];
 		?>
 
 
@@ -40,13 +46,29 @@ switch(@$_GET['mode'])
 
 					<?php txt('texte-champs-obligatoires', 'mbm')?>
 
+
+					<div class="editable-hidden">
+
+						<label for="email-to"><?php _e("Recipient email")?> (webmaster@mairie.fr)<span class="red">*</span></label><br>
+						<?input("email-to", array('name' => 'email-to', 'placeholder' => __("Recipient email")));?>
+						<?input("email-hash", array('name' => 'email-hash', 'type' => 'hidden', 'class' => 'hidden'));?>
+
+						<div class="ptm pbm">
+							<label for="sujet"><?php _e("Subject")?></label><br>
+							<?input("sujet", array('name' => 'sujet', 'placeholder' => __("Subject")));?>
+						</div>
+
+					</div>
+
+
 					<div class="mbm">
-						<label for="email_contact"><?php span('texte-label-email')?><span class="red">*</span></label><br>
-						<input type="email" name="email_contact" id="email_contact" autocomplete="email" placeholder="<?php _e("Email")?>" class="w40 vatt" required><span class="wrapper big white vam o50">@</span>
+						<label for="email-from"><?php span('texte-label-email')?><span class="red">*</span></label><br>
+						<input type="email" name="email-from" id="email-from" autocomplete="email" placeholder="<?php _e("Email")?>" class="w40 vatt" required><span class="wrapper big white vam o50">@</span>
 
 						<label for="reponse" class="hidden" aria-hidden="true"><?php _e("Email")?></label>
 						<input name="reponse" id="reponse" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$" placeholder="nom@domaine.com" aria-hidden="true">
 					</div>
+
 
 					<div>
 						<label for="message"><?php span('texte-label-message')?><span class="red">*</span></label>
@@ -132,7 +154,7 @@ switch(@$_GET['mode'])
 			{
 				event.preventDefault();
 
-				if($("#question").val()=="" || $("#message").val()=="" || $("#email_contact").val()=="" || $("#rgpdcheckbox").prop("checked") == false)
+				if($("#question").val()=="" || $("#message").val()=="" || $("#email-from").val()=="" || $("#rgpdcheckbox").prop("checked") == false)
 				error(__("Thank you for completing all the required fields!"));
 				else
 				{
@@ -158,9 +180,30 @@ switch(@$_GET['mode'])
 				}
 			}
 
-			$("#contact").submit(function(event)
+			$(function()
 			{
-				send_mail(event)
+				// Soumettre le formulaire
+				$("#contact").submit(function(event)
+				{
+					send_mail(event)
+				});
+
+				// Avant la sauvegarde
+				before_save.push(function() {
+					// Encode
+					if(data["content"]["email-to"] != undefined)
+						data["content"]["email-to"] = btoa(data["content"]["email-to"]);
+				});
+
+				// Edit
+				edit.push(function() 
+				{
+					// Décode
+					$("#email-to").val(function(index, value) {
+						if(value) return atob(value);
+					});
+				});
+
 			});
 		</script>
 		<?php 
@@ -175,20 +218,35 @@ switch(@$_GET['mode'])
 	print_r($_REQUEST);
 
 		// Si on a posté le formulaire
-		if(isset($_POST["email_contact"]) and $_POST["message"] and isset($_POST["question"]) and !$_POST["reponse"])// reponse pour éviter les bots qui remplisse tous les champs
+		if(isset($_POST["email-from"]) and $_POST["message"] and isset($_POST["question"]) and !$_POST["reponse"])// reponse pour éviter les bots qui remplisse tous les champs
 		{
 			include_once("../../../config.php");// Les variables
 
 			if($_SESSION["nonce_contact"] and $_SESSION["nonce_contact"] == $_POST["nonce_contact"])// Protection CSRF
 			{
-				if(filter_var($_POST["email_contact"], FILTER_VALIDATE_EMAIL))// Email valide
+				if(filter_var($_POST["email-from"], FILTER_VALIDATE_EMAIL))// Email valide
 				{
 					if(hash('sha256', $_POST["question"].$GLOBALS['pub_hash']) == $_POST["question_hash"])// Captcha valide
 					{
-						$from = ($_POST["email_contact"] ? htmlspecialchars($_POST["email_contact"]) : $GLOBALS['email_contact']);
+						// Email pour
+						if(@$_POST["email-to"])
+						{
+							// Vérifie que le mail encrypté envoyer = encryptage
+							if($_POST["email-hash"] == hash("sha256", base64_decode($_POST["email-to"]) . $GLOBALS['pub_hash'])) 
+								$to = base64_decode($_POST["email-to"]);
+							else 
+								$to = $GLOBALS['email_contact'];
+						}
+						else 
+							$to = $GLOBALS['email_contact'];
 
 
-						$subject = "[".htmlspecialchars($_SERVER['HTTP_HOST'])."] ".htmlspecialchars($_POST["email_contact"]);
+						// Email de
+						$from = ($_POST["email-from"] ? htmlspecialchars($_POST["email-from"]) : $to);
+
+
+						// Sujet
+						$subject = "[".htmlspecialchars($_SERVER['HTTP_HOST'])."] ".htmlspecialchars($_POST["sujet"]);
 
 
 						// Message
@@ -211,7 +269,7 @@ switch(@$_GET['mode'])
 						$header.= "Content-Type: text/plain; charset=utf-8\r\n";// utf-8 ISO-8859-1
 
 
-						if(mail($GLOBALS['email_contact'], $subject, stripslashes($message), $header))
+						if(mail($to, $subject, stripslashes($message), $header))
 						{
 							?>
 							<script>
@@ -251,7 +309,7 @@ switch(@$_GET['mode'])
 				{
 					?>
 					<script>
-						error(__("Invalid email!"), 'nofade', $("#email_contact"));
+						error(__("Invalid email!"), 'nofade', $("#email-from"));
 						document.title = title +' - '+ __("Invalid email!");
 						
 						activation_form();// On rétablie le formulaire
