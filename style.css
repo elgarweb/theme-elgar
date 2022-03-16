@@ -1368,7 +1368,7 @@ div.editable {
 	header nav > ul {
 		background-color: #fff;
 
-		display: block;
+		display: block !important;
 		visibility: hidden;
 
 		position: fixed !important;
@@ -1393,6 +1393,11 @@ div.editable {
 		transform: translateX(-100%);
 		-webkit-transform: translateX(-100%);
 	}
+		header nav > ul li {
+			display: block;
+			max-width: 100%;
+			min-height: 30px;
+		}
 		header nav li {
 			float: none;
 			padding: 0;
@@ -1404,6 +1409,7 @@ div.editable {
 			header nav li a {
 				display: block;
 				padding: 0.5rem;
+				color: #00253F !important;
 			}
 
 	/* Raz du header */
