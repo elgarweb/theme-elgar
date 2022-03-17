@@ -143,8 +143,10 @@
 		<article class="mw960p mod flex wrap space-l aic jcc center pam">
 						
 			<?php media('alerte-img', array('size' => '300', 'lazy' => true)); ?>
-						
-			<?php txt('alerte-texte', 'mw600p bold bigger'); ?>
+			
+			<div>
+				<?php txt('alerte-texte', 'mw600p'); ?>
+			</div>
 			
 		</article>
 
