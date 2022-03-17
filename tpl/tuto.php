@@ -8,6 +8,8 @@ lors de la création du site créer les pages suivantes pour le bon fonctionneme
 - navigation
 - ....
 
+- créer un cron pour tourinsoft
+
 => voir en fonction des traductions, et si plusieur (3 langues)
 
 

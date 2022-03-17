@@ -51,7 +51,7 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 				<div class="editable-hidden bold"><?php _e("Categories"); ?></div>
 
 				<!-- Champs saisie tags -->
-				<div class="pbm">
+				<div>
 
 					<?php 
 					// Champs saisie tags
@@ -104,11 +104,27 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 					<div>
 						<?php 
 							if(@$GLOBALS["content"]["aaaa-mm-jj"])
-								echo '<div>'.date_lang($GLOBALS["content"]["aaaa-mm-jj"]).'</div>';						
+							{
+								echo '<div>';
+								echo date_lang($GLOBALS["content"]["aaaa-mm-jj"]);
+
+								if(@$GLOBALS["content"]["heure-ouverture"])
+									echo ', '.date_format(date_create($GLOBALS["content"]["heure-ouverture"]), 'H\hi');
+
+								if(@$GLOBALS["content"]["heure-fermeture"])
+									echo ' '.__("to").' '.date_format(date_create($GLOBALS["content"]["heure-fermeture"]), 'H\hi');
+
+								echo '</div>';						
+							}
 
 							input("aaaa-mm-jj", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
-						?>
 
+							if(stristr($res['tpl'], 'event')) 
+							{
+								input('heure-ouverture', array("type" => "hidden", "autocomplete" => "off"));			
+								input('heure-fermeture', array("type" => "hidden", "autocomplete" => "off"));
+							}
+						?>
 					</div>
 					
 			<?php 
@@ -117,15 +133,9 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 
 			<!-- Chapô -->
 			<?php 
-			// Description : s'affiche sur la liste
-			if($res['tpl']=='article') 
-
-				txt('description', 'ptm');
-
-
 			if($res['tpl']=='annuaire' or  $res['tpl']=='event') 
 			{ 
-				echo '<div class="bold'.(!@$GLOBALS['content']['url-site-web']?' editable-hidden':'').'"><i class="fa fa-fw fa-globe" aria-hidden="true"></i> <a href="'.$GLOBALS['content']['url-site-web'].'" target="_blank">'.__('Website').'</a></div>';
+				echo '<div class="bold pts'.(!@$GLOBALS['content']['url-site-web']?' editable-hidden':'').'"><i class="fa fa-fw fa-globe" aria-hidden="true"></i> <a href="'.@$GLOBALS['content']['url-site-web'].'" target="_blank">'.__('Website').'</a></div>';
 
 				input('url-site-web', array('type' => 'hidden'));
 
@@ -146,13 +156,11 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 			}
 
 
-			// Détails de l'événement (horaires, contact...)
-			if($res['tpl']=='event')
+			// Description : s'affiche sur la liste
+			if($res['tpl']=='article' or $res['tpl']=='event') 
 
-				txt('texte-details-evenement', 'ptm');
-
+				txt('description', 'ptm');
 			?>
-
 
 		</div>
 

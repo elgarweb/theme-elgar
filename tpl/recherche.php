@@ -3,12 +3,14 @@ if(!$GLOBALS['domain']) exit;
 
 function highlight($txt, $recherche)
 {
-	$explode = explode(" ", $recherche);// Chaque élément
+	/*$explode = explode(" ", $recherche);// Chaque élément
 
 	$explode = array_filter($explode, function($v){ return strlen($v) > 2; });// Retire les éléments des moins de 2 lettres
 
 	if($recherche) return preg_replace('/'.implode('|', $explode).'/i', '<span class="color-alt">$0</span>', $txt);
-	else return $txt;
+	else return $txt;*/
+
+	return $txt;
 }
 ?>
 

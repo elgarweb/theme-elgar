@@ -6,30 +6,28 @@ include_once($_SERVER['DOCUMENT_ROOT']."/api/function.php");// Fonction
 // @todo voir erreur mysql
 // https://mairie-ciboure.fr/fetes-et-manifestations/marche-de-produits-regionaux-8/
 
-//echo php_sapi_name();
 //echo login('medium', 'add-event', 'true');
+//echo php_sapi_name().'<br>';
 //echo $_SESSION['token'].'<br>';
 //echo token_check($_SESSION['token']).'<br>';
 
 // Si execution par cron ou admin avec droit création d'évènement
-if(php_sapi_name() !== 'cli')
-	if(!token_check($_SESSION['token'])) 
-		die('die');
+//if(php_sapi_name() !== 'cli')
+if(@$_SERVER['PHP_AUTH_PW'] != $GLOBALS['tourinsoft_login'])// PHP_AUTH_USER
+if(!token_check(@$_SESSION['token'])) 
+	die('die');
 
 // supprime les caractères utf8 invalide des urls
 ini_set('mbstring.substitute_character', 'none');
+$verbose = (@$_SERVER['PHP_AUTH_PW']?false:true);
+$verbose_source = (@$_SERVER['PHP_AUTH_PW']?false:true);
 $sql_content = $sql_meta = $visuel_dest = null;
 $id_start = -1000000000;
-$limit = 50;// 50
+$limit = 50;// 50 10
 
 $chemin_visuel = $GLOBALS['media_dir'].'/tourinsoft';
 $racine = '../../../';
 $new_width = 320;
-
-
-// Récupère le fichier json distant
-$json = file_get_contents($GLOBALS['flux_tourinsoft']);
-$array = json_decode($json, true)['value'];
 
 
 // Construction des requetes mysql
@@ -37,25 +35,32 @@ $sql_init_content="REPLACE LOW_PRIORITY INTO `".$tc."` (`id`, `state`, `lang`, `
 $sql_init_meta="REPLACE LOW_PRIORITY INTO `".$tm."` (`id`, `type`, `cle`) VALUES ";
 
 
-// Suppression des tag lié au évènement tourinsoft
-$GLOBALS['connect']->query("DELETE FROM ".$tt." WHERE zone='agenda' AND id<=0");
+// Récupère le fichier json distant
+$json = file_get_contents($GLOBALS['tourinsoft_flux']);// curl()
+$array = json_decode($json, true)['value'];
 
-// Suppression des dates dans les méta avant ajout ?
-$GLOBALS['connect']->query("DELETE FROM ".$tm." WHERE type='aaaa-mm-jj' AND id<=0");
-
-// Suppression des contenus
-$GLOBALS['connect']->query("DELETE FROM ".$tc." WHERE type='event-tourinsoft'");// AND id<=0
 
 
 if(is_array($array))
 {
 	// Création du dossier pour les images
-	@mkdir($_SERVER['DOCUMENT_ROOT'].$chemin_visuel, 0755, true);//.$GLOBALS['path'] /resize
+	@mkdir(rtrim($_SERVER['DOCUMENT_ROOT'], '/').'/'.$chemin_visuel, 0755, true);//.$GLOBALS['path'] /resize
 	
 	// Nettoie les images dans le dossier
-	array_map('unlink', array_filter((array) glob($_SERVER['DOCUMENT_ROOT'].$chemin_visuel.'/*')));
-	array_map('unlink', array_filter((array) glob($_SERVER['DOCUMENT_ROOT'].$GLOBALS['media_dir'].'/resize/tourinsoft/*')));
+	array_map('unlink', array_filter((array) glob(rtrim($_SERVER['DOCUMENT_ROOT'], '/').'/'.$chemin_visuel.'/*')));
+	array_map('unlink', array_filter((array) glob(rtrim($_SERVER['DOCUMENT_ROOT'], '/').'/'.$GLOBALS['media_dir'].'/resize/tourinsoft/*')));
 
+
+	// Suppression des tag lié au évènement tourinsoft
+	$GLOBALS['connect']->query("DELETE FROM ".$tt." WHERE zone='agenda' AND id<=0");
+
+	// Suppression des dates dans les méta avant ajout ?
+	$GLOBALS['connect']->query("DELETE FROM ".$tm." WHERE type='aaaa-mm-jj' AND id<=0");
+
+	// Suppression des contenus
+	$GLOBALS['connect']->query("DELETE FROM ".$tc." WHERE type='event-tourinsoft'");// AND id<=0
+
+	//exit('clean');
 
 	// TRI PAR DATE
 	// Mets la date à un niveau plus haut pour le tri simplifier
@@ -73,7 +78,7 @@ if(is_array($array))
 	}, $array), SORT_ASC, $array);
 
 
-	//highlight_string(print_r($array, true));
+	if($verbose_source) highlight_string(print_r($array, true));
 
 
 	// CRÉATION DE LA REQUÊTE D'AJOUT DES CONTENUS
@@ -81,7 +86,7 @@ if(is_array($array))
 	{
 		$key = $key + 1;
 
-		echo '<hr><h2>'.$key.'. '.$val['SyndicObjectName'].'</h2>';
+		if($verbose) echo '<hr><h2>'.$key.'. '.$val['SyndicObjectName'].'</h2>';
 
 		// construction de l'url
 		$url = encode($val['SyndicObjectName']);
@@ -98,14 +103,14 @@ if(is_array($array))
 		{
 			$visuel_source = $val['PHOTOSs'][0]['Photo']['Url'];
 
-			$visuel_dest = $chemin_visuel.'/'.basename($visuel_source);
+			$visuel_dest = $chemin_visuel.'/'.strtolower(basename($visuel_source));
 
 			// Copie de l'image distante
 			if(copy($visuel_source, $racine.$visuel_dest))
 			{
 				$source_size = round(filesize($racine.$visuel_dest)/1024);
 
-				echo '✅ copy '.$visuel_source.' '.$source_size.'ko<br>';
+				if($verbose) echo '✅ copy '.$visuel_source.' '.$source_size.'ko<br>';
 
 				// Taille de l'image source rapatrier
 				list($source_width, $source_height, $type, $attr) = getimagesize($racine.$visuel_dest);
@@ -124,10 +129,10 @@ if(is_array($array))
 					$new_size = round(filesize($racine.strtok($visuel_dest, '?'))/1024);
 					$p100 = 100-round($new_size*100/$source_size);
 
-					echo 'ℹ️ resize '.$new_size.'ko ('.$p100.'%)<br>';
+					if($verbose) echo 'ℹ️ resize '.$new_size.'ko ('.$p100.'%)<br>';
 				} 
 			}
-			else echo '❌ copy error '.$visuel_source;
+			elseif($verbose) echo '❌ copy error '.$visuel_source;
 		}
 
 
@@ -138,16 +143,42 @@ if(is_array($array))
 		// $val['DATESs'][0]['Datedefin'] 
 		$date = explode($val['datedebut'], 'T')[0];
 
+
+		// On regarde si la description est courtes ou longue
+		if(strlen($val['DESCRIPTIFSs'][0]['Descriptioncommerciale'])<500) {
+			$description = $val['DESCRIPTIFSs'][0]['Descriptioncommerciale'];
+			$texte = '';
+		}
+		else {
+			$description = '';
+			$texte = $val['DESCRIPTIFSs'][0]['Descriptioncommerciale'];
+		}
+
+
+		// Moyen de communication
+		// C1 = Téléphone filaire | C4 = Mél | C5 = Site web (URL) | C6 = Téléphone cellulaire
+		unset($com);
+		for($i=0; $i<3; $i++) 
+		{ 
+			if(isset($val['MOYENSCOMs'][$i]['TypedaccesTelecom']['ThesCode']))
+				$com[$val['MOYENSCOMs'][$i]['TypedaccesTelecom']['ThesCode']] = @$val['MOYENSCOMs'][$i]['CoordonneesTelecom'];
+		}
+
+
 		// Contenu de l'article
 		$content = array (
 			'title' => $val['SyndicObjectName'],
 			'visuel' => $visuel_dest,
 			'visuel-alt' => @$val['PHOTOSs'][0]['Photo']['Titre'].' - '.@$val['PHOTOSs'][0]['Photo']['Credit'],
 			'aaaa-mm-jj' => $date,
-			'texte' => $val['DESCRIPTIFSs'][0]['Descriptioncommerciale'],
-			'dates' => $val['DATESs'][0]['Datededebut'],
-			'contact' => @$val['MOYENSCOMs'][0]['CoordonneesTelecom'],
-			//'adresse' => '<p>'.$val['ADRESSEs'][0]['Adresse2'].'<br>'.$val['ADRESSEs'][0]['CodePostal'].' '.$val['ADRESSEs'][0]['Commune'].'</p>',
+			'heure-ouverture' => $val['DATESs'][0]['Heuredouverture1'],
+			'heure-fermeture' => $val['DATESs'][0]['Heuredefermeture1'],
+			'description' => $description,
+			'texte' => $texte,
+			'url-site-web' => @$com['C5'],
+			'telephone' => (@$com['C1']?base64_encode(@$com['C1']) : (@$com['C6']?base64_encode(@$com['C6']):'')),
+			'mail-contact' => (@$com['C4']?base64_encode(@$com['C4']):''),
+			'adresse' => '<p>'.$val['ADRESSEs'][0]['Adresse2'].'<br>'.$val['ADRESSEs'][0]['CodePostal'].' '.$val['ADRESSEs'][0]['Commune'].'</p>',
 			'latitude' => $val['GmapLatitude'],
 			'longitude' => $val['GmapLongitude'],
 		);
@@ -209,7 +240,5 @@ echo $GLOBALS['connect']->error;
 
 //echo '<br><br>'.str_replace('),','),<br><br>', $sql);
 
-
-//file_put_contents($file, $current);
-
+echo '<br>time : '.benchmark().'s';
 ?>

@@ -67,6 +67,9 @@ $add_translation = array(
 	"november" => array("fr" => "novembre"),
 	"december" => array("fr" => "décembre"),
 	"st" => array("fr" => "er"),
+	"Open" => array("fr" => "Ouverture"),
+	"Close" => array("fr" => "Fermeture"),
+	"to" => array("fr" => "à"),
 
 	// RECHERCHE
 	"result" => array("fr" => "résultat", "eu" => "emaitzak"),
