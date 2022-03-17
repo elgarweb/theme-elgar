@@ -19,8 +19,12 @@ if(!token_check(@$_SESSION['token']))
 
 // supprime les caractères utf8 invalide des urls
 ini_set('mbstring.substitute_character', 'none');
-$verbose = (@$_SERVER['PHP_AUTH_PW']?false:true);
-$verbose_source = (@$_SERVER['PHP_AUTH_PW']?false:true);
+
+$verbose = (@$_SERVER['PHP_AUTH_PW']?false:true);// $verbose = false;
+$verbose_source = (@$_SERVER['PHP_AUTH_PW']?false:true);// $verbose_source = false;
+
+$img = true;
+
 $sql_content = $sql_meta = $visuel_dest = null;
 $id_start = -1000000000;
 $limit = 50;// 50 10
@@ -99,7 +103,7 @@ if(is_array($array))
 
 
 		// Retravaille des images
-		if(@$val['PHOTOSs'][0]['Photo']['Url']) 
+		if($img and @$val['PHOTOSs'][0]['Photo']['Url']) 
 		{
 			$visuel_source = $val['PHOTOSs'][0]['Photo']['Url'];
 
@@ -141,8 +145,7 @@ if(is_array($array))
 		// $val['DATESs'][0]['Heuredouverture1'] $val['DATESs'][0]['Heuredefermeture1']
 		// $val['DATESs'][0]['Heuredouverture2'] $val['DATESs'][0]['Heuredefermeture2']
 		// $val['DATESs'][0]['Datedefin'] 
-		$date = explode($val['datedebut'], 'T')[0];
-
+		$date = explode('T', $val['datedebut'])[0];
 
 		// On regarde si la description est courtes ou longue
 		if(strlen($val['DESCRIPTIFSs'][0]['Descriptioncommerciale'])<500) {
