@@ -54,6 +54,10 @@ $add_translation = array(
 	"news" => array("fr" => "actualites"),
 
 
+	// PAGE
+	"Summary" => array("fr" => "Sommaire"),
+
+
 	// ACTUALITÉS - AGENDA
 	"Read more" => array("fr" => "Lire la suite"),
 	"Go back to the news" => array("fr" => "Retour aux actualités"),
