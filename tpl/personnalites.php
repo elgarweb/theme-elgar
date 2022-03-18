@@ -10,7 +10,7 @@
 
 		<ul class="unstyled pan ptm">
 		<?php
-		$groupe = 5;
+		$groupe = 6;
 		for($i=1; $i<=$groupe; $i++)
 		{
 			?>
@@ -22,6 +22,10 @@
 
 				<div class="<?= (isset($GLOBALS['content']['groupe-sstitre-'.$i])) ? '' : 'editable-hidden pbl' ?>">
 					<?php h3('groupe-sstitre-'.$i); ?>
+				</div>
+
+				<div class="<?= (isset($GLOBALS['content']['groupe-ss-sstitre-'.$i])) ? '' : 'editable-hidden pbl' ?>">
+					<?php txt('groupe-ss-sstitre-'.$i, 'color'); ?>
 				</div>
 
 				<ul id="personnalite-<?=$i?>" class="blocks module unstyled grid-3 space-xl jic tc pln">					
