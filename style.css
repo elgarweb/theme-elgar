@@ -36,6 +36,7 @@ h1, .h1-like,
 		top: 15px;
 	}
 
+
 /* Mise en avant contenu */
 .highlight {
 	width: 60%;
@@ -43,6 +44,36 @@ h1, .h1-like,
 	background-color: #00253F1A;
 	padding: 2.5rem 2rem;
 }
+
+
+/* Citation */
+blockquote {
+    /* quotes: "“" "”" "‘" "’"; */
+    position: relative;
+    padding: 1rem 4rem 1rem 4rem;
+    /* margin-bottom: 1em !important; */
+}
+	blockquote::before {
+	    /* content: open-quote; */
+	    font-family: FontAwesome;
+	  	content: '\f10d';
+	    font-size: 1.5em;
+	    color: #9d9d9d;
+	    position: absolute;
+	    left: 1rem;
+	    top: 0;
+	}
+	blockquote::after {
+	    /* content: close-quote; */
+	    font-family: FontAwesome;
+	  	content: '\f10e';
+	    font-size: 1.5em;
+	    color: #9d9d9d;
+	    position: absolute;
+	    right: 1rem;
+	    bottom: 0;
+	}
+
 
 /* Fil d'ariane */
 .ariane { border-bottom: 2px solid #eaecee; }
