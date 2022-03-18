@@ -74,4 +74,23 @@ if(!$GLOBALS['domain']) exit;
 		?>
 	</ul>
 
+	<?php 
+	// Calcule du temps de lecture du texte de la page pour suggestion d'impression
+	// Vitesse de lecture moyenne entre 230 et 280 mots par minute, donc 200 pour plus de confort
+	$word = str_word_count(strip_tags(@$GLOBALS['content']['description'].@$GLOBALS['content']['texte']));
+	$minute = floor($word / 200);
+	$second = floor($word % 200 / (200 / 60));
+
+	// time > 3m24s => 204s
+	if(($minute*60+$second)>204){
+		echo 
+			'<div class="clear pts tc"><i class="fa fa-print mrs" aria-hidden="true"></i>'.
+			str_replace('*minute*', $minute,
+			str_replace('*second*', $second,
+				__("The average reading time for this page is *minute* minutes and *second* seconds. For less impact on the environment we recommend that you print it double-sided, black and white, 2 pages per sheet.")
+			)).
+			'</div>';
+	}
+	?>
+
 </div>
