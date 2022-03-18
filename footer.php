@@ -59,16 +59,16 @@
 
 			<article class="pbm">
 
-				<!-- @todo Formulaire newsletter -->
+				<?if(isset($GLOBALS['newsletter-key'][$lang])){?>
 				<div class="pbm">	
 
-					<form id="newsletter" method="post" action="" target="_blank">
+					<form id="newsletter" method="post" action="https://newsletter.infomaniak.com/external/submit" target="_blank">
 
 						<input type="email" name="email" style="display:none" />
 
-						<!-- <input type="hidden" name="key" value="<?=$GLOBALS['newsletter-key'][$lang]?>"> -->
+						<input type="hidden" name="key" value="<?=@$GLOBALS['newsletter-key'][$lang]?>">
 
-						<!-- <input type="hidden" name="webform_id" value="<?=$GLOBALS['newsletter-id'][$lang]?>"> -->
+						<input type="hidden" name="webform_id" value="<?=@$GLOBALS['newsletter-id'][$lang]?>">
 
 						<label for="email_newsletter"><?php _e('Subscribe to the newsletter of your city') ?></label>
 
@@ -85,6 +85,8 @@
 					</form>
 
 				</div>
+				<?}?>
+
 
 				<!-- Réseaux sociaux -->
 				<div class="pts">
