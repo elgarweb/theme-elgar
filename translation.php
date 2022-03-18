@@ -6,13 +6,20 @@ $add_translation = array(
 	"Search the site" => array("fr" => "Rechercher sur le site"),
 	"Home other language" => array("fr" => "Accueil Français", "eu" => "Harrera euskaraz"),
 
+	// Ariane
 	"Breadcrumb" => array("fr" => "Fil d'Ariane"),
 	"Home" => array("fr" => "Accueil", "eu" => "Harrera", "oc" => "Acuèlh"),
+	"The average reading time for this page is *minute* minutes and *second* seconds. For less impact on the environment we recommend that you print it double-sided, black and white, 2 pages per sheet." => array("fr" => "Le temps moyen de lecture de cette page est de *minute* minutes et *second* secondes. Pour moins d'impact sur l'environnement nous vous recommandons de l'imprimer en recto-verso, noir et blanc, 2 pages par feuille."),
+
+	// Admin langue
 	"Other language" => array("fr" => "Version Française", "eu" => "Euskarazko bertsioa", "oc" => "Version en Gascon"),
 	"Language" => array("fr" => "Langue"),
 	"Duplicate" => array("fr" => "Dupliquer"),
+
+	// Langue
 	"fr" => array("fr" => "Français"),
 	"eu" => array("fr" => "Basque"),
+
 
 	// FOOTER
 	// Footer - partage Réseaux sociaux
@@ -33,14 +40,17 @@ $add_translation = array(
 	"Site map" => array("fr" => "Plan du site"),
 	"Legal notices" => array("fr" => "Mentions légales"),
 
+
 	// BOUTONS
 	"Read all the news" => array("fr" => "Lire toutes les actualités"),
 	"See all the events" => array("fr" => "Consulter tout l'agenda"),
+
 
 	// URL
 	"sitemap" => array("fr" => "plan-du-site"),
 	"legal-notices" => array("fr" => "mentions-legales"),
 	"news" => array("fr" => "actualites"),
+
 
 	// ACTUALITÉS - AGENDA
 	"Read more" => array("fr" => "Lire la suite"),
@@ -71,15 +81,18 @@ $add_translation = array(
 	"Close" => array("fr" => "Fermeture"),
 	"to" => array("fr" => "à"),
 
+
 	// RECHERCHE
 	"result" => array("fr" => "résultat", "eu" => "emaitzak"),
 	"for" => array("fr" => "pour", "eu" => "rentzat"),
+
 
 	// ANNUAIRE
 	"Add annuaire" => array("fr" => "Ajouter un annuaire"),
 	"Edit annuaire" => array("fr" => "Edition d'un annuaire"),
 	"directory" => array("fr" => "annuaire"),
 	"Go back to the directory" => array("fr" => "Retour à l'annuaire"),
+
 
 	// ARRETES
 	"Add arrete" => array("fr" => "Ajouter un arrêté"),
@@ -89,16 +102,17 @@ $add_translation = array(
 	"Start" => array("fr" => "Début"),
 	"End" => array("fr" => "Fin"),
 
+
 	// TOURINSOFT
 	"Add event-tourinsoft" => array("fr" => "Ajouter un événement Tourinsoft"),
 	"Edit event-tourinsoft" => array("fr" => "Edition d'un événement Tourinsoft"),
+
 
 	// CONTACT
 	"For security reasons, please solve the following calculation" => array("fr" => "Pour des questions de sécurité, merci de résoudre le calcul suivant"),
 	"Please check your entry and tick the box to accept the storage and processing of this information" => array("fr" => "Merci de vérifier votre saisie et de cocher la case afin d’accepter le stockage et le traitement de ces informations"),
 	"Recipient email" => array("fr" => "Courriel du destinataire"),
 	"Subject" => array("fr" => "Sujet"),
-
 
 );
 ?>
