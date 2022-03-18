@@ -11,12 +11,25 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 
 	<article class="flex space-xl ptl pbm">
 
-		<?php if($res['tpl']=='article' or $res['tpl']=='event') { ?>
+		<?php if($res['tpl']=='article' or $res['tpl']=='event' or $res['tpl']=='annuaire') { ?>
 		<div class="prm">
 
 			<figure>
 
-				<?php media('visuel', array('size' => '300x225', 'lazy' => true)); ?>
+				<?php 
+				if($res['tpl']=='article') 
+				{
+					media('visuel', array('size' => '300x225', 'lazy' => true, 'dir' => 'actualites')); 
+				}
+				elseif($res['tpl']=='event')
+				{
+					media('visuel', array('size' => '300x225', 'lazy' => true, 'dir' => 'agenda')); 
+				}
+				else
+				{
+					media('visuel', array('size' => '300x225', 'lazy' => true, 'dir' => 'annuaire')); 
+				}
+				?>
 
 				<figcaption>
 
@@ -156,7 +169,21 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 	<!-- Contenu de l'article -->
 	<article class="clear ptl">
 
-		<?php txt('texte'); ?>
+		<?php 
+		if($res['tpl']=='article') 
+		{
+			txt('texte', array('dir' => 'actualites'));
+		}
+		elseif($res['tpl']=='event')
+		{
+			txt('texte', array('dir' => 'agenda')); 
+		}
+		else
+		{
+			txt('texte', array('dir' => 'annuaire')); 
+		}
+		?>
+		
 		
 	</article>
 	

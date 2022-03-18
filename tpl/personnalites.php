@@ -34,7 +34,7 @@
 
 						<li>
 							
-							<?php media("personnalite-".$i."-visuel-".$key, array('size' => '150x150', 'lazy' => true, 'crop' => 'true', 'class' => 'brd-rad-100 brd-alt'));?>
+							<?php media("personnalite-".$i."-visuel-".$key, array('size' => '150x150', 'lazy' => true, 'crop' => 'true', 'dir' => 'personnalites', 'class' => 'brd-rad-100 brd-alt'));?>
 
 							<?php txt("personnalite-".$i."-prenom-".$key, array("tag" => "span", "class" => "h3-like block bold ptm"));?>
 							

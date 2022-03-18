@@ -621,7 +621,7 @@ img.fl, img.fr { margin-bottom: 0.5rem; }
 
 figure.center {	text-align: center; }
 
-#logo img, article img { max-width: 100% !important; } /* Pour que les images ne dépassent pas la taille du contener */
+article img { max-width: 100%; } /* Pour que les images ne dépassent pas la taille du contener */
 
 /* Pour que l'image au clic soit bien centré dans le figure*/
 figure img { display: inline-block !important; }
