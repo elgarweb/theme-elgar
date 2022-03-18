@@ -1,13 +1,10 @@
 <?php if(!$GLOBALS['domain']) exit;?>
 
-<!--
-@todo Simon :
-- partage par mail
-- newsletter (repris d'Adaptaville)
-- ajouter lien vers plan du site
--->
-
 <footer role="contentinfo">
+
+
+	<div class="editable-hidden tc ptm"><i class="fa fa-attention"></i><?_e("Have you taken the accessibility rules into account when entering your content?")?></div>
+
 
 	<!-- PARTAGE RÉSEAUX SOCIAUX -->
 	<section id="partage" class="mw960p flex wrap jcc center tc ptl pbl">
