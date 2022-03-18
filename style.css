@@ -138,6 +138,8 @@ span[lang="eu"] { border-bottom: dotted 1px #00253F; }
 
 button { border: solid 1px #26D691; }
 
+/* Listes à puces */
+article ul li { padding-bottom: 2em; }
 
 /* Couleurs */
 .color { color: #00253F; }
