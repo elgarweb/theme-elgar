@@ -44,8 +44,8 @@ if(!$alert_view){?>
 
 	<article class="<?=(isset($GLOBALS['content']['intro-texte']) ? 'row' : 'editable-hidden'); ?>">
 		
-		<div class="col brd-rad-top-left">
-			<?php media('intro-visuel', array('size' => '550', 'lazy' => true)); ?>
+		<div class="col brd brd-rad-top-left">
+			<?php media('intro-visuel', array('size' => '550x260', 'lazy' => true)); ?>
 		</div>
 		
 		<div class="col bg-green brd-rad-bot-right">
