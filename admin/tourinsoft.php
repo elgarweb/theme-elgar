@@ -11,6 +11,8 @@ include_once($_SERVER['DOCUMENT_ROOT']."/api/function.php");// Fonction
 //echo $_SESSION['token'].'<br>';
 //echo token_check($_SESSION['token']).'<br>';
 
+print_r($_REQUEST);
+
 // Si execution par cron ou admin avec droit création d'évènement
 //if(php_sapi_name() !== 'cli')
 if(@$_SERVER['PHP_AUTH_PW'] != $GLOBALS['tourinsoft_login'])// PHP_AUTH_USER
@@ -20,14 +22,16 @@ if(!token_check(@$_SESSION['token']))
 // supprime les caractères utf8 invalide des urls
 ini_set('mbstring.substitute_character', 'none');
 
-$verbose = (@$_SERVER['PHP_AUTH_PW']?false:true);// $verbose = false;
-$verbose_source = (@$_SERVER['PHP_AUTH_PW']?false:true);// $verbose_source = false;
+$verbose = (@$_SERVER['PHP_AUTH_PW']?false:true);// $verbose = false;// Affiche les infos de rapatriement
+$verbose_source = (@$_SERVER['PHP_AUTH_PW']?false:false);// $verbose_source = false;// Affiche le tableau du json
 
-$img = true;
+$img = true;// get img
+$keep_img = true;// garde les images originales sur le serveur
+//$_REQUEST['clean'] = true;// Force la vidange des dossiers images
 
 $sql_content = $sql_meta = $visuel_dest = null;
-$id_start = -1000000000;
-$limit = 50;// 50 10
+$id_start = -1000000000;// Plus utiliser car on a des id négatifs
+$limit = 25;// 50 10 // Nombre d'évènement rapatrié
 
 $chemin_visuel = $GLOBALS['media_dir'].'/tourinsoft';
 $racine = '../../../';
@@ -50,21 +54,16 @@ if(is_array($array))
 	// Création du dossier pour les images
 	@mkdir(rtrim($_SERVER['DOCUMENT_ROOT'], '/').'/'.$chemin_visuel, 0755, true);//.$GLOBALS['path'] /resize
 	
+
 	// Nettoie les images dans le dossier
-	array_map('unlink', array_filter((array) glob(rtrim($_SERVER['DOCUMENT_ROOT'], '/').'/'.$chemin_visuel.'/*')));
-	array_map('unlink', array_filter((array) glob(rtrim($_SERVER['DOCUMENT_ROOT'], '/').'/'.$GLOBALS['media_dir'].'/resize/tourinsoft/*')));
+	if(@$_REQUEST['clean'])
+	{
+		array_map('unlink', array_filter((array) glob(rtrim($_SERVER['DOCUMENT_ROOT'], '/').'/'.$chemin_visuel.'/*')));
+		array_map('unlink', array_filter((array) glob(rtrim($_SERVER['DOCUMENT_ROOT'], '/').'/'.$GLOBALS['media_dir'].'/resize/tourinsoft/*')));
 
-
-	// Suppression des tag lié au évènement tourinsoft
-	$GLOBALS['connect']->query("DELETE FROM ".$tt." WHERE zone='agenda' AND id<=0");
-
-	// Suppression des dates dans les méta avant ajout ?
-	$GLOBALS['connect']->query("DELETE FROM ".$tm." WHERE type='aaaa-mm-jj' AND id<=0");
-
-	// Suppression des contenus
-	$GLOBALS['connect']->query("DELETE FROM ".$tc." WHERE type='event-tourinsoft'");// AND id<=0
-
-	//exit('clean');
+		//exit('clean');
+	}
+	
 
 	// TRI PAR DATE
 	// Mets la date à un niveau plus haut pour le tri simplifier
@@ -89,6 +88,7 @@ if(is_array($array))
 	foreach($array as $key => $val) 
 	{
 		$key = $key + 1;
+		$copy = false;
 
 		if($verbose) echo '<hr><h2>'.$key.'. '.$val['SyndicObjectName'].'</h2>';
 
@@ -108,14 +108,33 @@ if(is_array($array))
 			$visuel_source = $val['PHOTOSs'][0]['Photo']['Url'];
 
 			$visuel_dest = $chemin_visuel.'/'.strtolower(basename($visuel_source));
+			
 
-			// Copie de l'image distante
-			if(copy($visuel_source, $racine.$visuel_dest))
+			// Fichier déjà rapatrié ?
+			if($keep_img and file_exists($racine.$visuel_dest))
 			{
+				$copy = true;
+
 				$source_size = round(filesize($racine.$visuel_dest)/1024);
 
-				if($verbose) echo '✅ copy '.$visuel_source.' '.$source_size.'ko<br>';
+				if($verbose) echo '⚠️ fichier '.$visuel_source.' déjà sur le serveur<br>';				
+			}
+			// Copie de l'image distante
+			elseif(copy($visuel_source, $racine.$visuel_dest))
+			{
+				$copy = true;
 
+				$source_size = round(filesize($racine.$visuel_dest)/1024);
+
+				if($verbose) echo '✅ copy '.$visuel_source.' <b>'.$source_size.'ko</b><br>';
+				
+			}
+			elseif($verbose) echo '❌ copy error '.$visuel_source.'<br>';
+
+
+			// Besoin de resize ?
+			if($copy)
+			{
 				// Taille de l'image source rapatrier
 				list($source_width, $source_height, $type, $attr) = getimagesize($racine.$visuel_dest);
 				
@@ -128,7 +147,7 @@ if(is_array($array))
 					$visuel_dest = resize($racine.$visuel_dest, $new_width, null, 'tourinsoft');	
 
 					// Supp l'image source si resize
-					unlink($visuel_source);
+					if(!$keep_img) unlink($visuel_source);
 
 					$new_size = round(filesize($racine.strtok($visuel_dest, '?'))/1024);
 					$p100 = 100-round($new_size*100/$source_size);
@@ -136,7 +155,7 @@ if(is_array($array))
 					if($verbose) echo 'ℹ️ resize '.$new_size.'ko ('.$p100.'%)<br>';
 				} 
 			}
-			elseif($verbose) echo '❌ copy error '.$visuel_source;
+
 		}
 
 
@@ -233,13 +252,31 @@ if(is_array($array))
 	}
 }
 
+
+
+// Suppression des tag lié au évènement tourinsoft
+$GLOBALS['connect']->query("DELETE FROM ".$tt." WHERE zone='agenda' AND id<=0");
+if($GLOBALS['connect']->error) die($GLOBALS['connect']->error);
+
+// Suppression des dates dans les méta avant ajout ?
+$GLOBALS['connect']->query("DELETE FROM ".$tm." WHERE type='aaaa-mm-jj' AND id<=0");
+if($GLOBALS['connect']->error) die($GLOBALS['connect']->error);
+
+// Suppression des contenus
+$GLOBALS['connect']->query("DELETE FROM ".$tc." WHERE type='event-tourinsoft'");// AND id<=0
+if($GLOBALS['connect']->error) die($GLOBALS['connect']->error);
+
+
+
 // Insertion dans la table CONTENT
 $GLOBALS['connect']->query(trim($sql_init_content.$sql_content,','));
-echo $GLOBALS['connect']->error;
+if($GLOBALS['connect']->error) die($GLOBALS['connect']->error);
 
 // Insertion dans la table META
 $GLOBALS['connect']->query(trim($sql_init_meta.$sql_meta,','));
-echo $GLOBALS['connect']->error;
+if($GLOBALS['connect']->error) die($GLOBALS['connect']->error);
+
+
 
 //echo '<br><br>'.str_replace('),','),<br><br>', $sql);
 

@@ -243,7 +243,7 @@ if(!$alert_view){?>
 			$sql.=" WHERE (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft') AND ".$tc.".lang='".$lang."' ".$sql_state;
 			
 			// Tri par date de l'evenement
-			$sql.=" ORDER BY event.cle DESC";
+			$sql.=" ORDER BY event.cle ASC";
 			$sql.=" LIMIT 3";
 
 			$sel_event = $connect->query($sql);
