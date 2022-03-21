@@ -19,8 +19,8 @@
 </section>
 
 <script>
-$(function()
-{
+//$(function(){
+
 	// CONSTRUCTION DU SOMMAIRE
 	i = 1;
 	open = false;
@@ -66,5 +66,5 @@ $(function()
 
 	$("#sommaire").append(html);
 
-});
+//});
 </script>
