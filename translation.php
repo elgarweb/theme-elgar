@@ -22,6 +22,8 @@ $add_translation = array(
 
 
 	// FOOTER
+	"Have you taken the accessibility rules into account when entering your content?" => array("fr" => "Avez-vous bien pris en compte les règles d'accessibilité lors de la saisie de vos contenus ?"),
+
 	// Footer - partage Réseaux sociaux
 	"Share this page" => array("fr" => "Partager cette page"),
 
@@ -50,6 +52,10 @@ $add_translation = array(
 	"sitemap" => array("fr" => "plan-du-site"),
 	"legal-notices" => array("fr" => "mentions-legales"),
 	"news" => array("fr" => "actualites"),
+
+
+	// PAGE
+	"Summary" => array("fr" => "Sommaire"),
 
 
 	// ACTUALITÉS - AGENDA
