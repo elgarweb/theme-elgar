@@ -108,8 +108,14 @@ $add_translation = array(
 	"Edit arrete" => array("fr" => "Edition d'un arrêté"),
 	"See the sheet" => array("fr" => "Voir la fiche", "eu" => "Ikus fitxa"),
 	"Filter by date (format DD/MM/YYYY)" => array("fr" => "Filtrer par date (format JJ/MM/AAAA)"),
+	"Filter by date" => array("fr" => "Filtrer par date"),
 	"Start" => array("fr" => "Début"),
 	"End" => array("fr" => "Fin"),
+	"Day" => array("fr" => "Jour"),
+	"Month" => array("fr" => "Mois"),
+	"Year" => array("fr" => "Année"),
+	"Filter" => array("fr" => "Filtrer"),
+	"No result" => array("fr" => "Pas de résultat"),
 
 
 	// TOURINSOFT

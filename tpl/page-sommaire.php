@@ -7,7 +7,8 @@
 	<?php h1('title', 'picto'); ?>
 
 	<nav role="navigation" aria-label="<?php _e("Summary")?>">
-		<ul id="sommaire" class="unstyled pln pbm"></ul>
+		<h2><?php _e("Summary")?></h2>
+		<ol id="sommaire" class="unstyled pln pbm"></ol>
 	</nav>
 
 	<article>
@@ -41,12 +42,12 @@
 		{
 			if(open)// On doit fermer
 			{
-				html += "</ul></li>";
+				html += "</ol></li>";
 				open = false;
 			}
 			else// On ouvre une sous-section
 			{
-				html += "<li><ul>";
+				html += "<li><ol>";
 				open = true;
 			}
 		}
@@ -62,7 +63,7 @@
 	});
 
 	// Si sommaire par fermer
-	if(open) html += "</ul></li>";
+	if(open) html += "</ol></li>";
 
 	$("#sommaire").append(html);
 
