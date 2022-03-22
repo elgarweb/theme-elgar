@@ -1,4 +1,20 @@
-<?php  if(!$GLOBALS['domain']) exit; ?>
+<?php  if(!$GLOBALS['domain']) exit;
+
+$mois = array(
+	1 => 'january',
+	2 => 'february',
+	3 => 'march',
+	4 => 'april',
+	5 => 'may',
+	6 => 'june',
+	7 => 'july',
+	8 => 'august',
+	9 => 'september',
+	10 => 'october',
+	11 => 'november',
+	12 => 'december',
+);
+?>
 
 <section class="mw960p mod center mbl">
 
@@ -25,15 +41,43 @@
 
 	<form id="filtre-date-arrete" class="tc">
 
+		<!-- 
 		<div class="mbt"><?_e("Filter by date (format DD/MM/YYYY)")?> :</div>
 
 		<label for="start"><?_e("Start")?></label>
 		<input type="date" id="start" value="<?=@$GLOBALS['filter']['start']?>" placeholder="jj-mm-aaaa" autocomplete="off">
 
 		<label for="end"><?_e("End")?></label>
-		<input type="date" id="end" value="<?=@$GLOBALS['filter']['end']?>" placeholder="jj-mm-aaaa" autocomplete="off">
+		<input type="date" id="end" value="<?=@$GLOBALS['filter']['end']?>" placeholder="jj-mm-aaaa" autocomplete="off"> -->
+
+		<fieldset class="inbl">
+			<legend>
+				<?_e("Filter by date")?>
+			</legend>
+
+			<label for="date"><?_e("Month")?> :</label>
+			<select id="month">
+				<option value="" <?=(!@$GLOBALS['filter']['month']?'selected':'')?>><?_e("Month")?></option>
+				<?php 
+				foreach($mois as $num => $nom){
+					echo'<option value="'.$num.'"'.(@$GLOBALS['filter']['month']==$num?' selected':'').'>'.__($nom).'</option>';
+				}
+				?>
+			</select>
+
+			<label for="date" class="mls"><?_e("Year")?> :</label>
+			<select id="year">
+				<option value="" <?=(!@$GLOBALS['filter']['year']?'selected':'')?>><?_e("Year")?></option>
+				<?php 
+				for($i=1980; $i<=date("Y"); $i++) { 
+					echo'<option value="'.$i.'"'.(@$GLOBALS['filter']['year']==$i?' selected':'').'>'.$i.'</option>';
+				}
+				?>
+			</select>
+
+		</fieldset>
 		
-		<button type="submit" class="bg-green pat"><?_e("Search")?></button>
+		<button type="submit" class="bg-green pat mtm"><?_e("Filter")?></button>
 
 	</form>
 	<script>
@@ -43,6 +87,9 @@
 			var url = "/<?=encode(__("Arrêtés"))?>";
 
 			if(tag) url = url+'/'+tag;
+
+			if($("#month").val()) url = url + '/month_' + $("#month").val();
+			if($("#year").val()) url = url + '/year_' + $("#year").val();
 
 			if($("#start").val()) url = url + '/start_' + $("#start").val();
 			if($("#end").val()) url = url + '/end_' + $("#end").val();
@@ -85,7 +132,26 @@
 
 
 		// Filtre par date
-		if(@$GLOBALS['filter']['start'] or @$GLOBALS['filter']['end']) {
+		if(@$GLOBALS['filter']['month'] or @$GLOBALS['filter']['year']) {
+			$sql.=" JOIN ".$tm." ON (
+				".$tm.".id=".$tc.".id AND
+				".$tm.".type='aaaa-mm-jj' AND";
+
+				if(@$GLOBALS['filter']['month'] and @$GLOBALS['filter']['year'])
+					$sql.=" ".$tm.".cle LIKE '".(int)$GLOBALS['filter']['year']."-".sprintf("%02d", (int)$GLOBALS['filter']['month'])."-%'";
+
+				if(@$GLOBALS['filter']['month'] and !@$GLOBALS['filter']['year'])
+					$sql.=" ".$tm.".cle LIKE '%-".sprintf("%02d", (int)$GLOBALS['filter']['month'])."-%'";
+
+				if(!@$GLOBALS['filter']['month'] and @$GLOBALS['filter']['year'])
+					$sql.=" ".$tm.".cle LIKE '".(int)$GLOBALS['filter']['year']."-%'";
+
+			$sql.=")";
+		}
+
+
+		// Filtre par date
+		/*if(@$GLOBALS['filter']['start'] or @$GLOBALS['filter']['end']) {
 			$sql.=" JOIN ".$tm." ON (
 				".$tm.".id=".$tc.".id AND
 				".$tm.".type='aaaa-mm-jj' AND";
@@ -95,12 +161,15 @@
 				if(@$GLOBALS['filter']['end']) $sql.=" ".$tm.".cle<='".date("Y-m-d", strtotime(encode($GLOBALS['filter']['end'])))."'";
 
 			$sql.=")";
-		}
+		}*/
 
 
-		$sql.=" WHERE ".$tc.".lang='".$lang."' ".$sql_state." AND";
+		$sql.=" WHERE ".$tc.".lang='".$lang."' ".$sql_state." AND ".$tc.".type='arrete'";
 
-		$sql.=" ".$tc.".type='arrete'";
+		if(@$GLOBALS['filter']['start'] or @$GLOBALS['filter']['end'])
+			$sql.=" ORDER BY ".$tm.".cle ASC";
+		else 
+			$sql.=" ORDER BY ".$tc.".date_insert DESC";
 
 		$sql.=" LIMIT ".$start.", ".$num_pp;
 
@@ -109,6 +178,8 @@
 		$sel_fiche = $connect->query($sql);
 
 		$num_total = $connect->query("SELECT FOUND_ROWS()")->fetch_row()[0];// Nombre total de fiche
+
+		if($num_total == 0) echo'<li class="tc">'.__("No result").' !</li>';
 
 		while($res_fiche = $sel_fiche->fetch_assoc())
 		{
