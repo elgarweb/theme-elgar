@@ -8,7 +8,7 @@
 
 	<nav role="navigation" aria-label="<?php _e("Summary")?>">
 		<h2><?php _e("Summary")?></h2>
-		<ol id="sommaire" class="unstyled pln pbm"></ol>
+		<ol id="sommaire" class="unstyled pbm"></ol>
 	</nav>
 
 	<article>
