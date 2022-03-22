@@ -121,4 +121,11 @@
 
 </footer>
 
+<script>
+	// Ajout du title "nouvelle fenêtre" au lien sortant
+	$("a[target='_blank']").each(function() {
+		if(!$(this).attr("title")) $(this).attr("title", $(this).text() + " - <?_e("New window");?>");
+	});
+</script>
+
 <? include("theme/".$GLOBALS['theme']."/admin/lang.php"); ?>

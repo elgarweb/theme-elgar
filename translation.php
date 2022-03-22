@@ -42,6 +42,8 @@ $add_translation = array(
 	"Site map" => array("fr" => "Plan du site"),
 	"Legal notices" => array("fr" => "Mentions légales"),
 
+	"New window" => array("fr" => "Nouvelle fenêtre"),
+
 
 	// BOUTONS
 	"Read all the news" => array("fr" => "Lire toutes les actualités"),
