@@ -3,7 +3,7 @@ $add_translation = array(
 	// HEADER
 	"Accessibility" => array("fr" => "Accessibilité"),
 	"Search" => array("fr" => "Rechercher"),
-	"Search the site" => array("fr" => "Rechercher sur le site"),
+	"Search the site" => array("fr" => "Rechercher sur le site", "eu" => "Webgunean bilatu"),
 	"Home other language" => array("fr" => "Accueil Français", "eu" => "Harrera euskaraz"),
 
 	// Ariane
@@ -25,29 +25,30 @@ $add_translation = array(
 	"Have you taken the accessibility rules into account when entering your content?" => array("fr" => "Avez-vous bien pris en compte les règles d'accessibilité lors de la saisie de vos contenus ?"),
 
 	// Footer - partage Réseaux sociaux
-	"Share this page" => array("fr" => "Partager cette page"),
+	"Share this page" => array("fr" => "Partager cette page", "eu" => "Orri hau partekatu"),
 
 	// Footer - Newsletter
-	"Subscribe to the newsletter of your city" => array("fr" => "Inscrivez-vous<br> à la newsletter de votre ville"),
-	"Your email" => array("fr" => "Votre mail"),
-	"Subscribe" => array("fr" => "S'inscrire"),
+	"Subscribe to the newsletter of your city" => array("fr" => "Inscrivez-vous<br> à la newsletter de votre ville", "eu" => "Zure herriko newsletter-ean harpidetu zaitez"),
+	"Your email" => array("fr" => "Votre mail", "eu" => "Zure helbide elektronikoa"),
+	"Subscribe" => array("fr" => "S'inscrire", "eu" => "Zure izena eman"),
 
 	// Footer - Réseaux sociaux
 	"On Facebook" => array("fr" => "Sur Facebook"),
 	"On Twitter" => array("fr" => "Sur Twitter"),
 
 	// Footer - Liens
-	"The news" => array("fr" => "Les actualités"),
+	"The news" => array("fr" => "Les actualités", "eu" => "Berriak"),
 	"Documents download" => array("fr" => "Documents à télécharger"),
-	"Site map" => array("fr" => "Plan du site"),
-	"Legal notices" => array("fr" => "Mentions légales"),
+	"Site map" => array("fr" => "Plan du site", "eu" => "Webgunearen planoa"),
+	"Legal notices" => array("fr" => "Mentions légales", "eu" => "Legezko aipamenak"),
 
+	// FONCTIONS
 	"New window" => array("fr" => "Nouvelle fenêtre"),
 
 
 	// BOUTONS
-	"Read all the news" => array("fr" => "Lire toutes les actualités"),
-	"See all the events" => array("fr" => "Consulter tout l'agenda"),
+	"Read all the news" => array("fr" => "Lire toutes les actualités", "eu" => "Berri guziak irakurri"),
+	"See all the events" => array("fr" => "Consulter tout l'agenda", "eu" => "Agenda guzia kontsultatu"),
 
 
 	// URL
@@ -61,14 +62,14 @@ $add_translation = array(
 
 
 	// ACTUALITÉS - AGENDA
-	"Read more" => array("fr" => "Lire la suite"),
+	"Read more" => array("fr" => "Lire la suite", "eu" => "Segida irakurri"),
 	"Go back to the news" => array("fr" => "Retour aux actualités"),
 	"Go back to the agenda" => array("fr" => "Retour à l'agenda"),
 	"Edit event" => array("fr" => "Edition d'un événement"),
 	"Categories" => array("fr" => "Catégories/Tags"),
 	"Start date" => array("fr" => "Date de début"),
-	"Website" => array("fr" => "Site web"),
-	"Telephone" => array("fr" => "Téléphone"),
+	"Website" => array("fr" => "Site web", "eu" => "Webgunea"),
+	"Telephone" => array("fr" => "Téléphone", "eu" => "Telefonoa"),
 	"Mail" => array("fr" => "Mail"),
 	"Address" => array("fr" => "Adresse"),
 
@@ -98,14 +99,14 @@ $add_translation = array(
 	// ANNUAIRE
 	"Add annuaire" => array("fr" => "Ajouter un annuaire"),
 	"Edit annuaire" => array("fr" => "Edition d'un annuaire"),
-	"directory" => array("fr" => "annuaire"),
+	"directory" => array("fr" => "annuaire", "eu" => "aurkitegia"),
 	"Go back to the directory" => array("fr" => "Retour à l'annuaire"),
 
 
 	// ARRETES
 	"Add arrete" => array("fr" => "Ajouter un arrêté"),
 	"Edit arrete" => array("fr" => "Edition d'un arrêté"),
-	"See the sheet" => array("fr" => "Voir la fiche"),
+	"See the sheet" => array("fr" => "Voir la fiche", "eu" => "Ikus fitxa"),
 	"Filter by date (format DD/MM/YYYY)" => array("fr" => "Filtrer par date (format JJ/MM/AAAA)"),
 	"Start" => array("fr" => "Début"),
 	"End" => array("fr" => "Fin"),
