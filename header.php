@@ -7,17 +7,20 @@
 		<div class="flex wrap center space-l jcc tc brd-bot-alt ptm pbs">
 
 			<!-- Conformité -->
-			<?php txt('texte-conformite', 'mrm'); ?>
+			
 
 			<!-- Accessibilité -->
 			<div class="prm">
 
-				<nav role="navigation" aria-label="<?php _e("Quick access")?>" class="inline"><a href="#main" class="acces-rapide"><?php _e("Skip to content")?></a></nav>
-				|
-				<input type="checkbox" name="high-contrast" id="high-contrast"<?=(@$_COOKIE['high-contrast']?'checked="checked"':'')?>> <label class="color tdu" for="high-contrast"><?php _e("Enhanced contrast")?></label>
-				|
-				<a href="/<?=encode(__("Contact"))?>"><?php _e("Contact")?></a>
-				
+				<nav role="navigation" aria-label="<?php _e("Quick access")?>" class="inline">
+					<a href="#main" class="acces-rapide mrs"><?php _e("Skip to content")?></a>
+					|
+					<a href="/<?=encode(__("Contact"))?>"><?php _e("Contact")?></a>
+					|
+					<?php txt('texte-conformite', array('class'=>'mrs mls','tag'=>'span')); ?>
+					|
+				</nav>				
+				<input type="checkbox" name="high-contrast" id="high-contrast"<?=(@$_COOKIE['high-contrast']?'checked="checked"':'')?>> <label class="color tdu" for="high-contrast"><?php _e("Enhanced contrast")?></label>				
 			</div>
 
 			<!-- Changement de site en fonction de la langue -->
