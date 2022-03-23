@@ -1,15 +1,5 @@
 <?php if(!$GLOBALS['domain']) exit;?>
 
-<style>
-	/* 
-	Bug style="width: 1024px;" se met en mode édition ??? 
-	A supprimer quand corrigé
-	*/
-	.lucide #texte-conformite {
-		width: 33% !important;
-	}
-</style>
-
 <header role="banner">
 
 	<section class="mw960p mod center relative">
