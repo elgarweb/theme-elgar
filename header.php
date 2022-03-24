@@ -17,10 +17,10 @@
 					|
 					<a href="/<?=encode(__("Contact"))?>"><?php _e("Contact")?></a>
 					|
-					<?php txt('texte-conformite', array('class'=>'mrs mls','tag'=>'span')); ?>
+					<a <?href('lien-conformite')?>><?php txt('texte-conformite', array('class'=>'mrs mls','tag'=>'span')); ?></a>
 					|
 				</nav>				
-				<input type="checkbox" name="high-contrast" id="high-contrast"<?=(@$_COOKIE['high-contrast']?'checked="checked"':'')?>> <label class="color tdu" for="high-contrast"><?php _e("Enhanced contrast")?></label>				
+				<input type="checkbox" name="high-contrast" id="high-contrast"<?=(@$_COOKIE['high-contrast']?'checked="checked"':'')?>> <label class="color" for="high-contrast"><?php _e("Enhanced contrast")?></label>				
 			</div>
 
 			<!-- Changement de site en fonction de la langue -->
