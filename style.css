@@ -10,7 +10,7 @@ a {
 	text-decoration: underline;
 	transition: color .3s;
 }
-	a:hover { font-weight: bold; }
+	a:hover { text-decoration: none; }
 	
 
 /* Titres */
@@ -230,9 +230,9 @@ article ul li { padding-bottom: 2em; }
 		}
 
 	/* Couleurs blocs image + texte */
-	#home-actualites #block { background-color: #00253F1A; }
+	#home-actualites .blocks > div { background-color: #00253F1A; }
 	
-	#home-agenda.bg-grey #block { background-color: white;	}
+	/* #home-agenda.bg-grey #block { background-color: white;	} */
 
 	/* Affichage img actus et agenda en background */
 	figure div { background-position: center center; }

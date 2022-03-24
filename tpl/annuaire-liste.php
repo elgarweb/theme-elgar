@@ -89,8 +89,9 @@
 
 					<div class="pam brd-left">
 						
+						<!-- Affichage tags supprimé pour Elgarweb - laisser en commentaire si besoin pour autre mairie -->
 						<!-- Tags -->
-						<div class="mbm">
+						<!-- <div class="mbm">
 
 							<?php 
 							if(isset($tags) and isset($res_fiche['id']))
@@ -104,7 +105,7 @@
 							} 
 							?>
 
-						</div>
+						</div> -->
 
 						<!-- Titre -->
 						<h2 class="h3-like tl">
