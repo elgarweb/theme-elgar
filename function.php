@@ -22,7 +22,9 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 			<?=$state?>
 		</div>
 	    
-		<a href="<?=make_url($url_title, array("domaine" => true));?>" title="<?=$title?>" class="tdn">
+		<?php /*<a href="<?=make_url($url_title, array("domaine" => true));?>" title="<?=$title?>" class="tdn"> */
+		// DOM : suppression du title pour lire tout le contenu du lien composite ?>
+		<a href="<?=make_url($url_title, array("domaine" => true));?>"  class="tdn">
 
 			<article class="pbm">
 
