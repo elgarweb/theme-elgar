@@ -90,9 +90,9 @@
 				{
 					// Menu sélectionné si page en cours // @$res['type'] == "article" and $val['href'] == "actualites"  or ()
 					if(get_url() == $val['href'] or @array_keys($GLOBALS['filter'])[0] == basename($val['href']))
-						$selected = true;
+						$selected = ' selected';
 					else
-						$selected = false;
+						$selected = '';
 
 					echo'<li class="'.$selected.'">
 						<a href="'.make_url($val['href'], array('domaine' => true)).'"'.
