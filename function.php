@@ -41,8 +41,9 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 				
 				<div class="pam<?= ($num_fiche <= 3) ? ' brd-top' : '' ?>">
 
+					<!-- Affichage tags supprimé pour Elgarweb - laisser en commentaire si besoin pour autre mairie -->
 					<!-- Tag  (que sur le listing des articles car query + longue)-->
-					<?php if($res['tpl'] == 'article-liste' or $res['tpl'] == 'annuaire-liste') { ?>
+					<!-- <?php if($res['tpl'] == 'article-liste' or $res['tpl'] == 'annuaire-liste') { ?>
 
 						<div class="mbm">
 
@@ -58,7 +59,7 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 
 						</div>
 
-					<?php } ?>
+					<?php } ?> -->
 
 					<?php
 					/* Titre */
