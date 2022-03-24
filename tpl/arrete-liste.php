@@ -22,7 +22,7 @@ $mois = array(
 	
 	<?php h1('title', 'picto'); ?>
 
-	<nav role="navigation" class="flex wrap space jcc tc ptl pbm">
+	<nav role="navigation" aria-label="<?php _e("Filter by")?>" class="flex wrap space jcc tc ptl pbm">
 		<?php 
 		// Liste les tags pour filtrer la page
 		$i = 1;

@@ -72,7 +72,7 @@ $add_translation = array(
 	"Telephone" => array("fr" => "Téléphone", "eu" => "Telefonoa"),
 	"Mail" => array("fr" => "Mail"),
 	"Address" => array("fr" => "Adresse"),
-
+	"Filter by" => array("fr" => "Filtrer par"),
 	"january" => array("fr" => "janvier"),
 	"february" => array("fr" => "février"),
 	"march" => array("fr" => "mars"),
