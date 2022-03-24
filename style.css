@@ -10,7 +10,7 @@ a {
 	text-decoration: underline;
 	transition: color .3s;
 }
-	a:hover { font-weight: bold; }
+	a:hover { text-decoration: none; }
 	
 
 /* Titres */
