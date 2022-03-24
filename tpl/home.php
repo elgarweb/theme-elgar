@@ -49,7 +49,7 @@ if(!$alert_view){?>
 		</div>
 		
 		<div class="col bg-green brd-rad-bot-right">
-			<?php txt('intro-texte', 'pal'); ?>
+			<?php txt('intro-texte', 'pam'); ?>
 		</div>
 		
 	</article>
