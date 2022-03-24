@@ -63,7 +63,7 @@ switch(@$_GET['mode'])
 
 					<div class="mbm">
 						<label for="email-from"><?php span('texte-label-email')?><span class="red">*</span></label><br>
-						<input type="email" name="email-from" id="email-from" autocomplete="email" placeholder="<?php _e("Email")?>" class="w40 vatt" required><span class="wrapper big white vam o50">@</span>
+						<input type="email" name="email-from" id="email-from" autocomplete="email" placeholder="<?php _e("Email")?>" class="w40 vatt" required><!--<span class="wrapper big white vam o50">@</span>-->
 
 						<label for="reponse" class="hidden" aria-hidden="true"><?php _e("Email")?></label>
 						<input name="reponse" id="reponse" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$" placeholder="nom@domaine.com" aria-hidden="true">
