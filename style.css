@@ -1473,6 +1473,8 @@ div.editable {
 		padding-right: 1rem;
 	}
 
+	article img { max-width: 100% !important; }
+
 	/* Home */
 		/** Encart intro **/
 		#intro-texte { max-width: 550px; }
