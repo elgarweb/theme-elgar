@@ -10,7 +10,10 @@ a {
 	text-decoration: underline;
 	transition: color .3s;
 }
-	a:hover { text-decoration: none; }
+	a:hover, 
+	.tdu:hover { /* liens */
+		text-decoration: none; 
+	}
 	
 
 /* Titres */
