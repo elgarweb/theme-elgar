@@ -9,7 +9,7 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 
 	<?php h1('title', 'picto'); ?>
 
-	<article class="flex space-xl ptl pbm">
+	<article class="flex wrap space-xl ptl">
 
 		<?php if($res['tpl']=='article' or $res['tpl']=='event' or $res['tpl']=='annuaire') { ?>
 		<div class="prm">
@@ -19,15 +19,15 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 				<?php 
 				if($res['tpl']=='article') 
 				{
-					media('visuel', array('size' => '300x225', 'lazy' => true, 'dir' => 'actualites')); 
+					media('visuel', array('size' => '300x225', 'lazy' => true, 'dir' => 'actualites', 'class' => 'brd')); 
 				}
 				elseif($res['tpl']=='event')
 				{
-					media('visuel', array('size' => '300x225', 'lazy' => true, 'dir' => 'agenda')); 
+					media('visuel', array('size' => '300x225', 'lazy' => true, 'dir' => 'agenda', 'class' => 'brd')); 
 				}
 				else
 				{
-					media('visuel', array('size' => '300x225', 'lazy' => true, 'dir' => 'annuaire')); 
+					media('visuel', array('size' => '300x225', 'lazy' => true, 'dir' => 'annuaire', 'class' => 'brd')); 
 				}
 				?>
 
@@ -159,7 +159,7 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 			// Description : s'affiche sur la liste
 			if($res['tpl']=='article' or $res['tpl']=='event') 
 
-				txt('description', 'ptm');
+				txt('description', 'ptl');
 			?>
 
 		</div>
