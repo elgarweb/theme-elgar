@@ -263,27 +263,12 @@ article ul li { padding-bottom: 2em; }
 		}
 
 	/* Tags */
-		/** affichage tags en mode bouton **/
-		#tags .editable-tag a {
-			display: inline-block;
-			text-align: center;
-			background-color: #26D691;
-			border-radius: 25px;
-			padding: 1rem 2rem;
+		/** affichage tags pages détail **/
+		#tags a { 
+			text-decoration: underline !important;
+			padding-right: 1rem; 
 		}
-
-		/** masquage virgule **/
-		#tags:not(a) {
-			color: #fff; 
-		}
-
-		/** affichage tags sans CSS en mode édition **/
-		.lucide #tags:not(a) { color: inherit; }
-
-		.lucide #tags a {
-			background-color: transparent;
-			padding: 0;
-		}
+			#tags a:hover { text-decoration: none !important; }
 
 	/* Affichage images en background */
 	.tpl-annuaire-liste figure { width: 299px; }
