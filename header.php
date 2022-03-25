@@ -33,10 +33,10 @@
 		</div>
 
 
-		<div class="flex wrap jcsb aic ptm">
+		<div class="flex wrap jcsb aic ptm plt prt">
 
 			<!-- Logo -->
-			<div><a href="<?=$GLOBALS['home']?>"><?php media('logo', array('size' => '330x70', 'lazy' => 'true'))?></a></div>
+			<div class="pts"><a href="<?=$GLOBALS['home']?>"><?php media('logo', array('size' => '330x70', 'lazy' => 'true'))?></a></div>
 			
 			<!-- Formulaire de recherche -->
 			<form role="search" id="rechercher" action="/recherche/" method="post">
