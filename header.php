@@ -5,22 +5,22 @@
 	<section class="mw960p mod center relative">
 
 		<div class="flex wrap center space-l jcc tc brd-bot-alt ptm pbs">
-
-			<!-- Conformité -->
 			
-
 			<!-- Accessibilité -->
-			<div class="prm">
-
+			<div id="accessibilite">
+				
 				<nav role="navigation" aria-label="<?php _e("Quick access")?>" class="inline">
+
 					<a href="#main" class="acces-rapide mrs"><?php _e("Skip to content")?></a>
 					|
 					<a href="/<?=encode(__("Contact"))?>"><?php _e("Contact")?></a>
 					|
 					<a <?href('lien-conformite')?>><?php txt('texte-conformite', array('class'=>'mrs mls','tag'=>'span')); ?></a>
 					|
-				</nav>				
-				<input type="checkbox" name="high-contrast" id="high-contrast"<?=(@$_COOKIE['high-contrast']?'checked="checked"':'')?>> <label class="color" for="high-contrast"><?php _e("Enhanced contrast")?></label>				
+				</nav>	
+
+				<input type="checkbox" name="high-contrast" id="high-contrast"<?=(@$_COOKIE['high-contrast']?'checked="checked"':'')?>> <label class="color" for="high-contrast"><?php _e("Enhanced contrast")?></label>
+
 			</div>
 
 			<!-- Changement de site en fonction de la langue -->
@@ -33,10 +33,10 @@
 		</div>
 
 
-		<div class="flex wrap jcsb aic ptm">
+		<div class="flex wrap jcsb aic ptm plt prt">
 
 			<!-- Logo -->
-			<div><a href="<?=$GLOBALS['home']?>"><?php media('logo', array('size' => '330x70', 'lazy' => 'true'))?></a></div>
+			<div class="pts"><a href="<?=$GLOBALS['home']?>"><?php media('logo', array('size' => '330x70', 'lazy' => 'true'))?></a></div>
 			
 			<!-- Formulaire de recherche -->
 			<form role="search" id="rechercher" action="/recherche/" method="post">
