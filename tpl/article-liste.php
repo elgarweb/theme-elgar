@@ -1,8 +1,3 @@
-<!--
-	@todo Stéphanie :
-	- Affichage tag sur chaque actu
--->
-
 <?php  if(!$GLOBALS['domain']) exit; ?>
 
 <section>

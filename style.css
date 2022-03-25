@@ -211,6 +211,10 @@ article ul li { padding-bottom: 2em; }
 	header #logo [src*='.svg'] { min-width: 300px; }
 		header #logo:hover { opacity: 0.6; }
 
+	.lucide #add-nav .dragger:before {
+		color: #000;
+	}
+
 
 /* HOME */
 	/* En un clic */
@@ -259,27 +263,12 @@ article ul li { padding-bottom: 2em; }
 		}
 
 	/* Tags */
-		/** affichage tags en mode bouton **/
-		#tags .editable-tag a {
-			display: inline-block;
-			text-align: center;
-			background-color: #26D691;
-			border-radius: 25px;
-			padding: 1rem 2rem;
+		/** affichage tags pages détail **/
+		#tags a { 
+			text-decoration: underline !important;
+			padding-right: 1rem; 
 		}
-
-		/** masquage virgule **/
-		#tags:not(a) {
-			color: #fff; 
-		}
-
-		/** affichage tags sans CSS en mode édition **/
-		.lucide #tags:not(a) { color: inherit; }
-
-		.lucide #tags a {
-			background-color: transparent;
-			padding: 0;
-		}
+			#tags a:hover { text-decoration: none !important; }
 
 	/* Affichage images en background */
 	.tpl-annuaire-liste figure { width: 299px; }
@@ -1481,6 +1470,9 @@ div.editable {
 
 	article img { max-width: 100% !important; }
 
+	/* Header */
+	header #accessibilite { margin-right: 5.5rem; }
+
 	/* Home */
 		/** Encart intro **/
 		#intro-texte { max-width: 550px; }
@@ -1513,7 +1505,6 @@ div.editable {
 /* RESPONSIVE medium */
 @media (max-width: 480px)
 {
-	header nav .burger { top: 245px; }
 
 	#recherche { max-width: 190px; }
 
