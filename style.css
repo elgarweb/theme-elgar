@@ -211,6 +211,10 @@ article ul li { padding-bottom: 2em; }
 	header #logo [src*='.svg'] { min-width: 300px; }
 		header #logo:hover { opacity: 0.6; }
 
+	.lucide #add-nav .dragger:before {
+		color: #000;
+	}
+
 
 /* HOME */
 	/* En un clic */
