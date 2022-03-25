@@ -6,10 +6,10 @@
 	<div class="editable-hidden tc ptm"><i class="fa fa-attention"></i><?_e("Have you taken the accessibility rules into account when entering your content?")?></div>
 
 
-	<!-- PARTAGE RÉSEAUX SOCIAUX -->
-	<section id="partage" class="mw960p flex wrap jcc center tc ptl pbl">
 
-		<?if(isset($res['url'])){?>
+	<?if(isset($res['url'])){?>
+		<!-- PARTAGE RÉSEAUX SOCIAUX -->
+		<section id="partage" class="mw960p flex wrap jcc center tc ptl pbl">
 
 			<?php _e('Share this page'); ?>
 
@@ -26,82 +26,66 @@
 				<a href="mailto:?subject=<?=$titre_encode?>&body=<?=$url_encode?>" target="_blank">Mail<i class="fa fa-fw fa-mail big pls prm" aria-hidden="true"></i></a>
 
 			</div>
-			
-		<?}?>
 
-	</section>
+		</section>
+	<?}?>
+
+
 
 	<!-- RENSEIGNEMENTS COMPLEMENTAIRES -->
-	<section class="<?=(isset($GLOBALS['content']['texte-renseignements']) ? 'bg-green ptl pbl' : 'editable-hidden'); ?>">
+	<section class="<?=(isset($GLOBALS['content']['texte-renseignements']) ? 'bg-green ptl pbt' : 'editable-hidden'); ?>">
 
-		<article class="mw960p center">
-
-			<?php txt('texte-renseignements', 'bold tc'); ?>
-
-		</article>
+		<?php txt('texte-renseignements', array('tag' => 'article', 'class' => 'mw960p center bold tc')); ?>
 
 	</section>
+
+
 
 	<!-- CONTACTS -->
 	<section id="contacts" class="bg-color ptl pbm">
 
 		<div class="mw960p center flex jcsb">
 
-			<article class="pbm">
 
-				<?php txt('texte-coordonnees')?>
-
-			</article>
+			<?php txt('texte-coordonnees', array('tag' => 'article'))?>
 
 
-			<article class="pbm">
+			<article>
 
 				<?if(isset($GLOBALS['newsletter-key'][$lang])){?>
-				<div class="pbm">	
+				<form id="newsletter" method="post" action="https://newsletter.infomaniak.com/external/submit" target="_blank" class="pbm">
 
-					<form id="newsletter" method="post" action="https://newsletter.infomaniak.com/external/submit" target="_blank">
+					<input type="email" name="email" style="display:none" />
 
-						<input type="email" name="email" style="display:none" />
+					<input type="hidden" name="key" value="<?=@$GLOBALS['newsletter-key'][$lang]?>">
 
-						<input type="hidden" name="key" value="<?=@$GLOBALS['newsletter-key'][$lang]?>">
+					<input type="hidden" name="webform_id" value="<?=@$GLOBALS['newsletter-id'][$lang]?>">
 
-						<input type="hidden" name="webform_id" value="<?=@$GLOBALS['newsletter-id'][$lang]?>">
+					<label for="email_newsletter"><?php _e('Subscribe to the newsletter of your city') ?></label>
 
-						<label for="email_newsletter"><?php _e('Subscribe to the newsletter of your city') ?></label>
+					<div class="flex pts">
 
-						<div class="flex pts">
+						<input type="email" name="inf[1]" id="email_newsletter" data-inf-meta="1" data-inf-error="Merci de renseigner une adresse email" required="required" placeholder="<?php _e("Your email")?>" class="w200p pts pbs pls">	
+						
+						<button type="submit" class="bg-green bold pas">
+							<?php _e("Subscribe"); ?>
+						</button>
 
-							<input type="email" name="inf[1]" id="email_newsletter" data-inf-meta="1" data-inf-error="Merci de renseigner une adresse email" required="required" placeholder="<?php _e("Your email")?>" class="w200p pts pbs pls">	
-							
-							<button type="submit" class="bg-green bold pas">
-								<?php _e("Subscribe"); ?>
-							</button>
+					</div>
 
-						</div>
-
-					</form>
-
-				</div>
+				</form>
 				<?}?>
 
-
 				<!-- Réseaux sociaux -->
-				<div class="pts">
-
-					<?php txt('texte-reseaux'); ?>
-
-				</div>
+				<?php txt('texte-reseaux', 'pts'); ?>
 
 			</article>
 
 
-			<article class="pbm">
+			<article>
+
 				<!-- Liens -->
-				<div class="pbl">
-
-					<?php txt('footer-liens'); ?>
-
-				</div>
+				<?php txt('footer-liens', 'pbm'); ?>
 				
 				<!-- Logo France Relance -->
 				<?php media('logo-sponsor', array('size' => '150', 'lazy' => 'true')); ?>
@@ -112,12 +96,10 @@
 
 	</section>
 
+
 	<!-- Liens -->
-	<section class="mw960p center tc ptm pbm">
+	<?php txt('footer-liens-webmaster', array('tag' => 'section', 'class' => 'mw960p center tc ptm')); ?>
 
-		<?php txt('footer-liens-webmaster'); ?>
-
-	</section>
 
 </footer>
 
