@@ -1481,6 +1481,9 @@ div.editable {
 
 	article img { max-width: 100% !important; }
 
+	/* Header */
+	header #accessibilite { margin-right: 5.5rem; }
+
 	/* Home */
 		/** Encart intro **/
 		#intro-texte { max-width: 550px; }
@@ -1513,7 +1516,6 @@ div.editable {
 /* RESPONSIVE medium */
 @media (max-width: 480px)
 {
-	header nav .burger { top: 245px; }
 
 	#recherche { max-width: 190px; }
 
