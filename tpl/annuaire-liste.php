@@ -87,7 +87,7 @@
 
 					</figure>
 
-					<div class="pam brd-left">
+					<div class="ptm pbl plm prm brd-left">
 						
 						<!-- Tags -->
 						<!-- <div class="mbm">

@@ -273,18 +273,26 @@ article ul li { padding-bottom: 2em; }
 	/* Affichage images en background */
 	.tpl-annuaire-liste figure { width: 299px; }
 
-	.tpl-personnalites .blocks li {
-		width: 300px;
-		background-color: #00253F1A;
-		margin-top: 2rem;
-		padding: 4rem;
-		border-top-left-radius: 25px;
-		border-bottom-right-radius: 25px;
-	}
-
 	#adresse p {  margin-bottom: 0; }
 
 
+/* PERSONNALITES */
+.tpl-personnalites .blocks li {
+	position: relative;
+	width: 300px;
+	background-color: #00253F1A;
+	margin-top: 2rem;
+	padding: 4rem 2rem;
+	border-top-left-radius: 25px;
+	border-bottom-right-radius: 25px;
+}
+
+	/* Alignement dernier texte dans le bas */
+	.tpl-personnalites .absolute.block {
+		left: 0;
+		right: 0;
+		bottom: 4rem;
+	}
 
 
 /* CONTACT */
