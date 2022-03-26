@@ -87,13 +87,13 @@
 
 					</figure>
 
-					<div class="pam brd-left">
+					<div class="ptm pbl plm prm brd-left">
 						
-						<!-- Affichage tags supprimé pour Elgarweb - laisser en commentaire si besoin pour autre mairie -->
 						<!-- Tags -->
 						<!-- <div class="mbm">
-
+			
 							<?php 
+							/* Affichage tags supprimé pour Elgarweb - laisser en commentaire si besoin pour autre mairie */
 							if(isset($tags) and isset($res_fiche['id']))
 							global $tags;
 							{ 

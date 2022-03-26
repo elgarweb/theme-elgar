@@ -64,7 +64,7 @@ switch(@$_REQUEST['mode'])
 			});
 
 			// Action avant la supp
-			before_del.push(function()
+			after_del.push(function()
 			{
 				$.ajax({
 					type: "POST",

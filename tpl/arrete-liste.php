@@ -203,7 +203,7 @@ $mois = array(
 	<div class="tc ptm mtl pbl">
 
 		<?php
-		page($num_total, $page);
+		page($num_total, $page, array('aria-label'=>__("Browsing by page")));
 		?>
 
 	</div>

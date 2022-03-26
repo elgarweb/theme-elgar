@@ -89,6 +89,7 @@ $add_translation = array(
 	"Open" => array("fr" => "Ouverture"),
 	"Close" => array("fr" => "Fermeture"),
 	"to" => array("fr" => "à"),
+	"Browsing by page" => array("fr" => "Navigation par page"),
 
 
 	// RECHERCHE
