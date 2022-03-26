@@ -19,11 +19,14 @@ function highlight($txt, $recherche)
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 
 
-	<h1 class="tc"><?txt('title')?></h1>
+	<?php /*
+	 <h1 class="tc"><?txt('title')?></h1>
+	 */ ?>
+	<?php h1('title');?>
 
 
 	<div class="w90 center">
-	<?
+	<?php 
 	// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs
 	if(!@$_SESSION['auth']['edit-article']) $sql_state = "AND state='active'";
 	else $sql_state = "";
@@ -77,15 +80,11 @@ function highlight($txt, $recherche)
 	$num_total = $connect->query("SELECT FOUND_ROWS()")->fetch_row()[0];// Nombre total de fiche
 	?>
 
-
 	<div class="tc">
-		<?=$num_total.' '.__("result").($num_total>1?'s':'')?>
-		<?=__("for")?>
-		<strong><?=htmlspecialchars(strip_tags(@$_POST['recherche']));?></strong>
+		<?php echo $num_total.' '.__("result").($num_total>1?'s':'')." ". __("for")." <strong>".htmlspecialchars(strip_tags(@$_POST['recherche']))."</strong>";?>
 	</div>
 
-
-	<?
+	<?php 
 	while($res_fiche = $sel_fiche->fetch_assoc())
 	{
 		$texte = null;
@@ -99,10 +98,9 @@ function highlight($txt, $recherche)
 		?>
 		<article class="mod mtl">
 
-			<h2 class="up bigger"><a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" class="tdn"><?=highlight($res_fiche['title'], strip_tags(@$_POST['recherche']))?></a><?=$state?></h2>
+			<h2 class="up bigger"><a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" class="tdn"><?php echo highlight($res_fiche['title'], strip_tags(@$_POST['recherche']))?></a><?php echo $state?></h2>
 			
-
-			<?
+			<?php
 			if(isset($content_fiche['description'])) $texte = $content_fiche['description'];
 			elseif(isset($content_fiche['texte'])) $texte = $content_fiche['texte'];
 			
@@ -110,15 +108,14 @@ function highlight($txt, $recherche)
 				echo highlight(word_cut($texte, '350', '...', '<br><div>'), strip_tags(@$_POST['recherche']));
 			?>
 
-
-			<div class="fr mtm"><a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" class="bt bold"><?_e("Lire")?></a></div>
+			<div class="fr mtm"><a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" class="bt bold" aria-label="<?php _e("Lire")?> <?php echo $res_fiche['title']?>"><?php _e("Lire")?></a></div>
 
 		</article>
-		<?
+		<?php
 	}?>
 	</div>
 
-	<div class="tc mtl"><?page($num_total, $page);?></div>
+	<div class="tc mtl"><?php page($num_total, $page, array('aria-label'=>__("Browsing by page")));?></div>
 
 </section>
 
