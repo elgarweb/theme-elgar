@@ -43,7 +43,7 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 		</div>
 		<?php } ?>
 	
-		<div>
+		<div class="mw600p">
 
 			<!-- Tag -->
 			<div id="tags">
