@@ -7,6 +7,8 @@ $add_translation = array(
 	"Home other language" => array("fr" => "Accueil Français", "eu" => "Harrera euskaraz"),
 
 	// Ariane
+	"Navigation" => array("fr" => "Navigation"),
+	"Upper menu" => array("fr" => "Menu supérieur"),
 	"Breadcrumb" => array("fr" => "Fil d'Ariane"),
 	"Home" => array("fr" => "Accueil", "eu" => "Harrera", "oc" => "Acuèlh"),
 	"The average reading time for this page is *minute* minutes and *second* seconds. For less impact on the environment we recommend that you print it double-sided, black and white, 2 pages per sheet." => array("fr" => "Le temps moyen de lecture de cette page est de *minute* minutes et *second* secondes. Pour moins d'impact sur l'environnement nous vous recommandons de l'imprimer en recto-verso, noir et blanc, 2 pages par feuille."),

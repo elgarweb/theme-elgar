@@ -24,7 +24,11 @@ if(!$GLOBALS['domain']) exit;
 			{?><a href="/<?=encode(__("Arrêtés"))?>"><?php _e("Arrêtés")?></a><?}
 		?>
 
-		<?php tag('navigation', array('tag' => 'span', 'separator' => ' > '));?>
+		<?php 
+		//tag('navigation', array('tag' => 'span', 'separator' => ' > '));// ancienne version
+		 if($res['tpl']!='navigation') 
+		 	select('navigation', ['option' => json_encode($navigation, true), 'tag' => 'a', 'href' => encode(@$content['navigation']), 'class'=>'meta']);
+		;?>
 
 		<?php 
 		//if(isset($GLOBALS['tags']) and isset($res['title'])) echo' > ';
