@@ -189,11 +189,30 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 	
 	<!-- Bouton vers toutes les actualités/agenda/annuaire -->
 	<div class="tc ptl pbl">
+		<?php
+		switch ($res['type']){
+			case 'event':
+			case 'event-tourinsoft':
+				$url=__('agenda');
+				$text = __("Go back to the agenda");
+				break;
+			case 'article':
+				$url=__('news');
+				$text = __("Go back to the news");
+				break;
+			case 'arrete':
+				$url=__('arrete');
+				$text = __("Go back to the arrete");
+				break;
+			default:
+				$url=__('directory');
+				$text = __("Go back to the directory");
+				break;
+		}
+		?>
 
-		<a href="<?= make_url(($res['type']=='event' ? __('agenda') : ($res['type']=='article' ? __('news') : __('directory'))), array("domaine" => true))?>" class="bt pas">
-
-			<?= ($res['type']=='event' ? __("Go back to the agenda") : ($res['type']=='article' ? __("Go back to the news") : __("Go back to the directory"))); ?>
-
+		<a href="<?= make_url($url, array("domaine" => true))?>" class="bt pas">
+			<?= $text; ?>
 		</a>
 
 	</div>
