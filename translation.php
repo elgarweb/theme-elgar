@@ -119,6 +119,8 @@ $add_translation = array(
 	"Year" => array("fr" => "Année"),
 	"Filter" => array("fr" => "Filtrer"),
 	"No result" => array("fr" => "Pas de résultat"),
+	"Go back to the arrete" => array("fr" => "Retour aux arrêtés"),
+	"arrete" => array("fr" => "arretes"),
 
 
 	// TOURINSOFT
