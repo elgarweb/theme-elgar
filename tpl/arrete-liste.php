@@ -38,7 +38,6 @@ $mois = array(
 
 	<?php txt('description'); ?>
 
-
 	<form id="filtre-date-arrete" class="tc">
 
 		<!-- 
@@ -54,27 +53,29 @@ $mois = array(
 			<legend>
 				<?_e("Filter by date")?>
 			</legend>
+			<?php echo txt("comment-filtrer");?>
+			<div>
 
-			<label for="date"><?_e("Month")?> :</label>
-			<select id="month">
-				<option value="" <?=(!@$GLOBALS['filter']['month']?'selected':'')?>><?_e("Month")?></option>
-				<?php 
-				foreach($mois as $num => $nom){
-					echo'<option value="'.$num.'"'.(@$GLOBALS['filter']['month']==$num?' selected':'').'>'.__($nom).'</option>';
-				}
-				?>
-			</select>
+				<label for="year" class="mls"><?_e("Year")?> :</label>
+				<select id="year" aria-describedby="comment-filtrer">
+					<option value="" <?=(!@$GLOBALS['filter']['year']?'selected':'')?>><?_e("Year")?></option>
+					<?php 
+					for($i=1980; $i<=date("Y"); $i++) { 
+						echo'<option value="'.$i.'"'.(@$GLOBALS['filter']['year']==$i?' selected':'').'>'.$i.'</option>';
+					}
+					?>
+				</select>
 
-			<label for="date" class="mls"><?_e("Year")?> :</label>
-			<select id="year">
-				<option value="" <?=(!@$GLOBALS['filter']['year']?'selected':'')?>><?_e("Year")?></option>
-				<?php 
-				for($i=1980; $i<=date("Y"); $i++) { 
-					echo'<option value="'.$i.'"'.(@$GLOBALS['filter']['year']==$i?' selected':'').'>'.$i.'</option>';
-				}
-				?>
-			</select>
-
+				<label for="month"><?_e("Month")?> :</label>
+				<select id="month">
+					<option value="" <?=(!@$GLOBALS['filter']['month']?'selected':'')?>><?_e("Month")?></option>
+					<?php 
+					foreach($mois as $num => $nom){
+						echo'<option value="'.$num.'"'.(@$GLOBALS['filter']['month']==$num?' selected':'').'>'.__($nom).'</option>';
+					}
+					?>
+				</select>
+			</div>
 		</fieldset>
 		
 		<button type="submit" class="bg-green pat mtm"><?_e("Filter")?></button>

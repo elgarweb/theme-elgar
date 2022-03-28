@@ -33,7 +33,7 @@ if(!$GLOBALS['domain']) exit;
 		
 	</nav>
 
-
+<?if((isset($GLOBALS['tags'])) || (@$res['type']=='article') || (@$res['type']=='event' or $res['type']=='event-tourinsoft')) { ?>
 	<script>
 		<?if(isset($GLOBALS['tags'])) {// Si tag de navigation on met en selected dans la navigation principal?>
 			$("header nav [href$='<?=array_keys($GLOBALS['tags'])[0]?>']").parent().addClass("selected");
@@ -45,36 +45,32 @@ if(!$GLOBALS['domain']) exit;
 			$("header nav [href$='agenda'").parent().addClass("selected");
 		<?}?>
 	</script>
-	
+<?php } 
 
+ 	// Si une traduction de la page courante existe on propose le lien vers la page traduite
+	$sql='SELECT '.$tc.'.url, '.$tc.'.lang FROM '.$tc;
+	$sql.=' JOIN '.$tl.'
+	ON
+	(
+		'.$tl.'.id = '.$id.' AND
+		'.$tl.'.trad = '.$tc.'.id
 
-	<ul class="unstyled fr">
-	 	<?php
-	 	// Si une traduction de la page courante existe on propose le lien vers la page traduite
-		$sql='SELECT '.$tc.'.url, '.$tc.'.lang FROM '.$tc;
-		$sql.=' JOIN '.$tl.'
-		ON
-		(
-			'.$tl.'.id = '.$id.' AND
-			'.$tl.'.trad = '.$tc.'.id
-
-		)';
-		$sql.=' WHERE state="active"';
-		$sql.=' ORDER BY '.$tc.'.lang ASC';
-		$sql.=' LIMIT '.count($GLOBALS['language']);
-		//echo $sql;
-		$sel_lang = $connect->query($sql);
-		if(!empty($sel_lang->num_rows))// Si des résultat & que la table existe
+	)';
+	$sql.=' WHERE state="active"';
+	$sql.=' ORDER BY '.$tc.'.lang ASC';
+	$sql.=' LIMIT '.count($GLOBALS['language']);
+	//echo $sql;
+	$sel_lang = $connect->query($sql);
+	if(!empty($sel_lang->num_rows))// Si des résultat & que la table existe
+	{
+		echo '<ul class="unstyled fr">';
+		while($res_lang = $sel_lang->fetch_assoc())
 		{
-			while($res_lang = $sel_lang->fetch_assoc())
-			{
-				echo'<li><a href="'.make_url($res_lang['url'], array('domaine' => $GLOBALS['scheme'].@$GLOBALS['domain_lang'][$res_lang['lang']].$GLOBALS['path'])).'" lang="'.$res_lang['lang'].'">'.$GLOBALS['translation']['other language'][$res_lang['lang']].'</a></li>';
-			}
+			echo'<li><a href="'.make_url($res_lang['url'], array('domaine' => $GLOBALS['scheme'].@$GLOBALS['domain_lang'][$res_lang['lang']].$GLOBALS['path'])).'" lang="'.$res_lang['lang'].'">'.$GLOBALS['translation']['other language'][$res_lang['lang']].'</a></li>';
 		}
-		?>
-	</ul>
+		echo '</ul>';
+	}
 
-	<?php 
 	// Calcule du temps de lecture du texte de la page pour suggestion d'impression
 	// Vitesse de lecture moyenne entre 230 et 280 mots par minute, donc 200 pour plus de confort
 	$word = str_word_count(strip_tags(@$GLOBALS['content']['description'].@$GLOBALS['content']['texte']));
