@@ -28,7 +28,7 @@
 					<?php txt('groupe-ss-sstitre-'.$i, 'color'); ?>
 				</div>
 
-				<ul id="personnalite-<?=$i?>" class="blocks module unstyled flex wrap space-xl jcc jic tc pln">					
+				<ul id="personnalite-<?=$i?>" class="blocks module unstyled flex wrap space-xl jic tc pln">					
 				<?php 
 				$module = module("personnalite-".$i);
 				//print_r($modulePersonnalite);
