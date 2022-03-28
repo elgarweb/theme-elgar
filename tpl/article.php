@@ -56,13 +56,13 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 					<?php 
 					// Champs saisie tags
 					if($res['tpl']=='article')
-						tag('actualites', array('tag' => 'span', 'separator' => '&nbsp;')); 
+						tag('actualites', array('tag' => 'span')); 
 					elseif ($res['tpl']=='event')
-						tag('agenda', array('tag' => 'span', 'separator' => '&nbsp;')); 
+						tag('agenda', array('tag' => 'span')); 
 					elseif ($res['tpl']=='annuaire')
-						tag('annuaire', array('tag' => 'span', 'separator' => '&nbsp;')); 
+						tag('annuaire', array('tag' => 'span')); 
 					else
-						tag('arretes', array('tag' => 'span', 'separator' => '&nbsp;'));
+						tag('arretes', array('tag' => 'span'));
 				
 					// Scripts		
 					if($res['tpl']=='article') { ?>
