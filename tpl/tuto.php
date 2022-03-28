@@ -12,6 +12,8 @@ lors de la création du site créer les pages suivantes pour le bon fonctionneme
 
 => voir en fonction des traductions, et si plusieur (3 langues)
 
+- pour les pages de sous menu (navigation) il faut créer la page (tpl : navigation) avant de l'ajouter au menu, et après y rattacher les pages voulus en sélectionnant dans le select du fil d'ariane
+
 
 voir pour le nom des zone tag en multilangue
 => dire de bien créer les pages liste-* avec le nom de la zone tag
