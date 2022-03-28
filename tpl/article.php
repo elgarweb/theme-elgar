@@ -12,7 +12,7 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 	<article class="flex wrap space-xl ptl">
 
 		<?php if($res['tpl']=='article' or $res['tpl']=='event' or $res['tpl']=='annuaire') { ?>
-		<div class="prm">
+		<div class="<?= (isset($GLOBALS['content']['visuel'])) ? '' : 'editable-hidden ' ?>prm">
 
 			<figure>
 
@@ -43,7 +43,7 @@ if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['cont
 		</div>
 		<?php } ?>
 	
-		<div>
+		<div class="mw600p">
 
 			<!-- Tag -->
 			<div id="tags">

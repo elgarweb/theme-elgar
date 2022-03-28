@@ -28,7 +28,7 @@ $add_translation = array(
 	"Share this page" => array("fr" => "Partager cette page", "eu" => "Orri hau partekatu"),
 
 	// Footer - Newsletter
-	"Subscribe to the newsletter of your city" => array("fr" => "Inscrivez-vous<br> à la newsletter de votre ville", "eu" => "Zure herriko newsletter-ean harpidetu zaitez"),
+	"Subscribe to the newsletter of your city" => array("fr" => "Inscrivez-vous<br> à la lettre d'informations de votre ville", "eu" => "Zure herriko newsletter-ean harpidetu zaitez"),
 	"Your email" => array("fr" => "Votre mail", "eu" => "Zure helbide elektronikoa"),
 	"Subscribe" => array("fr" => "S'inscrire", "eu" => "Zure izena eman"),
 
