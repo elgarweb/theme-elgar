@@ -84,10 +84,15 @@
 			</button>
 
 			<ul id="main-navigation" class="flex wrap space bold plm prm">
-				<?php				
+				<?php		
+				$navigation = [''=>__('Upper menu')];
+
 				// Extraction du menu
 				foreach($GLOBALS['nav'] as $cle => $val)
 				{
+					// Pour le fil d'ariane
+					$navigation = array_merge($navigation, [$val['href'] => str_replace('<br>',' ', $val['text'])]);
+
 					// Menu sélectionné si page en cours // @$res['type'] == "article" and $val['href'] == "actualites"  or ()
 					if(get_url() == $val['href'] or @array_keys($GLOBALS['filter'])[0] == basename($val['href']))
 						$selected = ' selected';

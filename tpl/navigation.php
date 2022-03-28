@@ -13,7 +13,7 @@
 		// Récupération du filtre dans l'url pour rechercher les pages connexes
 
 		// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs
-		if(!@$_SESSION['auth']['edit-article']) $sql_state = "AND state='active'";
+		if(!@$_SESSION['auth']['edit-page']) $sql_state = "AND state='active'";
 		else $sql_state = "";
 
 		// Navigation par page
@@ -24,9 +24,8 @@
 		$start = ($page * $num_pp) - $num_pp;
 
 
-		// Construction de la requete
-		$sql="SELECT ".$tc.".url, ".$tc.".title, ".$tc.".state FROM ".$tc;//SQL_CALC_FOUND_ROWS ".$tc.".id, 
-
+		// Version avec les tags
+		/*$sql="SELECT ".$tc.".url, ".$tc.".title, ".$tc.".state FROM ".$tc;//SQL_CALC_FOUND_ROWS ".$tc.".id, 
 		$sql.=" RIGHT JOIN ".$tt."
 		ON
 		(
@@ -34,12 +33,20 @@
 			".$tt.".zone = 'navigation' AND
 			".$tt.".encode = '".$tag."'
 		)";
-
 		$sql.=" WHERE ".$tc.".lang='".$lang."' ".$sql_state."";
-
 		$sql.=" ORDER BY ".$tc.".date_insert DESC";
+		$sql.=" LIMIT ".$start.", ".$num_pp;*/
 
+
+		// Version avec select dans le fil d'ariane
+		$sql ="SELECT ".$tc.".url, ".$tc.".title, ".$tc.".state FROM ".$tc;
+		$sql.=" RIGHT JOIN ".$tm." ON (".$tc.".id = ".$tm.".id)";
+		$sql.=" WHERE (".$tm.".type='navigation')";
+		$sql.=" AND ".$tm.".cle='".$res['url']."' ";
+		//$sql.=" ORDER BY ".$tm.".ordre ASC";
+		$sql.=" ORDER BY ".$tc.".date_insert DESC";
 		$sql.=" LIMIT ".$start.", ".$num_pp;
+
 
 		//echo $sql;
 		$sel_nav = $connect->query($sql);
