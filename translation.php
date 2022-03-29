@@ -132,11 +132,15 @@ $add_translation = array(
 	"sitemap" => array("fr" => "plan-du-site"),
 	"legal-notices" => array("fr" => "mentions-legales"),
 
+
 	"News" => array("fr" => "Actualités"),
 		"actualites" => array("fr" => "Actualités"),
+
 	"Agenda" => array("fr" => "Agenda"),
+
 	"Directory" => array("fr" => "Annuaire", "eu" => "aurkitegia"),
 		"annuaire" => array("fr" => "Annuaire"),
+
 	"Decrees" => array("fr" => "Arrêtés"),
 		"arretes" => array("fr" => "Arrêtés"),
 
