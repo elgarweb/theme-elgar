@@ -21,7 +21,7 @@ h1, .h1-like,
 h2, .h2-like,
 h3, .h3-like { 
 	color: #00253F;
-	font-weight: bold;
+	font-weight: 800;
 	margin-top: 1rem;
 	margin-bottom: 2rem;
 }
@@ -114,6 +114,7 @@ span[lang="eu"] { border-bottom: dotted 1px #00253F; }
 }
 
 .bt:not(.fixed):not(.vam) { 
+	font-family: 'Montserrat', sans-serif;
 	font-weight: bold;
 	padding: 1rem 3rem; 
 	border-bottom-right-radius: 2.5rem;
