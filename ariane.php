@@ -10,25 +10,22 @@ if(!$GLOBALS['domain']) exit;
 
 		<a href="/"><?php _e("Home")?></a>
 
-		<?php 
-		if(@$res['type']=='article' or ($res['url'] == encode(__("Actualités")) and $tag))
-			{?><a href="/<?=encode(__("Actualités"))?>"><?php _e("Actualités")?></a><?}
-
-		elseif(@$res['type']=='event' or @$res['type']=='event-tourinsoft' or ($res['url'] == encode(__("Agenda")) and $tag))
-			{?><a href="/<?=encode(__("Agenda"))?>"><?php _e("Agenda")?></a><?}
-
-		elseif(@$res['type']=='annuaire' or ($res['url'] == encode(__("Annuaire")) and $tag))
-			{?><a href="/<?=encode(__("Annuaire"))?>"><?php _e("Annuaire")?></a><?}
-
-		elseif(@$res['type']=='arrete' or ($res['url'] == encode(__("Arrêtés")) and $tag))
-			{?><a href="/<?=encode(__("Arrêtés"))?>"><?php _e("Arrêtés")?></a><?}
-		?>
 
 		<?php 
+		// Page navigation/carrefour
 		//tag('navigation', array('tag' => 'span', 'separator' => ' > '));// ancienne version
 		 if($res['tpl']!='navigation') 
-		 	select('navigation', ['option' => json_encode($navigation, true), 'tag' => 'a', 'href' => encode(@$content['navigation']), 'class'=>'meta']);
+		 	select('navigation', ['option' => json_encode($navigation, true), 'tag' => 'a', 'href' => $GLOBALS['path'].encode(@$content['navigation']), 'class'=>'meta']);
 		;?>
+
+
+		<?php 
+		// Si page fiche ou listing avec tag
+		//if(@$res['type']=='article' or ($res['url'] == encode(__("Actualités")) and $tag))
+		if(@$res['type']==@$type or $tag)
+			{?><a href="/<?=encode($url_back)?>"><?php _e(encode($url_back))?></a><?}
+		?>
+
 
 		<?php 
 		//if(isset($GLOBALS['tags']) and isset($res['title'])) echo' > ';
@@ -37,7 +34,9 @@ if(!$GLOBALS['domain']) exit;
 		
 	</nav>
 
-<?if((isset($GLOBALS['tags'])) || (@$res['type']=='article') || (@$res['type']=='event' or $res['type']=='event-tourinsoft')) { ?>
+
+
+	<?if((isset($GLOBALS['tags'])) || (@$res['type']=='article') || (@$res['type']=='event' or $res['type']=='event-tourinsoft')) { ?>
 	<script>
 		<?if(isset($GLOBALS['tags'])) {// Si tag de navigation on met en selected dans la navigation principal?>
 			$("header nav [href$='<?=array_keys($GLOBALS['tags'])[0]?>']").parent().addClass("selected");
@@ -49,7 +48,9 @@ if(!$GLOBALS['domain']) exit;
 			$("header nav [href$='agenda'").parent().addClass("selected");
 		<?}?>
 	</script>
-<?php } 
+	<?php } 
+
+
 
  	// Si une traduction de la page courante existe on propose le lien vers la page traduite
 	$sql='SELECT '.$tc.'.url, '.$tc.'.lang FROM '.$tc;
@@ -74,6 +75,8 @@ if(!$GLOBALS['domain']) exit;
 		}
 		echo '</ul>';
 	}
+
+
 
 	// Calcule du temps de lecture du texte de la page pour suggestion d'impression
 	// Vitesse de lecture moyenne entre 230 et 280 mots par minute, donc 200 pour plus de confort
