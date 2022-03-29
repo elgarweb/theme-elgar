@@ -195,7 +195,7 @@ $mois = array(
 			?>
 
 			<li>
-				<a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>"><?=$res_fiche['title']; ?></a> - <?=date_lang($content_fiche['aaaa-mm-jj']); ?>
+				<a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>"><?=$res_fiche['title']; ?></a> - <?=date_lang(@$content_fiche['aaaa-mm-jj']); ?>
 			</li>
 
 		<?php	
