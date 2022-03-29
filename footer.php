@@ -61,11 +61,11 @@
 
 					<input type="hidden" name="webform_id" value="<?=@$GLOBALS['newsletter-id'][$lang]?>">
 
-					<label for="email_newsletter"><?php _e('Subscribe to the newsletter of your city') ?></label>
+					<label for="email_newsletter"><?php _e('Subscribe to the newsletter of your city') ?><span class="block small ptt"><?php _e('Expected format: nom@domaine.com');?></span></label>
 
 					<div class="flex pts">
 
-						<input type="email" name="inf[1]" id="email_newsletter" data-inf-meta="1" data-inf-error="Merci de renseigner une adresse email" required="required" placeholder="<?php _e("Your email")?>" class="w200p pts pbs pls">	
+						<input type="email" name="inf[1]" id="email_newsletter" autocomplete="email" required="required" placeholder="<?php _e("Your email")?>" class="w200p pts pbs pls">
 						
 						<button type="submit" class="bg-green bold pas">
 							<?php _e("Subscribe"); ?>
