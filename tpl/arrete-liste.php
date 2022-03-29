@@ -202,7 +202,7 @@ $mois = array(
 		}
 		?>
 
-	</div>
+	</ul>
 
 	<div class="tc ptm mtl pbl">
 
