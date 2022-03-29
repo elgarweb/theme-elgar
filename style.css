@@ -126,7 +126,7 @@ span[lang="eu"] { border-bottom: dotted 1px #00253F; }
 		color: #00253F;
 	}
 
-.bt-tag {
+/* .bt-tag {
 	display: inline-block;
 	text-align: center;
 	background-color: #26D691;
@@ -138,7 +138,7 @@ span[lang="eu"] { border-bottom: dotted 1px #00253F; }
 	.bt-tag:hover, .bt-tag.selected {
 		background-color: #00253F;
 		color: #26D691;
-	}
+	} */
 
 button { border: solid 1px #26D691; }
 
@@ -267,7 +267,7 @@ article ul li { padding-bottom: 2em; }
 		/** affichage tags pages détail **/
 		#tags a { 
 			text-decoration: underline !important;
-			padding-right: 1rem; 
+			/* padding-right: 1rem; */ 
 		}
 			#tags a:hover { text-decoration: none !important; }
 

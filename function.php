@@ -48,14 +48,15 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 
 						<div class="mbm">
 
-							<?php if(isset($tags) and isset($res_fiche['id']))
+							<?php 
+							/*if(isset($tags) and isset($res_fiche['id']))
 							{ 
 								$sel_tag = $GLOBALS['connect']->query("SELECT * FROM ".$GLOBALS['tt']."
 									WHERE zone = '".$res['url']."' AND id='".$res_fiche['id']."' LIMIT 5");
 								while($res_tag = $sel_tag->fetch_assoc()) {
 									echo '<span class="bt-tag">'.$res_tag['name']."</span> ";
 								}
-							} 
+							}*/
 							?>
 
 						</div>
