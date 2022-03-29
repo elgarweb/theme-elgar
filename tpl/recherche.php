@@ -19,9 +19,6 @@ function highlight($txt, $recherche)
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 
 
-	<?php /*
-	 <h1 class="tc"><?txt('title')?></h1>
-	 */ ?>
 	<?php h1('title');?>
 
 
@@ -52,7 +49,10 @@ function highlight($txt, $recherche)
 		if(!@$_POST['recherche'] and $GLOBALS['filter']) 
 			$_POST['recherche'] = str_replace("-", " " , array_keys($GLOBALS['filter'])[0]);
 		else 
-			$GLOBALS['filter'][] = @$_POST['recherche'];
+			$GLOBALS['filter'][] = encode(strip_tags(@$_POST['recherche']));// pour l'url
+
+		// On supprime les éléments HTML par sécurité
+		$_POST['recherche'] = strip_tags(@$_POST['recherche']);
 
 		//echo"<br>filter after : ";print_r($GLOBALS['filter']);
 
@@ -81,7 +81,7 @@ function highlight($txt, $recherche)
 	?>
 
 	<div class="tc">
-		<?php echo $num_total.' '.__("result").($num_total>1?'s':'')." ". __("for")." <strong>".htmlspecialchars(strip_tags(@$_POST['recherche']))."</strong>";?>
+		<?php echo $num_total.' '.__("result").($num_total>1?'s':'')." ". __("for")." <strong>".htmlspecialchars(@$_POST['recherche'])."</strong>";?>
 	</div>
 
 	<?php 
@@ -98,14 +98,14 @@ function highlight($txt, $recherche)
 		?>
 		<article class="mod mtl">
 
-			<h2 class="up bigger"><a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" class="tdn"><?php echo highlight($res_fiche['title'], strip_tags(@$_POST['recherche']))?></a><?php echo $state?></h2>
+			<h2 class="up bigger"><a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" class="tdn"><?php echo highlight($res_fiche['title'], @$_POST['recherche'])?></a><?php echo $state?></h2>
 			
 			<?php
 			if(isset($content_fiche['description'])) $texte = $content_fiche['description'];
 			elseif(isset($content_fiche['texte'])) $texte = $content_fiche['texte'];
 			
 			if(isset($texte))
-				echo highlight(word_cut($texte, '350', '...', '<br><div>'), strip_tags(@$_POST['recherche']));
+				echo highlight(word_cut($texte, '350', '...', '<br><div>'), @$_POST['recherche']);
 			?>
 
 			<div class="fr mtm"><a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" class="bt bold" aria-label="<?php _e("Lire")?> <?php echo $res_fiche['title']?>"><?php _e("Lire")?></a></div>
@@ -121,9 +121,15 @@ function highlight($txt, $recherche)
 
 
 <script>
-	$(function()
-	{
+	<?if(@$_POST['recherche']) 
+	{?>
 		// Remplis l'input recherche avec les mots-clés de la recherche
-		<?if(@$_POST['recherche']) {?>$("#rechercher input").val("<?=htmlspecialchars($_POST['recherche'])?>")<?}?>
-	});
+		$("#rechercher input").val("<?=addslashes(@$_POST['recherche'])?>");
+
+		// Change le title de la page
+		document.title = "<?=addslashes($res['title']).' - '.addslashes(@$_POST['recherche']).' - '.addslashes($GLOBALS['sitename']);?>";
+
+		// Change l'url de la page			
+		window.history.replaceState({}, document.title, "<?=make_url($res['url'], array_merge($GLOBALS['filter'], array("page" => $page, "domaine" => true)));?>");//history.state	
+	<?}?>
 </script>

@@ -29,13 +29,21 @@
 		// Si page fiche ou listing avec tag
 		//if(@$res['type']=='article' or ($res['url'] == encode(__("Actualités")) and $tag))
 		if(@$res['type']==@$type or $tag)
-			{?><a href="/<?=encode($url_back)?>"><?php _e(encode($url_back))?></a><?}
+		{
+			// Supprime le nom du la page en cours pour le chemin
+			$title = preg_replace('/^'.preg_quote($res['title'].' - ').'*/', '', $title);
+
+			?><a href="/<?=encode($url_back)?>"><?php _e(encode($url_back))?></a><?
+		}
 		?>
 
 
 		<?php 
+		// Supprime le nom du site
+		$title = preg_replace('/'.preg_quote(' - '.$GLOBALS['sitename']).'*$/', '', $title);
+
 		//if(isset($GLOBALS['tags']) and isset($res['title'])) echo' > ';
-		if(isset($res['title'])) echo'<span aria-current="page">'.$res['title'].'</span>';
+		if(isset($title)) echo'<span aria-current="page">'.$title.'</span>';
 		?>
 		
 	</nav>

@@ -39,7 +39,7 @@
 			<div class="pts"><a href="<?=$GLOBALS['home']?>"><?php media('logo', array('size' => '330x70', 'lazy' => 'true'))?></a></div>
 			
 			<!-- Formulaire de recherche -->
-			<form role="search" id="rechercher" action="/recherche/" method="post">
+			<form role="search" id="rechercher" action="/recherche" method="post">
 				
 				<div id="input-recherche" class="inbl">
 					
@@ -54,11 +54,11 @@
 						</button>
 
 						<script>
-							$("#rechercher").on("submit", function(event) {
+							/*$("#rechercher").on("submit", function(event) {
 								event.preventDefault();
 								var url = "/recherche/" + $("#rechercher input").val().replace(/\s+/g, '-').toLowerCase();
 								document.location.href = url;
-							});
+							});*/
 						</script>
 
 					</div>
