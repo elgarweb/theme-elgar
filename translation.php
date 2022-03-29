@@ -54,12 +54,6 @@ $add_translation = array(
 	"See all the events" => array("fr" => "Consulter tout l'agenda", "eu" => "Agenda guzia kontsultatu"),
 
 
-	// URL
-	"sitemap" => array("fr" => "plan-du-site"),
-	"legal-notices" => array("fr" => "mentions-legales"),
-	"news" => array("fr" => "actualites"),
-
-
 	// PAGE
 	"Summary" => array("fr" => "Sommaire"),
 
@@ -103,7 +97,6 @@ $add_translation = array(
 	// ANNUAIRE
 	"Add annuaire" => array("fr" => "Ajouter un annuaire"),
 	"Edit annuaire" => array("fr" => "Edition d'un annuaire"),
-	"directory" => array("fr" => "annuaire", "eu" => "aurkitegia"),
 	"Go back to the directory" => array("fr" => "Retour à l'annuaire"),
 
 
@@ -120,8 +113,7 @@ $add_translation = array(
 	"Year" => array("fr" => "Année"),
 	"Filter" => array("fr" => "Filtrer"),
 	"No result" => array("fr" => "Pas de résultat"),
-	"Go back to the arrete" => array("fr" => "Retour aux arrêtés"),
-	"arrete" => array("fr" => "arretes"),
+	"Go back to decrees" => array("fr" => "Retour aux arrêtés"),
 
 
 	// TOURINSOFT
@@ -134,6 +126,19 @@ $add_translation = array(
 	"Please check your entry and tick the box to accept the storage and processing of this information" => array("fr" => "Merci de vérifier votre saisie et de cocher la case afin d’accepter le stockage et le traitement de ces informations"),
 	"Recipient email" => array("fr" => "Courriel du destinataire"),
 	"Subject" => array("fr" => "Sujet"),
+
+
+	// URL
+	"sitemap" => array("fr" => "plan-du-site"),
+	"legal-notices" => array("fr" => "mentions-legales"),
+
+	"News" => array("fr" => "Actualités"),
+		"actualites" => array("fr" => "Actualités"),
+	"Agenda" => array("fr" => "Agenda"),
+	"Directory" => array("fr" => "Annuaire", "eu" => "aurkitegia"),
+		"annuaire" => array("fr" => "Annuaire"),
+	"Decrees" => array("fr" => "Arrêtés"),
+		"arretes" => array("fr" => "Arrêtés"),
 
 );
 ?>

@@ -1,4 +1,8 @@
-<?php  if(!$GLOBALS['domain']) exit; ?>
+<?php 
+if(!$GLOBALS['domain']) exit;
+
+$url_back = encode(__('Directory'));
+?>
 
 <section class="mw960p mod center mbl">
 

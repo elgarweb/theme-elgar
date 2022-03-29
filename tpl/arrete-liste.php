@@ -1,4 +1,7 @@
-<?php  if(!$GLOBALS['domain']) exit;
+<?php
+if(!$GLOBALS['domain']) exit;
+
+$url_back = encode(__('Decrees'));
 
 $mois = array(
 	1 => 'january',
