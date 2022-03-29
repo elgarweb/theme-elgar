@@ -1,9 +1,5 @@
-<?php
-if(!$GLOBALS['domain']) exit;
+<?php if(!$GLOBALS['domain']) exit;?>
 
-// @todo voir pour mettre le fil d'ariane dans une ol/li => problème avec système de tag+edition
-// Peut-être injecter accueil dans la liste de tag et le supp au moment du save...
-?>
 <div class="mw960p ariane mod center ptm pbm">
 
 	<nav role="navigation" aria-label="<?php _e("Breadcrumb")?>" class="fl" itemprop="breadcrumb">
@@ -14,9 +10,19 @@ if(!$GLOBALS['domain']) exit;
 		<?php 
 		// Page navigation/carrefour
 		//tag('navigation', array('tag' => 'span', 'separator' => ' > '));// ancienne version
-		 if($res['tpl']!='navigation') 
-		 	select('navigation', ['option' => json_encode($navigation, true), 'tag' => 'a', 'href' => $GLOBALS['path'].encode(@$content['navigation']), 'class'=>'meta']);
-		;?>
+		if($res['tpl']!='navigation')
+		{
+			$array_navigation = array('option' => json_encode($navigation, true), 'class'=>'meta');
+
+			// Si un élément selectionner on affiche le lien, sinon c'est un span vide pas lisible
+			if(isset($content['navigation'])) {
+				$array_navigation['tag']= 'a';
+				$array_navigation['href']= $GLOBALS['path'].encode(@$content['navigation']);
+			}
+
+			select('navigation', $array_navigation);
+		}
+		?>
 
 
 		<?php 
