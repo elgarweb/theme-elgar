@@ -40,9 +40,14 @@
 
 		// Version avec select dans le fil d'ariane
 		$sql ="SELECT ".$tc.".url, ".$tc.".title, ".$tc.".state FROM ".$tc;
-		$sql.=" RIGHT JOIN ".$tm." ON (".$tc.".id = ".$tm.".id)";
-		$sql.=" WHERE (".$tm.".type='navigation')";
-		$sql.=" AND ".$tm.".cle='".$res['url']."' ";
+		$sql.=" JOIN ".$tm."
+		ON
+		(
+			".$tm.".id = ".$tc.".id AND
+			".$tm.".type='navigation' AND
+			".$tm.".cle='".$res['url']."'
+		)";
+		//$sql.=" WHERE ";
 		//$sql.=" ORDER BY ".$tm.".ordre ASC";
 		$sql.=" ORDER BY ".$tc.".date_insert DESC";
 		$sql.=" LIMIT ".$start.", ".$num_pp;

@@ -15,15 +15,16 @@
 		<ul>
 		 	<?php
 		 	$ul = null;
+		 	$num_pp = 50;
 			// Boucle sur les éléments du menu
 			foreach($GLOBALS['nav'] as $cle => $val)
 			{
 				echo'<li>';
 
-					echo'<a href="'.make_url($val['href'], array("domaine" => true)).'">'.$val['text'].'</a>';
+					echo'<a href="'.make_url($val['href'], array("domaine" => true)).'">'.str_replace('<br>',' ', $val['text']).'</a>';
 
-					// On regarde s'il y a des sous catégories
-					$sql="SELECT ".$tc.".url, ".$tc.".title FROM ".$tc;
+					// On regarde s'il y a des sous catégories // Ancienne méthode avec les tags
+					/*$sql="SELECT ".$tc.".url, ".$tc.".title FROM ".$tc;
 					$sql.=" RIGHT JOIN ".$tt."
 					ON
 					(
@@ -32,7 +33,21 @@
 						".$tt.".encode = '".basename($val['href'])."'
 					)";
 					$sql.=" WHERE ".$tc.".lang='".$lang."' AND state='active'";
-					$sql.=" ORDER BY ".$tt.".ordre ASC";
+					$sql.=" ORDER BY ".$tt.".ordre ASC";*/
+
+					// Version avec select dans le fil d'ariane
+					$sql ="SELECT ".$tc.".url, ".$tc.".title FROM ".$tc;
+					$sql.=" JOIN ".$tm."
+					ON
+					(
+						".$tm.".id = ".$tc.".id AND
+						".$tm.".type='navigation' AND
+						".$tm.".cle='".basename($val['href'])."'
+					)";
+					$sql.=" WHERE ".$tc.".lang='".$lang."' AND state='active'";
+					$sql.=" ORDER BY ".$tc.".date_insert DESC";
+					$sql.=" LIMIT ".$num_pp;
+
 					//echo $sql;
 					$sel_nav = $connect->query($sql);
 					while($res_nav = $sel_nav->fetch_assoc())
