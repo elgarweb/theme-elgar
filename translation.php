@@ -1,6 +1,9 @@
 <?php
 $add_translation = array(
 	// HEADER
+	"Menu" => array("fr" => "Menu", "eu" => "Menua"),
+	"Close" => array("fr" => "Fermer", "eu" => "Hetsi"),
+
 	"Accessibility" => array("fr" => "Accessibilité"),
 	"Search" => array("fr" => "Rechercher"),
 	"Search the site" => array("fr" => "Rechercher sur le site", "eu" => "Webgunean bilatu"),
@@ -66,7 +69,7 @@ $add_translation = array(
 	"Categories" => array("fr" => "Catégories/Tags"),
 	"Start date" => array("fr" => "Date de début"),
 	"Website" => array("fr" => "Site web", "eu" => "Webgunea"),	
-	"Click to see the" => array("fr" => "Cliquer pour voir le"),
+	"Click to display the" => array("fr" => "Cliquer pour afficher le"),
 	"Telephone" => array("fr" => "Téléphone", "eu" => "Telefonoa"),
 	"Email" => array("fr" => "Courriel"),
 	"Mail" => array("fr" => "Mail"),
@@ -85,8 +88,8 @@ $add_translation = array(
 	"november" => array("fr" => "novembre"),
 	"december" => array("fr" => "décembre"),
 	"st" => array("fr" => "er"),
-	"Open" => array("fr" => "Ouverture"),
-	"Close" => array("fr" => "Fermeture"),
+	"Opening" => array("fr" => "Ouverture"),
+	"Closing" => array("fr" => "Fermeture"),
 	"to" => array("fr" => "à"),
 	"Browsing by page" => array("fr" => "Navigation par page"),
 

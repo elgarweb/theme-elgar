@@ -150,12 +150,12 @@ switch($res['tpl']) {
 				input('url-site-web', array('type' => 'hidden'));
 
 
-				echo '<div class="bold pts'.(!@$GLOBALS['content']['telephone']?' editable-hidden':'').'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i> <a href="javascript:void(0)" class="tel" title="'.__("Click to see the").' '.__('Telephone').'">'.__('Telephone').'</a><span class="pls" aria-live="polite"></span></div>';
+				echo '<div class="bold pts'.(!@$GLOBALS['content']['telephone']?' editable-hidden':'').'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i> <a href="javascript:void(0)" class="tel" title="'.__("Click to display the").' '.__('Telephone').'">'.__('Telephone').'</a><span class="pls" aria-live="polite"></span></div>';
 
 				input('telephone', array('type' => 'hidden', 'class' => 'encode'));
 	
 
-				echo '<div class="bold pts'.(!@$GLOBALS['content']['mail-contact']?' editable-hidden':'').'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i> <a href="javascript:void(0)" class="mailto" title="'.__("Click to see the").' '.__('Email').'">'.__('Email').'</a><span class="pls" aria-live="polite"></span></div>';
+				echo '<div class="bold pts'.(!@$GLOBALS['content']['mail-contact']?' editable-hidden':'').'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i> <a href="javascript:void(0)" class="mailto" title="'.__("Click to display the").' '.__('Email').'">'.__('Email').'</a><span class="pls" aria-live="polite"></span></div>';
 
 				input('mail-contact', array('type' => 'hidden', 'class' => 'encode'));
 
