@@ -1498,7 +1498,7 @@ div.editable {
 	article img { max-width: 100% !important; }
 
 	/* Header */
-	header #accessibilite { margin-right: 5.5rem; }
+	header #accessibilite { margin-right: 5.6rem; }
 
 	/* Home */
 		/** Encart intro **/
@@ -1536,6 +1536,10 @@ div.editable {
 	#recherche { max-width: 190px; }
 
 	header { font-size: 1.4rem; }
+
+	header #accessibilite .mls,
+	header #accessibilite .mrs
+	{ margin: 0; }
 
 	[class*="grid-2"],
 	[class*="grid-3"],
