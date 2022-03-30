@@ -79,7 +79,7 @@
 		<nav role="navigation" class="mw960p center brd-top-alt mtl tc" aria-label="<?php _e("Browsing menu")?>">
 
 			<button type="button" class="burger" aria-expanded="false" aria-controls="main-navigation">
-				<span class="open">Menu</span>
+				<span class="open"><?php _e("Menu")?></span>
 				<span class="close none"><?php _e("Close")?></span>
 			</button>
 
