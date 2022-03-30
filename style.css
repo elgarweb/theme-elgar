@@ -226,6 +226,8 @@ article ul li { padding-bottom: 2em; }
 		color: #000;
 	}
 
+	header section:first-of-type { font-size: 1.4rem; }
+
 
 /* HOME */
 	/* En un clic */
@@ -1485,9 +1487,12 @@ div.editable {
 	.dragger { display: none !important; }
 	#add-nav { display: none !important; }
 
-	header #accessibilite { text-align: center; }
+	header #accessibilite { 
+		float: none;
+		text-align: center; 
+	}
 	header div > a { 
-		float: initial !important; 
+		float: none !important; 
 		display: block; 
 		text-align: center; 
 	}
@@ -1540,8 +1545,6 @@ div.editable {
 {
 
 	#recherche { max-width: 190px; }
-
-	header { font-size: 1.4rem; }
 
 	header #accessibilite .mls,
 	header #accessibilite .mrs
