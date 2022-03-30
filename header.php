@@ -83,7 +83,7 @@
 				<span class="close none"><?php _e("Close")?></span>
 			</button>
 
-			<ul id="main-navigation" class="flex wrap space bold plm prm">
+			<ul id="main-navigation" class="flex wrap space-l bold">
 				<?php		
 				$navigation = [''=>__('Upper menu')];
 
