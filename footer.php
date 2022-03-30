@@ -2,9 +2,7 @@
 
 <footer role="contentinfo">
 
-
 	<div class="editable-hidden tc ptm"><i class="fa fa-attention"></i><?_e("Have you taken the accessibility rules into account when entering your content?")?></div>
-
 
 
 	<?if(isset($res['url'])){?>
@@ -31,7 +29,6 @@
 	<?}?>
 
 
-
 	<!-- RENSEIGNEMENTS COMPLEMENTAIRES -->
 	<section class="<?=(isset($GLOBALS['content']['texte-renseignements']) ? 'bg-green ptl pbt' : 'editable-hidden'); ?>">
 
@@ -40,15 +37,12 @@
 	</section>
 
 
-
 	<!-- CONTACTS -->
 	<section id="contacts" class="bg-color ptl pbm">
 
 		<div class="mw960p center flex jcsb">
 
-
 			<?php txt('texte-coordonnees', array('tag' => 'article'))?>
-
 
 			<article>
 
@@ -81,7 +75,6 @@
 
 			</article>
 
-
 			<article>
 
 				<!-- Liens -->
@@ -96,17 +89,16 @@
 
 	</section>
 
-
 	<!-- Liens -->
 	<?php txt('footer-liens-webmaster', array('tag' => 'section', 'class' => 'mw960p center tc ptm')); ?>
-
 
 </footer>
 
 <script>
 	// Ajout du title "nouvelle fenêtre" au lien sortant
 	$("a[target='_blank']").each(function() {
-		if(!$(this).attr("title")) $(this).attr("title", $(this).text() + " - <?_e("New window");?>");
+		if(!$(this).attr("aria-label")) $(this).attr("aria-label", $(this).text() + " - <?_e("New window");?>");
+		$(this).addClass("external");
 	});
 </script>
 
