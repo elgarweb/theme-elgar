@@ -16,15 +16,6 @@ $add_translation = array(
 	"Home" => array("fr" => "Accueil", "eu" => "Harrera", "oc" => "Acuèlh"),
 	"The average reading time for this page is *minute* minutes and *second* seconds. For less impact on the environment we recommend that you print it double-sided, black and white, 2 pages per sheet." => array("fr" => "Le temps moyen de lecture de cette page est de *minute* minutes et *second* secondes. Pour moins d'impact sur l'environnement nous vous recommandons de l'imprimer en recto-verso, noir et blanc, 2 pages par feuille."),
 
-	// Admin langue
-	"Other language" => array("fr" => "Version Française", "eu" => "Euskarazko bertsioa", "oc" => "Version en Gascon"),
-	"Language" => array("fr" => "Langue"),
-	"Duplicate" => array("fr" => "Dupliquer"),
-
-	// Langue
-	"fr" => array("fr" => "Français"),
-	"eu" => array("fr" => "Basque"),
-
 
 	// FOOTER
 	"Have you taken the accessibility rules into account when entering your content?" => array("fr" => "Avez-vous bien pris en compte les règles d'accessibilité lors de la saisie de vos contenus ?"),
@@ -48,9 +39,6 @@ $add_translation = array(
 	"Site map" => array("fr" => "Plan du site", "eu" => "Webgunearen planoa"),
 	"Legal notices" => array("fr" => "Mentions légales", "eu" => "Legezko aipamenak"),
 
-	// FONCTIONS
-	"New window" => array("fr" => "Nouvelle fenêtre"),
-
 
 	// BOUTONS
 	"Read all the news" => array("fr" => "Lire toutes les actualités", "eu" => "Berri guziak irakurri"),
@@ -59,6 +47,8 @@ $add_translation = array(
 
 	// PAGE
 	"Summary" => array("fr" => "Sommaire"),
+	"Page" => array("fr" => "Page"),
+	"Disabled page" => array("fr" => "Page désactivé"),
 
 
 	// ACTUALITÉS - AGENDA
@@ -131,6 +121,20 @@ $add_translation = array(
 	"Please check your entry and tick the box to accept the storage and processing of this information" => array("fr" => "Merci de vérifier votre saisie et de cocher la case afin d’accepter le stockage et le traitement de ces informations"),
 	"Recipient email" => array("fr" => "Courriel du destinataire"),
 	"Subject" => array("fr" => "Sujet"),
+
+
+	// FONCTIONS
+	"New window" => array("fr" => "Nouvelle fenêtre"),
+
+
+	// Admin langue
+	"Other language" => array("fr" => "Version Française", "eu" => "Euskarazko bertsioa", "oc" => "Version en Gascon"),
+	"Language" => array("fr" => "Langue"),
+	"Duplicate" => array("fr" => "Dupliquer"),
+
+	// Langue
+	"fr" => array("fr" => "Français"),
+	"eu" => array("fr" => "Basque"),
 
 
 	// URL
