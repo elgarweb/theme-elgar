@@ -4,7 +4,6 @@
 
 	<div class="editable-hidden tc ptm"><i class="fa fa-attention"></i><?_e("Have you taken the accessibility rules into account when entering your content?")?></div>
 
-
 	<?if(isset($res['url'])){?>
 		<!-- PARTAGE RÉSEAUX SOCIAUX -->
 		<section id="partage" class="mw960p flex wrap jcc center tc ptl pbl">
@@ -19,15 +18,14 @@
 				$url_encode = urlencode(make_url($res['url'], array("domaine" => true)));
 				?>
 
-				<a href="https://www.facebook.com/sharer/sharer.php?u=<?=$url_encode?>" target="_blank">Facebook<i class="fa fa-fw fa-facebook big pls prm" aria-hidden="true"></i></a>
+				<a href="https://www.facebook.com/sharer/sharer.php?u=<?=$url_encode?>" target="_blank"><i class="fa fa-fw fa-facebook big" aria-hidden="true"></i>Facebook</a>
 				
-				<a href="mailto:?subject=<?=$titre_encode?>&body=<?=$url_encode?>" target="_blank">Mail<i class="fa fa-fw fa-mail big pls prm" aria-hidden="true"></i></a>
+				<a href="mailto:?subject=<?=$titre_encode?>&body=<?=$url_encode?>" target="_blank"><i class="fa fa-fw fa-mail big mlm mrs" aria-hidden="true"></i>Mail</a>
 
 			</div>
 
 		</section>
 	<?}?>
-
 
 	<!-- RENSEIGNEMENTS COMPLEMENTAIRES -->
 	<section class="<?=(isset($GLOBALS['content']['texte-renseignements']) ? 'bg-green ptl pbt' : 'editable-hidden'); ?>">
@@ -35,7 +33,6 @@
 		<?php txt('texte-renseignements', array('tag' => 'article', 'class' => 'mw960p center bold tc')); ?>
 
 	</section>
-
 
 	<!-- CONTACTS -->
 	<section id="contacts" class="bg-color ptl pbm">

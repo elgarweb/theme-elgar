@@ -16,11 +16,12 @@ a {
 	}
 	
 	a.external:after{
-		content: url(/theme/elgar/img/external.png);
-		width: 10px;
-		height: 10px;
-		display: inline-block;
-		padding: 0 0.5em;
+		/* content: open-quote; */
+	  font-family: FontAwesome;
+	  content: '\f08e';
+	  font-size: .85em;
+	  color: #00253F;
+	  padding: 0 .5em 0 .25em;
 	}
 
 /* Titres */
