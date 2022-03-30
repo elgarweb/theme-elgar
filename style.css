@@ -179,8 +179,9 @@ article ul li { padding-bottom: 2em; }
 .brd-left { border-left: 1px solid #00253F; }
 .brd-alt { border: 2px solid #26D691; }
 .brd-top { border-top: solid 3px #00253F; }
+.brd-top-green { border-top: solid 1px #26D691; }
 .brd-top-alt { border-top: solid 3px #26D691; }
-.brd-bot-alt { border-bottom: solid 1px #26D691; }
+/* .brd-bot-alt { border-bottom: solid 1px #26D691; } */
 
 
 /* Border-radius */
@@ -1476,6 +1477,13 @@ div.editable {
 	/* mode edition : menu d'ajout invisible */
 	.dragger { display: none !important; }
 	#add-nav { display: none !important; }
+
+	header #accessibilite { text-align: center; }
+	header div > a { 
+		float: initial !important; 
+		display: block; 
+		text-align: center; 
+	}
 
 	.col { display: inline-block; }
 

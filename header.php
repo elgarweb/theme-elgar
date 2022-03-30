@@ -4,10 +4,10 @@
 
 	<section class="mw960p mod center relative">
 
-		<div class="flex wrap center space-l jcc tc brd-bot-alt ptm pbs">
+		<div class="ptm">
 			
 			<!-- Accessibilité -->
-			<div id="accessibilite">
+			<div id="accessibilite" class="fl pbs">
 				
 				<nav role="navigation" aria-label="<?php _e("Quick access")?>" class="inline">
 
@@ -28,12 +28,12 @@
 			if($lang=='fr') $switch_lang='eu';
 			else $switch_lang='fr';
 			?>
-			<a href="<?=$GLOBALS['scheme'].$GLOBALS['domain_lang'][$switch_lang].$GLOBALS['path'];?>" lang="<?=$switch_lang?>"><?=$GLOBALS['translation']['home other language'][$switch_lang]?></a>
+			<a href="<?=$GLOBALS['scheme'].$GLOBALS['domain_lang'][$switch_lang].$GLOBALS['path'];?>" lang="<?=$switch_lang?>" class="fr pbs"><?=$GLOBALS['translation']['home other language'][$switch_lang]?></a>
 
 		</div>
 
 
-		<div class="flex wrap jcsb aic ptm plt prt">
+		<div class="clear flex wrap jcsb aic brd-top-green ptm plt prt">
 
 			<!-- Logo -->
 			<div class="pts"><a href="<?=$GLOBALS['home']?>"><?php media('logo', array('size' => '330x70', 'lazy' => 'true'))?></a></div>
