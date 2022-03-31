@@ -8,6 +8,7 @@ $add_translation = array(
 	"Search" => array("fr" => "Rechercher"),
 	"Search the site" => array("fr" => "Rechercher sur le site", "eu" => "Webgunean bilatu"),
 	"Home other language" => array("fr" => "Accueil Français", "eu" => "Harrera euskaraz"),
+	"Contact" => array("fr" => "Contact", "eu" => "Kontaktuak"),
 
 	// Ariane
 	"Navigation" => array("fr" => "Navigation"),
@@ -117,8 +118,8 @@ $add_translation = array(
 
 
 	// CONTACT
-	"For security reasons, please solve the following calculation" => array("fr" => "Pour des questions de sécurité, merci de résoudre le calcul suivant"),
-	"Please check your entry and tick the box to accept the storage and processing of this information" => array("fr" => "Merci de vérifier votre saisie et de cocher la case afin d’accepter le stockage et le traitement de ces informations"),
+	"For security reasons, please solve the following calculation" => array("fr" => "Pour des questions de sécurité, merci de résoudre le calcul suivant", "eu" => "Segurtasuna bermatzeko, milesker ondoko kalkulua argitzeagatik"),
+	"Please check your entry and tick the box to accept the storage and processing of this information" => array("fr" => "Merci de vérifier votre saisie et de cocher la case afin d’accepter le stockage et le traitement de ces informations", "eu" => "Milesker idatzi dituzun datuak egiaztatzea eta laukia markatzea, informazio hauen estrategia eta tratamendua onartzeko gisan."),
 	"Recipient email" => array("fr" => "Courriel du destinataire"),
 	"Subject" => array("fr" => "Sujet"),
 
@@ -126,6 +127,8 @@ $add_translation = array(
 	// FONCTIONS
 	"New window" => array("fr" => "Nouvelle fenêtre"),
 
+	// Accessibilité
+	"Skip to content" => array("fr" => "Aller au contenu", "eu" => "Joan edukia"),
 
 	// Admin langue
 	"Other language" => array("fr" => "Version Française", "eu" => "Euskarazko bertsioa", "oc" => "Version en Gascon"),
