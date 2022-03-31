@@ -1512,6 +1512,9 @@ div.editable {
 
 	article img { max-width: 100% !important; }
 
+	.blocks div.relative,
+	#actualaune div.relative { box-sizing: content-box; }
+
 	/* Header */
 	header #accessibilite { margin-right: 5.6rem; }
 
