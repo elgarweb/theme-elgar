@@ -47,17 +47,15 @@ switch($res['tpl']) {
 ?>
 <?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 
-<section class="<?= $res['tpl'] == 'event' ? 'bg-grey' : ''; ?>">
 
+<section class="<?= $res['tpl'] == 'event' ? 'bg-grey' : ''; ?>">
 
 	<div class="mw960p mod center">
 
 
 		<?php h1('title', 'picto'); ?>
 
-
 		<article class="flex wrap space-xl ptl">
-
 
 			<?php if($media) { ?>
 			<div class="<?=(isset($GLOBALS['content']['visuel'])) ? '' : 'editable-hidden ' ?>prm">
@@ -70,6 +68,7 @@ switch($res['tpl']) {
 
 						<?php txt('texte-legende-visuel', 'italic ptt plt'); ?>
 
+
 					</figcaption>
 
 
@@ -77,11 +76,8 @@ switch($res['tpl']) {
 				
 			</div>
 			<?php } ?>
-
-
-		
+	
 			<div class="mw600p">
-
 
 				<!-- Tag -->
 				<div id="tags">
@@ -104,7 +100,6 @@ switch($res['tpl']) {
 					</div>
 
 				</div>
-
 
 				<!-- Date événement -->
 				<?php 
@@ -142,7 +137,6 @@ switch($res['tpl']) {
 				}
 				?>
 
-
 				<!-- Chapô -->
 				<?php 
 				if($res['tpl']=='annuaire' or  $res['tpl']=='event') 
@@ -152,21 +146,18 @@ switch($res['tpl']) {
 					input('url-site-web', array('type' => 'hidden'));
 
 
-					echo '<div class="bold pts'.(!@$GLOBALS['content']['telephone']?' editable-hidden':'').'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i> <a href="javascript:void(0)" class="tel" title="'.__("Click to display the").' '.__('Telephone').'">'.__('Telephone').'</a><span class="pls" aria-live="polite"></span></div>';
+				  echo '<details class="pts'.(!@$GLOBALS['content']['telephone']?' editable-hidden':'').'" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold  inbl" data-encode="'.$GLOBALS['content']['telephone'].'"  aria-label="'.__("Click to see the").' '.__('Telephone').'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary><span class="pls bold"></span></details>';
 
-					input('telephone', array('type' => 'hidden', 'class' => 'encode'));
-		
-
-					echo '<div class="bold pts'.(!@$GLOBALS['content']['mail-contact']?' editable-hidden':'').'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i> <a href="javascript:void(0)" class="mailto" title="'.__("Click to display the").' '.__('Email').'">'.__('Email').'</a><span class="pls" aria-live="polite"></span></div>';
+				  input('telephone', array('type' => 'hidden', 'class' => 'encode'));
+	
+				  echo '<details class="pts'.(!@$GLOBALS['content']['mail-contact']?' editable-hidden':'').'" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold inbl" data-encode="'.$GLOBALS['content']['mail-contact'].'"  aria-label="'.__("Click to see the").' '.__('Email').'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary><span class="pls bold mtm"></span></details>';
 
 					input('mail-contact', array('type' => 'hidden', 'class' => 'encode'));
-
 
 					echo '<div class="bold pts'.(!@$GLOBALS['content']['adresse']?' editable-hidden':'').'"><i class="fa fa-fw fa-location" aria-hidden="true"></i> '.__('Address').'</div>';
 
 					txt('adresse', 'plt');
 				}
-
 
 				// Description : s'affiche sur la liste
 				if($res['tpl']=='article' or $res['tpl']=='event')
@@ -176,17 +167,13 @@ switch($res['tpl']) {
 			</div>
 
 		</article>
-
-
-
+    
 		<!-- Contenu de l'article -->
 		<article class="clear ptl">
 
 			<?php txt('texte', array('dir' => $dir));?>
 					
 		</article>
-
-
 		
 		<!-- Bouton vers toutes les actualités/agenda/annuaire -->
 		<div class="tc ptl pbl">		
