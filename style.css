@@ -23,6 +23,7 @@ a {
 	  color: #00253F;
 	  padding: 0 .5em 0 .25em;
 	}
+	#contacts a.external:after{ color: #FFF;}
 
 /* Titres */
 h1, .h1-like, 
