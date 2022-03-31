@@ -122,10 +122,10 @@ $url_back = encode(__('Directory'));
 							echo '<div class="bold"><i class="fa fa-fw fa-globe" aria-hidden="true"></i> <a href="'.$content_fiche['url-site-web'].'" target="_blank">'.__('Website').'</a></div>';
 
 						if(isset($content_fiche['telephone']))
-							echo '<div class="bold pts"><i class="fa fa-fw fa-phone" aria-hidden="true"></i> <a href="javascript:void(0)" class="tel" data-encode="'.$content_fiche['telephone'].'"  aria-label="'.__("Click to see the").' '.__('Telephone').'">'.__('Telephone').'</a><span class="pls" aria-live="polite" role="alert"></span></div>';
+							echo '<details class="pts" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold  inbl" data-encode="'.$content_fiche['telephone'].'"  aria-label="'.__("Click to see the").' '.__('Telephone').'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary><span class="pls bold"></span></details>';
 
 						if(isset($content_fiche['mail-contact']))
-							echo '<div class="bold pts"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i> <a href="javascript:void(0)" class="mailto" data-encode="'.$content_fiche['mail-contact'].'"  aria-label="'.__("Click to see the").' '.__('Email').'">'.__('Email').'</a><span class="pls" aria-live="polite" role="alert"></span></div>';
+							echo '<details class="pts" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold inbl" data-encode="'.$content_fiche['mail-contact'].'"  aria-label="'.__("Click to see the").' '.__('Email').'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary><span class="pls bold mtm"></span></details>';
 
 						if(isset($content_fiche['adresse']))
 							echo '<div class="bold pts"><i class="fa fa-fw fa-location" aria-hidden="true"></i> '.__('Address').'</div><div class="plt">'.$content_fiche['adresse'].'</div>';
