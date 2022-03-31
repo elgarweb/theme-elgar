@@ -45,135 +45,142 @@ switch($res['tpl']) {
 	break;
 } 
 ?>
-<section class="mw960p mod center">
+<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 
-	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 
-	<?php h1('title', 'picto'); ?>
+<section class="<?= $res['tpl'] == 'event' ? 'bg-grey' : ''; ?>">
 
-	<article class="flex wrap space-xl ptl">
+	<div class="mw960p mod center">
 
-		<?php if($media) { ?>
-		<div class="<?=(isset($GLOBALS['content']['visuel'])) ? '' : 'editable-hidden ' ?>prm">
 
-			<figure>
+		<?php h1('title', 'picto'); ?>
 
-				<?php media('visuel', array('size' => '300x225', 'lazy' => true, 'dir' => $dir, 'class' => 'brd'));	?>
+		<article class="flex wrap space-xl ptl">
 
-				<figcaption>
+			<?php if($media) { ?>
+			<div class="<?=(isset($GLOBALS['content']['visuel'])) ? '' : 'editable-hidden ' ?>prm">
 
-					<?php txt('texte-legende-visuel', 'italic ptt plt'); ?>
+				<figure>
 
-				</figcaption>
+					<?php media('visuel', array('size' => '300x225', 'lazy' => true, 'dir' => $dir, 'class' => 'brd'));	?>
 
-			</figure>
-			
-		</div>
-		<?php } ?>
+					<figcaption>
 
-		<div class="mw600p">
+						<?php txt('texte-legende-visuel', 'italic ptt plt'); ?>
 
-			<!-- Tag -->
-			<div id="tags">
+
+					</figcaption>
+
+
+				</figure>
 				
-				<div class="editable-hidden bold"><?php _e("Categories"); ?></div>
+			</div>
+			<?php } ?>
+	
+			<div class="mw600p">
 
-				<!-- Champs saisie tags -->
-				<div>
+				<!-- Tag -->
+				<div id="tags">
+					
+					<div class="editable-hidden bold"><?php _e("Categories"); ?></div>
 
-					<?php 
-					// Champs saisie tags
-					tag($dir, array('tag' => 'span'));
-					?>
-				 
-					<script>
-						if(!$(".editable-tag").text()) $("#<?=$dir?>").prev("h3").hide();
-						else $("#<?=$dir?>").addClass("mbm");
-					</script>
+					<!-- Champs saisie tags -->
+					<div>
+
+						<?php 
+						// Champs saisie tags
+						tag($dir, array('tag' => 'span'));
+						?>
+					
+						<script>
+							if(!$(".editable-tag").text()) $("#<?=$dir?>").prev("h3").hide();
+							else $("#<?=$dir?>").addClass("mbm");
+						</script>
+
+					</div>
 
 				</div>
+
+				<!-- Date événement -->
+				<?php 
+				if(stristr($res['tpl'], 'event') or stristr($res['tpl'], 'arrete'))
+				{
+				?>
+					<div class="editable-hidden bold"><?= _e("Date");?></div>
+
+					<div>
+						<?php 
+							if(@$GLOBALS["content"]["aaaa-mm-jj"])
+							{
+								echo '<div>';
+								echo date_lang($GLOBALS["content"]["aaaa-mm-jj"]);
+
+								if(@$GLOBALS["content"]["heure-ouverture"])
+									echo ', '.date_format(date_create($GLOBALS["content"]["heure-ouverture"]), 'H\hi');
+
+								if(@$GLOBALS["content"]["heure-fermeture"])
+									echo ' '.__("to").' '.date_format(date_create($GLOBALS["content"]["heure-fermeture"]), 'H\hi');
+
+								echo '</div>';						
+							}
+
+							input("aaaa-mm-jj", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
+
+							if(stristr($res['tpl'], 'event')) 
+							{
+								input('heure-ouverture', array("type" => "hidden", "autocomplete" => "off"));			
+								input('heure-fermeture', array("type" => "hidden", "autocomplete" => "off"));
+							}
+						?>
+					</div>
+				<?php 
+				}
+				?>
+
+				<!-- Chapô -->
+				<?php 
+				if($res['tpl']=='annuaire' or  $res['tpl']=='event') 
+				{ 
+					echo '<div class="bold pts'.(!@$GLOBALS['content']['url-site-web']?' editable-hidden':'').'"><i class="fa fa-fw fa-globe" aria-hidden="true"></i> <a href="'.@$GLOBALS['content']['url-site-web'].'" target="_blank">'.__('Website').'</a></div>';
+
+					input('url-site-web', array('type' => 'hidden'));
+
+
+				  echo '<details class="pts'.(!@$GLOBALS['content']['telephone']?' editable-hidden':'').'" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold  inbl" data-encode="'.$GLOBALS['content']['telephone'].'"  aria-label="'.__("Click to see the").' '.__('Telephone').'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary><span class="pls bold"></span></details>';
+
+				  input('telephone', array('type' => 'hidden', 'class' => 'encode'));
+	
+				  echo '<details class="pts'.(!@$GLOBALS['content']['mail-contact']?' editable-hidden':'').'" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold inbl" data-encode="'.$GLOBALS['content']['mail-contact'].'"  aria-label="'.__("Click to see the").' '.__('Email').'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary><span class="pls bold mtm"></span></details>';
+
+					input('mail-contact', array('type' => 'hidden', 'class' => 'encode'));
+
+					echo '<div class="bold pts'.(!@$GLOBALS['content']['adresse']?' editable-hidden':'').'"><i class="fa fa-fw fa-location" aria-hidden="true"></i> '.__('Address').'</div>';
+
+					txt('adresse', 'plt');
+				}
+
+				// Description : s'affiche sur la liste
+				if($res['tpl']=='article' or $res['tpl']=='event')
+					txt('description', 'ptl');
+				?>
 
 			</div>
 
-			<!-- Date événement -->
-			<?php 
-			if(stristr($res['tpl'], 'event') or stristr($res['tpl'], 'arrete'))
-			{
-			?>
-				<div class="editable-hidden bold"><?= _e("Date");?></div>
+		</article>
+    
+		<!-- Contenu de l'article -->
+		<article class="clear ptl">
 
-				<div>
-					<?php 
-						if(@$GLOBALS["content"]["aaaa-mm-jj"])
-						{
-							echo '<div>';
-							echo date_lang($GLOBALS["content"]["aaaa-mm-jj"]);
+			<?php txt('texte', array('dir' => $dir));?>
+					
+		</article>
+		
+		<!-- Bouton vers toutes les actualités/agenda/annuaire -->
+		<div class="tc ptl pbl">		
 
-							if(@$GLOBALS["content"]["heure-ouverture"])
-								echo ', '.date_format(date_create($GLOBALS["content"]["heure-ouverture"]), 'H\hi');
-
-							if(@$GLOBALS["content"]["heure-fermeture"])
-								echo ' '.__("to").' '.date_format(date_create($GLOBALS["content"]["heure-fermeture"]), 'H\hi');
-
-							echo '</div>';						
-						}
-
-						input("aaaa-mm-jj", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
-
-						if(stristr($res['tpl'], 'event')) 
-						{
-							input('heure-ouverture', array("type" => "hidden", "autocomplete" => "off"));			
-							input('heure-fermeture', array("type" => "hidden", "autocomplete" => "off"));
-						}
-					?>
-				</div>
-			<?php 
-			}
-			?>
-
-			<!-- Chapô -->
-			<?php 
-			if($res['tpl']=='annuaire' or  $res['tpl']=='event') 
-			{ 
-				echo '<div class="bold pts'.(!@$GLOBALS['content']['url-site-web']?' editable-hidden':'').'"><i class="fa fa-fw fa-globe" aria-hidden="true"></i> <a href="'.@$GLOBALS['content']['url-site-web'].'" target="_blank">'.__('Website').'</a></div>';
-
-				input('url-site-web', array('type' => 'hidden'));
-
-				echo '<details class="pts'.(!@$GLOBALS['content']['telephone']?' editable-hidden':'').'" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold  inbl" data-encode="'.$GLOBALS['content']['telephone'].'"  aria-label="'.__("Click to see the").' '.__('Telephone').'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary><span class="pls bold"></span></details>';
-
-				input('telephone', array('type' => 'hidden', 'class' => 'encode'));
-	
-				echo '<details class="pts'.(!@$GLOBALS['content']['mail-contact']?' editable-hidden':'').'" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold inbl" data-encode="'.$GLOBALS['content']['mail-contact'].'"  aria-label="'.__("Click to see the").' '.__('Email').'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary><span class="pls bold mtm"></span></details>';
-
-				input('mail-contact', array('type' => 'hidden', 'class' => 'encode'));
-
-
-				echo '<div class="bold pts'.(!@$GLOBALS['content']['adresse']?' editable-hidden':'').'"><i class="fa fa-fw fa-location" aria-hidden="true"></i> '.__('Address').'</div>';
-
-				txt('adresse', 'plt');
-			}
-
-
-			// Description : s'affiche sur la liste
-			if($res['tpl']=='article' or $res['tpl']=='event')
-				txt('description', 'ptl');
-			?>
+			<a href="<?=make_url($url_back, array("domaine" => true))?>" class="bt pas"><?=$text_back;?></a>
 
 		</div>
-
-	</article>
-
-	<!-- Contenu de l'article -->
-	<article class="clear ptl">
-
-		<?php txt('texte', array('dir' => $dir));?>
-				
-	</article>
-
-	<!-- Bouton vers toutes les actualités/agenda/annuaire -->
-	<div class="tc ptl pbl">		
-
-		<a href="<?=make_url($url_back, array("domaine" => true))?>" class="bt pas"><?=$text_back;?></a>
 
 	</div>
 

@@ -79,9 +79,7 @@ $url_back = encode(__('Directory'));
 
 			<div class="brd brd-rad-bot-right mbm">
 
-			
-
-				<article class="relative flex">
+				<article class="relative flex aic">
 
 					<!-- Image -->
 					<figure>

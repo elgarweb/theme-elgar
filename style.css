@@ -178,7 +178,9 @@ article ul li { padding-bottom: 2em; }
 
 /* Bordures */
 .brd { border: 1px solid #00253F; }
+.brd3 { border: 3px solid #00253F; }
 .brd-left { border-left: 1px solid #00253F; }
+.brd-right { border-right: 1px solid #00253F; }
 .brd-alt { border: 2px solid #26D691; }
 .brd-top { border-top: solid 3px #00253F; }
 .brd-top-green { border-top: solid 1px #26D691; }
@@ -285,7 +287,8 @@ article ul li { padding-bottom: 2em; }
 			#tags a:hover { text-decoration: none !important; }
 
 	/* Affichage images en background */
-	.tpl-annuaire-liste figure { width: 299px; }
+	.tpl-annuaire-liste figure,
+	#actualaune figure { width: 300px; }
 
 	#adresse p {  margin-bottom: 0; }
 
@@ -1061,7 +1064,7 @@ input[type="reset"].unstyled:focus {
 	[class*=" grid-"].space-l,
 	[class^="grid-"].space-l,
 	.flex.space-l {
-		grid-gap: 2rem;
+		grid-gap: 0 2rem;
 	}
 
 	.grid.space-xl,
@@ -1297,7 +1300,7 @@ div.editable {
 			/* margin: auto; */
 			padding: 0 0.5rem;
 			max-width: 150px;
-			min-height: 90px;
+			min-height: 80px;
 			align-items: center;
 		}
 			/* Soulignement menu sélectionné */
@@ -1518,11 +1521,12 @@ div.editable {
 		#encart { text-align: center; }
 
 	/* Liste actus... */
-	.blocks, .tpl-annuaire-liste article { display: block; }
+	.blocks, .tpl-annuaire-liste article,  #actualaune > div { display: block; }
 		.blocks > div, 
 		.blocks article,
 		.tpl-annuaire-liste section > div > div,
-		.blocks li {
+		.blocks li,
+		#actualaune > div {
 			width: 300px;
 			min-height: 300px;
 			margin: auto;
@@ -1531,7 +1535,7 @@ div.editable {
 
 	.tpl-annuaire-liste figure { border-bottom: 1px solid #00253F; }
 
-	.tpl-annuaire-liste .brd-left { border: none; }
+	.tpl-annuaire-liste .brd-left, #actualaune .brd-right { border: none; }
 
 	/* Footer */
 	#contacts div { 
