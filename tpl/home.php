@@ -109,7 +109,7 @@ if(!$alert_view){?>
 	<?php h2('titre-actus', 'picto pbm'); ?>
 	
 	<!-- Actualité à la une -->
-	<article>
+	<article id="actualaune">
 		<?php
 		$sql_alaune="
 		SELECT ".$tc.".* FROM ".$tc."
@@ -136,17 +136,17 @@ if(!$alert_view){?>
 			// var_dump($article['id']);
 			?>
 
-			<div class="<?=(isset($article['title']) ? 'flex wrap space-l aic center pam brd brd-rad-bot-right mbl' : 'none'); ?>">
+			<div class="<?=(isset($article['title']) ? 'relative flex aic brd3 brd-rad-bot-right mbl' : 'none'); ?>">
 
 				<!-- Image -->
-				<figure>
+				<figure class="brd-right">
 
-					<div class="cover" data-bg="<?= $article['content']['visuel']; ?>" data-lazy="bg" style="width: 300px; height: 225px;">
+					<div class="nor" data-bg="<?= $article['content']['visuel']; ?>" data-lazy="bg" style="width: 100%; height: 225px;">
 					</div>
 
 				</figure>
 
-				<div class="mw600p">
+				<div class="ptm pbl plm prm">
 
 					<!-- Titre -->
 					<h3 class="tl mtn">
@@ -160,9 +160,14 @@ if(!$alert_view){?>
 					?>
 				
 					<!-- Lien Lire la suite -->
-					<a href="<?=make_url($article['title'], array("domaine" => true));?>"><span class=""><?php _e("Read more")?></span></a>
+					<div class="absolute bot15 right15">
+
+						<a href="<?=make_url($article['title'], array("domaine" => true));?>"><span class=""><?php _e("Read more")?></span></a>
+					
+					</div>
 						
 				</div>
+
 			</div>
 		
 		<?php
