@@ -30,8 +30,8 @@
 		//if(@$res['type']=='article' or ($res['url'] == encode(__("Actualités")) and $tag))
 		if(@$res['type']==@$type or $tag)
 		{
-			// Supprime le nom du la page en cours pour le chemin
-			$title = preg_replace('/^'.preg_quote($res['title'].' - ').'*/', '', $title);
+			// Supprime le nom de la page en cours pour le chemin
+			if($tag) $title = preg_replace('/^'.preg_quote($res['title'].' - ').'*/', '', $title);
 
 			?><a href="/<?=encode($url_back)?>"><?php _e(encode($url_back))?></a><?
 		}
