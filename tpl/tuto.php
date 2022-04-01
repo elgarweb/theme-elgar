@@ -42,6 +42,8 @@ voir pour le nom des zone tag en multilangue
 - type de contenu ajoutable
 
 
+
+
 --> EDITION DU SITE
 - ajout page dans un sous-menu
 - ajouter un tag (event, article, annuaire...)

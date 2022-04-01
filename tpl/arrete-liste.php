@@ -81,7 +81,7 @@ $mois = array(
 			</div>
 		</fieldset>
 		
-		<button type="submit" class="bg-green pat mtm"><?_e("Filter")?></button>
+		<button type="submit" class="bg-green pam mtl"><?_e("Filter")?></button>
 
 	</form>
 	<script>
