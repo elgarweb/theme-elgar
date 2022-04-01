@@ -150,6 +150,8 @@ span[lang] { border-bottom: dotted 1px #00253F; }
 		color: #26D691;
 	} */
 
+fieldset p { margin-bottom: 0.5em !important; }
+
 button { border: solid 1px #26D691; }
 
 /* Listes à puces */
