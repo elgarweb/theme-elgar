@@ -50,7 +50,7 @@ function highlight($txt, $recherche)
 	else $sql_state = "";
 
 	// Navigation par page
-	$num_pp = 10;
+	$num_pp = 2;
 
 	if(isset($GLOBALS['filter']['page'])) $page = (int)$GLOBALS['filter']['page']; else $page = 1;
 
