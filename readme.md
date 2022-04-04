@@ -4,7 +4,7 @@
 [![jQuery](https://img.shields.io/badge/PHP-7.2-lightgrey.svg?colorB=8892bf)](http://php.net/)
 
 Le projet Elgar Web a pour objectif de donner la possibilité aux communes de disposer plus facilement et a moindre cout d'un site internet écoconçu et accessible aux personnes en situation de handicap.
-Pour ça le collectif d'indépendant Translucide a été missionné par la Mission accessibilité de la Communauté d'Agglomérations Pays Basque.
+La Mission accessibilité de la Communauté d'Agglomérations du Pays Basque a fait appel au collectif d'indépendant Translucide, spécialisé dans l'écoconception web.
 L'objectif est de créer un thème libre de droits (sous licence MIT) pour le CMS Translucide.
 
 ## Installation
