@@ -28,10 +28,10 @@
 		<?php 
 		// Si page fiche ou listing avec tag
 		//if(@$res['type']=='article' or ($res['url'] == encode(__("Actualités")) and $tag))
-		if(@$res['type']==@$type or $tag)
+		if(isset($url_back) and (@$res['type']==@$type or $tag or $GLOBALS['filter']))
 		{
-			// Supprime le nom du la page en cours pour le chemin
-			$title = preg_replace('/^'.preg_quote($res['title'].' - ').'*/', '', $title);
+			// Supprime le nom de la page en cours pour le chemin
+			if($tag or $GLOBALS['filter']) $title = preg_replace('/^'.preg_quote($res['title'].' - ').'*/', '', $title);
 
 			?><a href="/<?=encode($url_back)?>"><?php _e(encode($url_back))?></a><?
 		}

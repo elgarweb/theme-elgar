@@ -50,7 +50,7 @@ function highlight($txt, $recherche)
 	else $sql_state = "";
 
 	// Navigation par page
-	$num_pp = 10;
+	$num_pp = 2;
 
 	if(isset($GLOBALS['filter']['page'])) $page = (int)$GLOBALS['filter']['page']; else $page = 1;
 
@@ -61,7 +61,7 @@ function highlight($txt, $recherche)
 	$sql ="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
 
 
-	$sql.=" WHERE url!='recherche' ".$sql_state." ";	
+	$sql.=" WHERE url!='recherche' AND lang='".$lang."' ".$sql_state." ";	
 
 
 	if(@$_POST['recherche'] or $GLOBALS['filter'])
