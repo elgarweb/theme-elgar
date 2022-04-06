@@ -8,7 +8,7 @@ La Mission accessibilité de la Communauté Pays Basque a fait appel au Collecti
 L'objectif est de créer un thème libre de droits (sous licence MIT) pour le [CMS Translucide](https://github.com/simonvdfr/Translucide).
 
 ## Installation
-- Récupérer les [CMS Translucides](https://github.com/simonvdfr/Translucide/archive/refs/tags/v1.5.zip), décompresser les fichiers 
+- Récupérer les [CMS Translucides](@todo lien vers la version stable pour Elgar), décompresser les fichiers 
 - Décompresser le thème elgarweb dans le dossier `theme`
 	- Vous devez avoir à la racine de votre hébergement ceci :
 		```
@@ -95,7 +95,26 @@ $GLOBALS['add_content'] = array(
 ```
 
 #### Configuration spécifique au thème
-Pour le thème vous devez créer des pages spécifique. Pour ajouter des contenus [suivez le tutoriel](@todo)
+
+##### Configuration
+Dans le fichier `config.php` :
+
+- Vous devez spécifier le fichier de fonction spécifique au thème dans la variable `$GLOBALS['function'] = 'function.php';`
+
+- Vous devez également ajouter les filtres suivants qui permettent de construire des URL (pour le moteur de recherche par exemple) :
+```php 
+// Filtre url autorisé
+$GLOBALS['filter_auth'] = array(
+	'page',
+	'user',
+	'recherche',
+	'month', 'year',
+	'start', 'end'
+);
+```
+
+##### Création de pages spécifique
+Pour le thème vous devez aussi créer des pages spécifique. Pour ajouter des contenus [suivez le tutoriel](@todo)
 
 Pour le bon fonctionnement du site vous devez créer des pages types dont le permalien soit :
 - `recherche` avec le template `recherche`
@@ -115,7 +134,25 @@ En plus vous devez créer un cron (tache planifier) qui s'exécute après minuit
 #### Configuration du multilingue
 Si votre site utilise plusieurs langues vous devez spécifier les langues existant dans le fichier de `config.php` et les URL des domaines des autres langues qui doivent tous pointer vers le même dossier ou est installé le CMS.
 
-Exemple pour un site en français et basque de config.php : ```@todo```
+Exemple pour un site en français et basque de `config.php` :
+```php
+// Fixe la langue en fonction de l'extension du nom de domaine
+if(strstr($_SERVER['SERVER_NAME'], '.eus')) 
+	$lang = $_SESSION['lang'] = "eu";
+else
+	$lang = $_SESSION['lang'] = "fr";
+
+// Variables sites pour le multilingue
+$GLOBALS['language'] = array('fr','eu');
+
+$GLOBALS['theme_translation'] = true;
+
+$GLOBALS['domain_lang']['fr'] = "www.elgarweb.fr";
+$GLOBALS['domain_lang']['eu'] = "www.elgarweb.eus";
+
+$GLOBALS['domain'] = $GLOBALS['domain_lang'][$lang];
+
+```
 
 De plus vous devez ajouter les traductions dans le fichier `translation.php` qui contient déjà les textes en anglais, français et basque pour l'interface vu par les visiteurs du site.
 
@@ -138,7 +175,7 @@ Pour créer une page intermédiaire de navigation vous devez :
 Pour personnaliser le thème vous pouvez modifier le fichier `style.css` dans le dossier `theme/elgar/`.
 Attention à bien prendre en compte les règles d'accessibilité.
 Vous pouvez modifier les couleurs des class des typos `.color` & `.color-alt` et des fonds `.bg-color`.
-Bien prendre en compte les ratios de contraste pour limiter les problèmes d'accessibilité. @todo donner le ratio RGAA
+Bien prendre en compte les ratios de contraste pour limiter les problèmes d'accessibilité à au moins 4.5:1. Pour plus de détails voir le [point 3.2 du RGAA](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic3)
 
 
 ## Création templates
