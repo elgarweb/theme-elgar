@@ -40,7 +40,7 @@ L'objectif est de créer un thème libre de droits (sous licence MIT) pour le [C
 
 - Lancer l'installation de translucide
 	- Rentrez les informations pour se connecter à votre base de données (vous devez l'avoir créé précédemment)
-	- Choisissez bien le thème Elgar qui est dans votre dossier `theme`
+	- Choisissez bien le [thème Elgar](@todo lien vers la version stable) qui est dans votre dossier `theme`
 	- Choisissez vos accès administrateurs, qui vous permettent par la suite d'ajouter d'autre utilisateur et de modifier les contenus du site
 
 ### Configuration
@@ -95,7 +95,7 @@ $GLOBALS['add_content'] = array(
 ```
 
 #### Configuration spécifique au thème
-Pour le thème vous devez créer des pages spécifique. [@todo Pour ajouter des contenus suivez le tutoriel]()
+Pour le thème vous devez créer des pages spécifique. Pour ajouter des contenus [suivez le tutoriel](@todo)
 
 Pour le bon fonctionnement du site vous devez créer des pages types dont le permalien soit :
 - `recherche` avec le template `recherche`
@@ -121,7 +121,7 @@ De plus vous devez ajouter les traductions dans le fichier `translation.php` qui
 
 
 ## Premier pas pour la gestion du contenu
-Pour la prise en main du CMS nous vous invitons à regarder ce [@todo tutoriel]()
+Pour la prise en main du CMS nous vous invitons à regarder ce [tutoriel](@todo)
 
 
 ### Spécificité du thème
@@ -130,7 +130,7 @@ Pour la prise en main du CMS nous vous invitons à regarder ce [@todo tutoriel](
 Le site n'utilise pas de menu déroulant mais des pages intermédiaires de navigation pour simplifier le code HTML et aussi rendre la navigation plus stable à la souris.
 Pour créer une page intermédiaire de navigation vous devez :
 - Créer une page avec le template `navigation`
-- Ajouter au menu principal cette page [@todo voir tutoriel de prise en main]())
+- Ajouter au menu principal cette page [voir tutoriel de prise en main](@todo)
 - Dans les pages que vous voulez voir apparaître dans cette page intermédiaire vous devez en mode édition sélectionner ce dernier dans le menu déroulant qui se situe dans le chemin de navigation (fil d'Ariane) pour la rattacher.
 
 
@@ -148,7 +148,7 @@ Comme vous pouvez le voir dans la [documentation du CMS](https://github.com/simo
 
 D'autres fonction sont utilisables librement dans le code des templates :
 - `_e()` Permets d'afficher une traduction qui est dans le tableau présent dans le fichier `translation.php` dans le dossier du thème. La variante `__()` fait juste un retour de la traduction pour la manipuler en variable par exemple, elle ne fait pas un affichage.
-- `make_url()` Permets de créer des URL normées avec notamment le forçage du nom de domaine : `make_url(__('agenda'), array("domaine" => true))` par exemple permet de faire un lien vers la page agenda (en utilisant la traduction du mot `agenda`) et y ajoute le nom de domaine complet (htt://www.nomdusite.com/agenda)
+- `make_url()` Permets de créer des URL normées avec notamment le forçage du nom de domaine : `make_url(__('agenda'), array("domaine" => true))` par exemple permet de faire un lien vers la page agenda (en utilisant la traduction du mot `agenda`) et y ajoute le nom de domaine complet (https://www.elgarweb.fr/agenda)
 - `tag("nom-de-la-zone")` Permets de créer une zone éditable pour ajouter des tags/catégorie à la page courante. Typiquement pour filtrer après dans les pages qui listent des contenus comme la page actualité ou agenda.
 - `href()` Permets de créer des liens éditables `<a <?php href();?>>lien editable vers un contenu</a>`
 
@@ -156,11 +156,11 @@ D'autres fonction sont utilisables librement dans le code des templates :
 ## Responsabilité & support
 
 Nous ne sommes pas responsable de l'utilisation du thème. Par défaut le thème est totalement conformé au RGAA. Nous ne sommes pas garant du niveau d'accessibilité de votre site. Nous ne pouvons pas être tenus responsables de quelconque dégradation d'accessibilité due à vos modifications ou mauvaise saisie des contenus.
-Nous vous recommandons de limiter les modifications thème aux couleurs de typographie et des fonds dans le fichier `style.css`, tout en analysant les ratios de contraste pour avoir au moins toujours un ratio supérieur à @todo xx.
+Nous vous recommandons de limiter les modifications thème aux couleurs de typographie et des fonds dans le fichier `style.css`, tout en analysant les ratios de contraste pour avoir au moins toujours un ratio de 4.5:1, au moins, entre la couleur et le fond.
 Aucun SAV ou support n'est compris avec le thème/dépôt github. Aucune maintenance ou suivi des tickets n'est possible. Des changements, amélioration et/ou correction peuvent advenir suite à la commande de la Communauté Pays basque.
 
 ## Licence
 
 Elgarweb est sous licence MIT, merci de vous référer au fichier `Licence` à la racine du dossier.
 
-L'équipe Translucide qui a participé à ce projet se compose de [Maud Subiry](http://maudsubiry.fr/) pour le Webdesign, [Simon Vandaele](https://github.com/simonvdfr) développeur web et auteur du CMS Translucide, [stéphanie Leroux](https://www.koinga.fr/) intégratrice HTML & CSS, [Dominique Nicolle](https://www.pix-e.fr/) Accessibilité
+L'équipe Translucide qui a participé à ce projet se compose de [Simon Vandaele](https://github.com/simonvdfr) développeur web et auteur du CMS Translucide, [Maud Subiry](http://maudsubiry.fr/) pour le Webdesign, [stéphanie Leroux](https://www.koinga.fr/) intégratrice HTML & CSS, [Dominique Nicolle](https://www.pix-e.fr/) Accessibilité
