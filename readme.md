@@ -193,7 +193,9 @@ D'autres fonction sont utilisables librement dans le code des templates :
 ## Responsabilité & support
 
 Nous ne sommes pas responsable de l'utilisation du thème. Par défaut le thème est totalement conformé au RGAA. Nous ne sommes pas garant du niveau d'accessibilité de votre site. Nous ne pouvons pas être tenus responsables de quelconque dégradation d'accessibilité due à vos modifications ou mauvaise saisie des contenus.
+
 Nous vous recommandons de limiter les modifications thème aux couleurs de typographie et des fonds dans le fichier `style.css`, tout en analysant les ratios de contraste pour avoir au moins toujours un ratio de 4.5:1, au moins, entre la couleur et le fond.
+
 Aucun SAV ou support n'est compris avec le thème/dépôt github. Aucune maintenance ou suivi des tickets n'est possible. Des changements, amélioration et/ou correction peuvent advenir suite à la commande de la Communauté Pays basque.
 
 ## Licence
