@@ -163,4 +163,4 @@ Aucun SAV ou support n'est compris avec le thème/dépôt github. Aucune mainten
 
 Elgarweb est sous licence MIT, merci de vous référer au fichier `Licence` à la racine du dossier.
 
-L'équipe Translucide qui a participé à ce projet se compose de [Simon Vandaele](https://github.com/simonvdfr) développeur web et auteur du CMS Translucide, [Maud Subiry](http://maudsubiry.fr/) pour le Webdesign, [stéphanie Leroux](https://www.koinga.fr/) intégratrice HTML & CSS, [Dominique Nicolle](https://www.pix-e.fr/) Accessibilité
+L'équipe Translucide qui a participé à ce projet se compose de [Simon Vandaele](https://github.com/simonvdfr) développeur web et auteur du CMS Translucide, [Maud Subiry](http://maudsubiry.fr/) graphiste pour le Webdesign, [Stéphanie Leroux](https://www.koinga.fr/) pour l'intégration HTML & CSS, [Dominique Nicolle](https://www.pix-e.fr/) pour l'accessibilité
