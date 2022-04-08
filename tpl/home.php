@@ -61,7 +61,7 @@ if(!$alert_view){?>
 <!-- EN 1 CLIC -->
 <section class="bg-color">
 
-	<div class="mw960p mod center ptl pbl">
+	<div class="mw960p mod center ptl pbs">
 
 		<?php h2('titre-clic', 'color-alt'); ?>
 
