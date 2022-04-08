@@ -238,7 +238,7 @@ article ul li { padding-bottom: 1em; }
 	/* En un clic */
 	#enunclic li { 
 		max-width: 150px; 
-		padding-bottom: 1rem; 
+		padding-bottom: 4rem; 
 		margin: auto;
 	}
 
@@ -1095,6 +1095,7 @@ input[type="reset"].unstyled:focus {
 .w80 { width: 80%; }
 .w90 { width: 90%; }
 .w100 { width: 100%; }
+.h100 { height: 100%; }
 
 .w50p { width: 50px; }
 .w100p { width: 100px; }

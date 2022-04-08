@@ -26,7 +26,7 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 		// DOM : suppression du title pour lire tout le contenu du lien composite ?>
 		<a href="<?=make_url($url_title, array("domaine" => true));?>"  class="tdn">
 
-			<article class="pbm">
+			<article class="pbm h100">
 
 				<!-- Image -->
 				<?php //Affichage images des 3 premières actus seulement

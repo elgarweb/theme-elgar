@@ -115,11 +115,27 @@ switch($res['tpl']) {
 								echo '<div>';
 								echo date_lang($GLOBALS["content"]["aaaa-mm-jj"]);
 
-								if(@$GLOBALS["content"]["heure-ouverture"])
-									echo ', '.date_format(date_create($GLOBALS["content"]["heure-ouverture"]), 'H\hi');
+								if(@$GLOBALS["content"]["heure-ouverture"]){
+									echo ', '.date_format(date_create($GLOBALS["content"]["heure-ouverture"]), 'H:i');
 
-								if(@$GLOBALS["content"]["heure-fermeture"])
-									echo ' '.__("to").' '.date_format(date_create($GLOBALS["content"]["heure-fermeture"]), 'H\hi');
+									// Si basque
+									if($lang == 'eu')										
+										if(date_format(date_create($GLOBALS["content"]["heure-ouverture"]), 'i') == 0) 
+											echo"etatik";// pluriel
+										else 
+											echo"etik";// singulier
+								}
+
+								if(@$GLOBALS["content"]["heure-fermeture"]){
+									echo ' '.__("to").' '.date_format(date_create($GLOBALS["content"]["heure-fermeture"]), 'H:i');
+
+									// Si basque
+									if($lang == 'eu')										
+										if(date_format(date_create($GLOBALS["content"]["heure-fermeture"]), 'i') == 0)
+											echo"etara";// pluriel
+										else
+											echo"era";// singulier
+								}
 
 								echo '</div>';						
 							}
