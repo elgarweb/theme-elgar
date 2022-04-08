@@ -1,8 +1,8 @@
 <?php if(!$GLOBALS['domain']) exit;?>
 
-<div class="mw960p ariane mod center ptm pbm">
+<div class="mw960p ariane mod center pbm">
 
-	<nav role="navigation" aria-label="<?php _e("Breadcrumb")?>" class="fl" itemprop="breadcrumb">
+	<nav role="navigation" aria-label="<?php _e("Breadcrumb")?>" class="fl ptm" itemprop="breadcrumb">
 
 		<a href="/"><?php _e("Home")?></a>
 
@@ -82,7 +82,7 @@
 	$sel_lang = $connect->query($sql);
 	if(!empty($sel_lang->num_rows))// Si des résultat & que la table existe
 	{
-		echo '<ul class="unstyled fr">';
+		echo '<ul class="unstyled fr ptm">';
 		while($res_lang = $sel_lang->fetch_assoc())
 		{
 			echo'<li><a href="'.make_url($res_lang['url'], array('domaine' => $GLOBALS['scheme'].@$GLOBALS['domain_lang'][$res_lang['lang']].$GLOBALS['path'])).'" lang="'.$res_lang['lang'].'">'.$GLOBALS['translation']['other language'][$res_lang['lang']].'</a></li>';
@@ -101,7 +101,7 @@
 	// time > 3m24s => 204s
 	if(($minute*60+$second)>204){
 		echo 
-			'<div class="clear pts tc"><i class="fa fa-print mrs" aria-hidden="true"></i>'.
+			'<div class="clear ptm tc"><i class="fa fa-print mrs" aria-hidden="true"></i>'.
 			str_replace('*minute*', $minute,
 			str_replace('*second*', $second,
 				__("The average reading time for this page is *minute* minutes and *second* seconds. For less impact on the environment we recommend that you print it double-sided, black and white, 2 pages per sheet.")
