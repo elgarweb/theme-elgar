@@ -1017,7 +1017,7 @@ input[type="reset"].unstyled:focus {
 		-ms-grid-column: y;
 	*/
 	.grid {
-		display: -ms-grid;
+		display: flex;/*ie11*/
 		display: grid;
 		grid-auto-flow: column;
 		grid-auto-columns: 1fr;
@@ -1025,7 +1025,7 @@ input[type="reset"].unstyled:focus {
 
 	[class*=" grid-"],
 	[class^="grid-"] {
-		display: -ms-grid;
+		display: -ms-flex;/*ie11*/
 		display: grid;
 		grid-auto-flow: dense;
 	}
