@@ -80,7 +80,7 @@ switch(@$_GET['mode'])
 
 						<!-- Question -->
 						<?
-						$chiffre = array('zéro', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf', 'dix');
+						$chiffre = array('zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten');
 						$operators = array("+", "-");
 						$operator = $operators[array_rand($operators)];
 						$nb1 = rand(1, 5);//10
@@ -92,7 +92,7 @@ switch(@$_GET['mode'])
 						<div>
 							<label for="question">
 								<?php _e("For security reasons, please solve the following calculation")?><span class="red">*</span><br>
-								<?=($chiffre[$nb1]." ".($operator=='-'?'−':$operator)." ".$chiffre[$nb2]);?> = 
+								<?=(__($chiffre[$nb1])." ".($operator=='-'?'−':$operator)." ".__($chiffre[$nb2]));?> = 
 							</label>
 							<input type="text" name="question" id="question" placeholder="?" class="w50p tc" autocomplete="off" required>
 
@@ -112,7 +112,7 @@ switch(@$_GET['mode'])
 					<!-- Bouton envoyer -->
 					<div class="tc mtm mbl">
 						<button type="submit" id="send" class="bt bold">
-							<?php _e(array("Send" => array("fr" => "Envoyer")))?>
+							<?php _e("Send")?>
 							<i class="fa fa-mail-alt mlt" aria-hidden="true"></i>
 						</button>
 					</div>

@@ -350,7 +350,7 @@ switch(@$_REQUEST['mode'])
 		$sql .= "description = '".addslashes($res['description'])."', ";
 		$sql .= "content = '".addslashes($json_content)."', ";
 		$sql .= "user_insert = '".(int)$_SESSION['uid']."', ";
-		$sql .= "date_insert = NOW() ";
+		$sql .= "date_insert = '".$res['date_insert']."' ";
 		
 		$connect->query($sql);
 
