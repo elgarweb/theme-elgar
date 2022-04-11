@@ -26,7 +26,7 @@ $add_translation = array(
 
 	// Footer - Newsletter
 	"Subscribe to the newsletter of your city" => array("fr" => "Inscrivez-vous<br> à la lettre d'informations de votre ville", "eu" => "Zure herriko newsletter-ean harpidetu zaitez"),
-	"Expected format: nom@domaine.com" => array("fr"=>"Format attendu : nom@domaine.fr"),
+	"Expected format: nom@domaine.com" => array("fr"=>"Format attendu : nom@domaine.fr", "eu"=>"Igurikatua den formatua : e.mezua@webgunea.eu"),
 	"Your email" => array("fr" => "Votre mail", "eu" => "Zure helbide elektronikoa"),
 	"Subscribe" => array("fr" => "S'inscrire", "eu" => "Zure izena eman"),
 
@@ -62,8 +62,8 @@ $add_translation = array(
 	"Website" => array("fr" => "Site web", "eu" => "Webgunea"),	
 	"Click to display the" => array("fr" => "Cliquer pour afficher le"),
 	"Telephone" => array("fr" => "Téléphone", "eu" => "Telefonoa"),
-	"Email" => array("fr" => "Courriel"),
-	"Mail" => array("fr" => "Mail"),
+	"Email" => array("fr" => "Courriel", "eu" => "E-mezua"),
+	"Mail" => array("fr" => "Mail", "eu" => "E-mezua"),
 	"Address" => array("fr" => "Adresse"),
 	"Filter by" => array("fr" => "Filtrer par"),
 	"january" => array("fr" => "janvier"),
@@ -81,7 +81,7 @@ $add_translation = array(
 	"st" => array("fr" => "er"),
 	"Opening" => array("fr" => "Ouverture"),
 	"Closing" => array("fr" => "Fermeture"),
-	"to" => array("fr" => "à"),
+	"to" => array("fr" => "à", "eu" => ""),
 	"Browsing by page" => array("fr" => "Navigation par page"),
 
 
@@ -120,8 +120,21 @@ $add_translation = array(
 	// CONTACT
 	"For security reasons, please solve the following calculation" => array("fr" => "Pour des questions de sécurité, merci de résoudre le calcul suivant", "eu" => "Segurtasuna bermatzeko, milesker ondoko kalkulua argitzeagatik"),
 	"Please check your entry and tick the box to accept the storage and processing of this information" => array("fr" => "Merci de vérifier votre saisie et de cocher la case afin d’accepter le stockage et le traitement de ces informations", "eu" => "Milesker idatzi dituzun datuak egiaztatzea eta laukia markatzea, informazio hauen estrategia eta tratamendua onartzeko gisan."),
-	"Recipient email" => array("fr" => "Courriel du destinataire"),
-	"Subject" => array("fr" => "Sujet"),
+	"Recipient email" => array("fr" => "Courriel du destinataire", "eu" => "Hartzailearen e-mezua"),
+	"Subject" => array("fr" => "Sujet", "eu" => "Gaia"),
+	"Send" => array("fr" => "Envoyer", "eu" => "Bidali"),
+
+	"zero" => array("fr" => "zéro", "eu" => "huts"),
+	"one" => array("fr" => "un", "eu" => "bat"),
+	"two" => array("fr" => "deux", "eu" => "bi"),
+	"three" => array("fr" => "trois", "eu" => "hiru"),
+	"four" => array("fr" => "quatre", "eu" => "lau"),
+	"five" => array("fr" => "cinq", "eu" => "bost"),
+	"six" => array("fr" => "six", "eu" => "sei"),
+	"seven" => array("fr" => "sept", "eu" => "zazpi"),
+	"eight" => array("fr" => "huit", "eu" => "zortzi"),
+	"nine" => array("fr" => "neuf", "eu" => "bederazi"),
+	"ten" => array("fr" => "dix", "eu" => "hamar"),
 
 
 	// FONCTIONS
@@ -145,12 +158,12 @@ $add_translation = array(
 	"legal-notices" => array("fr" => "mentions-legales"),
 
 
-	"News" => array("fr" => "Actualités"),
+	"News" => array("fr" => "Actualités", "eu" => "Berriak"),
 		"actualites" => array("fr" => "Actualités"),
 
-	"Agenda" => array("fr" => "Agenda"),
+	"Agenda" => array("fr" => "Agenda", "eu" => "Agenda"),
 
-	"Directory" => array("fr" => "Annuaire", "eu" => "aurkitegia"),
+	"Directory" => array("fr" => "Annuaire", "eu" => "Aurkitegia"),
 		"annuaire" => array("fr" => "Annuaire"),
 
 	"Decrees" => array("fr" => "Arrêtés"),
