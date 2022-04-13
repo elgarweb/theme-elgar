@@ -14,7 +14,7 @@ L'objectif est de créer un thème libre de droits (sous licence MIT) pour le [C
 - Récupérer les fichiers du CMS [CMS Translucides](@todo lien vers la version stable pour Elgar) et les décompresser 
 - Décompresser le thème elgarweb dans le dossier `/theme`
 
-	Vous devez avoir à la racine de votre hébergement ceci :
+	- Vous devez avoir à la racine de votre hébergement ceci :
 		```
 		api/
 		    ajax.admin.php
