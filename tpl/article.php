@@ -106,50 +106,46 @@ switch($res['tpl']) {
 				if(stristr($res['tpl'], 'event') or stristr($res['tpl'], 'arrete'))
 				{
 				?>
-					<div class="editable-hidden bold"><?= _e("Date");?></div>
+					<p class="editable-hidden bold"><?= _e("Date");?></p>
 
-					<div>
-						<?php 
-							if(@$GLOBALS["content"]["aaaa-mm-jj"])
-							{
-								echo '<div>';
-								echo date_lang($GLOBALS["content"]["aaaa-mm-jj"]);
+					<?php 
+					if(@$GLOBALS["content"]["aaaa-mm-jj"])
+					{
+						echo '<p class="mbn">';
+						echo date_lang($GLOBALS["content"]["aaaa-mm-jj"]);
 
-								if(@$GLOBALS["content"]["heure-ouverture"]){
-									echo ', '.date_format(date_create($GLOBALS["content"]["heure-ouverture"]), 'H:i');
+						if(@$GLOBALS["content"]["heure-ouverture"]){
+							echo ', '.date_format(date_create($GLOBALS["content"]["heure-ouverture"]), 'H:i');
 
-									// Si basque
-									if($lang == 'eu')										
-										if(date_format(date_create($GLOBALS["content"]["heure-ouverture"]), 'i') == 0) 
-											echo"etatik";// pluriel
-										else 
-											echo"etik";// singulier
-								}
+							// Si basque
+							if($lang == 'eu')										
+								if(date_format(date_create($GLOBALS["content"]["heure-ouverture"]), 'i') == 0) 
+									echo"etatik";// pluriel
+								else 
+									echo"etik";// singulier
+						}
 
-								if(@$GLOBALS["content"]["heure-fermeture"]){
-									echo ' '.__("to").' '.date_format(date_create($GLOBALS["content"]["heure-fermeture"]), 'H:i');
+						if(@$GLOBALS["content"]["heure-fermeture"]){
+							echo ' '.__("to").' '.date_format(date_create($GLOBALS["content"]["heure-fermeture"]), 'H:i');
 
-									// Si basque
-									if($lang == 'eu')										
-										if(date_format(date_create($GLOBALS["content"]["heure-fermeture"]), 'i') == 0)
-											echo"etara";// pluriel
-										else
-											echo"era";// singulier
-								}
+							// Si basque
+							if($lang == 'eu')										
+								if(date_format(date_create($GLOBALS["content"]["heure-fermeture"]), 'i') == 0)
+									echo"etara";// pluriel
+								else
+									echo"era";// singulier
+						}
 
-								echo '</div>';						
-							}
+						echo '</p>';						
+					}
 
-							input("aaaa-mm-jj", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
+					input("aaaa-mm-jj", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
 
-							if(stristr($res['tpl'], 'event')) 
-							{
-								input('heure-ouverture', array("type" => "hidden", "autocomplete" => "off"));			
-								input('heure-fermeture', array("type" => "hidden", "autocomplete" => "off"));
-							}
-						?>
-					</div>
-				<?php 
+					if(stristr($res['tpl'], 'event')) 
+					{
+						input('heure-ouverture', array("type" => "hidden", "autocomplete" => "off"));			
+						input('heure-fermeture', array("type" => "hidden", "autocomplete" => "off"));
+					}
 				}
 				?>
 
@@ -157,21 +153,23 @@ switch($res['tpl']) {
 				<?php 
 				if($res['tpl']=='annuaire' or  $res['tpl']=='event') 
 				{ 
-					echo '<div class="bold pts'.(!@$GLOBALS['content']['url-site-web']?' editable-hidden':'').'"><i class="fa fa-fw fa-globe" aria-hidden="true"></i> <a href="'.@$GLOBALS['content']['url-site-web'].'" target="_blank">'.__('Website').'</a></div>';
+					echo '<ul>';
+					echo '<li class="bold pts'.(!@$GLOBALS['content']['url-site-web']?' editable-hidden':'').'"><i class="fa fa-fw fa-globe" aria-hidden="true"></i> <a href="'.@$GLOBALS['content']['url-site-web'].'" target="_blank">'.__('Website').'</a>';
 
 					input('url-site-web', array('type' => 'hidden'));
 
-				  	echo '<details class="pts'.(!@$GLOBALS['content']['telephone']?' editable-hidden':'').'" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold  inbl" data-encode="'.@$GLOBALS['content']['telephone'].'"  aria-label="'.__("Click to display the").' '.__('Telephone').'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary><span class="pls bold"></span></details>';
+				  	echo '</li><li><details class="pts'.(!@$GLOBALS['content']['telephone']?' editable-hidden':'').'" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold  inbl" data-encode="'.@$GLOBALS['content']['telephone'].'"  aria-label="'.__("Click to display the").' '.__('Telephone').'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary><span class="pls bold"></span></details>';
 
 				  	input('telephone', array('type' => 'hidden', 'class' => 'encode'));
 	
-				  	echo '<details class="pts'.(!@$GLOBALS['content']['mail-contact']?' editable-hidden':'').'" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold inbl" data-encode="'.@$GLOBALS['content']['mail-contact'].'"  aria-label="'.__("Click to display the").' '.__('Email').'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary><span class="pls bold mtm"></span></details>';
+				  	echo '</li><li><details class="pts'.(!@$GLOBALS['content']['mail-contact']?' editable-hidden':'').'" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold inbl" data-encode="'.@$GLOBALS['content']['mail-contact'].'"  aria-label="'.__("Click to display the").' '.__('Email').'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary><span class="pls bold mtm"></span></details>';
 
 					input('mail-contact', array('type' => 'hidden', 'class' => 'encode'));
 
-					echo '<div class="bold pts'.(!@$GLOBALS['content']['adresse']?' editable-hidden':'').'"><i class="fa fa-fw fa-location" aria-hidden="true"></i> '.__('Address').'</div>';
+					echo '</li><li class="bold pts'.(!@$GLOBALS['content']['adresse']?' editable-hidden':'').'"><i class="fa fa-fw fa-location" aria-hidden="true"></i> '.__('Address');
 
 					txt('adresse', 'plt');
+					echo '</li></ul>';
 				}
 
 				// Description : s'affiche sur la liste
