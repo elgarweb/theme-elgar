@@ -2,7 +2,7 @@
 
 <footer role="contentinfo">
 
-	<div class="editable-hidden tc ptm"><i class="fa fa-attention"></i><?_e("Have you taken the accessibility rules into account when entering your content?")?></div>
+	<div class="editable-hidden tc ptm"><i class="fa fa-attention" aria-hidden="true"></i><?_e("Have you taken the accessibility rules into account when entering your content?")?></div>
 
 	<?if(isset($res['url'])){?>
 		<!-- PARTAGE RÉSEAUX SOCIAUX -->
