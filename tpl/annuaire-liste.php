@@ -11,7 +11,7 @@ $url_back = encode(__('Directory'));
 	<?php h1('title', 'picto'); ?>
 
 	<nav role="navigation" aria-label="<?php _e("Filter by")?>" class="flex wrap space jcc tc ptl pbm">
-		<ul class="unstyled"><?php 
+		<ul class="unstyled pln"><?php 
 			// Liste les tags pour filtrer la page
 			$i = 1;
 			$sel_tag_list = $connect->query("SELECT distinct encode, name FROM ".$table_tag." WHERE zone='".$res['url']."' GROUP BY encode, name ORDER BY encode ASC");
@@ -25,7 +25,7 @@ $url_back = encode(__('Directory'));
 		</ul>
 	</nav>
 	
-	<?php txt('description', 'tc ptm pbm'); ?>
+	<?php txt('description', array('class'=>'tc ptm mbn','tag'=>'p')); ?>
 	
 </section>
 
@@ -116,20 +116,21 @@ $url_back = encode(__('Directory'));
 						</h2>
 
 						<!-- Coordonnées -->
+						<ul class="unstyled pln">
 						<?php 
-						if(isset($content_fiche['url-site-web']))
-							echo '<div class="bold"><i class="fa fa-fw fa-globe" aria-hidden="true"></i> <a href="'.$content_fiche['url-site-web'].'" target="_blank">'.__('Website').'</a></div>';
+							if(isset($content_fiche['url-site-web']))
+								echo '<li class="bold pbn"><i class="fa fa-fw fa-globe" aria-hidden="true"></i> <a href="'.$content_fiche['url-site-web'].'" target="_blank">'.__('Website').'</a></li>';
 
-						if(isset($content_fiche['telephone']))
-							echo '<details class="pts" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold  inbl" data-encode="'.$content_fiche['telephone'].'"  aria-label="'.__("Click to display the").' '.__('Telephone').'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary><span class="pls bold"></span></details>';
+							if(isset($content_fiche['telephone']))
+								echo '<li class="pbn"><details class="pts" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold  inbl" data-encode="'.$content_fiche['telephone'].'"  aria-label="'.__("Click to display the").' '.__('Telephone').'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary><span class="pls bold"></span></details></li>';
 
-						if(isset($content_fiche['mail-contact']))
-							echo '<details class="pts" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold inbl" data-encode="'.$content_fiche['mail-contact'].'"  aria-label="'.__("Click to display the").' '.__('Email').'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary><span class="pls bold mtm"></span></details>';
+							if(isset($content_fiche['mail-contact']))
+								echo '<li class="pbn"><details class="pts" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold inbl" data-encode="'.$content_fiche['mail-contact'].'"  aria-label="'.__("Click to display the").' '.__('Email').'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary><span class="pls bold mtm"></span></details></li>';
 
-						if(isset($content_fiche['adresse']))
-							echo '<div class="bold pts"><i class="fa fa-fw fa-location" aria-hidden="true"></i> '.__('Address').'</div><div class="plt">'.$content_fiche['adresse'].'</div>';
-						?>
-
+							if(isset($content_fiche['adresse']))
+								echo '<li class="bold pbn pts"><i class="fa fa-fw fa-location" aria-hidden="true"></i> '.__('Address').'<p class="plt">'.$content_fiche['adresse'].'</p></li>';
+							?>
+							</ul>
 						<!-- Lien vers détail -->
 						<div class="absolute bot15 right15">
 

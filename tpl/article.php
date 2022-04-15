@@ -174,7 +174,7 @@ switch($res['tpl']) {
 
 				// Description : s'affiche sur la liste
 				if($res['tpl']=='article' or $res['tpl']=='event')
-					txt('description', 'ptl');
+					txt('description', array('class'=>'ptl mbn','tag'=>'p'));
 				?>
 
 			</div>
