@@ -1329,7 +1329,16 @@ div.editable {
 					color: #26D691 !important;
 				}
 		
-
+ #accessibilite nav ul { min-height: unset;}
+ #accessibilite nav > ul li {
+ 	display: inline;
+ 	min-height: unset;
+ 	max-width: unset;
+ 	padding: 0;
+ 	align-items: unset;
+ }
+ #accessibilite nav > ul li:after{content: "|";padding: 0 0.5em;}
+ #accessibilite nav > ul li a { color: #000}
 
 	/* BOUTON BURGER & Animation */
 	header nav .burger {
