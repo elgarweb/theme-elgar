@@ -10,7 +10,7 @@
 			<div id="accessibilite" class="fl pbs">
 				
 				<nav role="navigation" aria-label="<?php _e("Quick access")?>" class="inline">
-					<ul>
+					<ul class="exclude">
 						<li><a href="#main" class="acces-rapide"><?php _e("Skip to content")?></a></li>
 						<li><a href="/<?=encode(__("Contact"))?>"><?php _e("Contact")?></a></li>
 						<li><a <?href('lien-conformite')?>><?php txt('texte-conformite', array('tag'=>'span')); ?></a></li>
