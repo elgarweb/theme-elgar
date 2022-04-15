@@ -3,49 +3,41 @@
 <div class="mw960p ariane mod center pbm">
 
 	<nav role="navigation" aria-label="<?php _e("Breadcrumb")?>" class="fl ptm" itemprop="breadcrumb">
+		<ul class="inline pln">
+			<li class="inline"><a href="/"><?php _e("Home")?></a></li>
+			<?php 
+			// Page navigation/carrefour
+			//tag('navigation', array('tag' => 'span', 'separator' => ' > '));// ancienne version
+			if($res['tpl']!='navigation')
+			{
+				$array_navigation = array('option' => json_encode($navigation, true), 'class'=>'meta');
 
-		<a href="/"><?php _e("Home")?></a>
+				// Si un élément selectionner on affiche le lien, sinon c'est un span vide pas lisible
+				if(isset($content['navigation'])) {
+					$array_navigation['tag']= 'a';
+					$array_navigation['href']= $GLOBALS['path'].encode(@$content['navigation']);
+				}
 
-
-		<?php 
-		// Page navigation/carrefour
-		//tag('navigation', array('tag' => 'span', 'separator' => ' > '));// ancienne version
-		if($res['tpl']!='navigation')
-		{
-			$array_navigation = array('option' => json_encode($navigation, true), 'class'=>'meta');
-
-			// Si un élément selectionner on affiche le lien, sinon c'est un span vide pas lisible
-			if(isset($content['navigation'])) {
-				$array_navigation['tag']= 'a';
-				$array_navigation['href']= $GLOBALS['path'].encode(@$content['navigation']);
+				select('navigation', $array_navigation);
 			}
 
-			select('navigation', $array_navigation);
-		}
-		?>
+			// Si page fiche ou listing avec tag
+			//if(@$res['type']=='article' or ($res['url'] == encode(__("Actualités")) and $tag))
+			if(isset($url_back) and (@$res['type']==@$type or $tag or $GLOBALS['filter']))
+			{
+				// Supprime le nom de la page en cours pour le chemin
+				if($tag or $GLOBALS['filter']) $title = preg_replace('/^'.preg_quote($res['title'].' - ').'*/', '', $title);
 
+				?><li class="inline"><a href="/<?=encode($url_back)?>"><?php _e(encode($url_back))?></a></li><?
+			}
 
-		<?php 
-		// Si page fiche ou listing avec tag
-		//if(@$res['type']=='article' or ($res['url'] == encode(__("Actualités")) and $tag))
-		if(isset($url_back) and (@$res['type']==@$type or $tag or $GLOBALS['filter']))
-		{
-			// Supprime le nom de la page en cours pour le chemin
-			if($tag or $GLOBALS['filter']) $title = preg_replace('/^'.preg_quote($res['title'].' - ').'*/', '', $title);
+			// Supprime le nom du site
+			$title = preg_replace('/'.preg_quote(' - '.$GLOBALS['sitename']).'*$/', '', $title);
 
-			?><a href="/<?=encode($url_back)?>"><?php _e(encode($url_back))?></a><?
-		}
-		?>
-
-
-		<?php 
-		// Supprime le nom du site
-		$title = preg_replace('/'.preg_quote(' - '.$GLOBALS['sitename']).'*$/', '', $title);
-
-		//if(isset($GLOBALS['tags']) and isset($res['title'])) echo' > ';
-		if(isset($title)) echo'<span aria-current="page">'.$title.'</span>';
-		?>
-		
+			//if(isset($GLOBALS['tags']) and isset($res['title'])) echo' > ';
+			if(isset($title)) echo'<li class="inline" aria-current="page">'.$title.'</li>';
+			?>
+		</ul>
 	</nav>
 
 
