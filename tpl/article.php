@@ -153,22 +153,22 @@ switch($res['tpl']) {
 				<?php 
 				if($res['tpl']=='annuaire' or  $res['tpl']=='event') 
 				{ 
-					echo '<ul>';
-					echo '<li class="bold pts'.(!@$GLOBALS['content']['url-site-web']?' editable-hidden':'').'"><i class="fa fa-fw fa-globe" aria-hidden="true"></i> <a href="'.@$GLOBALS['content']['url-site-web'].'" target="_blank">'.__('Website').'</a>';
+					echo '<ul class="unstyled pln">';
+					echo '<li class="bold pts pbn'.(!@$GLOBALS['content']['url-site-web']?' editable-hidden':'').'"><i class="fa fa-fw fa-globe" aria-hidden="true"></i> <a href="'.@$GLOBALS['content']['url-site-web'].'" target="_blank">'.__('Website').'</a>';
 
 					input('url-site-web', array('type' => 'hidden'));
 
-				  	echo '</li><li><details class="pts'.(!@$GLOBALS['content']['telephone']?' editable-hidden':'').'" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold  inbl" data-encode="'.@$GLOBALS['content']['telephone'].'"  aria-label="'.__("Click to display the").' '.__('Telephone').'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary><span class="pls bold"></span></details>';
+				  	echo '</li><li class="pbn"><details class="pts'.(!@$GLOBALS['content']['telephone']?' editable-hidden':'').'" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold  inbl" data-encode="'.@$GLOBALS['content']['telephone'].'"  aria-label="'.__("Click to display the").' '.__('Telephone').'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary><span class="pls bold"></span></details>';
 
 				  	input('telephone', array('type' => 'hidden', 'class' => 'encode'));
 	
-				  	echo '</li><li><details class="pts'.(!@$GLOBALS['content']['mail-contact']?' editable-hidden':'').'" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold inbl" data-encode="'.@$GLOBALS['content']['mail-contact'].'"  aria-label="'.__("Click to display the").' '.__('Email').'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary><span class="pls bold mtm"></span></details>';
+				  	echo '</li><li class="pbn"><details class="pts'.(!@$GLOBALS['content']['mail-contact']?' editable-hidden':'').'" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold inbl" data-encode="'.@$GLOBALS['content']['mail-contact'].'"  aria-label="'.__("Click to display the").' '.__('Email').'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary><span class="pls bold mtm"></span></details>';
 
 					input('mail-contact', array('type' => 'hidden', 'class' => 'encode'));
 
-					echo '</li><li class="bold pts'.(!@$GLOBALS['content']['adresse']?' editable-hidden':'').'"><i class="fa fa-fw fa-location" aria-hidden="true"></i> '.__('Address');
+					echo '</li><li class="bold pts pbn'.(!@$GLOBALS['content']['adresse']?' editable-hidden':'').'"><i class="fa fa-fw fa-location" aria-hidden="true"></i> '.__('Address');
 
-					txt('adresse', 'plt');
+					txt('adresse', array('class'=>'plt mbt','tag'=>'p'));
 					echo '</li></ul>';
 				}
 
