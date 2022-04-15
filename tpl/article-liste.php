@@ -15,17 +15,19 @@ $url_back = encode($res['url']);
 			<?php h1('title', 'picto'); ?>
 			
 			<nav role="navigation" aria-label="<?php _e("Filter by")?>" class="flex wrap space jcc tc ptl pbm">
-				<?php 
-				// Liste les tags pour filtrer la page
-				$i = 1;
-				$sel_tag_list = $connect->query("SELECT distinct encode, name FROM ".$table_tag." WHERE zone='".$res['url']."' GROUP BY encode, name ORDER BY encode ASC");
-				//echo $connect->error;
-				
-				while($res_tag_list = $sel_tag_list->fetch_assoc()) {
-					echo'<a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="bt-tag'.($tag==$res_tag_list['encode']?' selected':'').'">'.$res_tag_list['name'].'</a>';
-					$i++;
-				}
-				?>
+				<ul class="unstyled">
+					<?php 
+					// Liste les tags pour filtrer la page
+					$i = 1;
+					$sel_tag_list = $connect->query("SELECT distinct encode, name FROM ".$table_tag." WHERE zone='".$res['url']."' GROUP BY encode, name ORDER BY encode ASC");
+					//echo $connect->error;
+					
+					while($res_tag_list = $sel_tag_list->fetch_assoc()) {
+						echo'<li class="inline prs"><a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="bt-tag'.($tag==$res_tag_list['encode']?' selected':'').'">'.$res_tag_list['name'].'</a></li>';
+						$i++;
+					}
+					?>
+				</ul>
 			</nav>
 			
 			<?php txt('description', 'tc ptm pbm'); ?>

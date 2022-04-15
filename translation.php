@@ -118,7 +118,7 @@ $add_translation = array(
 
 
 	// CONTACT
-	"For security reasons, please solve the following calculation" => array("fr" => "Pour des questions de sécurité, merci de résoudre le calcul suivant", "eu" => "Segurtasuna bermatzeko, milesker ondoko kalkulua argitzeagatik"),
+	"For security reasons, please solve the following calculation" => array("fr" => "Pour des questions de sécurité, merci de résoudre le calcul suivant (en chiffre)", "eu" => "Segurtasuna bermatzeko, milesker ondoko kalkulua argitzeagatik"),
 	"Please check your entry and tick the box to accept the storage and processing of this information" => array("fr" => "Merci de vérifier votre saisie et de cocher la case afin d’accepter le stockage et le traitement de ces informations", "eu" => "Milesker idatzi dituzun datuak egiaztatzea eta laukia markatzea, informazio hauen estrategia eta tratamendua onartzeko gisan."),
 	"Recipient email" => array("fr" => "Courriel du destinataire", "eu" => "Hartzailearen e-mezua"),
 	"Subject" => array("fr" => "Sujet", "eu" => "Gaia"),

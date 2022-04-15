@@ -133,12 +133,12 @@ function highlight($txt, $recherche)
 	</script>
 
 
-	<div class="tc">
+	<p class="tc">
 		<?php 
 		echo $num_total.' '.__("result").($num_total>1?'s':'');
 		if(@$_SESSION['recherche']) echo ' '.__("for")." <strong>".htmlspecialchars(@$_SESSION['recherche'])."</strong>";
 		?>
-	</div>
+	</p>
 
 
 	<?php 
@@ -162,10 +162,10 @@ function highlight($txt, $recherche)
 			elseif(isset($content_fiche['texte'])) $texte = $content_fiche['texte'];
 			
 			if(isset($texte))
-				echo highlight(word_cut($texte, '350', '...', '<br><i><div>'), @$_POST['recherche']);
+				echo '<p class="mbn">'.highlight(word_cut($texte, '350', '...', '<br><i><div>'), @$_POST['recherche']).'</p>';
 			?>
 
-			<div class="fr mtm"><a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" class="bt bold" aria-label="<?php _e("Lire")?> <?php echo $res_fiche['title']?>"><?php _e("Lire")?></a></div>
+			<a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" class="bt bold fr mtm" aria-label="<?php _e("Lire")?> <?php echo $res_fiche['title']?>"><?php _e("Lire")?></a>
 
 		</article>
 		<?php

@@ -11,18 +11,18 @@
 			<?php _e('Share this page'); ?>
 
 			<!-- <?php txt('texte-reseaux-sociaux', 'plm'); ?> -->
-			<div class="plm">
+			<ul class="plm">
 
 				<?php				
 				$titre_encode = rawurlencode($title);
 				$url_encode = urlencode(make_url($res['url'], array("domaine" => true)));
 				?>
 
-				<a href="https://www.facebook.com/sharer/sharer.php?u=<?=$url_encode?>" target="_blank"><i class="fa fa-fw fa-facebook big" aria-hidden="true"></i>Facebook</a>
+				<li class="inline"><a href="https://www.facebook.com/sharer/sharer.php?u=<?=$url_encode?>" target="_blank"><i class="fa fa-fw fa-facebook big" aria-hidden="true"></i>Facebook</a></li>
 				
-				<a href="mailto:?subject=<?=$titre_encode?>&body=<?=$url_encode?>" target="_blank"><i class="fa fa-fw fa-mail big mlm mrs" aria-hidden="true"></i><?_e("Mail")?></a>
+				<li class="inline"><a href="mailto:?subject=<?=$titre_encode?>&body=<?=$url_encode?>" target="_blank"><i class="fa fa-fw fa-mail big mlm mrs" aria-hidden="true"></i><?_e("Mail")?></a></li>
 
-			</div>
+			</ul>
 
 		</section>
 	<?}?>

@@ -154,20 +154,12 @@ if(!$alert_view){?>
 					</h3>
 					
 					<!-- Extrait texte -->
-					<div class="pbm">
-						<?php 
-					if(isset($article['content']['texte'])) echo word_cut($article['content']['texte'], '100', '...');
-					?>
-				
+					<p class="pbm">
+						<?php if(isset($article['content']['texte'])) echo word_cut($article['content']['texte'], '100', '...');?>
+					</p>
 					<!-- Lien Lire la suite -->
-					<div class="absolute bot15 right15">
-
-						<a href="<?=make_url($article['title'], array("domaine" => true));?>"><span class=""><?php _e("Read more")?></span></a>
-					
-					</div>
-						
+					<a  class="absolute bot15 right15" href="<?=make_url($article['title'], array("domaine" => true));?>"><span class=""><?php _e("Read more")?></span></a>
 				</div>
-
 			</div>
 		
 		<?php
