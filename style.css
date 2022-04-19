@@ -939,8 +939,9 @@ input[type="reset"].unstyled:focus {
 	padding: 0.2rem 1rem;
 
 	border-radius: 30px;
+	border: none;
 
-	opacity: 0.6;
+	opacity: 0.7;
 	text-shadow: none;
 }
 	.bt.fixed.top { 	
@@ -953,7 +954,7 @@ input[type="reset"].unstyled:focus {
 	}
 	.bt.fixed.edit { 	
 		transition: right .1s;	
-		opacity: 0.2;
+		opacity: 0.6;
 		left: 20px;
 		right: initial;
 	}
