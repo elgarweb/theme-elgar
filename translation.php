@@ -5,21 +5,22 @@ $add_translation = array(
 	"Close" => array("fr" => "Fermer", "eu" => "Hetsi"),
 
 	"Accessibility" => array("fr" => "Accessibilité"),
-	"Search" => array("fr" => "Rechercher"),
+	"Enhanced contrast" => array("fr" => "Contraste renforcé", "eu" => "Kontraste indartua"),
+	"Search" => array("fr" => "Rechercher", "eu" => "Bilatu"),
 	"Search the site" => array("fr" => "Rechercher sur le site", "eu" => "Webgunean bilatu"),
 	"Home other language" => array("fr" => "Accueil Français", "eu" => "Harrera euskaraz"),
 	"Contact" => array("fr" => "Contact", "eu" => "Kontaktuak"),
 
 	// Ariane
-	"Navigation" => array("fr" => "Navigation"),
-	"Upper menu" => array("fr" => "Menu supérieur"),
-	"Breadcrumb" => array("fr" => "Fil d'Ariane"),
+	"Navigation" => array("fr" => "Navigation", "eu" => "Nabigazioa"),
+	"Upper menu" => array("fr" => "Menu supérieur", "eu" => "Goi-menua"),
+	"Breadcrumb" => array("fr" => "Fil d'Ariane", "eu" => "Hari gidaria"),
 	"Home" => array("fr" => "Accueil", "eu" => "Harrera", "oc" => "Acuèlh"),
-	"The average reading time for this page is *minute* minutes and *second* seconds. For less impact on the environment we recommend that you print it double-sided, black and white, 2 pages per sheet." => array("fr" => "Le temps moyen de lecture de cette page est de *minute* minutes et *second* secondes. Pour moins d'impact sur l'environnement nous vous recommandons de l'imprimer en recto-verso, noir et blanc, 2 pages par feuille."),
+	"The average reading time for this page is *minute* minutes and *second* seconds. For less impact on the environment we recommend that you print it double-sided, black and white, 2 pages per sheet." => array("fr" => "Le temps moyen de lecture de cette page est de *minute* minutes et *second* secondes. Pour moins d'impact sur l'environnement nous vous recommandons de l'imprimer en recto-verso, noir et blanc, 2 pages par feuille.", "eu" => "Orri honen irakurtzeko bataz besteko denbora *minutu*minutukoa eta *segundu *segundukoa da. Ingurumenari gutiago eragiteko, gomendatzen dizugu bi orrialdetan inprimatzea, zuri eta beltzez, 2 orri hostoka."),
 
 
 	// FOOTER
-	"Have you taken the accessibility rules into account when entering your content?" => array("fr" => "Avez-vous bien pris en compte les règles d'accessibilité lors de la saisie de vos contenus ?"),
+	"Have you taken the accessibility rules into account when entering your content?" => array("fr" => "Avez-vous bien pris en compte les règles d'accessibilité lors de la saisie de vos contenus ?", "eu" => "Helgarritasun-arauak kontutan hartu ote dituzu, zure edukiak idazterakoan?"),
 
 	// Footer - partage Réseaux sociaux
 	"Share this page" => array("fr" => "Partager cette page", "eu" => "Orri hau partekatu"),
@@ -36,7 +37,7 @@ $add_translation = array(
 
 	// Footer - Liens
 	"The news" => array("fr" => "Les actualités", "eu" => "Berriak"),
-	"Documents download" => array("fr" => "Documents à télécharger"),
+	"Documents download" => array("fr" => "Documents à télécharger", "eu" => "Telekargatzekoak diren dokumentuak"),
 	"Site map" => array("fr" => "Plan du site", "eu" => "Webgunearen planoa"),
 	"Legal notices" => array("fr" => "Mentions légales", "eu" => "Legezko aipamenak"),
 
@@ -47,40 +48,40 @@ $add_translation = array(
 
 
 	// PAGE
-	"Summary" => array("fr" => "Sommaire"),
-	"Page" => array("fr" => "Page"),
-	"Disabled page" => array("fr" => "Page désactivé"),
+	"Summary" => array("fr" => "Sommaire", "eu" => "Aurkibidea"),
+	"Page" => array("fr" => "Page", "eu" => "Orrialdea"),
+	"Disabled page" => array("fr" => "Page désactivée", "eu" => "Orrialdea desaktibatua"),
 
 
 	// ACTUALITÉS - AGENDA
 	"Read more" => array("fr" => "Lire la suite", "eu" => "Segida irakurri"),
-	"Go back to the news" => array("fr" => "Retour aux actualités"),
-	"Go back to the agenda" => array("fr" => "Retour à l'agenda"),
-	"Edit event" => array("fr" => "Edition d'un événement"),
-	"Categories" => array("fr" => "Catégories/Tags"),
-	"Start date" => array("fr" => "Date de début"),
+	"Go back to the news" => array("fr" => "Retour aux actualités", "eu" => "Itzuli aktualitateetara"),
+	"Go back to the agenda" => array("fr" => "Retour à l'agenda", "eu" => "Itzuli agendara"),
+	"Edit event" => array("fr" => "Edition d'un événement", "eu" => "Gertakari baten argitalpena"),
+	"Categories" => array("fr" => "Catégories/Tags", "eu" => "Sailak/Tags"),
+	"Start date" => array("fr" => "Date de début", "eu" => "Hastapeneko data"),
 	"Website" => array("fr" => "Site web", "eu" => "Webgunea"),	
 	"Click to display the" => array("fr" => "Cliquer pour afficher le"),
 	"Telephone" => array("fr" => "Téléphone", "eu" => "Telefonoa"),
 	"Email" => array("fr" => "Courriel", "eu" => "E-mezua"),
 	"Mail" => array("fr" => "Mail", "eu" => "E-mezua"),
-	"Address" => array("fr" => "Adresse"),
+	"Address" => array("fr" => "Adresse", "eu" => "Helbidea"),
 	"Filter by" => array("fr" => "Filtrer par"),
-	"january" => array("fr" => "janvier"),
-	"february" => array("fr" => "février"),
-	"march" => array("fr" => "mars"),
-	"april" => array("fr" => "avril"),
-	"may" => array("fr" => "mai"),
-	"june" => array("fr" => "juin"),
-	"july" => array("fr" => "juillet"),
-	"august" => array("fr" => "août"),
-	"september" => array("fr" => "septembre"),
-	"october" => array("fr" => "octobre"),
-	"november" => array("fr" => "novembre"),
+	"january" => array("fr" => "janvier", "eu" => "urtarrila"),
+	"february" => array("fr" => "février", "eu" => "otsaila"),
+	"march" => array("fr" => "mars", "eu" => "martxoa"),
+	"april" => array("fr" => "avril", "eu" => "apirila"),
+	"may" => array("fr" => "mai", "eu" => "maiatza"),
+	"june" => array("fr" => "juin", "eu" => "ekaina"),
+	"july" => array("fr" => "juillet", "eu" => "uztaila"),
+	"august" => array("fr" => "août", "eu" => "agorrila"),
+	"september" => array("fr" => "septembre", "eu" => "iraila"),
+	"october" => array("fr" => "octobre", "eu" => "urria"),
+	"november" => array("fr" => "novembre", "eu" => "azaroa"),
 	"december" => array("fr" => "décembre"),
-	"st" => array("fr" => "er"),
-	"Opening" => array("fr" => "Ouverture"),
-	"Closing" => array("fr" => "Fermeture"),
+	"st" => array("fr" => "er", "eu" => "lehena"),
+	"Opening" => array("fr" => "Ouverture", "eu" => "Irekitzea"),
+	"Closing" => array("fr" => "Fermeture", "eu" => "Hestea"),
 	"to" => array("fr" => "à", "eu" => ""),
 	"Browsing by page" => array("fr" => "Pagination"),
 
@@ -91,30 +92,30 @@ $add_translation = array(
 
 
 	// ANNUAIRE
-	"Add annuaire" => array("fr" => "Ajouter un annuaire"),
-	"Edit annuaire" => array("fr" => "Edition d'un annuaire"),
-	"Go back to the directory" => array("fr" => "Retour à l'annuaire"),
+	"Add annuaire" => array("fr" => "Ajouter un annuaire", "eu" => "Aurkibide 1 gehitu"),
+	"Edit annuaire" => array("fr" => "Edition d'un annuaire", "eu" => "Aurkibide baten argitaratzea "),
+	"Go back to the directory" => array("fr" => "Retour à l'annuaire", "eu" => "Aurkibidera itzuli"),
 
 
 	// ARRETES
-	"Add arrete" => array("fr" => "Ajouter un arrêté"),
-	"Edit arrete" => array("fr" => "Edition d'un arrêté"),
+	"Add arrete" => array("fr" => "Ajouter un arrêté", "eu" => "Erabaki bat gehitu"),
+	"Edit arrete" => array("fr" => "Edition d'un arrêté", "eu" => "Erabaki baten argitaratzea"),
 	"See the sheet" => array("fr" => "Voir la fiche", "eu" => "Ikus fitxa"),
-	"Filter by date (format DD/MM/YYYY)" => array("fr" => "Filtrer par date (format JJ/MM/AAAA)"),
-	"Filter by date" => array("fr" => "Filtrer par date"),
-	"Start" => array("fr" => "Début"),
-	"End" => array("fr" => "Fin"),
-	"Day" => array("fr" => "Jour"),
-	"Month" => array("fr" => "Mois"),
-	"Year" => array("fr" => "Année"),
-	"Filter" => array("fr" => "Filtrer"),
-	"No result" => array("fr" => "Pas de résultat"),
-	"Go back to decrees" => array("fr" => "Retour aux arrêtés"),
+	"Filter by date (format DD/MM/YYYY)" => array("fr" => "Filtrer par date (format JJ/MM/AAAA)", "eu" => "Dataz irazi (UUUU/HH/EE formatua)"),
+	"Filter by date" => array("fr" => "Filtrer par date", "eu" => "Dataz irazi"),
+	"Start" => array("fr" => "Début", "eu" => "Hastapena"),
+	"End" => array("fr" => "Fin", "eu" => "Bukaera"),
+	"Day" => array("fr" => "Jour", "eu" => "Eguna"),
+	"Month" => array("fr" => "Mois", "eu" => "Hilabetea"),
+	"Year" => array("fr" => "Année", "eu" => "Urtea"),
+	"Filter" => array("fr" => "Filtrer", "eu" => "Irazi"),
+	"No result" => array("fr" => "Pas de résultat", "eu" => "Emaitzarik ez"),
+	"Go back to decrees" => array("fr" => "Retour aux arrêtés", "eu" => "Erabakietara itzuli"),
 
 
 	// TOURINSOFT
-	"Add event-tourinsoft" => array("fr" => "Ajouter un événement Tourinsoft"),
-	"Edit event-tourinsoft" => array("fr" => "Edition d'un événement Tourinsoft"),
+	"Add event-tourinsoft" => array("fr" => "Ajouter un événement Tourinsoft", "eu" => "Tourinsoft gertakari bat gehitu"),
+	"Edit event-tourinsoft" => array("fr" => "Edition d'un événement Tourinsoft", "eu" => "Tourinsoft gertakari baten argitaratzea"),
 
 
 	// CONTACT
@@ -138,19 +139,19 @@ $add_translation = array(
 
 
 	// FONCTIONS
-	"New window" => array("fr" => "Nouvelle fenêtre"),
+	"New window" => array("fr" => "Nouvelle fenêtre", "eu" => "Leiho berria"),
 
 	// Accessibilité
 	"Skip to content" => array("fr" => "Aller au contenu", "eu" => "Joan edukia"),
 
 	// Admin langue
 	"Other language" => array("fr" => "Version Française", "eu" => "Euskarazko bertsioa", "oc" => "Version en Gascon"),
-	"Language" => array("fr" => "Langue"),
-	"Duplicate" => array("fr" => "Dupliquer"),
+	"Language" => array("fr" => "Langue", "eu" => "Hizkuntza"),
+	"Duplicate" => array("fr" => "Dupliquer", "eu" => "Kopiak egin"),
 
 	// Langue
-	"fr" => array("fr" => "Français"),
-	"eu" => array("fr" => "Basque"),
+	"fr" => array("fr" => "Français", "eu" => "Frantsesa"),
+	"eu" => array("fr" => "Basque", "eu" => "Euskara"),
 
 
 	// URL
@@ -166,7 +167,7 @@ $add_translation = array(
 	"Directory" => array("fr" => "Annuaire", "eu" => "Aurkitegia"),
 		"annuaire" => array("fr" => "Annuaire"),
 
-	"Decrees" => array("fr" => "Arrêtés"),
+	"Decrees" => array("fr" => "Arrêtés", "eu" => "Erabakiak"),
 		"arretes" => array("fr" => "Arrêtés"),
 
 );
