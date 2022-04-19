@@ -182,6 +182,8 @@ switch(@$_GET['mode'])
 
 			$(function()
 			{
+				$('#email-from')[0].setCustomValidity("<?_e("Expected format" )?> : sophie.dupont@exemple.com");
+				
 				// Soumettre le formulaire
 				$("#contact").submit(function(event)
 				{
