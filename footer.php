@@ -66,7 +66,7 @@
 
 				</form>
 				<script>
-					$('#email_newsletter')[0].setCustomValidity("<?_e("Expected format" )?> : sophie.dupont@exemple.com");
+					//$('#email_newsletter')[0].setCustomValidity("<?_e("Expected format" )?> : sophie.dupont@exemple.com");
 				</script>
 				<?}?>
 
