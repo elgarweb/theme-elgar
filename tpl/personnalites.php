@@ -9,39 +9,10 @@
 		$groupe = 6;
 		for($i=1; $i<=$groupe; $i++) { ?>
 			<div class="pan ptl">
-					<?/*
-				<div class="editable-hidden">
-					$titreChecked	= false;
-					$sstitreChecked	= false;
-					$sssstitreChecked = false;
-					if(@$GLOBALS['content']['groupe-titre-'.$i]) $titreChecked=true;
-					checkbox('affiche-groupe-titre-'.$i,$titreChecked)?> <label for="affiche-groupe-titre-'<?=$i;?>">Afficher le Titre de Niveau 2</label>
-					
-					<?
-					if(@$GLOBALS['content']['groupe-sstitre-'.$i]) $sstitreChecked=true;
-					checkbox('affiche-groupe-sstitre-'.$i, $sstitreChecked)?> <label for="affiche-groupe-sstitre-'<?=$i;?>">Afficher le Titre de Niveau 3</label>
-					
-					<?
-					if(@$GLOBALS['content']['groupe-ss-sstitre-'.$i]) $sssstitreChecked=true;
-					checkbox('affiche-groupe-ss-sstitre-'.$i, $sssstitreChecked)?> <label for="affiche-groupe-ss-sstitre-'<?=$i;?>">Afficher le Titre de Niveau 4</label>
-					
-				</div>
-				<?php 
-				// pour afficher ou non en front le titre de niveau 2
-
-				if(@$GLOBALS['content']['affiche-groupe-titre-'.$i] || @$GLOBALS['content']['groupe-titre-'.$i])
-					h2('groupe-titre-'.$i, 'tl mtm');
-				
-				if(@$GLOBALS['content']['affiche-groupe-sstitre-'.$i] || @$GLOBALS['content']['groupe-sstitre-'.$i])
-					h3('groupe-sstitre-'.$i);
-
-				if(@$GLOBALS['content']['affiche-groupe-ss-sstitre-'.$i] || @$GLOBALS['content']['groupe-ss-sstitre-'.$i])
-					txt('groupe-ss-sstitre-'.$i, array('class'=>'color','tag'=>'h4')); 
-				*/
+				<?php
 					h2('groupe-titre-'.$i, 'tl mtm');
 					h3('groupe-sstitre-'.$i);
-					txt('groupe-ss-sstitre-'.$i, array('class'=>'color','tag'=>'h4')); 
-				
+					txt('groupe-ss-sstitre-'.$i, array('class'=>'color','tag'=>'h4'));
 				?>
 				<ul id="personnalite-<?=$i?>" class="blocks module unstyled flex wrap space-xl jic tc pln">					
 					<?php 
