@@ -12,7 +12,7 @@
 
 		<?php txt('texte');?>
 
-		<ul>
+		<ul id="sitemap">
 		 	<?php
 		 	$ul = null;
 		 	$num_pp = 50;
@@ -70,9 +70,44 @@
 				echo'</li>';
 			}
 			?>
-			<li><a href="/<?=encode(__("Contact"))?>"><?php _e("Contact")?></a></li>
 		</ul>
 
 	</div>
 
 </section>
+<script>
+$(function()
+{
+	// Tableau avec les éléments déjà present
+	sitemap = {};
+	$("#sitemap a").each(function() 
+	{
+		sitemap[$(this).attr("href")] = $(this).html();
+	});
+
+	// Liens supplementaire dans le footer
+	$("#footer-liens a").each(function() 
+	{
+		// Si le lien n'est pas déjà présent
+		if(!sitemap[window.location.origin + $(this).attr("href")]) 
+		{
+			$("#sitemap").append('<li><a href="'+$(this).attr("href")+'">'+$(this).html()+'</a></li>');
+
+			sitemap[window.location.origin + $(this).attr("href")] = $(this).html();
+		}
+	});
+
+	// Liens webmaster tout en bas dans le footer
+	$("#footer-liens-webmaster a").each(function() 
+	{
+		if(!sitemap[window.location.origin + $(this).attr("href")]) 
+		{
+			$("#sitemap").append('<li><a href="'+$(this).attr("href")+'">'+$(this).html()+'</a></li>');
+			
+			sitemap[window.location.origin + $(this).attr("href")] = $(this).html();
+		}
+	});
+
+	//console.log(sitemap)
+});
+</script>
