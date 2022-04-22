@@ -52,7 +52,7 @@
 
 					<input type="hidden" name="webform_id" value="<?=@$GLOBALS['newsletter-id'][$lang]?>">
 
-					<label for="email_newsletter"><?php _e('Subscribe to the newsletter of your city') ?><span class="block small ptt"><?php _e('Expected format: nom@domaine.com');?></span></label>
+					<label for="email_newsletter"><?php _e('Subscribe to the newsletter of your city') ?><span class="block small ptt"><?php _e('Expected format');?> : dupont@exemple.com</span></label>
 
 					<div class="flex pts">
 
@@ -69,7 +69,7 @@
 					// Message d'erreur en cas de mauvaise saisie du mail. Pour l'accessibilité
 					var email_newsletter = document.getElementById("email_newsletter");
 					email_newsletter.addEventListener("invalid", function() {
-						email_newsletter.setCustomValidity("<?_e("Expected format" )?> : dupont@exemple.com")
+						email_newsletter.setCustomValidity("<?_e("Invalid email")?>. <?_e("Expected format")?> : dupont@exemple.com")
 					}, false);
 					email_newsletter.addEventListener("input", function() {
 						email_newsletter.setCustomValidity("");
