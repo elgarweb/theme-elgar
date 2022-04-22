@@ -158,7 +158,7 @@ if(!$alert_view){?>
 						<?php if(isset($article['content']['texte'])) echo word_cut($article['content']['texte'], '100', '...');?>
 					</p>
 					<!-- Lien Lire la suite -->
-					<a  class="absolute bot15 right15" href="<?=make_url($article['title'], array("domaine" => true));?>"><span class=""><?php _e("Read more")?></span></a>
+					<a  class="absolute bot15 right15" href="<?=make_url($article['title'], array("domaine" => true));?>" aria-label="<?php echo __("Read more")." ". $article['title'];?> "><?php _e("Read more")?></a>
 				</div>
 			</div>
 		
