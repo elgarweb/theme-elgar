@@ -89,7 +89,7 @@ switch($res['tpl']) {
 
 						<?php 
 						// Champs saisie tags
-						tag($dir, array('tag' => 'ul'));
+						tag($dir, array('tag' => 'ul', 'class'=>'unstyled pln flex'));
 						?>
 					
 						<script>
