@@ -27,8 +27,9 @@ $add_translation = array(
 
 	// Footer - Newsletter
 	"Subscribe to the newsletter of your city" => array("fr" => "Inscrivez-vous<br> à la lettre d'informations de votre ville", "eu" => "Zure herriko newsletter-ean harpidetu zaitez"),
-	"Expected format: nom@domaine.com" => array("fr"=>"Format attendu : nom@domaine.fr", "eu"=>"Igurikatua den formatua : e.mezua@webgunea.eu"),
-	"Your email" => array("fr" => "Votre mail", "eu" => "Zure helbide elektronikoa"),
+	"Expected format" => array("fr"=>"Format attendu", "eu"=>"Igurikatua den formatua"),
+	"Invalid email" => array("fr" => "E-mail invalide", "eu" => "Helbide elektronikoa ez da bali"),
+	"Your email" => array("fr" => "Votre e-mail", "eu" => "Zure helbide elektronikoa"),
 	"Subscribe" => array("fr" => "S'inscrire", "eu" => "Zure izena eman"),
 
 	// Footer - Réseaux sociaux
@@ -83,7 +84,7 @@ $add_translation = array(
 	"Opening" => array("fr" => "Ouverture", "eu" => "Irekitzea"),
 	"Closing" => array("fr" => "Fermeture", "eu" => "Hestea"),
 	"to" => array("fr" => "à", "eu" => ""),
-	"Browsing by page" => array("fr" => "Pagination"),
+	"Browsing by page" => array("fr" => "Pagination", "eu" => "Nabigazioa orrika"),
 
 
 	// RECHERCHE

@@ -26,7 +26,7 @@ switch(@$_GET['mode'])
 			"Thank you for completing all the required fields!" : {"fr" : "Merci de remplir tous les champs obligatoires !"},
 			"Wrong answer to the verification question!" : {"fr" : "R\u00e9ponse erron\u00e9e \u00e0 la question de vérification !"},
 			"Error sending email" : {"fr" : "Erreur lors de l'envoi du mail"},
-			"Invalid email!" : {"fr" : "Mail invalide !"},
+			"Invalid email" : {"fr" : "E-mail invalide", "eu" : "Helbide elektronikoa ez da bali"},
 			"Message sent" : {"fr" : "Message envoy\u00e9"},
 		});
 		</script>
@@ -185,7 +185,7 @@ switch(@$_GET['mode'])
 				// Message d'erreur en cas de mauvaise saisie du mail. Pour l'accessibilité
 				var email_from = document.getElementById("email-from");
 				email_from.addEventListener("invalid", function() {
-					email_from.setCustomValidity("<?_e("Expected format" )?> : dupont@exemple.com")
+					email_from.setCustomValidity("<?_e("Invalid email")?>. <?_e("Expected format")?> : dupont@exemple.com")
 				}, false);
 				email_from.addEventListener("input", function() {
 					email_from.setCustomValidity("");
@@ -318,8 +318,8 @@ switch(@$_GET['mode'])
 				{
 					?>
 					<script>
-						error(__("Invalid email!"), 'nofade', $("#email-from"));
-						document.title = title +' - '+ __("Invalid email!");
+						error(__("Invalid email"), 'nofade', $("#email-from"));
+						document.title = title +' - '+ __("Invalid email");
 						
 						activation_form();// On rétablie le formulaire
 					</script>
