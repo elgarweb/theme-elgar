@@ -89,7 +89,7 @@ switch($res['tpl']) {
 
 						<?php 
 						// Champs saisie tags
-						tag($dir, array('tag' => 'span'));
+						tag($dir, array('tag' => 'ul'));
 						?>
 					
 						<script>
