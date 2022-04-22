@@ -182,7 +182,14 @@ switch(@$_GET['mode'])
 
 			$(function()
 			{
-				//$('#email-from')[0].setCustomValidity("<?_e("Expected format" )?> : sophie.dupont@exemple.com");
+				// Message d'erreur en cas de mauvaise saisie du mail. Pour l'accessibilité
+				var email_from = document.getElementById("email-from");
+				email_from.addEventListener("invalid", function() {
+					email_from.setCustomValidity("<?_e("Expected format" )?> : dupont@exemple.com")
+				}, false);
+				email_from.addEventListener("input", function() {
+					email_from.setCustomValidity("");
+				}, false);
 				
 				// Soumettre le formulaire
 				$("#contact").submit(function(event)

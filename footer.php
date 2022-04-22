@@ -66,7 +66,14 @@
 
 				</form>
 				<script>
-					//$('#email_newsletter')[0].setCustomValidity("<?_e("Expected format" )?> : sophie.dupont@exemple.com");
+					// Message d'erreur en cas de mauvaise saisie du mail. Pour l'accessibilité
+					var email_newsletter = document.getElementById("email_newsletter");
+					email_newsletter.addEventListener("invalid", function() {
+						email_newsletter.setCustomValidity("<?_e("Expected format" )?> : dupont@exemple.com")
+					}, false);
+					email_newsletter.addEventListener("input", function() {
+						email_newsletter.setCustomValidity("");
+					}, false);
 				</script>
 				<?}?>
 
