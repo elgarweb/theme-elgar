@@ -111,11 +111,14 @@ switch(@$_GET['mode'])
 
 					<!-- Bouton envoyer -->
 					<div class="tc mtm mbl">
-						<button type="submit" id="send" class="bt bold">
+						<button type="submit" id="send" class="bt bold" aria-describedby="texte-rgpd">
 							<?php _e("Send")?>
 							<i class="fa fa-mail-alt mlt" aria-hidden="true"></i>
 						</button>
 					</div>
+
+
+					<?php txt('texte-rgpd', 'mtl')?>
 
 
 					<input type="hidden" name="rgpd_text" value="<?=htmlspecialchars(@$GLOBALS['content']['rgpd']);?>">
