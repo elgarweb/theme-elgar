@@ -18,7 +18,9 @@
 					$array_navigation['href']= $GLOBALS['path'].encode(@$content['navigation']);
 				}
 
+				?><li class="inline"><?
 				select('navigation', $array_navigation);
+				?></li><?
 			}
 
 			// Si page fiche ou listing avec tag
