@@ -822,7 +822,8 @@ input[type="reset"].unstyled:focus {
 	position: relative;
 	/* display: inline-block; */
 }
-	.video input,
+	/* .video input, */
+	.video button,
 	.video iframe {
 		width: 320px;
 		height: 180px;
@@ -832,7 +833,7 @@ input[type="reset"].unstyled:focus {
 
 	.video iframe { display: inline-block; }
 
-	.video:after {/* Icône rouge pour inciter au clique */
+	.video button:after {/* Icône rouge pour inciter au clique */
 		content: '\f144';
 		font-family: FontAwesome;
 		font-size: 6rem;
@@ -844,8 +845,8 @@ input[type="reset"].unstyled:focus {
 		opacity: .8;
 		transition: all 1.5s;
 	}
-		.video:hover:after { opacity: 1; }
-		.video.play:after { content: ''; }
+		.video button:hover:after { opacity: 1; }
+		.video.play button:after { content: ''; }
 
 
 
