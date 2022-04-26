@@ -34,7 +34,7 @@ $add_translation = array(
 
 	// Footer - Réseaux sociaux
 	"On Facebook" => array("fr" => "Sur Facebook", "eu" => "Facebook-en"),
-	"On Twitter" => array("fr" => "Sur Twitter", , "eu" => "Twitter-en"),
+	"On Twitter" => array("fr" => "Sur Twitter", "eu" => "Twitter-en"),
 
 	// Footer - Liens
 	"The news" => array("fr" => "Les actualités", "eu" => "Berriak"),
