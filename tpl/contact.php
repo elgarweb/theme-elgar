@@ -227,7 +227,7 @@ switch(@$_GET['mode'])
 	// SCRIPT D'ENVOIE DE L'EMAIL
 	case 'send-mail':
 
-	print_r($_REQUEST);
+		//print_r($_REQUEST);
 
 		// Si on a posté le formulaire
 		if(isset($_POST["email-from"]) and $_POST["message"] and isset($_POST["question"]) and !$_POST["reponse"])// reponse pour éviter les bots qui remplisse tous les champs
