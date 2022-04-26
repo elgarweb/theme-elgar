@@ -52,7 +52,7 @@
 
 					<input type="hidden" name="webform_id" value="<?=@$GLOBALS['newsletter-id'][$lang]?>">
 
-					<label for="email_newsletter"><?php _e('Subscribe to the newsletter of your city') ?><span class="block small ptt"><?php _e('Expected format');?> : dupont@exemple.com</span></label>
+					<label for="email_newsletter"><?php _e('Subscribe to the newsletter of your city') ?><span class="block small ptt"><?php _e('Expected format');?> : nomprenom@exemple.com</span></label>
 
 					<div class="flex pts">
 
