@@ -4,7 +4,7 @@ $add_translation = array(
 	"Menu" => array("fr" => "Menu", "eu" => "Menua"),
 	"Close" => array("fr" => "Fermer", "eu" => "Hetsi"),
 
-	"Accessibility" => array("fr" => "Accessibilité"),
+	"Accessibility" => array("fr" => "Accessibilité", "eu" => "Helgarritasuna"),
 	"Enhanced contrast" => array("fr" => "Contraste renforcé", "eu" => "Kontraste indartua"),
 	"Search" => array("fr" => "Rechercher", "eu" => "Bilatu"),
 	"Search the site" => array("fr" => "Rechercher sur le site", "eu" => "Webgunean bilatu"),
@@ -33,8 +33,8 @@ $add_translation = array(
 	"Subscribe" => array("fr" => "S'inscrire", "eu" => "Zure izena eman"),
 
 	// Footer - Réseaux sociaux
-	"On Facebook" => array("fr" => "Sur Facebook"),
-	"On Twitter" => array("fr" => "Sur Twitter"),
+	"On Facebook" => array("fr" => "Sur Facebook", "eu" => "Facebook-en"),
+	"On Twitter" => array("fr" => "Sur Twitter", "eu" => "Twitter-en"),
 
 	// Footer - Liens
 	"The news" => array("fr" => "Les actualités", "eu" => "Berriak"),
@@ -62,12 +62,12 @@ $add_translation = array(
 	"Categories" => array("fr" => "Catégories/Tags", "eu" => "Sailak/Tags"),
 	"Start date" => array("fr" => "Date de début", "eu" => "Hastapeneko data"),
 	"Website" => array("fr" => "Site web", "eu" => "Webgunea"),	
-	"Click to display the" => array("fr" => "Cliquer pour afficher le"),
+	"Click to display the" => array("fr" => "Cliquer pour afficher le", "eu" => "Egin klik bistaratzeko"),
 	"Telephone" => array("fr" => "Téléphone", "eu" => "Telefonoa"),
 	"Email" => array("fr" => "Courriel", "eu" => "E-mezua"),
 	"Mail" => array("fr" => "Mail", "eu" => "E-mezua"),
 	"Address" => array("fr" => "Adresse", "eu" => "Helbidea"),
-	"Filter by" => array("fr" => "Filtrer par"),
+	"Filter by" => array("fr" => "Filtrer par", "eu" => "Irazi"),
 	"january" => array("fr" => "janvier", "eu" => "urtarrila"),
 	"february" => array("fr" => "février", "eu" => "otsaila"),
 	"march" => array("fr" => "mars", "eu" => "martxoa"),
@@ -79,7 +79,7 @@ $add_translation = array(
 	"september" => array("fr" => "septembre", "eu" => "iraila"),
 	"october" => array("fr" => "octobre", "eu" => "urria"),
 	"november" => array("fr" => "novembre", "eu" => "azaroa"),
-	"december" => array("fr" => "décembre"),
+	"december" => array("fr" => "décembre", "eu" => "abendua"),
 	"st" => array("fr" => "er", "eu" => "lehena"),
 	"Opening" => array("fr" => "Ouverture", "eu" => "Irekitzea"),
 	"Closing" => array("fr" => "Fermeture", "eu" => "Hestea"),

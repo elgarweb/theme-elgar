@@ -820,25 +820,35 @@ input[type="reset"].unstyled:focus {
 /* Vidéo */
 .video {
 	position: relative;
-	display: inline-block;
+	/* display: inline-block; */
 }
-	.video:after {
+	/* .video input, */
+	.video button,
+	.video iframe {
+		width: 320px;
+		height: 180px;
+		padding: 0;
+		border: none;
+	}
+
+	.video iframe { display: inline-block; }
+
+	.video button:after {/* Icône rouge pour inciter au clique */
 		content: '\f144';
 		font-family: FontAwesome;
 		font-size: 6rem;
 		position: absolute;
-		left: 50%;
 		top: 50%;
+		left: 50%;
 		transform: translate(-50%, -50%);
 		color: #ff0000;
 		opacity: .8;
 		transition: all 1.5s;
 	}
-		.video:hover:after { opacity: 1; }
-		.video.play:after { content: ''; }
+		.video button:hover:after { opacity: 1; }
+		.video.play button:after { content: ''; }
 
-	.video iframe { display: block; }
-		
+
 
 /* Bouton */
 .bt, button {

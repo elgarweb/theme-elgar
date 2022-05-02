@@ -111,11 +111,14 @@ switch(@$_GET['mode'])
 
 					<!-- Bouton envoyer -->
 					<div class="tc mtm mbl">
-						<button type="submit" id="send" class="bt bold">
+						<button type="submit" id="send" class="bt bold" aria-describedby="texte-rgpd">
 							<?php _e("Send")?>
 							<i class="fa fa-mail-alt mlt" aria-hidden="true"></i>
 						</button>
 					</div>
+
+
+					<?php txt('texte-rgpd', 'mtl')?>
 
 
 					<input type="hidden" name="rgpd_text" value="<?=htmlspecialchars(@$GLOBALS['content']['rgpd']);?>">
@@ -155,8 +158,8 @@ switch(@$_GET['mode'])
 				event.preventDefault();
 
 				if($("#question").val()=="" || $("#message").val()=="" || $("#email-from").val()=="" || $("#rgpdcheckbox").prop("checked") == false)
-				error(__("Thank you for completing all the required fields!"));
-				else
+					error(__("Thank you for completing all the required fields!"));
+				else if(!desactive)
 				{
 					desactive = true;
 
@@ -168,7 +171,7 @@ switch(@$_GET['mode'])
 
 					// Désactive le bouton submit (pour les soumissions avec la touche entrée)
 					//$("#contact").off("submit");
-					$("#contact button").attr("disabled", true);
+					//$("#contact button").attr("disabled", true);// => ne permet pas le focus sur le bt une fois envoyer
 
 					$.ajax(
 						{
@@ -282,7 +285,7 @@ switch(@$_GET['mode'])
 						{
 							?>
 							<script>
-								popin(__("Message sent"));
+								popin(__("Message sent"), 'nofade', 'popin', $("#send"));
 								document.title = title +' - '+ __("Message sent");
 
 								// Icone envoyer

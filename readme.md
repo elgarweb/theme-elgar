@@ -6,7 +6,7 @@
 ## Présentation
 Le projet Elgar Web a pour objectif de donner la possibilité aux communes du territoire Pays Basque de disposer plus facilement et à moindre coût d'un site internet accessible aux personnes en situation de handicap et écoconçu.
 
-La Mission accessibilité de la Communauté Pays Basque a fait appel au Collectif d'indépendants [Translucide](https://www.translucide.net/), spécialisé dans l'écoconception web.
+Le réseau CCA-CIA de la Communauté Pays Basque a fait appel au Collectif d'indépendants [Translucide](https://www.translucide.net/), spécialisé dans l'écoconception web.
 
 L'objectif est de créer un thème libre de droits (sous licence MIT) pour le [CMS Translucide](https://github.com/simonvdfr/Translucide).
 

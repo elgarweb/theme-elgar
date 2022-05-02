@@ -52,7 +52,7 @@
 
 					<input type="hidden" name="webform_id" value="<?=@$GLOBALS['newsletter-id'][$lang]?>">
 
-					<label for="email_newsletter"><?php _e('Subscribe to the newsletter of your city') ?><span class="block small ptt"><?php _e('Expected format');?> : dupont@exemple.com</span></label>
+					<label for="email_newsletter"><?php _e('Subscribe to the newsletter of your city') ?><span class="block small ptt"><?php _e('Expected format');?> : nomprenom@exemple.com</span></label>
 
 					<div class="flex pts">
 
@@ -103,9 +103,12 @@
 
 <script>
 	// Ajout du title "nouvelle fenêtre" au lien sortant
-	$("a[target='_blank']").each(function() {
+	$("a[target='_blank']").each(function() 
+	{
 		if(!$(this).attr("aria-label")) $(this).attr("aria-label", $(this).text() + " - <?_e("New window");?>");
-		$(this).addClass("external");
+
+		if($(this).children().prop("tagName") != "IMG")
+			$(this).addClass("external");// Pour l'icône d'ouverture dans un nouvel onglet
 	});
 </script>
 
