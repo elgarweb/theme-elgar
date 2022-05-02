@@ -41,7 +41,7 @@ $mois = array(
 		</ul>
 	</nav>
 
-	<?php txt('description', array('class'=>'tc ptm mbn','tag'=>'p')); ?>
+	<?php txt('description', array('class'=>'tc ptm','tag'=>'p')); ?>
 
 	<form id="filtre-date-arrete" class="tc">
 
