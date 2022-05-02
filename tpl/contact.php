@@ -1,11 +1,5 @@
 <?php 
 
-// @todo accessibilité
-// changer le titre si le formulaire est bien soumis ou si erreur
-// ------Si échape dans la popin ça ferme
-// bloquer la tabulation dans la popin => boucle à la fin de la modal pour retour au premier elem ?
-// bloquer la nav au clavier dans la popin => forcer le focus dans la modal ?
-
 switch(@$_GET['mode'])
 {
 	// AFFICHAGE DU FORMULAIRE DE CONTACT
@@ -63,7 +57,7 @@ switch(@$_GET['mode'])
 
 					<div class="mbm">
 						<label for="email-from"><?php span('texte-label-email')?><span class="red">*</span></label><br>
-						<input type="email" name="email-from" id="email-from" autocomplete="email" placeholder="<?php _e("Email")?>" class="w40 vatt" required><!--<span class="wrapper big white vam o50">@</span>-->
+						<input type="email" name="email-from" id="email-from" autocomplete="email" placeholder="<?php _e("Email")?>" class="w40 vatt" required>
 
 						<label for="reponse" class="hidden" aria-hidden="true"><?php _e("Email")?></label>
 						<input name="reponse" id="reponse" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$" placeholder="nom@domaine.com" aria-hidden="true">
@@ -227,7 +221,7 @@ switch(@$_GET['mode'])
 	// SCRIPT D'ENVOIE DE L'EMAIL
 	case 'send-mail':
 
-	print_r($_REQUEST);
+		//print_r($_REQUEST);
 
 		// Si on a posté le formulaire
 		if(isset($_POST["email-from"]) and $_POST["message"] and isset($_POST["question"]) and !$_POST["reponse"])// reponse pour éviter les bots qui remplisse tous les champs
