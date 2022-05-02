@@ -344,10 +344,13 @@ footer #contacts { font-size: 1.4rem; }
 		font-size: 2rem;
 	}
 
-	footer ul{list-style: none; padding-left: 0; margin-left: 0;}
+	footer ul, .ulinline ul{list-style: none; padding-left: 0; margin-left: 0;}
 		footer #texte-reseaux ul li{padding-bottom: 0.5em;}
 	footer #texte-reseaux p{margin-bottom: 1em;}
 
+	.ulinline ul li{display: inline;}
+	.ulinline ul li:after{content: " - ";}
+	.ulinline ul li:last-child:after{content: "";}
 
 /* Inspiré par knacss.com (Raphael Goetter) et donc normalize.css (Nicolas Gallagher & Jonathan Neal) */
 
