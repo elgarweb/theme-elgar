@@ -59,7 +59,13 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 					if(isset($description)) echo '<p>'.word_cut($description, '80', '...').'</p>';
 
 					//Date évènement
-					if(isset($date)) '<p class="bold mbm">'.date_lang($date).'</p>';?>
+					if(isset($date)) {
+						echo '<p class="bold mbm">';
+							if($GLOBALS['lang'] == 'eu') echo str_replace('-', '/', $date);
+							else echo date_lang($date);
+						echo '</p>';
+					}
+					?>
 
 					<!-- Lien vers détail -->
 					<p class="absolute bot15 bold tdu mbn">
