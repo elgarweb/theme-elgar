@@ -16,7 +16,7 @@ $add_translation = array(
 	"Upper menu" => array("fr" => "Menu supérieur", "eu" => "Goi-menua"),
 	"Breadcrumb" => array("fr" => "Fil d'Ariane", "eu" => "Hari gidaria"),
 	"Home" => array("fr" => "Accueil", "eu" => "Harrera", "oc" => "Acuèlh"),
-	"The average reading time for this page is *minute* minutes and *second* seconds. For less impact on the environment we recommend that you print it double-sided, black and white, 2 pages per sheet." => array("fr" => "Le temps moyen de lecture de cette page est de *minute* minutes et *second* secondes. Pour moins d'impact sur l'environnement nous vous recommandons de l'imprimer en recto-verso, noir et blanc, 2 pages par feuille.", "eu" => "Orri honen irakurtzeko bataz besteko denbora *minutu*minutukoa eta *segundu *segundukoa da. Ingurumenari gutiago eragiteko, gomendatzen dizugu bi orrialdetan inprimatzea, zuri eta beltzez, 2 orri hostoka."),
+	"The average reading time for this page is *minute* minutes and *second* seconds. For less impact on the environment we recommend that you print it double-sided, black and white, 2 pages per sheet." => array("fr" => "Le temps moyen de lecture de cette page est de *minute* minutes et *second* secondes. Pour moins d'impact sur l'environnement nous vous recommandons de l'imprimer en recto-verso, noir et blanc, 2 pages par feuille.", "eu" => "Orri honen irakurtzeko bataz besteko denbora *minute* minutukoa eta *second* segundukoa da. Ingurumenari gutiago eragiteko, gomendatzen dizugu bi orrialdetan inprimatzea, zuri eta beltzez, 2 orri hostoka."),
 
 
 	// FOOTER
