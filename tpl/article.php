@@ -112,7 +112,8 @@ switch($res['tpl']) {
 					if(@$GLOBALS["content"]["aaaa-mm-jj"])
 					{
 						echo '<p class="mbn">';
-						echo date_lang($GLOBALS["content"]["aaaa-mm-jj"]);
+						if($lang == 'eu') echo str_replace('-', '/', $GLOBALS["content"]["aaaa-mm-jj"]);
+						else echo date_lang($GLOBALS["content"]["aaaa-mm-jj"]);
 
 						if(@$GLOBALS["content"]["heure-ouverture"]){
 							echo ', '.date_format(date_create($GLOBALS["content"]["heure-ouverture"]), 'H:i');
