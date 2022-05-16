@@ -11,7 +11,7 @@ Le réseau CCA-CIA de la Communauté Pays Basque a fait appel au Collectif d'ind
 L'objectif est de créer un thème libre de droits (sous licence MIT) pour le [CMS Translucide](https://github.com/simonvdfr/Translucide).
 
 ## Installation
-- Récupérer les fichiers du CMS [CMS Translucides](@todo lien vers la version stable pour Elgar) et les décompresser 
+- Récupérer les fichiers du CMS [CMS Translucides](https://github.com/simonvdfr/Translucide/releases) et les décompresser 
 - Décompresser le thème elgarweb dans le dossier `/theme`
 
 	- Vous devez avoir à la racine de votre hébergement ceci :
@@ -72,7 +72,7 @@ L'objectif est de créer un thème libre de droits (sous licence MIT) pour le [C
 
 - Lancer l'installation de Translucide en allant à l'adresse où se trouve `index.php` :
 	- Rentrer les informations pour se connecter à la base de données (vous devez l'avoir créée précédemment)
-	- Choisir le [thème Elgar](@todo lien vers la version stable) qui est dans le dossier `/theme`
+	- Choisir le [thème Elgar](https://github.com/elgarweb/theme-elgar/releases) qui est dans le dossier `/theme`
 	- Choisir vos accès administrateurs, qui vous permettent par la suite d'ajouter d'autres utilisateurs et de modifier les contenus du site
 
 ### Configuration
@@ -145,7 +145,7 @@ $GLOBALS['filter_auth'] = array(
 ```
 
 ##### Création de pages spécifiques
-Pour le thème vous pouvez aussi créer des pages spécifiques. Pour ajouter des contenus [suivez le tutoriel](@todo)
+Pour le thème vous pouvez aussi créer des pages spécifiques. Pour ajouter des contenus [suivez le tutoriel](https://www.elgarweb.fr/tutoriel.html)
 
 Pour le bon fonctionnement du site vous devez créer des pages types dont le permalien soit :
 - `recherche` à partir du template `recherche`
@@ -191,7 +191,7 @@ De plus vous devez ajouter les traductions dans le fichier `translation.php` qui
 
 
 ## Premier pas pour la gestion du contenu
-Pour la prise en main du CMS nous vous invitons à consulter ce [tutoriel](@todo)
+Pour la prise en main du CMS nous vous invitons à consulter ce [tutoriel](https://www.elgarweb.fr/tutoriel.html)
 
 
 ### Spécificités du thème
@@ -200,7 +200,7 @@ Pour la prise en main du CMS nous vous invitons à consulter ce [tutoriel](@todo
 Le site n'utilise pas de menu déroulant mais des pages intermédiaires de navigation pour simplifier le code HTML et aussi rendre la navigation plus stable à la souris.
 Pour créer une page intermédiaire de navigation vous devez :
 - Créer une page avec le template `navigation`
-- Ajouter au menu principal cette page [voir tutoriel de prise en main](@todo) et ajouter les pages qui dépendent de ce menu [voir tutoriel de prise en main](@todo)
+- Ajouter au menu principal cette page [voir tutoriel de prise en main](https://www.elgarweb.fr/tutoriel.html) et ajouter les pages qui dépendent de ce menu.
 
 ## Personnalisation du thème
 Pour personnaliser le thème vous pouvez modifier le fichier `style.css` dans le dossier `theme/elgar/`.
