@@ -206,7 +206,9 @@ Pour créer une page intermédiaire de navigation vous devez :
 Pour personnaliser le thème vous pouvez modifier le fichier `style.css` dans le dossier `theme/elgar/`.
 Attention à bien prendre en compte les règles d'accessibilité.
 Vous pouvez modifier les couleurs des class des typos `.color` & `.color-alt` et des fonds `.bg-color`.
-Bien prendre en compte les ratios de contraste à au moins 4.5:1 pour limiter les problèmes d'accessibilité. Pour plus de détails voir le [point 3.2 du RGAA](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic3)
+Bien prendre en compte les ratios de contraste à au moins 4.5:1 pour limiter les problèmes d'accessibilité. Pour plus de détails voir le [point 3.2 du RGAA](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic3).
+
+Pour vous aider pour maintenir l'accessibilité du site que vous allers construire vous pouvez suivre le [tableau des critères RGAA](https://github.com/elgarweb/theme-elgar/blob/main/rgaa.md) que nous avons mise en place pour voir les critères à impacts à surveiller que vos soyers développeurs et modifier le CSS, mais aussi pour les éditeurs de contenu.
 
 
 ## Création templates
@@ -227,6 +229,7 @@ D'autres fonctions sont utilisables librement dans le code des templates :
 Nous ne sommes pas responsables de l'utilisation du thème. Par défaut le thème est totalement conformé au RGAA. Nous ne sommes pas garants du niveau d'accessibilité de votre site. Nous ne pouvons pas être tenus responsables de quelconque dégradations d'accessibilité dues à vos modifications ou mauvaise saisie des contenus.
 
 Nous vous recommandons de limiter les modifications du thème aux couleurs de typographie et des fonds de couleur dans le fichier `style.css`, tout en analysant les ratios de contraste pour avoir toujours au moins un ratio de 4.5:1 entre la couleur et le fond.
+Vous pouvez suivre le [tableau des critères RGAA](https://github.com/elgarweb/theme-elgar/blob/main/rgaa.md) pour voir les points de vigilance à avoir sur les éléments impactés par le CSS.
 
 Aucun SAV ou support n'est compris avec le thème/dépôt Github. Aucune maintenance ou suivi des tickets n'est possible. Des changements, améliorations et/ou corrections peuvent advenir suite à la commande de la Communauté Pays basque.
 
