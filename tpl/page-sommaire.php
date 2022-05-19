@@ -29,12 +29,16 @@
 
 	$("#texte h2, #texte h3").each(function(index) 
 	{
+		// nom de l'ancre
+		var ancre = $(this).text().toLowerCase().replace(/[^a-z0-9]+/g,'-');
+
+
 		// 1er élément
 		if(i == 1) previous = $(this).prop("tagName");
 
 
 		// Ajoute l'encre dans le contenu
-		$(this).attr("id","ancre"+i);
+		$(this).attr("id","ancre-" + ancre);
 
 
 		// Si changement de niveau
@@ -54,7 +58,7 @@
 
 
 		// Ajoute l'élément au sommaire
-		html += "<li><a href='#ancre" + i + "'>" + $(this).text() + "</a></li>";
+		html += "<li><a href='#ancre-" + ancre + "'>" + $(this).text() + "</a></li>";
 
 
 		previous = $(this).prop("tagName");
