@@ -14,8 +14,8 @@
 
 				// Si un élément selectionner on affiche le lien, sinon c'est un span vide pas lisible
 				if(isset($content['navigation'])) {
-					$array_navigation['tag']= 'a';
-					$array_navigation['href']= $GLOBALS['path'].encode(@$content['navigation']);
+					$array_navigation['tag'] = 'a';
+					$array_navigation['href'] = $GLOBALS['path'].encode(@$content['navigation']);
 				}
 
 				?><li class="inline"><?
