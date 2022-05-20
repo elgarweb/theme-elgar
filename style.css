@@ -302,7 +302,9 @@ article ul li { padding-bottom: 1em; }
 
 /* PERSONNALITES */
 .tpl-personnalites .blocks li {
-	position: relative;
+	display: grid;
+	grid-template-rows: 150px 60px 120px auto;
+	justify-items: center;
 	width: 300px;
 	background-color: #00253F1A;
 	margin-top: 2rem;
@@ -310,12 +312,8 @@ article ul li { padding-bottom: 1em; }
 	border-top-left-radius: 25px;
 	border-bottom-right-radius: 25px;
 }
-
-	/* Alignement dernier texte dans le bas */
-	.tpl-personnalites .absolute.block {
-		left: 0;
-		right: 0;
-		bottom: 4rem;
+	.tpl-personnalites .blocks li p {
+		margin-bottom: 0;
 	}
 
 
