@@ -22,7 +22,7 @@
 							<?php media("personnalite-".$i."-visuel-".$key, array('size' => '150x150', 'lazy' => true, 'crop' => 'true', 'dir' => 'personnalites', 'class' => 'brd-rad-100 brd-alt'));?>
 							<?php txt("personnalite-".$i."-prenom-".$key, array("tag" => "span", "class" => "h3-like block bold ptm mtn mbn"));?>
 							<?php txt("personnalite-".$i."-nom-".$key, array("tag" => "span", "class" => "h3-like block up bold ptt pbl mtn"));?>
-							<?php txt("personnalite-".$i."-texte-".$key, array("tag" => "span", "class" => "absolute block"));?>
+							<?php txt("personnalite-".$i."-texte-".$key, array("tag" => "span", "class" => "block asc"));?>
 						</li>
 					<?php }	?>
 				</ul>
