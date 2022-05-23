@@ -15,7 +15,7 @@ switch($res['tpl']) {
 	case 'article':
 		$type = 'article';
 		$media = true;
-		$dir = 'actualites';
+		$dir = encode(__('News'));// 'actualites'
 		$url_back = encode(__('News'));
 		$text_back = __("Go back to the news");
 	break;
@@ -23,7 +23,7 @@ switch($res['tpl']) {
 	case 'event':
 		$type = $res['type'];
 		$media = true;
-		$dir = 'agenda';
+		$dir = encode(__('Agenda'));
 		$url_back = encode(__('Agenda'));
 		$text_back = __("Go back to the agenda");
 	break;
@@ -31,7 +31,7 @@ switch($res['tpl']) {
 	case 'annuaire':
 		$type = 'annuaire';
 		$media = true;
-		$dir = 'annuaire';
+		$dir = encode(__('Directory'));// 'annuaire'
 		$url_back = encode(__('Directory'));
 		$text_back = __("Go back to the directory");
 	break;
@@ -39,7 +39,7 @@ switch($res['tpl']) {
 	case 'arrete':
 		$type = 'arrete';
 		$media = false;
-		$dir = 'arretes';
+		$dir = encode(__('Decrees'));// 'arretes'
 		$url_back = encode(__('Decrees'));
 		$text_back = __("Go back to decrees");
 	break;
