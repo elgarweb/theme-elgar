@@ -167,6 +167,9 @@ $add_translation = array(
 
 	"Directory" => array("fr" => "Annuaire", "eu" => "Aurkitegia"),
 		"annuaire" => array("fr" => "Annuaire"),
+	
+	"Commerce" => array("fr" => "Commerce", "eu" => "Merkataritza"),
+		"commerce" => array("fr" => "Commerce"),
 
 	"Decrees" => array("fr" => "Arrêtés", "eu" => "Erabakiak"),
 		"arretes" => array("fr" => "Arrêtés"),

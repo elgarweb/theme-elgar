@@ -36,6 +36,14 @@ switch($res['tpl']) {
 		$text_back = __("Go back to the directory");
 	break;
 
+	case 'commerce':
+		$type = 'commerce';
+		$media = true;
+		$dir = encode(__('Commerce'));// 'commerce'
+		$url_back = encode(__('Commerce'));
+		$text_back = __("Go back to the directory");
+	break;
+
 	case 'arrete':
 		$type = 'arrete';
 		$media = false;
