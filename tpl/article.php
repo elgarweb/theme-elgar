@@ -160,7 +160,7 @@ switch($res['tpl']) {
 
 				<!-- Chapô -->
 				<?php 
-				if($res['tpl']=='annuaire' or  $res['tpl']=='event') 
+				if($res['tpl']=='annuaire' or  $res['tpl']=='event' or  $res['tpl']=='commerce') 
 				{ 
 					echo '<ul class="unstyled pln">';
 					echo '<li class="bold pts pbn'.(!@$GLOBALS['content']['url-site-web']?' editable-hidden':'').'"><i class="fa fa-fw fa-globe" aria-hidden="true"></i> <a href="'.@$GLOBALS['content']['url-site-web'].'" target="_blank">'.__('Website').'</a>';

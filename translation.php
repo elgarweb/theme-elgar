@@ -97,6 +97,9 @@ $add_translation = array(
 	"Edit annuaire" => array("fr" => "Edition d'un annuaire", "eu" => "Aurkibide baten argitaratzea "),
 	"Go back to the directory" => array("fr" => "Retour à l'annuaire", "eu" => "Aurkibidera itzuli"),
 
+	// COMMERCE
+	"Add commerce" => array("fr" => "Ajouter un commerce"),
+	"Edit commerce" => array("fr" => "Edition d'un commerce"),
 
 	// ARRETES
 	"Add arrete" => array("fr" => "Ajouter un arrêté", "eu" => "Erabaki bat gehitu"),
