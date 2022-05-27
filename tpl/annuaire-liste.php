@@ -60,7 +60,10 @@ $url_back = encode(__('Directory'));
 
 		$sql.=" WHERE ".$tc.".lang='".$lang."' ".$sql_state." AND";
 
-		$sql.=" ".$tc.".type='annuaire'";
+		if($res['url']=='annuaire') 
+			$sql.=" ".$tc.".type='annuaire'";
+		else
+			$sql.=" ".$tc.".type='commerce'";
 
 		$sql.=" LIMIT ".$start.", ".$num_pp;
 
