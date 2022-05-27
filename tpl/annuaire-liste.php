@@ -1,7 +1,7 @@
 <?php 
 if(!$GLOBALS['domain']) exit;
 
-$url_back = encode(__('Directory'));
+$url_back = encode($res['url']);
 ?>
 
 <section class="mw960p mod center mbl">
@@ -60,7 +60,7 @@ $url_back = encode(__('Directory'));
 
 		$sql.=" WHERE ".$tc.".lang='".$lang."' ".$sql_state." AND";
 
-		if($res['url']=='annuaire') 
+		if($res['url'] == encode(__('Directory'))) 
 			$sql.=" ".$tc.".type='annuaire'";
 		else
 			$sql.=" ".$tc.".type='commerce'";
