@@ -14,7 +14,7 @@ $url_back = encode($res['url']);
 		<ul class="unstyled pln"><?php 
 			// Liste les tags pour filtrer la page
 			$i = 1;
-			$sel_tag_list = $connect->query("SELECT distinct encode, name FROM ".$table_tag." WHERE zone='".$res['url']."' GROUP BY encode, name ORDER BY encode ASC");
+			$sel_tag_list = $connect->query("SELECT distinct encode, name FROM ".$table_tag." WHERE zone='".$res['url']."' AND lang='".$lang."' GROUP BY encode, name ORDER BY encode ASC");
 			//echo $connect->error;
 
 			while($res_tag_list = $sel_tag_list->fetch_assoc()) {
@@ -55,6 +55,7 @@ $url_back = encode($res['url']);
 		(
 			".$tt.".id = ".$tc.".id AND
 			".$tt.".zone = '".$res['url']."' AND
+			".$tt.".lang = '".$lang."' AND
 			".$tt.".encode = '".$tag."'
 		)";
 
