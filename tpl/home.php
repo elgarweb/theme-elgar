@@ -38,14 +38,20 @@ if(!$alert_view){?>
 
 
 <!-- ENCART INTRO -->
-<section id="encart" class="mw960p mod center pbl pll prl">
+<section id="encart" class="mw960p center pbl pll prl">
 	
 	<?php h1('titre', 'picto'); ?>
 
 	<article class="<?=(isset($GLOBALS['content']['intro-texte']) ? 'row' : 'editable-hidden'); ?>">
 		
 		<div class="col brd brd-rad-top-left">
-			<?php media('intro-visuel', array('size' => '550x260', 'lazy' => true)); ?>
+			<?php
+			// Taille de l'image par défaut
+			if(!isset($GLOBALS['intro-visuel-size'])) $GLOBALS['intro-visuel-size'] = '550x260';
+
+			// Grand visuel
+			media('intro-visuel', array('size' => $GLOBALS['intro-visuel-size'], 'lazy' => true));
+			?>
 		</div>
 		
 		<div class="col bg-green brd-rad-bot-right">

@@ -35,7 +35,7 @@
 		<div class="clear flex wrap jcsb aic brd-top-green ptm plt prt">
 
 			<!-- Logo -->
-			<div class="pts"><a href="<?=$GLOBALS['home']?>"><?php media('logo', array('size' => '330x70', 'lazy' => 'true'))?></a></div>
+			<div class="pts"><a href="<?=$GLOBALS['home']?>"><?php media('logo', array('size' => '330x90', 'lazy' => 'true'))?></a></div>
 			
 			<!-- Formulaire de recherche -->
 			<form role="search" id="rechercher" action="/recherche" method="post">
