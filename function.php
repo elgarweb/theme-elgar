@@ -27,7 +27,7 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 				<?php //Affichage images des 3 premières actus seulement
 				if($num_fiche <= 3) { ?>
 					<figure>
-						<div class="nor" data-bg="<?=(isset(parse_url($url_img)['scheme'])?'':$GLOBALS['home']).$url_img?>" data-lazy="bg" style="width: 100%; height: 225px;">
+						<div class="nor" data-bg="<?=(isset(parse_url($url_img)['scheme'])?'':$GLOBALS['home']).$url_img?>" data-lazy="bg">
 						</div>
 					</figure>
 				<?php } ?>
@@ -52,15 +52,15 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 					<?php } */ 
 
 					// Titre H3 en home / H2 dans les listes
-					if($res['tpl'] == 'home') echo '<h3 class="tl pbm">'.str_replace($search, $replace, $title).'</h3>';
+					if($res['tpl'] == 'home') echo '<h3 class="pbm">'.str_replace($search, $replace, $title).'</h3>';
 					if($res['tpl'] == 'article-liste' or $res['tpl'] == 'annuaire-liste') echo '<h2 class="h3-like tl pbm">'.str_replace($search, $replace, $title).'</h2>';
 
 					//Description
-					if(isset($description)) echo '<p>'.word_cut($description, '80', '...').'</p>';
+					if(isset($description)) echo '<p class="description">'.word_cut($description, '80', '...').'</p>';
 
 					//Date évènement
 					if(isset($date)) {
-						echo '<p class="bold mbm">';
+						echo '<p class="date bold mbm">';
 							if($GLOBALS['lang'] == 'eu') echo str_replace('-', '/', $date);
 							else echo date_lang($date);
 						echo '</p>';
@@ -68,7 +68,7 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 					?>
 
 					<!-- Lien vers détail -->
-					<p class="absolute bot15 bold tdu mbn">
+					<p class="plus absolute bot15 bold tdu mbn">
 						<?php _e("Read more")?>						
 					</p>
 				</div>

@@ -257,6 +257,12 @@ article ul li { padding-bottom: 1em; }
 	/* Couleurs blocs image + texte */
 	#home-actualites .blocks > div { background-color: #00253F1A; }
 	
+	#actualaune figure div,
+	.blocks figure div {
+		width: 300px;
+		height: 225px;
+	}
+
 	/* #home-agenda.bg-grey #block { background-color: white;	} */
 
 	/* Affichage img actus et agenda en background */
@@ -294,8 +300,7 @@ article ul li { padding-bottom: 1em; }
 	}
 
 	/* Affichage images en background */
-	.tpl-annuaire-liste figure,
-	#actualaune figure { width: 300px; }
+	.tpl-annuaire-liste figure { width: 300px; }
 
 	#adresse p {  margin-bottom: 0; }
 
@@ -1569,6 +1574,7 @@ div.editable {
 
 	/* Liste actus... */
 	.blocks, .tpl-annuaire-liste article,  #actualaune > div { display: block; }
+
 		.blocks > div, 
 		.blocks article,
 		.tpl-annuaire-liste section > div > div,
