@@ -188,28 +188,19 @@ if(!$alert_view){?>
 		<div class="blocks grid-3 space-xl">
 			
 			<?php 
-			// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs
-			if(!@$_SESSION['auth']['edit-article']) $sql_state = "AND state='active'";
-			else $sql_state = "";
-
 			// Construction de la requete
 			$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
 
 			$sql.=" WHERE ".$tc.".type='article'";
-			if(isset($articles)){
-			$sql.=" AND id!='".$article['id']."'";
-			}
-			$sql.=" AND ".$tc.".lang='".$lang."' ".$sql_state." ORDER BY ".$tc.".date_insert DESC
+			if(isset($articles)) $sql.=" AND id!='".$article['id']."'";
+
+			$sql.=" AND ".$tc.".lang='".$lang."' AND state='active' ORDER BY ".$tc.".date_insert DESC
 			LIMIT 3";
 
 			$sel_article = $connect->query($sql);
 
 			while($res_article = $sel_article->fetch_assoc())
 			{
-				// Affichage du message pour dire si l'article est invisible ou pas
-				if($res_article['state'] != "active") $state = " <span class='deactivate pat'>".__("Article d&eacute;sactiv&eacute;")."</span>";
-				else $state = "";
-
 				$content_article = json_decode($res_article['content'], true);
 
 				block(@$content_article['visuel'], $res_article['url'], $res_article['title'], @$content_article['description'], @$content_article['aaaa-mm-jj']);
@@ -241,17 +232,13 @@ if(!$alert_view){?>
 		<div class="blocks grid-3 space-xl">
 			
 			<?php 
-			// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs
-			if(!@$_SESSION['auth']['edit-event']) $sql_state = "AND state='active'";
-			else $sql_state = "";
-
 			// Construction de la requete
 			$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
 
 			// Pour le tri par date pour les events
 			$sql.=" JOIN ".$tm." AS event ON event.id=".$tc.".id AND event.type='aaaa-mm-jj'";
 
-			$sql.=" WHERE (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft') AND ".$tc.".lang='".$lang."' ".$sql_state;
+			$sql.=" WHERE (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft') AND ".$tc.".lang='".$lang."' AND state='active'";
 			
 			// Tri par date de l'evenement
 			$sql.=" ORDER BY event.cle ASC";
@@ -261,11 +248,6 @@ if(!$alert_view){?>
 
 			while($res_event = $sel_event->fetch_assoc())
 			{
-				// Affichage du message pour dire si l'article est invisible ou pas
-				if($res_event['state'] != "active") $state = " <span class='deactivate pat'>".__("Article d&eacute;sactiv&eacute;")."</span>";
-				else $state = "";
-
-
 				$content_event = json_decode($res_event['content'], true);
 
 				block(@$content_event['visuel'], $res_event['url'], $res_event['title'], @$content_event['description'], @$content_event['aaaa-mm-jj']);
