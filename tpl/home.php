@@ -221,9 +221,9 @@ if(!$alert_view){?>
 	</div>
 		
 	<!-- Bouton vers toutes les actualités -->
-	<div class="tc ptl">
+	<div class="lien-bt ptl">
 		<a href="<?=make_url(__('news'), array("domaine" => true))?>" class="bt">
-			<?php span('txt-lien-actu', array('default' => __("Read all the news"))); ?>
+			<?php span('txt-lien-actus', array('default' => __("Read all the news"))); ?>
 		</a>
 	</div>
 
@@ -265,6 +265,7 @@ if(!$alert_view){?>
 				if($res_event['state'] != "active") $state = " <span class='deactivate pat'>".__("Article d&eacute;sactiv&eacute;")."</span>";
 				else $state = "";
 
+
 				$content_event = json_decode($res_event['content'], true);
 
 				block(@$content_event['visuel'], $res_event['url'], $res_event['title'], @$content_event['description'], @$content_event['aaaa-mm-jj']);
@@ -274,9 +275,9 @@ if(!$alert_view){?>
 		</div>
 
 		<!-- Bouton vers tous les événements -->
-		<div class="tc ptl">
+		<div class="lien-bt ptl">
 			<a href="<?=make_url(__('agenda'), array("domaine" => true))?>" class="bt">
-				<?php span('txt-lien-actu', array('default' => __("See all the events"))); ?>
+				<?php span('txt-lien-agenda', array('default' => __("See all the events"))); ?>
 			</a>
 		</div>		
 

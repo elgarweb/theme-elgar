@@ -98,7 +98,7 @@
 
 	<!-- Liens -->
 	<section id="footer-liens-plus">
-		<?php txt('footer-liens-webmaster', array('tag' => 'section', 'class' => 'mw960p center tc ptm pbs ulinline')); ?>
+		<?php txt('footer-liens-webmaster', array('tag' => 'section', 'class' => 'mw960p center tc ptm pbm ulinline')); ?>
 	</section>
 
 </footer>

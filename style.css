@@ -263,6 +263,10 @@ article ul li { padding-bottom: 1em; }
 		height: 225px;
 	}
 
+
+	.lien-bt { text-align: center; }
+
+
 	/* #home-agenda.bg-grey #block { background-color: white;	} */
 
 	/* Affichage img actus et agenda en background */
@@ -1347,19 +1351,15 @@ div.editable {
 				bottom: 0;
 				left: 0;
 			}
-			.lucide header nav > ul li {
-				white-space: normal;
-			}
+			.lucide header nav > ul li { white-space: normal; }
 			header nav > ul li a { 
 				color: #fff;
 				text-decoration: none; 
 			}
-				header nav>ul li a:hover {
-					color: #26D691;
-				}
-				header .selected a {
-					color: #26D691 !important;
-				}
+				header nav > ul li a:hover { color: #26D691; }
+				header .selected a { color: #26D691 !important; }
+
+			#main-navigation { font-weight: bold; }
 		
  #accessibilite nav ul { min-height: unset;}
  #accessibilite nav > ul li {
