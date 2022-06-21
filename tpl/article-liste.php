@@ -40,7 +40,7 @@ $url_back = encode($res['url']);
 
 <section class="<?= $res['url'] == 'agenda' ? 'bg-grey' : ''; ?>">
 
-	<div class="blocks mw960p mod center grid-3 space-xl">
+	<div class="blocks mw960p center grid-3 space-xl">
 		
 		<?php 
 		// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs

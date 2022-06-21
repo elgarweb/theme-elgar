@@ -55,7 +55,12 @@ if(!$alert_view){?>
 		</div>
 		
 		<div class="col bg-green brd-rad-bot-right">
-			<?php txt('intro-texte', 'pam'); ?>
+
+			<?php txt('intro-texte', 'pam pbt'); ?>
+
+			<div class="plus mlm mrm <?=(isset($GLOBALS['content']['intro-lien'])?'':' editable-hidden')?>">
+				<a <?href('intro-lien');?>><?php span('intro-texte-lien', ''); ?></a>
+			</div>
 		</div>
 		
 	</article>
@@ -65,9 +70,9 @@ if(!$alert_view){?>
 
 
 <!-- EN 1 CLIC -->
-<section class="bg-color">
+<section id="home-enunclic" class="bg-color ptl pbs">
 
-	<div class="mw960p mod center ptl pbs">
+	<div class="mw960p center">
 
 		<?php h2('titre-clic', 'color-alt'); ?>
 
@@ -110,7 +115,7 @@ if(!$alert_view){?>
 
 
 <!-- ACTUALITÉS -->
-<section id="home-actualites" class="mw960p mod center ptl pbl">
+<section id="home-actualites" class="mw960p center ptl pbl">
 	
 	<?php h2('titre-actus', 'picto pbm'); ?>
 	
@@ -147,7 +152,7 @@ if(!$alert_view){?>
 				<!-- Image -->
 				<figure class="brd-right">
 
-					<div class="nor" data-bg="<?= $article['content']['visuel']; ?>" data-lazy="bg" style="width: 100%; height: 225px;">
+					<div class="nor" data-bg="<?= $article['content']['visuel']; ?>" data-lazy="bg">
 					</div>
 
 				</figure>
@@ -155,7 +160,7 @@ if(!$alert_view){?>
 				<div class="ptm pbl plm prm">
 
 					<!-- Titre -->
-					<h3 class="tl mtn">
+					<h3 class="mtn bold">
 						<a href="<?= make_url($article['title'], array("domaine" => true)); ?>" class="tdn"><?= $article['title']; ?></a>
 					</h3>
 					
@@ -163,8 +168,11 @@ if(!$alert_view){?>
 					<p class="pbm">
 						<?php if(isset($article['content']['texte'])) echo word_cut($article['content']['texte'], '100', '...');?>
 					</p>
+
 					<!-- Lien Lire la suite -->
-					<a  class="absolute bot15 right15" href="<?=make_url($article['title'], array("domaine" => true));?>" aria-label="<?php echo __("Read more")." ". $article['title'];?> "><?php _e("Read more")?></a>
+					<div class="plus">
+						<a class="absolute bot15 right15" href="<?=make_url($article['title'], array("domaine" => true));?>" aria-label="<?php echo __("Read more")." ". $article['title'];?> "><?php _e("Read more")?></a>
+					</div>
 				</div>
 			</div>
 		
@@ -175,7 +183,7 @@ if(!$alert_view){?>
 
 
 	<!-- Dernières actualités -->
-	<article class="clear">
+	<div class="clear">
 
 		<div class="blocks grid-3 space-xl">
 			
@@ -210,12 +218,12 @@ if(!$alert_view){?>
 
 		</div>
 
-	</article>
+	</div>
 		
 	<!-- Bouton vers toutes les actualités -->
-	<div class="tc ptl">
+	<div class="lien-bt ptl">
 		<a href="<?=make_url(__('news'), array("domaine" => true))?>" class="bt">
-			<?= __("Read all the news"); ?>
+			<?php span('txt-lien-actus', array('default' => __("Read all the news"))); ?>
 		</a>
 	</div>
 
@@ -226,7 +234,7 @@ if(!$alert_view){?>
 <!-- AGENDA -->
 <section id="home-agenda" class="bg-grey ptl pbl">
 
-	<article class="mw960p mod center">
+	<article class="mw960p center">
 
 		<?php h2('titre-events', 'picto')?>
 
@@ -257,6 +265,7 @@ if(!$alert_view){?>
 				if($res_event['state'] != "active") $state = " <span class='deactivate pat'>".__("Article d&eacute;sactiv&eacute;")."</span>";
 				else $state = "";
 
+
 				$content_event = json_decode($res_event['content'], true);
 
 				block(@$content_event['visuel'], $res_event['url'], $res_event['title'], @$content_event['description'], @$content_event['aaaa-mm-jj']);
@@ -266,9 +275,9 @@ if(!$alert_view){?>
 		</div>
 
 		<!-- Bouton vers tous les événements -->
-		<div class="tc ptl">
+		<div class="lien-bt ptl">
 			<a href="<?=make_url(__('agenda'), array("domaine" => true))?>" class="bt">
-				<?= __("See all the events"); ?>
+				<?php span('txt-lien-agenda', array('default' => __("See all the events"))); ?>
 			</a>
 		</div>		
 
