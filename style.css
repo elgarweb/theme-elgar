@@ -326,6 +326,10 @@ article ul li { padding-bottom: 1em; }
 	}
 
 
+/* SOMMAIRE */
+#sommaire > ol { list-style: none; }
+
+
 /* CONTACT */
 	/* Formulaire contact */
 	#contact input, #contact textarea {

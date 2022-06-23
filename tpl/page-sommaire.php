@@ -6,9 +6,9 @@
 
 	<?php h1('title', 'picto'); ?>
 
-	<nav role="navigation" aria-label="<?php _e("Summary")?>">
+	<nav id="sommaire" role="navigation" aria-label="<?php _e("Summary")?>">
 		<h2><?php _e("Summary")?></h2>
-		<ol id="sommaire" class="unstyled pbm"></ol>
+		<ol class="pbm"></ol>
 	</nav>
 
 	<article>
@@ -20,14 +20,15 @@
 </section>
 
 <script>
-//$(function(){
 
-	// CONSTRUCTION DU SOMMAIRE
-	i = 1;
-	open = false;
-	html = '';
+// CONSTRUCTION DU SOMMAIRE
+i = 1;
+open = false;
+html = '';
 
-	$("#texte h2, #texte h3").each(function(index) 
+$("#texte h2, #texte h3").each(function(index) 
+{
+	if($(this).text().length >0)
 	{
 		// nom de l'ancre
 		var ancre = $(this).text().toLowerCase().replace(/[^a-z0-9]+/g,'-');
@@ -64,12 +65,54 @@
 		previous = $(this).prop("tagName");
 
 		++i;
+	}
+});
+
+// Si sommaire par fermer
+if(open) html += "</ol></li>";
+
+$("#sommaire ol").append(html);
+
+
+$(function(){
+
+	$window = $(window);
+
+	// Au scroll
+	$window.on("scroll resize load", function ()
+	{
+		window_height = $window.outerHeight();//height
+    	window_top = $window.scrollTop();
+
+		var $header = $("header");
+    	var header_hight = $header.outerHeight();
+		var header_bottom = (header_hight - window_top);
+
+		var $sommaire = $("#sommaire");
+		var sommaire_top = $sommaire.offset().top;
+
+		if(header_bottom > 0 && header_hight > window_top){// On scroll => repositionne et agrandi
+			//console.log("top")
+			$("#sommaire").css({
+				"top": header_bottom - 1,
+				//"position": "fixed",
+				"minHeight": window_height - header_bottom -10
+			});
+		}
+		else if(header_bottom < 0){// Le header n'est plus visible => max height
+			//console.log("0")
+			$("#sommaire").css({
+				"top": 10,
+				"minHeight": window_height - 20
+			});
+		}
+
+		/*console.log("header_hight: "+header_hight)
+		console.log("window_top: "+window_top)
+		console.log("header_bottom: "+header_bottom)
+		console.log("---------")*/
+
 	});
 
-	// Si sommaire par fermer
-	if(open) html += "</ol></li>";
-
-	$("#sommaire").append(html);
-
-//});
+});
 </script>
