@@ -29,7 +29,8 @@ $url_back = encode($res['url']);
 	
 </section>
 
-<section class="mw960p mod center">
+
+<section class="mw960p center">
 
 	<div>
 		
@@ -39,7 +40,7 @@ $url_back = encode($res['url']);
 		else $sql_state = "";
 
 		// Navigation par page
-		$num_pp = 3;
+		$num_pp = 10;
 
 		if(isset($GLOBALS['filter']['page'])) $page = (int)$GLOBALS['filter']['page']; else $page = 1;
 
@@ -136,7 +137,7 @@ $url_back = encode($res['url']);
 							?>
 							</ul>
 						<!-- Lien vers détail -->
-						<div class="absolute bot15 right15">
+						<div class="absolute bot15 right15 plus">
 
 							<a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" aria-label="<?php echo __("See the sheet")." ".$res_fiche['title']?>"><?php _e("See the sheet")?></a>
 							
