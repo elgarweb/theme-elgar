@@ -321,6 +321,8 @@ article ul li { padding-bottom: 1em; }
 	border-top-left-radius: 25px;
 	border-bottom-right-radius: 25px;
 }
+	.tpl-personnalites .h3-like { font-weight: bold; }
+
 	.tpl-personnalites .blocks li p {
 		margin-bottom: 0;
 	}

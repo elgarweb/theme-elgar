@@ -47,7 +47,7 @@
 			".$tm.".type='navigation' AND
 			".$tm.".cle='".$res['url']."'
 		)";
-		//$sql.=" WHERE ";
+		$sql.=" WHERE ".$tc.".lang='".$lang."' ".$sql_state."";
 		//$sql.=" ORDER BY ".$tm.".ordre ASC";
 		$sql.=" ORDER BY ".$tc.".date_insert DESC";
 		$sql.=" LIMIT ".$start.", ".$num_pp;

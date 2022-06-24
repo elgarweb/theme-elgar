@@ -1,10 +1,10 @@
 <?php if(!$GLOBALS['domain']) exit;?>
 
-<section class="mw960p mod center">
+<section class="mw960p center">
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 	<?php h1('title', 'picto'); ?>
 
-	<article>
+	<div>
 		<?php
 		$groupe = 6;
 		for($i=1; $i<=$groupe; $i++) { ?>
@@ -20,15 +20,16 @@
 					foreach ($module as $key => $value) { ?>
 						<li>
 							<?php media("personnalite-".$i."-visuel-".$key, array('size' => '150x150', 'lazy' => true, 'crop' => 'true', 'dir' => 'personnalites', 'class' => 'brd-rad-100 brd-alt'));?>
-							<?php txt("personnalite-".$i."-prenom-".$key, array("tag" => "span", "class" => "h3-like block bold ptm mtn mbn"));?>
-							<?php txt("personnalite-".$i."-nom-".$key, array("tag" => "span", "class" => "h3-like block up bold ptt pbl mtn"));?>
+							<?php txt("personnalite-".$i."-prenom-".$key, array("tag" => "span", "class" => "h3-like block ptm mtn mbn"));?>
+							<?php txt("personnalite-".$i."-nom-".$key, array("tag" => "span", "class" => "h3-like block up ptt mtn"));?>
 							<?php txt("personnalite-".$i."-texte-".$key, array("tag" => "span", "class" => "block asc"));?>
 						</li>
 					<?php }	?>
 				</ul>
 			</div>
 		<?php } ?>
-	</article>
+	</div>
+
 </section>
 <script>
 	const allTitles = document.querySelectorAll('h2, h3, h4');
