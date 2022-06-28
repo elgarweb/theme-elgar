@@ -1,21 +1,27 @@
 <?php if(!$GLOBALS['domain']) exit;?>
 
-<section class="mw960p mod center">
+<section class="mod center">
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 
-	<?php h1('title', 'picto'); ?>
+	<?php h1('title', 'mw960p center picto'); ?>
 
-	<nav id="sommaire" role="navigation" aria-label="<?php _e("Summary")?>">
-		<h2><?php _e("Summary")?></h2>
-		<ol class="pbm"></ol>
-	</nav>
+	<div class="mw1600p center flex-sommaire mtl">
 
-	<article>
+		<div class="col-sommaire">
+			<nav id="sommaire" role="navigation" aria-label="<?php _e("Summary")?>">
+				<h2><?php _e("Summary")?></h2>
+				<ol class="pbm"></ol>
+			</nav>
+		</div>
 
-		<?php txt('texte'); ?>
+		<article class="mw960p">
 
-	</article>
+			<?php txt('texte'); ?>
+
+		</article>
+
+	</div>
 
 </section>
 
@@ -84,32 +90,32 @@ $(function(){
 		window_height = $window.outerHeight();//height
     	window_top = $window.scrollTop();
 
-		var $header = $("header");
-    	var header_hight = $header.outerHeight();
-		var header_bottom = (header_hight - window_top);
+		var $h1 = $("h1");
+    	var h1_height = $h1.outerHeight(true);
+		var h1_top = $h1.offset().top;
+		var h1_bottom = h1_height + h1_top;
+		var h1_pass = h1_bottom - window_top;
 
-		var $sommaire = $("#sommaire");
-		var sommaire_top = $sommaire.offset().top;
-
-		if(header_bottom > 0 && header_hight > window_top){// On scroll => repositionne et agrandi
-			//console.log("top")
+		if(h1_pass > 0){// On voit le h1
+			//console.log("h1")
 			$("#sommaire").css({
-				"top": header_bottom - 1,
-				//"position": "fixed",
-				"minHeight": window_height - header_bottom -10
+				//"top": h1_bottom - window_top,
+				"position": "initial",
+				"maxHeight": window_height - h1_pass -10
 			});
 		}
-		else if(header_bottom < 0){// Le header n'est plus visible => max height
+		else if(h1_pass < 0){// On a dépassé le h1
 			//console.log("0")
 			$("#sommaire").css({
 				"top": 10,
-				"minHeight": window_height - 20
+				"position": "fixed",
+				"maxHeight": window_height - 20
 			});
 		}
 
-		/*console.log("header_hight: "+header_hight)
+		/*console.log("h1_bottom: "+h1_bottom)
 		console.log("window_top: "+window_top)
-		console.log("header_bottom: "+header_bottom)
+		console.log("h1_pass: "+h1_pass)
 		console.log("---------")*/
 
 	});
