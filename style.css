@@ -273,6 +273,10 @@ article ul li { padding-bottom: 1em; }
 	figure div { background-position: center center; }
 
 
+/* NAVIGATION */
+.tpl-navigation h1 { text-align: left; }
+
+
 /* ACTUALITÉS... */
 	/* Pagination */
 	.page .bt {
@@ -329,7 +333,9 @@ article ul li { padding-bottom: 1em; }
 
 
 /* SOMMAIRE */
-#sommaire > ol { list-style: none; }
+#sommaire { position: initial !important; }
+
+	#sommaire > ol { list-style: none; }
 
 
 /* CONTACT */
