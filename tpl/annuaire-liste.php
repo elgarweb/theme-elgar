@@ -4,11 +4,11 @@ if(!$GLOBALS['domain']) exit;
 $url_back = encode($res['url']);
 ?>
 
-<section class="mw960p mod center mbl">
+<section class="mw960p mod center mbm">
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 	
-	<?php h1('title', 'picto'); ?>
+	<?php h1('title', 'picto mbn'); ?>
 
 	<nav role="navigation" aria-label="<?php _e("Filter by")?>" class="flex wrap space jcc tc ptl pbm">
 		<ul class="unstyled pln"><?php 
@@ -25,7 +25,7 @@ $url_back = encode($res['url']);
 		</ul>
 	</nav>
 	
-	<?php txt('description', array('class'=>'tc ptm mbn','tag'=>'p')); ?>
+	<?php txt('description', array('class'=>'ptm mbn')); ?>
 	
 </section>
 
@@ -133,7 +133,7 @@ $url_back = encode($res['url']);
 								echo '<li class="pbn"><details class="pts" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold inbl" data-encode="'.$content_fiche['mail-contact'].'"  aria-label="'.__("Click to display the").' '.__('Email').'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary><span class="pls bold mtm"></span></details></li>';
 
 							if(isset($content_fiche['adresse']))
-								echo '<li class="bold pbn pts"><i class="fa fa-fw fa-location" aria-hidden="true"></i> '.__('Address').'<p class="plt">'.$content_fiche['adresse'].'</p></li>';
+								echo '<li class="bold pbn pts"><i class="fa fa-fw fa-location" aria-hidden="true"></i>'.__('Address').'<p class="plt">'.$content_fiche['adresse'].'</p></li>';
 							?>
 							</ul>
 						<!-- Lien vers détail -->
