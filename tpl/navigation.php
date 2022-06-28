@@ -1,12 +1,14 @@
 <?php if(!$GLOBALS['domain']) exit;?>
 
-<section class="mw960p center">
+<section class="mw960p center relative">
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php');?>
 
 	<div class="bg-grey mod plm pbl">
 
-		<?php h1('title', 'tl');?>
+		<?php h1('title', '');?>
+
+		<?php txt('texte', '');?>
 
 		<ul class="navigation">
 	 	<?php
