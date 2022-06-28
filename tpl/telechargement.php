@@ -1,4 +1,7 @@
-<?php if(!$GLOBALS['domain']) exit;?>
+<?php
+if(!$GLOBALS['domain']) exit;
+if(!isset($telechargements)) $telechargements = 5;
+?>
 
 <section class="mw960p mod center">
 
@@ -6,10 +9,12 @@
 
 	<?php h1('title', 'picto'); ?>
 
-	<article>
+	<?php txt('texte', ''); ?>
+
+	<div>
 		<?php
-		for($i=1; $i <= 5; $i++) { ?>
-			<div class="pan ptm">
+		for($i=1; $i <= $telechargements; $i++) { ?>
+			<div class="pan pbm">
 
 				<?h2('titre-'.$i, array('class' => 'tl mtm', 'dir' => 'telechargement'));?>
 
@@ -26,7 +31,7 @@
 				</ul>
 			</div>
 		<?php } ?>
-	</article>
+	</div>
 
 </section>
 
