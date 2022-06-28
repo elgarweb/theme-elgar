@@ -63,7 +63,7 @@ switch($res['tpl']) {
 
 		<?php h1('title', 'picto'); ?>
 
-		<article class="flex wrap space-xl ptl">
+		<div class="flex wrap space-xl ptl">
 
 			<?php if($media) { ?>
 			<div class="<?=(isset($GLOBALS['content']['visuel'])) ? '' : 'editable-hidden ' ?>prm">
@@ -175,7 +175,7 @@ switch($res['tpl']) {
 
 					input('mail-contact', array('type' => 'hidden', 'class' => 'encode'));
 
-					echo '</li><li class="bold pts pbn'.(!@$GLOBALS['content']['adresse']?' editable-hidden':'').'"><i class="fa fa-fw fa-location" aria-hidden="true"></i> '.__('Address');
+					echo '</li><li class="bold pts pbn'.(!@$GLOBALS['content']['adresse']?' editable-hidden':'').'"><i class="fa fa-fw fa-location" aria-hidden="true"></i>'.__('Address');
 
 					txt('adresse', array('class'=>'plt mbt','tag'=>'p'));
 					echo '</li></ul>';
@@ -188,7 +188,7 @@ switch($res['tpl']) {
 
 			</div>
 
-		</article>
+		</div>
     
 		<!-- Contenu de l'article -->
 		<article class="clear ptl">
