@@ -1661,9 +1661,10 @@ div.editable {
 		height: auto;
 	}
 
-
-
-
+	#enunclic { 
+		display: flex;
+    	flex-wrap: wrap;
+    }
 }
 
 /* RESPONSIVE small */
