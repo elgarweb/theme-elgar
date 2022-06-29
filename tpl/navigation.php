@@ -4,7 +4,7 @@
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php');?>
 
-	<div class="bg-grey mod plm pbl">
+	<div class="bg-grey mod pbl">
 
 		<?php h1('title', '');?>
 
