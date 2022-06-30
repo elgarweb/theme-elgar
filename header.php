@@ -4,7 +4,7 @@
 
 	<section class="mw960p mod center relative">
 
-		<div class="ptm">
+		<div class="pts">
 			
 			<!-- Accessibilité -->
 			<div id="accessibilite" class="fl pbs">
