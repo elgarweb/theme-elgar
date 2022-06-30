@@ -39,12 +39,12 @@
 
 		<div class="mw960p center flex jcsb">
 
-			<?php txt('texte-coordonnees', array('tag' => 'article'))?>
+			<?php txt('texte-coordonnees', array('tag' => 'article', 'class' => 'prm'))?>
 
-			<article>
+			<article class="prm">
 
 				<?if(isset($GLOBALS['newsletter-key'][$lang])){?>
-				<form id="newsletter" method="post" action="https://newsletter.infomaniak.com/external/submit" target="_blank" class="pbm">
+				<form id="newsletter" method="post" action="https://newsletter.infomaniak.com/external/submit" target="_blank" class="pbm mbs">
 
 					<input type="email" name="email" style="display:none" />
 
@@ -78,11 +78,11 @@
 				<?}?>
 
 				<!-- Réseaux sociaux -->
-				<?php txt('texte-reseaux', 'pts'); ?>
+				<?php txt('texte-reseaux'); ?>
 
 			</article>
 
-			<article>
+			<article class="prm">
 
 				<!-- Liens -->
 				<?php txt('footer-liens', 'pbm'); ?>
