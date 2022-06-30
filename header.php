@@ -75,7 +75,7 @@
 	<!-- Menu principal -->
 	<section class="bg-color">
 
-		<nav role="navigation" class="mw960p center brd-top-alt mtl tc" aria-label="<?php _e("Browsing menu")?>">
+		<nav id="nav-principale" role="navigation" class="mw960p center brd-top-alt mtl tc" aria-label="<?php _e("Browsing menu")?>">
 
 			<button type="button" class="burger" aria-expanded="false" aria-controls="main-navigation">
 				<span class="open"><?php _e("Menu")?></span>
