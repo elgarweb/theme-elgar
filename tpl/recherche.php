@@ -110,6 +110,8 @@ function highlight($txt, $recherche)
 
 
 			// Change le fil d'Ariane
+
+				/*
 				// Recherche : lien racine
 				$("nav[itemprop='breadcrumb'] span[aria-current='page']").replaceWith("<a href=\"/<?=$res['url']?>\"><?=addslashes($res['title'])?></a>");
 
@@ -124,6 +126,17 @@ function highlight($txt, $recherche)
 				// Page
 				<?if($page>1){?>
 					$("nav[itemprop='breadcrumb']").append("<span aria-current='page'><?=addslashes(__('Page').' '.$page)?></span>");
+				<?}?>
+				*/
+
+				// Si page > 1
+				<?if($page>1){?>
+					$("nav[itemprop='breadcrumb'] li[aria-current='page']").before("<li class='inline'><?=_e("Search")?> <a href=\"/<?=make_url($res['url'], array(@$_SESSION['recherche']));?>\"><?=addslashes(@$_SESSION['recherche'])?></a></li>");
+
+					$("nav[itemprop='breadcrumb'] li[aria-current='page']").html("<?=addslashes(__('Page').' '.$page)?>");
+				<?}
+				else{?>
+					$("nav[itemprop='breadcrumb'] li[aria-current='page']").html("<?=_e("Search")?> <?=addslashes(@$_SESSION['recherche'])?>");
 				<?}?>
 
 
