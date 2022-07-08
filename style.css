@@ -333,7 +333,10 @@ article ul li { padding-bottom: 1em; }
 
 
 /* SOMMAIRE */
-#sommaire { position: initial !important; }
+#sommaire { 
+	position: initial !important;
+	display: inline;
+}
 
 	#sommaire > ol { list-style: none; }
 
