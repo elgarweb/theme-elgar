@@ -16,7 +16,7 @@ if(!$alert_view){?>
 	<button class="editable-hidden tc w100" onclick="$('#alert').slideToggle();">Éditer l'alerte <i class="fa fa-attention grey" aria-hidden="true"></i></button>
 <?php }?>
 
-<section id="alert" class="bg-grey<?=(!$alert_view?' none':'');?>">
+<section id="alert" class="bg-color-3<?=(!$alert_view?' none':'');?>">
 
 	<div class="editable-hidden pts tc">
 		<label for="alert-date-debut">Date de début d'affichage de l'alerte</label> <?input('alert-date-debut', array('type' => 'date'))?>
@@ -44,7 +44,7 @@ if(!$alert_view){?>
 
 	<article class="<?=(isset($GLOBALS['content']['intro-texte']) ? 'row' : 'editable-hidden'); ?>">
 		
-		<div class="col brd brd-rad-top-left">
+		<div class="col brd">
 			<?php
 			// Taille de l'image par défaut
 			if(!isset($GLOBALS['intro-visuel-size'])) $GLOBALS['intro-visuel-size'] = '550x260';
@@ -54,7 +54,7 @@ if(!$alert_view){?>
 			?>
 		</div>
 		
-		<div class="col bg-green brd-rad-bot-right">
+		<div class="col bg-color-2">
 
 			<?php txt('intro-texte', 'pam pbt'); ?>
 
@@ -147,7 +147,7 @@ if(!$alert_view){?>
 			// var_dump($article['id']);
 			?>
 
-			<div class="<?=(isset($article['title']) ? 'relative flex aic brd3 brd-rad-bot-right mbl' : 'none'); ?>">
+			<div class="<?=(isset($article['title']) ? 'relative flex aic brd3 mbl' : 'none'); ?>">
 
 				<!-- Image -->
 				<figure class="brd-right">
@@ -223,7 +223,7 @@ if(!$alert_view){?>
 
 
 <!-- AGENDA -->
-<section id="home-agenda" class="bg-grey ptl pbl">
+<section id="home-agenda" class="bg-color-3 ptl pbl">
 
 	<article class="mw960p center">
 

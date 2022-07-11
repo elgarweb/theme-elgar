@@ -8,7 +8,7 @@ $url_back = encode($res['url']);
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 
-	<div class="<?= $res['url'] == 'agenda' ? 'bg-grey' : ''; ?>">
+	<div class="<?= $res['url'] == 'agenda' ? 'bg-color-3' : ''; ?>">
 
 		<div class="mw960p mod center">
 
@@ -38,7 +38,7 @@ $url_back = encode($res['url']);
 	
 </section>
 
-<section class="<?= $res['url'] == 'agenda' ? 'bg-grey' : ''; ?>">
+<section class="<?= $res['url'] == 'agenda' ? 'bg-color-3' : ''; ?>">
 
 	<div class="blocks mw960p center grid-3 space-xl">
 		

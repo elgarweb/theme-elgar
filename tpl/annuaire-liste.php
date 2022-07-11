@@ -83,7 +83,7 @@ $url_back = encode($res['url']);
 			$content_fiche = json_decode($res_fiche['content'], true);
 			?>
 
-			<div class="brd brd-rad-bot-right mbm">
+			<div class="brd mbm">
 
 				<article class="relative flex aic">
 
