@@ -56,7 +56,7 @@ switch($res['tpl']) {
 <?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 
 
-<section class="<?= $res['tpl'] == 'event' ? 'bg-grey' : ''; ?>">
+<section class="<?= $res['tpl'] == 'event' ? 'bg-color-3' : ''; ?>">
 
 	<div class="mw960p mod center">
 

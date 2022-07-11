@@ -28,7 +28,7 @@
 	<?}?>
 
 	<!-- RENSEIGNEMENTS COMPLEMENTAIRES -->
-	<section class="<?=(isset($GLOBALS['content']['texte-renseignements']) ? 'bg-green ptl pbt' : 'editable-hidden'); ?>">
+	<section class="<?=(isset($GLOBALS['content']['texte-renseignements']) ? 'bg-color-2 ptl pbt' : 'editable-hidden'); ?>">
 
 		<?php txt('texte-renseignements', array('tag' => 'article', 'class' => 'mw960p center bold tc')); ?>
 
@@ -58,7 +58,7 @@
 
 						<input type="email" name="inf[1]" id="email_newsletter" autocomplete="email" required="required" placeholder="<?php _e("Your email")?>" class="w200p pts pbs pls">
 						
-						<button type="submit" class="bg-green bold pas">
+						<button type="submit" class="bg-color-2 bold pas">
 							<?php _e("Subscribe"); ?>
 						</button>
 

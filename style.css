@@ -173,8 +173,8 @@ article ul li { padding-bottom: 1em; }
 			color: #00253F;
 		}
 
-	.bg-green { background-color: #26D691; }
-	.bg-grey { background-color: #00253F1A; }
+	.bg-color-2 { background-color: #26D691; }
+	.bg-color-3 { background-color: #00253F1A; }
 	.bg-white { background-color: #fff; }
 
 
@@ -185,27 +185,23 @@ article ul li { padding-bottom: 1em; }
 .brd-right { border-right: 1px solid #00253F; }
 .brd-alt { border: 2px solid #26D691; }
 .brd-top { border-top: solid 3px #00253F; }
-.brd-top-green { border-top: solid 1px #26D691; }
-.brd-top-alt { border-top: solid 3px #26D691; }
-/* .brd-bot-alt { border-bottom: solid 1px #26D691; } */
+.brd-top-2 { border-top: solid 1px #26D691; }
+.brd-top-3 { border-top: solid 3px #26D691; }
 
 
 /* Border-radius */
 .brd-rad { border-radius: 25px;}
 
-.brd-rad-top-left, 
-.brd-rad-top-left #intro-visuel img{
-	border-top-left-radius: 25px;
-}
-.brd-rad-bot-right {
-	border-bottom-right-radius: 25px;
-}
+#encart .col:first-child, #intro-visuel img { border-top-left-radius: 25px; }
+
+.blocks > div, #encart .col:nth-child(2) { border-bottom-right-radius: 25px; }
+
 .brd-rad-100 { border-radius: 100%; }
 
 
 /* Positions */
-.bot15 {bottom: 15px; }
-.right15 {right: 15px; }
+.bot15 { bottom: 15px; }
+.right15 { right: 15px; }
 
 
 /* Table layout */
@@ -267,7 +263,7 @@ article ul li { padding-bottom: 1em; }
 	.lien-bt { text-align: center; }
 
 
-	/* #home-agenda.bg-grey #block { background-color: white;	} */
+	/* #home-agenda.bg-color-3 #block { background-color: white;	} */
 
 	/* Affichage img actus et agenda en background */
 	figure div { background-position: center center; }
