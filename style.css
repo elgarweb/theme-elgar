@@ -271,6 +271,7 @@ article ul li { padding-bottom: 1em; }
 
 /* NAVIGATION */
 .tpl-navigation h1 { text-align: left; }
+.tpl-navigation .bg-color-3 { padding-left: 2rem; }
 
 
 /* ACTUALITÉS... */
