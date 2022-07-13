@@ -90,7 +90,7 @@ switch(@$_GET['mode'])
 			$(".content .navigation a").click(function() { return false; });
 
 			// Element déplaçable
-			$(".content .navigation").sortable();
+			$(".content .navigation").sortable({ stop: function(event, ui) { tosave(); } });
 		});
 
 		// Sauvegarde de l'ordre
