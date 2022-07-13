@@ -49,7 +49,7 @@
 						".$tm.".cle='".basename($val['href'])."'
 					)";
 					$sql.=" WHERE ".$tc.".lang='".$lang."' AND state='active'";
-					$sql.=" ORDER BY ".$tc.".date_insert DESC";
+					$sql.=" ORDER BY ".$tm.".ordre ASC, ".$tc.".date_insert DESC";
 					$sql.=" LIMIT ".$num_pp;
 
 					//echo $sql;
