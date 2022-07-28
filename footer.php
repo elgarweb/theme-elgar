@@ -28,7 +28,7 @@
 	<?}?>
 
 	<!-- RENSEIGNEMENTS COMPLEMENTAIRES -->
-	<section class="<?=(isset($GLOBALS['content']['texte-renseignements']) ? 'bg-green ptl pbt' : 'editable-hidden'); ?>">
+	<section class="<?=(isset($GLOBALS['content']['texte-renseignements']) ? 'bg-color-2 ptl pbt' : 'editable-hidden'); ?>">
 
 		<?php txt('texte-renseignements', array('tag' => 'article', 'class' => 'mw960p center bold tc')); ?>
 
@@ -39,12 +39,12 @@
 
 		<div class="mw960p center flex jcsb">
 
-			<?php txt('texte-coordonnees', array('tag' => 'article'))?>
+			<?php txt('texte-coordonnees', array('tag' => 'article', 'class' => 'prm'))?>
 
-			<article>
+			<article class="prm">
 
 				<?if(isset($GLOBALS['newsletter-key'][$lang])){?>
-				<form id="newsletter" method="post" action="https://newsletter.infomaniak.com/external/submit" target="_blank" class="pbm">
+				<form id="newsletter" method="post" action="https://newsletter.infomaniak.com/external/submit" target="_blank" class="pbm mbs">
 
 					<input type="email" name="email" style="display:none" />
 
@@ -58,7 +58,7 @@
 
 						<input type="email" name="inf[1]" id="email_newsletter" autocomplete="email" required="required" placeholder="<?php _e("Your email")?>" class="w200p pts pbs pls">
 						
-						<button type="submit" class="bg-green bold pas">
+						<button type="submit" class="bg-color-2 bold pas">
 							<?php _e("Subscribe"); ?>
 						</button>
 
@@ -78,11 +78,11 @@
 				<?}?>
 
 				<!-- Réseaux sociaux -->
-				<?php txt('texte-reseaux', 'pts'); ?>
+				<?php txt('texte-reseaux'); ?>
 
 			</article>
 
-			<article>
+			<article class="prm">
 
 				<!-- Liens -->
 				<?php txt('footer-liens', 'pbm'); ?>

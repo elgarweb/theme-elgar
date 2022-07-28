@@ -96,16 +96,24 @@ $(function(){
 		var h1_bottom = h1_height + h1_top;
 		var h1_pass = h1_bottom - window_top;
 
-		if(h1_pass > 0){// On voit le h1
+		if(h1_pass > 0)// On voit le h1
+		{
 			//console.log("h1")
+
 			$("#sommaire").css({
 				//"top": h1_bottom - window_top,
 				"position": "initial",
 				"maxHeight": window_height - h1_pass -10
 			});
 		}
-		else if(h1_pass < 0){// On a dépassé le h1
+		else if(h1_pass < 0)// On a dépassé le h1
+		{	
 			//console.log("0")
+
+			// Si footer visible on réduit le sommaire pour éviter les superpositions avec le footer
+			if($("footer").offset().top <= (window_top + window_height))				
+				window_height = window_height - ((window_top + window_height) - $("footer").offset().top);
+
 			$("#sommaire").css({
 				"top": 10,
 				"position": "fixed",

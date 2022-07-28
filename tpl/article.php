@@ -56,7 +56,7 @@ switch($res['tpl']) {
 <?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 
 
-<section class="<?= $res['tpl'] == 'event' ? 'bg-grey' : ''; ?>">
+<section class="<?= $res['tpl'] == 'event' ? 'bg-color-3' : ''; ?>">
 
 	<div class="mw960p mod center">
 
@@ -124,22 +124,22 @@ switch($res['tpl']) {
 						else echo date_lang($GLOBALS["content"]["aaaa-mm-jj"]);
 
 						if(@$GLOBALS["content"]["heure-ouverture"]){
-							echo ', '.date_format(date_create($GLOBALS["content"]["heure-ouverture"]), 'H:i');
+							echo ', '.@date_format(date_create($GLOBALS["content"]["heure-ouverture"]), 'H:i');
 
 							// Si basque
 							if($lang == 'eu')										
-								if(date_format(date_create($GLOBALS["content"]["heure-ouverture"]), 'i') == 0) 
+								if(@date_format(date_create($GLOBALS["content"]["heure-ouverture"]), 'i') == 0) 
 									echo"etatik";// pluriel
 								else 
 									echo"etik";// singulier
 						}
 
 						if(@$GLOBALS["content"]["heure-fermeture"]){
-							echo ' '.__("to").' '.date_format(date_create($GLOBALS["content"]["heure-fermeture"]), 'H:i');
+							echo ' '.__("to").' '.@date_format(date_create($GLOBALS["content"]["heure-fermeture"]), 'H:i');
 
 							// Si basque
 							if($lang == 'eu')										
-								if(date_format(date_create($GLOBALS["content"]["heure-fermeture"]), 'i') == 0)
+								if(@date_format(date_create($GLOBALS["content"]["heure-fermeture"]), 'i') == 0)
 									echo"etara";// pluriel
 								else
 									echo"era";// singulier
@@ -160,7 +160,7 @@ switch($res['tpl']) {
 
 				<!-- Chapô -->
 				<?php 
-				if($res['tpl']=='annuaire' or  $res['tpl']=='event' or  $res['tpl']=='commerce') 
+				if($res['tpl']=='annuaire' or $res['tpl']=='commerce' or $res['tpl']=='event') 
 				{ 
 					echo '<ul class="unstyled pln">';
 					echo '<li class="bold pts pbn'.(!@$GLOBALS['content']['url-site-web']?' editable-hidden':'').'"><i class="fa fa-fw fa-globe" aria-hidden="true"></i> <a href="'.@$GLOBALS['content']['url-site-web'].'" target="_blank">'.__('Website').'</a>';
@@ -183,7 +183,7 @@ switch($res['tpl']) {
 
 				// Description : s'affiche sur la liste
 				if($res['tpl']=='article' or $res['tpl']=='event')
-					txt('description', array('class'=>'mbn','tag'=>'p'));
+					txt('description', array('class'=>'mbn'));//,'tag'=>'p'
 				?>
 
 			</div>

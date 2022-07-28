@@ -14,7 +14,7 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
     $replace = array("«&nbsp;", "&nbsp;»", "&nbsp;?");
     ?>
 
-    <div class="<?= $res['url'] == 'actualites' ? 'bg-grey ' : 'bg-white '; ?>relative brd-top-alt brd brd-rad-bot-right">
+    <div class="<?= $res['url'] == 'actualites' ? 'bg-color-3 ' : 'bg-white '; ?>relative brd-top-3 brd">
 
 		<!-- Affichage état article si désactivé -->
 		<div class="color-alt tc bold">

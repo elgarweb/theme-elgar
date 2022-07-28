@@ -173,8 +173,8 @@ article ul li { padding-bottom: 1em; }
 			color: #00253F;
 		}
 
-	.bg-green { background-color: #26D691; }
-	.bg-grey { background-color: #00253F1A; }
+	.bg-color-2 { background-color: #26D691; }
+	.bg-color-3 { background-color: #00253F1A; }
 	.bg-white { background-color: #fff; }
 
 
@@ -185,27 +185,23 @@ article ul li { padding-bottom: 1em; }
 .brd-right { border-right: 1px solid #00253F; }
 .brd-alt { border: 2px solid #26D691; }
 .brd-top { border-top: solid 3px #00253F; }
-.brd-top-green { border-top: solid 1px #26D691; }
-.brd-top-alt { border-top: solid 3px #26D691; }
-/* .brd-bot-alt { border-bottom: solid 1px #26D691; } */
+.brd-top-2 { border-top: solid 1px #26D691; }
+.brd-top-3 { border-top: solid 3px #26D691; }
 
 
 /* Border-radius */
 .brd-rad { border-radius: 25px;}
 
-.brd-rad-top-left, 
-.brd-rad-top-left #intro-visuel img{
-	border-top-left-radius: 25px;
-}
-.brd-rad-bot-right {
-	border-bottom-right-radius: 25px;
-}
+#encart .col:first-child, #intro-visuel img { border-top-left-radius: 25px; }
+
+.blocks > div, #encart .col:nth-child(2) { border-bottom-right-radius: 25px; }
+
 .brd-rad-100 { border-radius: 100%; }
 
 
 /* Positions */
-.bot15 {bottom: 15px; }
-.right15 {right: 15px; }
+.bot15 { bottom: 15px; }
+.right15 { right: 15px; }
 
 
 /* Table layout */
@@ -267,7 +263,7 @@ article ul li { padding-bottom: 1em; }
 	.lien-bt { text-align: center; }
 
 
-	/* #home-agenda.bg-grey #block { background-color: white;	} */
+	/* #home-agenda.bg-color-3 #block { background-color: white;	} */
 
 	/* Affichage img actus et agenda en background */
 	figure div { background-position: center center; }
@@ -275,6 +271,7 @@ article ul li { padding-bottom: 1em; }
 
 /* NAVIGATION */
 .tpl-navigation h1 { text-align: left; }
+.tpl-navigation .bg-color-3 { padding-left: 2rem; }
 
 
 /* ACTUALITÉS... */
@@ -333,9 +330,61 @@ article ul li { padding-bottom: 1em; }
 
 
 /* SOMMAIRE */
-#sommaire { position: initial !important; }
+/* .mw1600p { max-width: 960px; } *//* Version non flottant */
+.mw1600p { max-width: 1600px; }
 
-	#sommaire > ol { list-style: none; }
+	#sommaire { 
+		/* Version non flottant
+		position: initial !important;
+		display: inline;
+		*/
+
+		width: fit-content;
+		min-width: 300px;
+		margin-right: 3rem;
+		margin-bottom: 2rem;
+	}
+
+	#sommaire > ol { list-style: circle; }
+
+	.col-sommaire {
+		position: relative;
+    	flex: 0 0 360px;
+		z-index: 1;
+	}
+
+
+	/* Sommaire dans le contenu */
+	@media (max-width: 1000px) {
+		#sommaire {
+			max-height: inherit !important;
+			position: initial !important;
+			margin: 0 1rem 3rem;
+    		border-bottom: 1px solid #E5E5E5;
+		}
+	}
+
+	/* Sommaire Flotant 1740px */
+	@media (min-width: 1000px) {
+		.flex-sommaire { display: flex; }
+
+		#sommaire {
+			border: 1px solid #E5E5E5;
+			border-left: 0;
+
+			/* position: fixed; */
+		   	/* top: 260px; */
+		    /* left: 0; */
+    		padding: 1rem;  
+    		margin-left: 10px;  
+		    overflow: auto;
+		    max-width: 320px;
+		    max-height: 300px;
+
+		    z-index: 1;
+    		background-color: #fff;
+		}
+	}
 
 
 /* CONTACT */
@@ -1476,7 +1525,7 @@ div.editable {
 	    z-index: 12;
 	}
 
-	header #nav-principale > ul {
+	header nav > ul#main-navigation {
 		/* background-color: #fff; */
 		background-color: #00253F;
 
@@ -1506,7 +1555,7 @@ div.editable {
 		transform: translateX(-100%);
 		-webkit-transform: translateX(-100%);
 	}
-		header #nav-principale > ul li {
+		header nav > ul#main-navigation li {
 			display: block;
 			max-width: 100%;
 			min-height: 30px;
@@ -1518,8 +1567,8 @@ div.editable {
 			border-radius: 5px;
 			transition: background 0.3s;
 		}
-			header #nav-principale li:hover { background-color: #dfdfdf; }
-			header #nav-principale li a {
+			header nav ul#main-navigation li:hover { background-color: #dfdfdf; }
+			header nav ul#main-navigation li a {
 				display: block;
 				padding: 0.5rem;
 				/* color: #00253F !important; */
@@ -1528,7 +1577,7 @@ div.editable {
 	/* Raz du header */
 	.responsive-nav header { position: inherit; }
 	/* Ouvertur du menu */
-	.responsive-nav header #nav-principale ul {
+	.responsive-nav header nav ul#main-navigation {
 		visibility: visible;
 		transform: translateX(0);
 		-webkit-transform: translateX(0);
@@ -1661,9 +1710,10 @@ div.editable {
 		height: auto;
 	}
 
-
-
-
+	#enunclic { 
+		display: flex;
+    	flex-wrap: wrap;
+    }
 }
 
 /* RESPONSIVE small */

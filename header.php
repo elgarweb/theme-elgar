@@ -4,7 +4,7 @@
 
 	<section class="mw960p mod center relative">
 
-		<div class="ptm">
+		<div class="pts">
 			
 			<!-- Accessibilité -->
 			<div id="accessibilite" class="fl pbs">
@@ -32,7 +32,7 @@
 		</div>
 
 
-		<div class="clear flex wrap jcsb aic brd-top-green ptm plt prt">
+		<div class="clear flex wrap jcsb aic brd-top-2 ptm plt prt">
 
 			<!-- Logo -->
 			<div class="pts"><a href="<?=$GLOBALS['home']?>"><?php media('logo', array('size' => '330x90', 'lazy' => 'true'))?></a></div>
@@ -48,7 +48,7 @@
 
 						<input type="search" name="recherche" id="recherche">
 						
-						<button type="submit" class="bg-green pat" value="<?php _e("Search")?>" aria-label="<?php _e("Search")?>">
+						<button type="submit" class="bg-color-2 pat" value="<?php _e("Search")?>" aria-label="<?php _e("Search")?>">
 							<i class="fa fa-fw fa-search" aria-hidden="true"></i>
 						</button>
 
@@ -75,7 +75,7 @@
 	<!-- Menu principal -->
 	<section class="bg-color">
 
-		<nav id="nav-principale" role="navigation" class="mw960p center brd-top-alt mtl tc" aria-label="<?php _e("Browsing menu")?>">
+		<nav role="navigation" class="mw960p center brd-top-3 mtl tc" aria-label="<?php _e("Browsing menu")?>">
 
 			<button type="button" class="burger" aria-expanded="false" aria-controls="main-navigation">
 				<span class="open"><?php _e("Menu")?></span>
