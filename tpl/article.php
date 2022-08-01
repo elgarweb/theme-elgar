@@ -103,6 +103,14 @@ switch($res['tpl']) {
 						<script>
 							if(!$(".editable-tag").text()) $("#<?=$dir?>").prev("h3").hide();
 							else $("#<?=$dir?>").addClass("mbm");
+
+							// Si tag vide on change le TagName pour ne pas avoir un ul vide
+							if(!$(".editable-tag").text())
+							{
+								$(".editable-tag").replaceWith(function(){
+									return this.outerHTML.replace("<ul", "<div").replace("</ul", "</div")
+								});
+							}
 						</script>
 
 					</div>
@@ -167,17 +175,17 @@ switch($res['tpl']) {
 
 					input('url-site-web', array('type' => 'hidden'));
 
-				  	echo '</li><li class="pbn"><details class="pts'.(!@$GLOBALS['content']['telephone']?' editable-hidden':'').'" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold  inbl" data-encode="'.@$GLOBALS['content']['telephone'].'"  aria-label="'.__("Click to display the").' '.__('Telephone').'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary><span class="pls bold"></span></details>';
+				  	echo '</li><li class="pbn"><details class="pts'.(!@$GLOBALS['content']['telephone']?' editable-hidden':'').'" aria-live="polite"><summary class="tel color pointer tdu bold  inbl" data-encode="'.@$GLOBALS['content']['telephone'].'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary><p class="inline pls bold"></p></details>';
 
 				  	input('telephone', array('type' => 'hidden', 'class' => 'encode'));
 	
-				  	echo '</li><li class="pbn"><details class="pts'.(!@$GLOBALS['content']['mail-contact']?' editable-hidden':'').'" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold inbl" data-encode="'.@$GLOBALS['content']['mail-contact'].'"  aria-label="'.__("Click to display the").' '.__('Email').'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary><span class="pls bold mtm"></span></details>';
+				  	echo '</li><li class="pbn"><details class="pts'.(!@$GLOBALS['content']['mail-contact']?' editable-hidden':'').'" aria-live="polite"><summary class="tel color pointer tdu bold inbl" data-encode="'.@$GLOBALS['content']['mail-contact'].'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary><p class="inline pls bold"></p></details>';
 
 					input('mail-contact', array('type' => 'hidden', 'class' => 'encode'));
 
 					echo '</li><li class="bold pts pbn'.(!@$GLOBALS['content']['adresse']?' editable-hidden':'').'"><i class="fa fa-fw fa-location" aria-hidden="true"></i>'.__('Address');
 
-					txt('adresse', array('class'=>'plt mbt','tag'=>'p'));
+					txt('adresse', array('class'=>'plt mbt'));//,'tag'=>'p'
 					echo '</li></ul>';
 				}
 
@@ -215,7 +223,7 @@ $(function()
 	$(".tel, .mailto").on("click", function(event) { 
 		//event.preventDefault();
 		//document.location.href = $(event.target).attr("class") + ":" + atob($(event.target).parent().next(".encode").val());
-		$(event.target).next('span').html(atob($(event.target).parent().next(".encode").val()));
+		$(event.target).next('p').html(atob($(event.target).parent().next(".encode").val()));
 	});
 
 	// Avant la sauvegarde
