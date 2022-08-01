@@ -191,16 +191,16 @@ if(is_array($array))
 		$content = array (
 			'title' => $val['SyndicObjectName'],
 			'visuel' => $visuel_dest,
-			'visuel-alt' => @$val['PHOTOSs'][0]['Photo']['Titre'].' - '.@$val['PHOTOSs'][0]['Photo']['Credit'],
+			'visuel-alt' => '',//@$val['PHOTOSs'][0]['Photo']['Titre'].' - '.@$val['PHOTOSs'][0]['Photo']['Credit']
 			'aaaa-mm-jj' => $date,
 			'heure-ouverture' => $val['DATESs'][0]['Heuredouverture1'],
 			'heure-fermeture' => $val['DATESs'][0]['Heuredefermeture1'],
-			'description' => '<p>'.$description.'</p>',
-			'texte' => '<p>'.$texte.'</p>',
+			'description' => (@$description?'<p>'.$description.'</p>':''),
+			'texte' => (@$texte?'<p>'.$texte.'</p>':''),
 			'url-site-web' => @$com['C5'],
 			'telephone' => (@$com['C1']?base64_encode(@$com['C1']) : (@$com['C6']?base64_encode(@$com['C6']):'')),
 			'mail-contact' => (@$com['C4']?base64_encode(@$com['C4']):''),
-			'adresse' => '<p>'.$val['ADRESSEs'][0]['Adresse2'].'<br>'.$val['ADRESSEs'][0]['CodePostal'].' '.$val['ADRESSEs'][0]['Commune'].'</p>',
+			'adresse' => (@$val['ADRESSEs'][0]['CodePostal']?'<p>'.$val['ADRESSEs'][0]['Adresse2'].'<br>'.$val['ADRESSEs'][0]['CodePostal'].' '.$val['ADRESSEs'][0]['Commune'].'</p>':''),
 			'latitude' => $val['GmapLatitude'],
 			'longitude' => $val['GmapLongitude'],
 		);
