@@ -18,7 +18,7 @@
 					$array_navigation['href'] = $GLOBALS['path'].encode(@$content['navigation']);
 				}
 
-				?><li class="inline"><?
+				?><li class="inline"<?=(isset($content['navigation'])?'':' aria-hidden="true"')?>><?
 				select('navigation', $array_navigation);
 				?></li><?
 			}
