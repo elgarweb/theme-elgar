@@ -127,10 +127,10 @@ $url_back = encode($res['url']);
 								echo '<li class="bold pbn"><i class="fa fa-fw fa-globe" aria-hidden="true"></i> <a href="'.$content_fiche['url-site-web'].'" target="_blank">'.__('Website').'</a></li>';
 
 							if(isset($content_fiche['telephone']))
-								echo '<li class="pbn"><details class="pts" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold  inbl" data-encode="'.$content_fiche['telephone'].'"  aria-label="'.__("Click to display the").' '.__('Telephone').'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary><span class="pls bold"></span></details></li>';
+								echo '<li class="pbn"><details class="pts" aria-live="polite"><summary class="tel color pointer tdu bold  inbl" data-encode="'.$content_fiche['telephone'].'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary><p class="inline pls bold"></p></details></li>';
 
 							if(isset($content_fiche['mail-contact']))
-								echo '<li class="pbn"><details class="pts" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold inbl" data-encode="'.$content_fiche['mail-contact'].'"  aria-label="'.__("Click to display the").' '.__('Email').'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary><span class="pls bold mtm"></span></details></li>';
+								echo '<li class="pbn"><details class="pts" aria-live="polite"><summary class="tel color pointer tdu bold inbl" data-encode="'.$content_fiche['mail-contact'].'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary><p class="inline pls bold"></p></details></li>';
 
 							if(isset($content_fiche['adresse']))
 								echo '<li class="bold pbn pts"><i class="fa fa-fw fa-location" aria-hidden="true"></i>'.__('Address').'<p class="plt">'.$content_fiche['adresse'].'</p></li>';
@@ -173,7 +173,7 @@ $(function()
 	$(".tel, .mailto").on("click", function(event) { 
 		//event.preventDefault();
 		//document.location.href = $(event.target).attr("class") + ":" + atob($(event.target).data("encode"));
-		$(event.target).next('span').html(atob($(event.target).data("encode")));
+		$(event.target).next('p').html(atob($(event.target).data("encode")));
 	});
 });
 </script>
