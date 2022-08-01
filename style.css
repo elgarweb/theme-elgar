@@ -345,7 +345,7 @@ article ul li { padding-bottom: 1em; }
 		margin-bottom: 2rem;
 	}
 
-	#sommaire > ol { list-style: circle; }
+	#sommaire ol { list-style: circle; }
 
 	.col-sommaire {
 		position: relative;
@@ -2069,6 +2069,11 @@ div.editable {
 .hc *::before,
 .hc *::after{
 	border-color: white !important;
+}
+
+.hc *::before,
+.hc *::after{
+	background: none !important;
 }
 
 /* Add a border on form elements when high contrast is on */
