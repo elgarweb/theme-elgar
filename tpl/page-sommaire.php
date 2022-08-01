@@ -53,19 +53,20 @@ $("#texte h2, #texte h3").each(function(index)
 		{
 			if(open)// On doit fermer
 			{
-				html += "</ol></li>";
+				html += "</li></ol>";
 				open = false;
 			}
 			else// On ouvre une sous-section
 			{
-				html += "<li><ol>";
+				html += "<ol>";
 				open = true;
 			}
 		}
+		else html += "</li>";
 
 
 		// Ajoute l'élément au sommaire
-		html += "<li><a href='#ancre-" + ancre + "'>" + $(this).text() + "</a></li>";
+		html += "<li><a href='#ancre-" + ancre + "'>" + $(this).text() + "</a>";
 
 
 		previous = $(this).prop("tagName");
@@ -75,7 +76,7 @@ $("#texte h2, #texte h3").each(function(index)
 });
 
 // Si sommaire par fermer
-if(open) html += "</ol></li>";
+if(open) html += "</li></ol>";
 
 $("#sommaire ol").append(html);
 
