@@ -34,7 +34,7 @@ html = '';
 
 $("#texte h2, #texte h3").each(function(index) 
 {
-	if($(this).text().length >0)
+	if($(this).text().length > 0)
 	{
 		// nom de l'ancre
 		var ancre = $(this).text().toLowerCase().replace(/[^a-z0-9]+/g,'-');
@@ -73,6 +73,7 @@ $("#texte h2, #texte h3").each(function(index)
 
 		++i;
 	}
+	else $(this).removeAttr("id");
 });
 
 // Si sommaire par fermer
