@@ -8,24 +8,30 @@ $url_back = encode($res['url']);
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 	
-	<?php h1('title', 'picto mbn'); ?>
+	<?php
+	h1('title', 'picto mbn');
 
-	<nav role="navigation" aria-label="<?php _e("Filter by")?>" class="flex wrap space jcc tc ptl pbm">
-		<ul class="unstyled pln"><?php 
-			// Liste les tags pour filtrer la page
-			$i = 1;
-			$sel_tag_list = $connect->query("SELECT distinct encode, name FROM ".$table_tag." WHERE zone='".$res['url']."' AND lang='".$lang."' GROUP BY encode, name ORDER BY encode ASC");
-			//echo $connect->error;
+	// Liste les tags pour filtrer la page
+	$i = 1;
+	$sel_tag_list = $connect->query("SELECT distinct encode, name FROM ".$table_tag." WHERE zone='".$res['url']."' AND lang='".$lang."' GROUP BY encode, name ORDER BY encode ASC");
+	//echo $connect->error;
 
-			while($res_tag_list = $sel_tag_list->fetch_assoc()) {
-				echo'<li class="inline prs"><a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="bt-tag">'.$res_tag_list['name'].'</a></li>';
-				$i++;
-			}
-			?>
-		</ul>
-	</nav>
-	
-	<?php txt('description', array('class'=>'ptm mbn')); ?>
+	if($sel_tag_list->num_rows > 0) {
+	?>
+		<nav role="navigation" aria-label="<?php _e("Filter by")?>" class="flex wrap space jcc tc ptl pbm">
+			<ul class="unstyled pln"><?php 
+				while($res_tag_list = $sel_tag_list->fetch_assoc()) {
+					echo'<li class="inline prs"><a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="bt-tag">'.$res_tag_list['name'].'</a></li>';
+					$i++;
+				}
+				?>
+			</ul>
+		</nav>
+	<?php
+	}
+
+	txt('description', array('class'=>'ptm mbn'));
+	?>
 	
 </section>
 
