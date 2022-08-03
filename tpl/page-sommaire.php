@@ -34,7 +34,7 @@ html = '';
 
 $("#texte h2, #texte h3").each(function(index) 
 {
-	if($(this).text().length >0)
+	if($(this).text().length > 0)
 	{
 		// nom de l'ancre
 		var ancre = $(this).text().toLowerCase().replace(/[^a-z0-9]+/g,'-');
@@ -53,29 +53,31 @@ $("#texte h2, #texte h3").each(function(index)
 		{
 			if(open)// On doit fermer
 			{
-				html += "</ol></li>";
+				html += "</li></ol>";
 				open = false;
 			}
 			else// On ouvre une sous-section
 			{
-				html += "<li><ol>";
+				html += "<ol>";
 				open = true;
 			}
 		}
+		else html += "</li>";
 
 
 		// Ajoute l'élément au sommaire
-		html += "<li><a href='#ancre-" + ancre + "'>" + $(this).text() + "</a></li>";
+		html += "<li><a href='#ancre-" + ancre + "'>" + $(this).text() + "</a>";
 
 
 		previous = $(this).prop("tagName");
 
 		++i;
 	}
+	else $(this).removeAttr("id");
 });
 
 // Si sommaire par fermer
-if(open) html += "</ol></li>";
+if(open) html += "</li></ol>";
 
 $("#sommaire ol").append(html);
 

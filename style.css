@@ -155,7 +155,7 @@ fieldset p { margin-bottom: 0.5em !important; }
 button { border: solid 1px #26D691; }
 
 /* Listes à puces */
-article ul li { padding-bottom: 1em; }
+article ul li { padding-bottom: 1rem; }
 
 /* Couleurs */
 .color { color: #00253F; }
@@ -345,7 +345,7 @@ article ul li { padding-bottom: 1em; }
 		margin-bottom: 2rem;
 	}
 
-	#sommaire > ol { list-style: circle; }
+	#sommaire ol { list-style: circle; }
 
 	.col-sommaire {
 		position: relative;
@@ -624,7 +624,7 @@ p, .p-like, ul, ol, dl, blockquote, pre, td, th, label, textarea, caption, detai
 }
 
 main p, footer p
-{ margin-bottom: 2em; } /* marge accessible sur les paragraphes */
+{ margin-bottom: 2rem; } /* marge accessible sur les paragraphes */
 
 h1, .h1-like { font-size: 3.4rem; }
 h2, .h2-like { font-size: 3rem; }
@@ -892,6 +892,14 @@ input[type="reset"].unstyled:focus {
 
 /* Module */
 .module > li:last-child { display: none; }
+
+
+/* iframe */
+iframe {
+	width: 100%;
+	height: 900px;
+	border: 0;
+}
 
 
 /* Vidéo */
@@ -1265,7 +1273,7 @@ s,m,l,n = small, medium, large, none
 .pbs { padding-bottom: 1rem; }
 .pbm { padding-bottom: 2rem; }
 .pbl { padding-bottom: 4rem; }
-.pbp { padding-bottom: 5.7rem; }
+.pbp { padding-bottom: 4.5rem; }
 .pln { padding-left: 0; }
 .plt { padding-left: 0.5rem; }
 .pls { padding-left: 1rem; }
@@ -2069,6 +2077,11 @@ div.editable {
 .hc *::before,
 .hc *::after{
 	border-color: white !important;
+}
+
+.hc *::before,
+.hc *::after{
+	background: none !important;
 }
 
 /* Add a border on form elements when high contrast is on */

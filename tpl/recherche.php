@@ -131,7 +131,7 @@ function highlight($txt, $recherche)
 
 				// Si page > 1
 				<?if($page>1){?>
-					$("nav[itemprop='breadcrumb'] li[aria-current='page']").before("<li class='inline'><?=_e("Search")?> <a href=\"/<?=make_url($res['url'], array(@$_SESSION['recherche']));?>\"><?=addslashes(@$_SESSION['recherche'])?></a></li>");
+					$("nav[itemprop='breadcrumb'] li[aria-current='page']").before("<li class='inline'><a href=\"/<?=make_url($res['url'], array(@$_SESSION['recherche']));?>\"><?=_e("Search")?> <?=addslashes(@$_SESSION['recherche'])?></a></li>");
 
 					$("nav[itemprop='breadcrumb'] li[aria-current='page']").html("<?=addslashes(__('Page').' '.$page)?>");
 				<?}
@@ -175,7 +175,14 @@ function highlight($txt, $recherche)
 			elseif(isset($content_fiche['texte'])) $texte = $content_fiche['texte'];
 			
 			if(isset($texte))
-				echo '<p class="mbn">'.highlight(word_cut($texte, '350', '...', '<br><i><div>'), @$_POST['recherche']).'</p>';
+			{
+				// Pour éviter les textes collés quand les Hn sont supprimés
+				$texte = str_replace('</h2>','</h2><br>',$texte);
+				$texte = str_replace('</h3>','</h3><br>',$texte);
+				$texte = str_replace('</h4>','</h4><br>',$texte);
+
+				echo '<p class="mbn">'.highlight(word_cut($texte, '350', '...', '<br><i>'), @$_POST['recherche']).'</p>';
+			}
 			?>
 
 			<a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" class="bt bold fr mtm" aria-label="<?php _e("Lire")?> <?php echo $res_fiche['title']?>"><?php _e("Lire")?></a>

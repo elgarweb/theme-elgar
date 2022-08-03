@@ -76,7 +76,6 @@ switch($res['tpl']) {
 
 						<?php txt('texte-legende-visuel', 'italic ptt plt'); ?>
 
-
 					</figcaption>
 
 
@@ -103,6 +102,14 @@ switch($res['tpl']) {
 						<script>
 							if(!$(".editable-tag").text()) $("#<?=$dir?>").prev("h3").hide();
 							else $("#<?=$dir?>").addClass("mbm");
+
+							// Si tag vide on change le TagName pour ne pas avoir un ul vide
+							if(!$(".editable-tag").text())
+							{
+								$(".editable-tag").replaceWith(function(){
+									return this.outerHTML.replace("<ul", "<div").replace("</ul", "</div")
+								});
+							}
 						</script>
 
 					</div>
@@ -163,21 +170,23 @@ switch($res['tpl']) {
 				if($res['tpl']=='annuaire' or $res['tpl']=='commerce' or $res['tpl']=='event') 
 				{ 
 					echo '<ul class="unstyled pln">';
-					echo '<li class="bold pts pbn'.(!@$GLOBALS['content']['url-site-web']?' editable-hidden':'').'"><i class="fa fa-fw fa-globe" aria-hidden="true"></i> <a href="'.@$GLOBALS['content']['url-site-web'].'" target="_blank">'.__('Website').'</a>';
 
-					input('url-site-web', array('type' => 'hidden'));
+						echo '<li class="bold pts pbn'.(!@$GLOBALS['content']['url-site-web']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['url-site-web']?' aria-hidden="true"':'').'><i class="fa fa-fw fa-globe" aria-hidden="true"></i> '.(@$GLOBALS['content']['url-site-web']?'<a href="'.@$GLOBALS['content']['url-site-web'].'" target="_blank">'.__('Website').'</a>':'').'';
 
-				  	echo '</li><li class="pbn"><details class="pts'.(!@$GLOBALS['content']['telephone']?' editable-hidden':'').'" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold  inbl" data-encode="'.@$GLOBALS['content']['telephone'].'"  aria-label="'.__("Click to display the").' '.__('Telephone').'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary><span class="pls bold"></span></details>';
+						input('url-site-web', array('type' => 'hidden'));
 
-				  	input('telephone', array('type' => 'hidden', 'class' => 'encode'));
-	
-				  	echo '</li><li class="pbn"><details class="pts'.(!@$GLOBALS['content']['mail-contact']?' editable-hidden':'').'" aria-live="polite"><summary href="javascript:void(0)" class="tel color pointer tdu bold inbl" data-encode="'.@$GLOBALS['content']['mail-contact'].'"  aria-label="'.__("Click to display the").' '.__('Email').'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary><span class="pls bold mtm"></span></details>';
+					  	echo '</li><li class="pbn"><details class="pts'.(!@$GLOBALS['content']['telephone']?' editable-hidden':'').'" aria-live="polite"'.(!@$GLOBALS['content']['telephone']?' aria-hidden="true"':'').'><summary class="tel color pointer tdu bold  inbl" data-encode="'.@$GLOBALS['content']['telephone'].'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary>'.(@$GLOBALS['content']['telephone']?'<p class="inline pls bold"></p>':'').'</details>';
 
-					input('mail-contact', array('type' => 'hidden', 'class' => 'encode'));
+					  	input('telephone', array('type' => 'hidden', 'class' => 'encode'));
+		
+					  	echo '</li><li class="pbn"><details class="pts'.(!@$GLOBALS['content']['mail-contact']?' editable-hidden':'').'" aria-live="polite"'.(!@$GLOBALS['content']['mail-contact']?' aria-hidden="true"':'').'><summary class="tel color pointer tdu bold inbl" data-encode="'.@$GLOBALS['content']['mail-contact'].'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary>'.(@$GLOBALS['content']['mail-contact']?'<p class="inline pls bold"></p>':'').'</details>';
 
-					echo '</li><li class="bold pts pbn'.(!@$GLOBALS['content']['adresse']?' editable-hidden':'').'"><i class="fa fa-fw fa-location" aria-hidden="true"></i>'.__('Address');
+						input('mail-contact', array('type' => 'hidden', 'class' => 'encode'));
 
-					txt('adresse', array('class'=>'plt mbt','tag'=>'p'));
+						echo '</li><li class="bold pts pbn'.(!@$GLOBALS['content']['adresse']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['adresse']?' aria-hidden="true"':'').'><i class="fa fa-fw fa-location" aria-hidden="true"></i>'.__('Address');
+
+						txt('adresse', array('class'=>'plt mbt'));//,'tag'=>'p'
+
 					echo '</li></ul>';
 				}
 
@@ -215,7 +224,7 @@ $(function()
 	$(".tel, .mailto").on("click", function(event) { 
 		//event.preventDefault();
 		//document.location.href = $(event.target).attr("class") + ":" + atob($(event.target).parent().next(".encode").val());
-		$(event.target).next('span').html(atob($(event.target).parent().next(".encode").val()));
+		$(event.target).next('p').html(atob($(event.target).parent().next(".encode").val()));
 	});
 
 	// Avant la sauvegarde
