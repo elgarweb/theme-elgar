@@ -38,32 +38,36 @@ if(!$alert_view){?>
 
 
 <!-- ENCART INTRO -->
-<section id="encart" class="mw960p center pbl pll prl">
+<section id="encart">
+
+	<div class="mw960p center pbl pll prl">
 	
-	<?php h1('titre', 'picto'); ?>
+		<?php h1('titre', 'picto'); ?>
 
-	<article class="<?=(isset($GLOBALS['content']['intro-texte']) ? 'row' : 'editable-hidden'); ?>">
-		
-		<div class="col brd">
-			<?php
-			// Taille de l'image par défaut
-			if(!isset($GLOBALS['intro-visuel-size'])) $GLOBALS['intro-visuel-size'] = '550x260';
+		<article class="<?=(isset($GLOBALS['content']['intro-texte']) ? 'row' : 'editable-hidden'); ?>">
+			
+			<div class="col brd">
+				<?php
+				// Taille de l'image par défaut
+				if(!isset($GLOBALS['intro-visuel-size'])) $GLOBALS['intro-visuel-size'] = '550x260';
 
-			// Grand visuel
-			media('intro-visuel', array('size' => $GLOBALS['intro-visuel-size'], 'lazy' => true));
-			?>
-		</div>
-		
-		<div class="col bg-color-2">
-
-			<?php txt('intro-texte', 'pam pbt'); ?>
-
-			<div class="plus mlm mrm <?=(isset($GLOBALS['content']['intro-lien'])?'':' editable-hidden')?>">
-				<a <?href('intro-lien');?>><?php span('intro-texte-lien', ''); ?></a>
+				// Grand visuel
+				media('intro-visuel', array('size' => $GLOBALS['intro-visuel-size'], 'lazy' => true));
+				?>
 			</div>
-		</div>
-		
-	</article>
+			
+			<div class="col bg-color-2">
+
+				<?php txt('intro-texte', 'pam pbt'); ?>
+
+				<div class="plus mlm mrm <?=(isset($GLOBALS['content']['intro-lien'])?'':' editable-hidden')?>">
+					<a <?href('intro-lien');?>><?php span('intro-texte-lien', ''); ?></a>
+				</div>
+			</div>
+			
+		</article>
+
+	</div>
 
 </section>
 
