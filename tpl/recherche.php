@@ -3,6 +3,9 @@ if(!$GLOBALS['domain']) exit;
 
 function highlight($txt, $recherche)
 {
+	// Supprime les <br> multiples
+	$txt = preg_replace('#(<br */?>\s*)+#i', '<br />', $txt);
+
 	/*$explode = explode(" ", $recherche);// Chaque élément
 
 	$explode = array_filter($explode, function($v){ return strlen($v) > 2; });// Retire les éléments des moins de 2 lettres
@@ -181,7 +184,7 @@ function highlight($txt, $recherche)
 				$texte = str_replace('</h3>','</h3><br>',$texte);
 				$texte = str_replace('</h4>','</h4><br>',$texte);
 
-				echo '<p class="mbn">'.highlight(word_cut($texte, '350', '...', '<br><i>'), @$_POST['recherche']).'</p>';
+				echo '<p class="mbn">'.highlight(word_cut($texte, '350', '...', '<br>'), @$_POST['recherche']).'</p>';
 			}
 			?>
 

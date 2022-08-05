@@ -175,11 +175,11 @@ switch($res['tpl']) {
 
 						input('url-site-web', array('type' => 'hidden'));
 
-					  	echo '</li><li class="pbn"><details class="pts'.(!@$GLOBALS['content']['telephone']?' editable-hidden':'').'" aria-live="polite"'.(!@$GLOBALS['content']['telephone']?' aria-hidden="true"':'').'><summary class="tel color pointer tdu bold  inbl" data-encode="'.@$GLOBALS['content']['telephone'].'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary>'.(@$GLOBALS['content']['telephone']?'<p class="inline pls bold"></p>':'').'</details>';
+					  	echo '</li><li class="pbn'.(!@$GLOBALS['content']['telephone']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['telephone']?' aria-hidden="true"':'').'><details class="pts" aria-live="polite"><summary class="tel color pointer tdu bold  inbl" data-encode="'.@$GLOBALS['content']['telephone'].'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary>'.(@$GLOBALS['content']['telephone']?'<p class="inline pls bold"></p>':'').'</details>';
 
 					  	input('telephone', array('type' => 'hidden', 'class' => 'encode'));
 		
-					  	echo '</li><li class="pbn"><details class="pts'.(!@$GLOBALS['content']['mail-contact']?' editable-hidden':'').'" aria-live="polite"'.(!@$GLOBALS['content']['mail-contact']?' aria-hidden="true"':'').'><summary class="tel color pointer tdu bold inbl" data-encode="'.@$GLOBALS['content']['mail-contact'].'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary>'.(@$GLOBALS['content']['mail-contact']?'<p class="inline pls bold"></p>':'').'</details>';
+					  	echo '</li><li class="pbn'.(!@$GLOBALS['content']['mail-contact']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['mail-contact']?' aria-hidden="true"':'').'><details class="pts" aria-live="polite"><summary class="tel color pointer tdu bold inbl" data-encode="'.@$GLOBALS['content']['mail-contact'].'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary>'.(@$GLOBALS['content']['mail-contact']?'<p class="inline pls bold"></p>':'').'</details>';
 
 						input('mail-contact', array('type' => 'hidden', 'class' => 'encode'));
 
