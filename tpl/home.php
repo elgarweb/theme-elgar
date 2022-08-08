@@ -119,107 +119,111 @@ if(!$alert_view){?>
 
 
 <!-- ACTUALITÉS -->
-<section id="home-actualites" class="mw960p center ptl pbl">
-	
-	<?php h2('titre-actus', 'picto pbm'); ?>
-	
-	<!-- Actualité à la une -->
-	<article id="actualaune">
-		<?php
-		$sql_alaune="
-		SELECT ".$tc.".* FROM ".$tc."
-		JOIN 
-			".$tm." ON ".$tc.".id = ".$tm.".id AND ".$tm.".type = 'article' 
-		WHERE 
-			".$tc.".type = 'article' AND ".$tc.".lang = '".$lang."' AND state = 'active'
-		ORDER BY ".$tc.".date_insert DESC
-		LIMIT 1";
+<section id="home-actualites" class="ptl pbl">
 
-		//echo $sql_alaune."<br>";
-
-		$sel_alaune = $connect->query($sql_alaune);
-
-		while($res_alaune = $sel_alaune->fetch_assoc())
-		{
-			$articles[$res_alaune['id']] = $res_alaune;
-			$articles[$res_alaune['id']]['content'] = json_decode($res_alaune['content'], true);
-		}
+	<div class="mw960p center">
 		
-		if(isset($articles))
-		foreach($articles as $key => $article)
-		{
-			// var_dump($article['id']);
-			?>
+		<?php h2('titre-actus', 'picto pbm'); ?>
+		
+		<!-- Actualité à la une -->
+		<article id="actualaune">
+			<?php
+			$sql_alaune="
+			SELECT ".$tc.".* FROM ".$tc."
+			JOIN 
+				".$tm." ON ".$tc.".id = ".$tm.".id AND ".$tm.".type = 'article' 
+			WHERE 
+				".$tc.".type = 'article' AND ".$tc.".lang = '".$lang."' AND state = 'active'
+			ORDER BY ".$tc.".date_insert DESC
+			LIMIT 1";
 
-			<div class="<?=(isset($article['title']) ? 'relative flex aic brd3 mbl' : 'none'); ?>">
+			//echo $sql_alaune."<br>";
 
-				<!-- Image -->
-				<figure class="brd-right">
+			$sel_alaune = $connect->query($sql_alaune);
 
-					<div class="nor" data-bg="<?= $article['content']['visuel']; ?>" data-lazy="bg">
-					</div>
+			while($res_alaune = $sel_alaune->fetch_assoc())
+			{
+				$articles[$res_alaune['id']] = $res_alaune;
+				$articles[$res_alaune['id']]['content'] = json_decode($res_alaune['content'], true);
+			}
+			
+			if(isset($articles))
+			foreach($articles as $key => $article)
+			{
+				// var_dump($article['id']);
+				?>
 
-				</figure>
+				<div class="<?=(isset($article['title']) ? 'relative flex aic brd3 mbl' : 'none'); ?>">
 
-				<div class="ptm pbl plm prm">
+					<!-- Image -->
+					<figure class="brd-right">
 
-					<!-- Titre -->
-					<h3 class="mtn bold">
-						<a href="<?= make_url($article['title'], array("domaine" => true)); ?>" class="tdn"><?= $article['title']; ?></a>
-					</h3>
-					
-					<!-- Extrait texte -->
-					<p class="pbm">
-						<?php if(isset($article['content']['texte'])) echo word_cut($article['content']['texte'], '100', '...');?>
-					</p>
+						<div class="nor" data-bg="<?= $article['content']['visuel']; ?>" data-lazy="bg">
+						</div>
 
-					<!-- Lien Lire la suite -->
-					<div class="plus">
-						<a class="absolute bot15 right15" href="<?=make_url($article['title'], array("domaine" => true));?>" aria-label="<?php echo __("Read more")." ". $article['title'];?> "><?php _e("Read more")?></a>
+					</figure>
+
+					<div class="ptm pbl plm prm">
+
+						<!-- Titre -->
+						<h3 class="mtn bold">
+							<a href="<?= make_url($article['title'], array("domaine" => true)); ?>" class="tdn"><?= $article['title']; ?></a>
+						</h3>
+						
+						<!-- Extrait texte -->
+						<p class="pbm">
+							<?php if(isset($article['content']['texte'])) echo word_cut($article['content']['texte'], '100', '...');?>
+						</p>
+
+						<!-- Lien Lire la suite -->
+						<div class="plus">
+							<a class="absolute bot15 right15" href="<?=make_url($article['title'], array("domaine" => true));?>" aria-label="<?php echo __("Read more")." ". $article['title'];?> "><?php _e("Read more")?></a>
+						</div>
 					</div>
 				</div>
-			</div>
-		
-		<?php
-		}
-		?>
-	</article>
-
-
-	<!-- Dernières actualités -->
-	<div class="clear">
-
-		<div class="blocks grid-3 space-xl">
 			
-			<?php 
-			// Construction de la requete
-			$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
-
-			$sql.=" WHERE ".$tc.".type='article'";
-			if(isset($articles)) $sql.=" AND id!='".$article['id']."'";
-
-			$sql.=" AND ".$tc.".lang='".$lang."' AND state='active' ORDER BY ".$tc.".date_insert DESC
-			LIMIT 3";
-
-			$sel_article = $connect->query($sql);
-
-			while($res_article = $sel_article->fetch_assoc())
-			{
-				$content_article = json_decode($res_article['content'], true);
-
-				block(@$content_article['visuel'], $res_article['url'], $res_article['title'], @$content_article['description'], @$content_article['aaaa-mm-jj']);
+			<?php
 			}
 			?>
+		</article>
+
+
+		<!-- Dernières actualités -->
+		<div class="clear">
+
+			<div class="blocks grid-3 space-xl">
+				
+				<?php 
+				// Construction de la requete
+				$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
+
+				$sql.=" WHERE ".$tc.".type='article'";
+				if(isset($articles)) $sql.=" AND id!='".$article['id']."'";
+
+				$sql.=" AND ".$tc.".lang='".$lang."' AND state='active' ORDER BY ".$tc.".date_insert DESC
+				LIMIT 3";
+
+				$sel_article = $connect->query($sql);
+
+				while($res_article = $sel_article->fetch_assoc())
+				{
+					$content_article = json_decode($res_article['content'], true);
+
+					block(@$content_article['visuel'], $res_article['url'], $res_article['title'], @$content_article['description'], @$content_article['aaaa-mm-jj']);
+				}
+				?>
+
+			</div>
 
 		</div>
-
-	</div>
+			
+		<!-- Bouton vers toutes les actualités -->
+		<div class="lien-bt ptl">
+			<a href="<?=make_url(__('news'), array("domaine" => true))?>" class="bt">
+				<?php span('txt-lien-actus', array('default' => __("Read all the news"))); ?>
+			</a>
+		</div>
 		
-	<!-- Bouton vers toutes les actualités -->
-	<div class="lien-bt ptl">
-		<a href="<?=make_url(__('news'), array("domaine" => true))?>" class="bt">
-			<?php span('txt-lien-actus', array('default' => __("Read all the news"))); ?>
-		</a>
 	</div>
 
 </section>
