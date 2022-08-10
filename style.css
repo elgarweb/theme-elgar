@@ -204,17 +204,19 @@ article ul li { padding-bottom: 1rem; }
 
 
 /* HEADER */
-	/** Logo **/
-	header #logo { transition: opacity .5s; }
-	header #logo [src*='.svg'] { min-width: 300px; }
-		header #logo:hover { opacity: 0.6; }
-		header #logo img { background-color: #fff !important; }
+/** Logo **/
+header #logo {
+	display: block;
+	min-height: 50px;
+	transition: opacity .5s;
+}
+header #logo [src*='.svg'] { min-width: 300px; }
+	header #logo:hover { opacity: 0.6; }
+	header #logo img { background-color: #fff !important; }
 
-	.lucide #add-nav .dragger:before {
-		color: #000;
-	}
+.lucide #add-nav .dragger:before { color: #000; }
 
-	header section:first-of-type { font-size: 1.4rem; }
+header section:first-of-type { font-size: 1.4rem; }
 
 
 /* HOME */
@@ -1702,12 +1704,16 @@ div.editable {
 
 	/* .tr, .tl { text-align: center !important; } */
 
+	main { word-break: break-word; }
+
 	article {
 		/*display: inline-block; Crée un bug collateral avec l'editeur de menu ... utile ?*/
 		/* padding-left: 0.5rem !important; */
 		/* padding-right: 0.5rem !important; */
 	}
 		
+	.highlight { width: 80%; }
+
 	.editable img.fl, .editable img.fr {
 		float: none;
 		display: block;
