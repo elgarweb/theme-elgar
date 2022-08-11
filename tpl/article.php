@@ -121,12 +121,35 @@ switch($res['tpl']) {
 				if(stristr($res['tpl'], 'event') or stristr($res['tpl'], 'arrete'))
 				{
 				?>
-					<p class="editable-hidden bold"><?= _e("Date");?></p>
+					<div class="editable-hidden bold"><?= _e("Start date");?></div>
+					<?php
+					input("aaaa-mm-jj", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
 
-					<?php 
+					if(stristr($res['tpl'], 'event')) 
+					{
+						input('heure-ouverture', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));			
+						input('heure-fermeture', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));
+					}
+					?>
+
+					<div class="editable-hidden bold"><?= _e("End date");?></div>
+					<?php
+					input("aaaa-mm-jj-fin", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
+
+					if(stristr($res['tpl'], 'event')) 
+					{
+						input('heure-ouverture-fin', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));			
+						input('heure-fermeture-fin', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));
+					}
+
+
+					// Affichage date de début
 					if(@$GLOBALS["content"]["aaaa-mm-jj"])
 					{
 						echo '<p class="mbn">';
+
+						if(@$GLOBALS["content"]["aaaa-mm-jj-fin"]) echo __("Du").' ';
+
 						if($lang == 'eu') echo str_replace('-', '/', $GLOBALS["content"]["aaaa-mm-jj"]);
 						else echo date_lang($GLOBALS["content"]["aaaa-mm-jj"]);
 
@@ -142,7 +165,7 @@ switch($res['tpl']) {
 						}
 
 						if(@$GLOBALS["content"]["heure-fermeture"]){
-							echo ' '.__("to").' '.@date_format(date_create($GLOBALS["content"]["heure-fermeture"]), 'H:i');
+							echo ' '.__("at").' '.@date_format(date_create($GLOBALS["content"]["heure-fermeture"]), 'H:i');
 
 							// Si basque
 							if($lang == 'eu')										
@@ -152,18 +175,46 @@ switch($res['tpl']) {
 									echo"era";// singulier
 						}
 
-						echo '</p>';						
+						if(@$GLOBALS["content"]["aaaa-mm-jj-fin"]) echo ' '.__("to").' ';
+						else echo '</p>';						
 					}
 
-					input("aaaa-mm-jj", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
 
-					if(stristr($res['tpl'], 'event')) 
+					// Affichage date de fin
+					if(@$GLOBALS["content"]["aaaa-mm-jj-fin"])
 					{
-						input('heure-ouverture', array("type" => "hidden", "autocomplete" => "off"));			
-						input('heure-fermeture', array("type" => "hidden", "autocomplete" => "off"));
+						if(!@$GLOBALS["content"]["aaaa-mm-jj"]) echo '<p class="mbn">';
+
+						if($lang == 'eu') echo str_replace('-', '/', $GLOBALS["content"]["aaaa-mm-jj-fin"]);
+						else echo date_lang($GLOBALS["content"]["aaaa-mm-jj-fin"]);
+
+						if(@$GLOBALS["content"]["heure-ouverture-fin"]){
+							echo ', '.@date_format(date_create($GLOBALS["content"]["heure-ouverture-fin"]), 'H:i');
+
+							// Si basque
+							if($lang == 'eu')										
+								if(@date_format(date_create($GLOBALS["content"]["heure-ouverture-fin"]), 'i') == 0) 
+									echo"etatik";// pluriel
+								else 
+									echo"etik";// singulier
+						}
+
+						if(@$GLOBALS["content"]["heure-fermeture-fin"]){
+							echo ' '.__("at").' '.@date_format(date_create($GLOBALS["content"]["heure-fermeture-fin"]), 'H:i');
+
+							// Si basque
+							if($lang == 'eu')										
+								if(@date_format(date_create($GLOBALS["content"]["heure-fermeture-fin"]), 'i') == 0)
+									echo"etara";// pluriel
+								else
+									echo"era";// singulier
+						}
+
+						echo '</p>';						
 					}
 				}
 				?>
+				
 
 				<!-- Chapô -->
 				<?php 
@@ -254,6 +305,7 @@ $(function()
 	        firstDay: 1
 	    });
 		$("#aaaa-mm-jj").datepicker();
+		$("#aaaa-mm-jj-fin").datepicker();
 	});
 });
 </script>
