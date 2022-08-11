@@ -95,7 +95,7 @@
 	// time > 3m24s => 204s
 	if(($minute*60+$second)>204){
 		echo 
-			'<p class="clear ptm mbn tc"><i class="fa fa-print mrs" aria-hidden="true"></i>'.
+			'<p class="printing clear ptm mbn tc"><i class="fa fa-print mrs" aria-hidden="true"></i>'.
 			str_replace('*minute*', $minute,
 			str_replace('*second*', $second,
 				__("The average reading time for this page is *minute* minutes and *second* seconds. For less impact on the environment we recommend that you print it double-sided, black and white, 2 pages per sheet.")

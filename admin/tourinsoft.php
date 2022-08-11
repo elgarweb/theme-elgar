@@ -166,6 +166,11 @@ if(is_array($array))
 		// $val['DATESs'][0]['Datedefin'] 
 		$date = explode('T', $val['datedebut'])[0];
 
+		// Si date de fin et != de la date de début
+		if(@$val['DATESs'][0]['Datedefin'] and @$val['DATESs'][0]['Datededebut'] != @$val['DATESs'][0]['Datedefin'])
+			$date_fin = explode('T', @$val['DATESs'][0]['Datedefin'])[0];
+		else $date_fin = null;
+
 		// On regarde si la description est courtes ou longue
 		if(strlen($val['DESCRIPTIFSs'][0]['Descriptioncommerciale'])<500) {
 			$description = $val['DESCRIPTIFSs'][0]['Descriptioncommerciale'];
@@ -195,6 +200,9 @@ if(is_array($array))
 			'aaaa-mm-jj' => $date,
 			'heure-ouverture' => $val['DATESs'][0]['Heuredouverture1'],
 			'heure-fermeture' => $val['DATESs'][0]['Heuredefermeture1'],
+			'aaaa-mm-jj-fin' => @$date_fin,
+			'heure-ouverture-fin' => @$val['DATESs'][0]['Heuredouverture2'],
+			'heure-fermeture-fin' => @$val['DATESs'][0]['Heuredefermeture2'],
 			'description' => (@$description?'<p>'.$description.'</p>':''),
 			'texte' => (@$texte?'<p>'.$texte.'</p>':''),
 			'url-site-web' => @$com['C5'],
