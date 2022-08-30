@@ -202,6 +202,10 @@ Pour créer une page intermédiaire de navigation vous devez :
 - Créer une page avec le template `navigation`
 - Ajouter au menu principal cette page [voir tutoriel de prise en main](https://www.elgarweb.fr/tutoriel.html) et ajouter les pages qui dépendent de ce menu.
 
+#### Plan du site
+Le template `sitemap.php` reprend les éléments du menu dans du header et y ajoute les pages connecter à travers le template `navigation.php`.
+Également y est ajouté à la fin les liens présents dans le `<ul>` du footer contenu dans le champ editable `#footer-liens`. Typiquement des liens vers des pages secondaires (actualité, agenda, téléchargement).
+
 ## Personnalisation du thème
 Pour personnaliser le thème vous pouvez modifier le fichier `style.css` dans le dossier `theme/elgar/`.
 Attention à bien prendre en compte les règles d'accessibilité.

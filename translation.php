@@ -61,6 +61,7 @@ $add_translation = array(
 	"Edit event" => array("fr" => "Edition d'un événement", "eu" => "Gertakari baten argitalpena"),
 	"Categories" => array("fr" => "Catégories/Tags", "eu" => "Sailak/Tags"),
 	"Start date" => array("fr" => "Date de début", "eu" => "Hastapeneko data"),
+	"End date" => array("fr" => "Date de fin", "eu" => "Amaiera-data"),
 	"Website" => array("fr" => "Site web", "eu" => "Webgunea"),	
 	"Click to display the" => array("fr" => "Cliquer pour afficher le", "eu" => "Egin klik bistaratzeko"),
 	"Telephone" => array("fr" => "Téléphone", "eu" => "Telefonoa"),
@@ -83,7 +84,9 @@ $add_translation = array(
 	"st" => array("fr" => "er", "eu" => "lehena"),
 	"Opening" => array("fr" => "Ouverture", "eu" => "Irekitzea"),
 	"Closing" => array("fr" => "Fermeture", "eu" => "Hestea"),
-	"to" => array("fr" => "à", "eu" => ""),
+	"From" => array("fr" => "Du", "eu" => ""),
+	"at" => array("fr" => "à", "eu" => ""),
+	"to" => array("fr" => "au", "eu" => ""),
 	"Browsing by page" => array("fr" => "Pagination", "eu" => "Nabigazioa orrika"),
 
 

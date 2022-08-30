@@ -73,6 +73,8 @@ $url_back = encode($res['url']);
 		else
 			$sql.=" ".$tc.".type='commerce'";
 
+		$sql.=" ORDER BY title ASC";
+
 		$sql.=" LIMIT ".$start.", ".$num_pp;
 
 		//echo $sql;

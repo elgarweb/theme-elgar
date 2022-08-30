@@ -8,7 +8,7 @@ switch(@$_GET['mode'])
 
 		<?php include('theme/'.$GLOBALS['theme'].'/ariane.php');?>
 
-		<div class="bg-color-3 mod pbl">
+		<div class="bg-color-3 pbl">
 
 			<?php h1('title', '');?>
 
