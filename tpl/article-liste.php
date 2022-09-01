@@ -104,7 +104,7 @@ $url_back = encode($res['url']);
 
 			$content_fiche = json_decode($res_fiche['content'], true);
 
-			block(@$content_fiche['visuel'], $res_fiche['url'], $res_fiche['title'], @$content_fiche['description'], @$content_fiche['aaaa-mm-jj'], 'tags');
+			block(@$content_fiche['visuel'], $res_fiche['url'], $res_fiche['title'], @$content_fiche['description'], @$content_fiche['aaaa-mm-jj'], @$content_fiche['aaaa-mm-jj-fin'], 'tags');
 
 			$num_fiche++;
 		}
