@@ -23,7 +23,7 @@ if(!token_check(@$_SESSION['token']))
 ini_set('mbstring.substitute_character', 'none');
 
 $verbose = (@$_SERVER['PHP_AUTH_PW']?false:true);// $verbose = false;// Affiche les infos de rapatriement
-$verbose_source = (@$_SERVER['PHP_AUTH_PW']?false:false);// $verbose_source = false;// Affiche le tableau du json
+$verbose_source = (@$_SERVER['PHP_AUTH_PW']?false:true);// $verbose_source = false;// Affiche le tableau du json
 
 $img = true;// get img
 $keep_img = true;// garde les images originales sur le serveur
@@ -31,7 +31,7 @@ $keep_img = true;// garde les images originales sur le serveur
 
 $sql_content = $sql_meta = $visuel_dest = null;
 $id_start = -1000000000;// Plus utiliser car on a des id négatifs
-$limit = 25;// 50 10 // Nombre d'évènement rapatrié
+$limit = 50;// 50 10 // Nombre d'évènement rapatrié
 
 $chemin_visuel = $GLOBALS['media_dir'].'/tourinsoft';
 $racine = '../../../';
