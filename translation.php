@@ -23,7 +23,7 @@ $add_translation = array(
 	"Have you taken the accessibility rules into account when entering your content?" => array("fr" => "Avez-vous bien pris en compte les règles d'accessibilité lors de la saisie de vos contenus ?", "eu" => "Helgarritasun-arauak kontutan hartu ote dituzu, zure edukiak idazterakoan?"),
 
 	// Footer - partage Réseaux sociaux
-	"Share this page" => array("fr" => "Partager cette page", "eu" => "Orri hau partekatu"),
+	"Share this page" => array("fr" => "Partager cette page via", "eu" => "Orri hau partekatu"),
 
 	// Footer - Newsletter
 	"Subscribe to the newsletter of your city" => array("fr" => "Inscrivez-vous<br> à la lettre d'informations de votre ville", "eu" => "Zure herriko newsletter-ean harpidetu zaitez"),
@@ -86,7 +86,7 @@ $add_translation = array(
 	"Closing" => array("fr" => "Fermeture", "eu" => "Hestea"),
 	"From" => array("fr" => "Du", "eu" => ""),
 	"at" => array("fr" => "à", "eu" => ""),
-	"to" => array("fr" => "au", "eu" => ""),
+	"to" => array("fr" => "au", "eu" => "to"),
 	"Browsing by page" => array("fr" => "Pagination", "eu" => "Nabigazioa orrika"),
 
 
