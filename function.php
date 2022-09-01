@@ -5,7 +5,7 @@ if(!isset($GLOBALS['domain'])) exit;
 $GLOBALS['table_lang'] = $GLOBALS['tl'] = $GLOBALS['db_prefix'].'lang';
 
 // Fonction affichage blocs img + titre + extrait texte
-function block($url_img, $url_title, $title, $description, $date = null, $tags = null)
+function block($url_img, $url_title, $title, $description, $date = null, $date_fin = null, $tags = null)
 {
 	global $res, $res_fiche, $state, $num_fiche;
 
@@ -59,10 +59,21 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 					if(isset($description)) echo '<p class="description">'.word_cut($description, '80', '...').'</p>';
 
 					//Date évènement
-					if(isset($date)) {
+					if(isset($date)) 
+					{
 						echo '<p class="date bold mbm">';
+
 							if($GLOBALS['lang'] == 'eu') echo str_replace('-', '/', $date);
 							else echo date_lang($date);
+
+							if(isset($date_fin))
+							{
+								echo' '.__("to");
+
+								if($GLOBALS['lang'] == 'eu') echo str_replace('-', '/', $date_fin);
+								else echo ' '.date_lang($date_fin);
+							}
+
 						echo '</p>';
 					}
 					?>
