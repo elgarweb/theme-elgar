@@ -62,6 +62,7 @@ h1, .h1-like,
 /* Citation */
 blockquote {
     /* quotes: "“" "”" "‘" "’"; */
+    display: table;
     position: relative;
     padding: 1rem 4rem 1rem 4rem;
     /* margin-bottom: 1em !important; */
@@ -260,7 +261,10 @@ header section:first-of-type { font-size: 1.4rem; }
 
 /* NAVIGATION */
 .tpl-navigation h1 { text-align: left; }
-.tpl-navigation .bg-color-3 { padding-left: 2rem; }
+.tpl-navigation .bg-color-3 {
+	padding-left: 2rem;
+	overflow: hidden;
+}
 
 .navigation { list-style: none; }
 	.navigation li { padding-bottom: 1.5rem; }
