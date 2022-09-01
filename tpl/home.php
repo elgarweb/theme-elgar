@@ -156,18 +156,20 @@ if(!$alert_view){?>
 				<div class="<?=(isset($article['title']) ? 'relative flex aic brd3 mbl' : 'none'); ?>">
 
 					<!-- Image -->
+					<?php if(isset($article['content']['visuel'])){?>
 					<figure class="brd-right">
-
-						<div class="nor" data-bg="<?= $article['content']['visuel']; ?>" data-lazy="bg">
+						
+						<div class="nor" data-bg="<?=$article['content']['visuel'];?>" data-lazy="bg">
 						</div>
 
 					</figure>
+					<?php }?>
 
 					<div class="ptm pbl plm prm">
 
 						<!-- Titre -->
 						<h3 class="mtn bold">
-							<a href="<?= make_url($article['title'], array("domaine" => true)); ?>" class="tdn"><?= $article['title']; ?></a>
+							<a href="<?= make_url($article['url'], array("domaine" => true)); ?>" class="tdn"><?= $article['title']; ?></a>
 						</h3>
 						
 						<!-- Extrait texte -->
@@ -177,7 +179,7 @@ if(!$alert_view){?>
 
 						<!-- Lien Lire la suite -->
 						<div class="plus">
-							<a class="absolute bot15 right15" href="<?=make_url($article['title'], array("domaine" => true));?>" aria-label="<?php echo __("Read more")." ". $article['title'];?> "><?php _e("Read more")?></a>
+							<a class="absolute bot15 right15" href="<?=make_url($article['url'], array("domaine" => true));?>" aria-label="<?php echo __("Read more")." ". $article['title'];?> "><?php _e("Read more")?></a>
 						</div>
 					</div>
 				</div>
@@ -258,7 +260,7 @@ if(!$alert_view){?>
 			{
 				$content_event = json_decode($res_event['content'], true);
 
-				block(@$content_event['visuel'], $res_event['url'], $res_event['title'], @$content_event['description'], @$content_event['aaaa-mm-jj']);
+				block(@$content_event['visuel'], $res_event['url'], $res_event['title'], @$content_event['description'], @$content_event['aaaa-mm-jj'], @$content_event['aaaa-mm-jj-fin']);
 			}
 			?>
 
