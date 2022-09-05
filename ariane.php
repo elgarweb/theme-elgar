@@ -79,6 +79,8 @@
 		echo '<ul class="unstyled fr ptm">';
 		while($res_lang = $sel_lang->fetch_assoc())
 		{
+			// Si un domaine pour la langue existe
+			if(@$GLOBALS['domain_lang'][$res_lang['lang']])
 			echo'<li><a href="'.make_url($res_lang['url'], array('domaine' => $GLOBALS['scheme'].@$GLOBALS['domain_lang'][$res_lang['lang']].$GLOBALS['path'])).'" lang="'.$res_lang['lang'].'">'.$GLOBALS['translation']['other language'][$res_lang['lang']].'</a></li>';
 		}
 		echo '</ul>';
