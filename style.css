@@ -765,9 +765,13 @@ img.fl, img.fr, figure.fl, figure.fr { margin-bottom: 0.5rem; }
 
 figure.center {	text-align: center; }
 
-article img { max-width: 100%; } /* Pour que les images ne dépassent pas la taille du contener */
+/* Pour que les images ne dépassent pas la taille du contener */
+article img { max-width: 100%; }
 
-/* Pour que l'image au clic soit bien centré dans le figure*/
+/* Pour que les images dans les contenus éditables se redimensionnent bien de façon homothétique */
+.editable img { height: 100%; }
+
+/* Pour que l'image au clic soit bien centré dans le figure */
 figure img { display: inline-block !important; }
 
 

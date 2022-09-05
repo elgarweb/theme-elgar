@@ -25,14 +25,14 @@ function block($url_img, $url_title, $title, $description, $date = null, $date_f
 			<article class="h100">
 				<!-- Image -->
 				<?php //Affichage images des 3 premières actus seulement
-				if($num_fiche <= 3) { ?>
+				if($num_fiche <= 3 and isset($url_img)) { ?>
 					<figure>
 						<div class="nor" data-bg="<?=(isset(parse_url($url_img)['scheme'])?'':$GLOBALS['home']).$url_img?>" data-lazy="bg">
 						</div>
 					</figure>
 				<?php } ?>
 				
-				<div class="pam<?= ($num_fiche <= 3) ? ' brd-top' : '' ?>">				
+				<div class="pam<?= ($num_fiche <= 3 and isset($url_img)) ? ' brd-top' : '' ?>">				
 					<?php 
 					/* Affichage tags supprimé pour Elgarweb - laisser en commentaire si besoin pour autre mairie */
 					/* Tag  (que sur le listing des articles car query + longue)
