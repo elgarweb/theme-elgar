@@ -94,7 +94,7 @@ switch(@$_GET['mode'])
 	if(isset($GLOBALS['tags']))
 	{?>
 	<!-- AGENDA -->
-	<div class=" mbl">
+	<div class="ptm mbm">
 		
 		<section id="home-agenda" class="bg-color-3 ptl pbl">
 
