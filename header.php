@@ -102,7 +102,7 @@
 						<a href="'.make_url($val['href'], array('domaine' => true)).'"'.
 						($val['id']?' id="'.$val['id'].'"':'').
 						($val['target']?' target="'.$val['target'].'"':'').
-						($selected?' class="selected" title="'.$val['text'].' - '.__("current page").'"':'').
+						($selected?' class="selected" title="'.str_replace('<br>', ' ', $val['text']) .' - '.__("current page").'"':'').
 						'>'.$val['text'].'</a>
 					</li>';
 				}
