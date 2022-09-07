@@ -6,9 +6,9 @@
 
 	<?if(isset($res['url'])){?>
 		<!-- PARTAGE RÉSEAUX SOCIAUX -->
-		<section id="partage" class="mw960p flex wrap jcc center tc ptl pbl">
+		<section id="partage" class="mw960p flex wrap jcc center tc ptl pbs">
 
-			<?php _e('Share this page'); ?>
+			<p><?php _e('Share this page'); ?></p>
 
 			<!-- <?php txt('texte-reseaux-sociaux', 'plm'); ?> -->
 			<ul class="plm">
