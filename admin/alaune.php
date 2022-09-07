@@ -27,19 +27,6 @@ switch(@$_REQUEST['mode'])
 
 	default:
 		?>
-		<style>
-			#admin-bar .alaune.switch label
-			{ background: #c8c8c8; }
-
-			/* Désactivé */
-			#admin-bar .alaune.switch label:before { content: "\e803"; font-size: 0.8em; }/*e806*/
-
-			/* Couleur de fond si activé */
-			#admin-bar .alaune.switch input[type=checkbox]:checked ~ label{ background: #fee566; }
-
-			/* Activé  */
-			#admin-bar .alaune.switch input[type=checkbox]:checked ~ label:before {	content: "\e803"; }
-		</style>
 		<script>
 			// Action si on lance le mode d'edition
 			edit.push(function()

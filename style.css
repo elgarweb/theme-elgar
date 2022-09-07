@@ -97,6 +97,7 @@ blockquote {
 		padding: 0 0.25em 0 0.5em;
 		content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 14' width='7' height='10'%3e%3cpath d='M-.4 12l2 2 7-7-7-7-2 2 5 5z'/%3e%3c/svg%3e");
 	}
+		.hc .ariane nav a:not(:empty):after { filter: invert(1); }
 
 
 /* Mots en langue basque */
@@ -1117,7 +1118,21 @@ iframe {
 
 
 /* ADMIN  */
-.body-margin-top { margin-top: 50px !important; }
+	.body-margin-top { margin-top: 50px !important; }
+
+
+	/*A LA UNE*/
+	#admin-bar .alaune.switch label	{ background: #c8c8c8; }
+
+	/* Désactivé */
+	#admin-bar .alaune.switch label:before { content: "\e803"; font-size: 0.8em; }/*e806*/
+
+	/* Couleur de fond si activé */
+	#admin-bar .alaune.switch input[type=checkbox]:checked ~ label{ background: #fee566; }
+
+	/* Activé  */
+	#admin-bar .alaune.switch input[type=checkbox]:checked ~ label:before {	content: "\e803"; }
+
 
 
 /* GRIDS */
