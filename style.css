@@ -28,7 +28,8 @@ a {
 /* Titres */
 h1, .h1-like, 
 h2, .h2-like,
-h3, .h3-like { 
+h3, .h3-like,
+h4, .h4-like { 
 	color: #00253F;
 	/* font-weight: 800; */
 	margin-top: 1rem;
