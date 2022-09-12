@@ -18,7 +18,7 @@ switch(@$_GET['mode'])
 		<script>
 		add_translation({
 			"Thank you for completing all the required fields!" : {"fr" : "Merci de remplir tous les champs obligatoires !"},
-			"Wrong answer to the verification question!" : {"fr" : "R\u00e9ponse erron\u00e9e \u00e0 la question de vérification !"},
+			"Wrong answer to the verification question! Please check your calculation" : {"fr" : "R\u00e9ponse erron\u00e9e \u00e0 la question de vérification ! Veuillez v\u00e9rifier votre calcul"},
 			"Error sending email" : {"fr" : "Erreur lors de l'envoi du mail"},
 			"Invalid email" : {"fr" : "E-mail invalide", "eu" : "Helbide elektronikoa ez da bali"},
 			"Message sent" : {"fr" : "Message envoy\u00e9"},
@@ -86,7 +86,7 @@ switch(@$_GET['mode'])
 						<div>
 							<label for="question">
 								<?php _e("For security reasons, please solve the following calculation")?><span class="red">*</span><br>
-								<?=(__($chiffre[$nb1])." ".($operator=='-'?'−':$operator)." ".__($chiffre[$nb2]));?> = 
+								<span id="calcul"><?=(__($chiffre[$nb1])." ".($operator=='-'?'−':$operator)." ".__($chiffre[$nb2]));?> = </span>
 							</label>
 							<input type="text" name="question" id="question" placeholder="?" class="w50p tc" autocomplete="off" required>
 
@@ -303,8 +303,8 @@ switch(@$_GET['mode'])
 					{
 						?>
 						<script>
-							error(__("Wrong answer to the verification question!"), 'nofade', $("#question"));
-							document.title = title +' - '+ __("Wrong answer to the verification question!");
+							error(__("Wrong answer to the verification question! Please check your calculation")+" : "+$("#calcul").text()+$("#question").val(), 'nofade', $("#question"));
+							document.title = title +' - '+ __("Wrong answer to the verification question! Please check your calculation")+" : "+$("#calcul").text()+$("#question").val();
 							
 							activation_form();// On rétablie le formulaire
 						</script>
