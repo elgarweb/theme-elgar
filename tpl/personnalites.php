@@ -4,11 +4,13 @@
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 	<?php h1('title', 'picto'); ?>
 
+	<?php txt('description', ''); ?>
+
 	<div>
 		<?php
 		$groupe = 6;
 		for($i=1; $i<=$groupe; $i++) { ?>
-			<div class="pan ptl">
+			<div class="pan ptm">
 				<?php
 					h2('groupe-titre-'.$i, 'tl mtm');
 					h3('groupe-sstitre-'.$i);
