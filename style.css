@@ -105,6 +105,13 @@ blockquote {
 span[lang] { border-bottom: dotted 1px #00253F; }
 
 
+/* Ancre */
+a[name] { 
+	text-decoration: none;
+	border-bottom: dashed 1px #00253F;
+}
+
+
 /* bouton pour les liens */
 .bt:not(.vam), .bt.internal {
 	background-color: #00253F;
