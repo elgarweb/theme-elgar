@@ -259,6 +259,9 @@ header section:first-of-type { font-size: 1.4rem; }
 	}
 
 
+	/* pour le cas ou les marges son modifier par le client */
+	.blocks .plus { margin-bottom: 0 !important; }
+
 	.lien-bt { text-align: center; }
 
 
