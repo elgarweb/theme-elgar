@@ -220,7 +220,15 @@ switch($res['tpl']) {
 				<?php 
 				if($res['tpl']=='annuaire' or $res['tpl']=='commerce' or $res['tpl']=='event') 
 				{ 
-					echo '<ul class="unstyled pln">';
+					if(!@$GLOBALS['content']['url-site-web'] and
+						!@$GLOBALS['content']['telephone'] and
+						!@$GLOBALS['content']['mail-contact'] and
+						!@$GLOBALS['content']['adresse'])
+						$hidden = true;
+					else 
+						$hidden = false;
+
+					echo '<ul class="unstyled pln'.($hidden?' editable-hidden':'').'">';
 
 						echo '<li class="bold pts pbn'.(!@$GLOBALS['content']['url-site-web']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['url-site-web']?' aria-hidden="true"':'').'><i class="fa fa-fw fa-globe" aria-hidden="true"></i> '.(@$GLOBALS['content']['url-site-web']?'<a href="'.@$GLOBALS['content']['url-site-web'].'" target="_blank">'.__('Website').'</a>':'').'';
 
