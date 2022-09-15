@@ -25,7 +25,7 @@ $url_back = encode($res['url']);
 					<ul class="unstyled pln">
 						<?php 
 						while($res_tag_list = $sel_tag_list->fetch_assoc()) {
-							echo'<li class="inline prs"><a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="bt-tag'.($tag==$res_tag_list['encode']?' selected':'').'">'.$res_tag_list['name'].'</a></li>';
+							echo'<li class="inbl prs"><a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="bt-tag'.($tag==$res_tag_list['encode']?' selected':'').'">'.$res_tag_list['name'].'</a></li>';
 						}
 						?>
 					</ul>
