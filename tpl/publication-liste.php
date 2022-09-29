@@ -1,7 +1,8 @@
 <?php
 if(!$GLOBALS['domain']) exit;
 
-$url_back = encode(__('Decrees'));
+//$url_back = encode(__('Decrees'));
+$url_back = encode(__('Publications'));
 
 $mois = array(
 	1 => 'january',
@@ -37,7 +38,7 @@ $mois = array(
 			<ul class="unstyled pln">
 				<?php 
 				while($res_tag_list = $sel_tag_list->fetch_assoc()) {
-					echo'<li class="inline prs"><a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="bt-tag'.($tag==$res_tag_list['encode']?' selected':'').'">'.$res_tag_list['name'].'</a></li>';
+					echo'<li class="inbl prs"><a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="bt-tag'.($tag==$res_tag_list['encode']?' selected':'').'">'.$res_tag_list['name'].'</a></li>';
 					$i++;
 				}
 				?>
@@ -49,7 +50,7 @@ $mois = array(
 	txt('description', array('class'=>'tc ptm','tag'=>'p'));
 	?>
 
-	<form id="filtre-date-arrete" class="tc">
+	<form id="filtre-date-publication" class="bg-color-3 pam">
 
 		<!-- 
 		<div class="mbt"><?_e("Filter by date (format DD/MM/YYYY)")?> :</div>
@@ -61,14 +62,17 @@ $mois = array(
 		<input type="date" id="end" value="<?=@$GLOBALS['filter']['end']?>" placeholder="jj-mm-aaaa" autocomplete="off"> -->
 
 		<fieldset class="inbl">
+
 			<legend>
 				<?_e("Filter by date")?>
 			</legend>
-			<?php echo txt("comment-filtrer");?>
-			<div>
 
-				<label for="year" class="mls"><?_e("Year")?> :</label>
-				<select id="year" aria-describedby="comment-filtrer">
+			<?php echo txt("comment-filtrer");?>
+
+			<div class="mts">
+
+				<label for="year"><?_e("Year")?> :</label>
+				<select id="year" class="pat" aria-describedby="comment-filtrer">
 					<option value="" <?=(!@$GLOBALS['filter']['year']?'selected':'')?>><?_e("Year")?></option>
 					<?php 
 					for($i=1980; $i<=date("Y"); $i++) { 
@@ -77,8 +81,8 @@ $mois = array(
 					?>
 				</select>
 
-				<label for="month"><?_e("Month")?> :</label>
-				<select id="month">
+				<label for="month" class="mlm"><?_e("Month")?> :</label>
+				<select class="pat" id="month">
 					<option value="" <?=(!@$GLOBALS['filter']['month']?'selected':'')?>><?_e("Month")?></option>
 					<?php 
 					foreach($mois as $num => $nom){
@@ -86,17 +90,19 @@ $mois = array(
 					}
 					?>
 				</select>
+
 			</div>
+
 		</fieldset>
 		
-		<button type="submit" class="bg-color-2 pam mtm"><?_e("Filter")?></button>
+		<button type="submit" class="bt fr mtl mrl"><?_e("Filter")?></button>
 
 	</form>
 	<script>
-		$("#filtre-date-arrete").on("submit", function(event) {
+		$("#filtre-date-publication").on("submit", function(event) {
 			event.preventDefault();
 
-			var url = "/<?=encode(__("Arrêtés"))?>";
+			var url = "/<?=encode(__("Publications"))?>";
 
 			if(tag) url = url+'/'+tag;
 
@@ -114,11 +120,11 @@ $mois = array(
 
 <section class="mw960p mod center">
 
-	<ul>
+	<div class="blocks grid-3 space-xl">
 		
 		<?php 
 		// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs
-		if(!@$_SESSION['auth']['edit-arrete']) $sql_state = "AND state='active'";
+		if(!@$_SESSION['auth']['edit-publication']) $sql_state = "AND state='active'";
 		else $sql_state = "";
 
 		// Navigation par page
@@ -177,7 +183,7 @@ $mois = array(
 		}*/
 
 
-		$sql.=" WHERE ".$tc.".lang='".$lang."' ".$sql_state." AND ".$tc.".type='arrete'";
+		$sql.=" WHERE ".$tc.".lang='".$lang."' ".$sql_state." AND ".$tc.".type='publication'";
 
 		if(@$GLOBALS['filter']['start'] or @$GLOBALS['filter']['end'])
 			$sql.=" ORDER BY ".$tm.".cle ASC";
@@ -192,7 +198,7 @@ $mois = array(
 
 		$num_total = $connect->query("SELECT FOUND_ROWS()")->fetch_row()[0];// Nombre total de fiche
 
-		if($num_total == 0) echo'<li class="tc">'.__("No result").' !</li>';
+		if($num_total == 0) echo'<p>'.__("No result").' !</p>';
 
 		while($res_fiche = $sel_fiche->fetch_assoc())
 		{
@@ -201,19 +207,12 @@ $mois = array(
 			else $state = "";
 
 			$content_fiche = json_decode($res_fiche['content'], true);
-			?>
 
-			<li>
-				<a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>"><?=$res_fiche['title']; ?></a>
-				-
-				<?=($lang == 'eu' ? str_replace('-', '/', @$content_fiche["aaaa-mm-jj"]) : date_lang(@$content_fiche['aaaa-mm-jj'])); ?>
-			</li>
-
-		<?php	
+			block(@$content_fiche['visuel'], $res_fiche['url'], $res_fiche['title'], @$content_fiche['description'], @$content_fiche['aaaa-mm-jj']);				
 		}
 		?>
 
-	</ul>
+	</div>
 
 	<div class="tc ptm mtl pbl">
 

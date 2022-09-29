@@ -9,7 +9,7 @@ $add_translation = array(
 	"Search" => array("fr" => "Rechercher", "eu" => "Bilatu"),
 	"Search the site" => array("fr" => "Rechercher sur le site", "eu" => "Webgunean bilatu"),
 	"Home other language" => array("fr" => "Accueil Français", "eu" => "Harrera euskaraz"),
-	"Contact" => array("fr" => "Contact", "eu" => "Kontaktuak"),
+	"Contact" => array("fr" => "Contact", "eu" => "Harremanak"),
 
 	// Ariane
 	"Navigation" => array("fr" => "Navigation", "eu" => "Nabigazioa"),
@@ -59,6 +59,7 @@ $add_translation = array(
 	"Go back to the news" => array("fr" => "Retour aux actualités", "eu" => "Itzuli aktualitateetara"),
 	"Go back to the agenda" => array("fr" => "Retour à l'agenda", "eu" => "Itzuli agendara"),
 	"Edit event" => array("fr" => "Edition d'un événement", "eu" => "Gertakari baten argitalpena"),
+	"Event" => array("fr" => "Événement", "eu" => ""),
 	"Categories" => array("fr" => "Catégories/Tags", "eu" => "Sailak/Tags"),
 	"Start date" => array("fr" => "Date de début", "eu" => "Hastapeneko data"),
 	"End date" => array("fr" => "Date de fin", "eu" => "Amaiera-data"),
@@ -84,9 +85,9 @@ $add_translation = array(
 	"st" => array("fr" => "er", "eu" => "lehena"),
 	"Opening" => array("fr" => "Ouverture", "eu" => "Irekitzea"),
 	"Closing" => array("fr" => "Fermeture", "eu" => "Hestea"),
-	"From" => array("fr" => "Du", "eu" => ""),
-	"at" => array("fr" => "à", "eu" => ""),
-	"to" => array("fr" => "au", "eu" => "to"),
+	"From" => array("fr" => "Du", "eu" => ""),// Traduction EU
+	"at" => array("fr" => "à", "eu" => ""),// Traduction EU
+	"to" => array("fr" => "au", "eu" => "-"),// Traduction EU
 	"Browsing by page" => array("fr" => "Pagination", "eu" => "Nabigazioa orrika"),
 
 
@@ -106,6 +107,7 @@ $add_translation = array(
 
 	// ARRETES
 	"Add arrete" => array("fr" => "Ajouter un arrêté", "eu" => "Erabaki bat gehitu"),
+	"Add publication" => array("fr" => "Ajouter une publication", "eu" => "Argitalpen bat gehitu"),
 	"Edit arrete" => array("fr" => "Edition d'un arrêté", "eu" => "Erabaki baten argitaratzea"),
 	"See the sheet" => array("fr" => "Voir la fiche", "eu" => "Ikus fitxa"),
 	"Filter by date (format DD/MM/YYYY)" => array("fr" => "Filtrer par date (format JJ/MM/AAAA)", "eu" => "Dataz irazi (UUUU/HH/EE formatua)"),
@@ -118,6 +120,9 @@ $add_translation = array(
 	"Filter" => array("fr" => "Filtrer", "eu" => "Irazi"),
 	"No result" => array("fr" => "Pas de résultat", "eu" => "Emaitzarik ez"),
 	"Go back to decrees" => array("fr" => "Retour aux arrêtés", "eu" => "Erabakietara itzuli"),
+	"Published on" => array("fr" => "Publié le", "eu" => "Ondoko egunean argitaratua"),
+	"Back to publications" => array("fr" => "Retour aux publications", "eu" => "Argitalpenetara itzultzea"),
+	"To download" => array("fr" => "À télécharger", "eu" => "Telekargatzeko"),
 
 
 	// TOURINSOFT
@@ -149,7 +154,7 @@ $add_translation = array(
 	"New window" => array("fr" => "Nouvelle fenêtre", "eu" => "Leiho berria"),
 
 	// Accessibilité
-	"Skip to content" => array("fr" => "Aller au contenu", "eu" => "Joan edukia"),
+	"Skip to content" => array("fr" => "Aller au contenu", "eu" => "Joan edukira"),
 
 	// Admin langue
 	"Other language" => array("fr" => "Version Française", "eu" => "Euskarazko bertsioa", "oc" => "Version en Gascon"),
@@ -179,6 +184,9 @@ $add_translation = array(
 
 	"Decrees" => array("fr" => "Arrêtés", "eu" => "Erabakiak"),
 		"arretes" => array("fr" => "Arrêtés"),
+
+	"Publication" => array("fr" => "Publication", "eu" => "Argitalpena"),
+		"publications" => array("fr" => "Publications", "eu" => "Argitalpenak"),
 
 );
 ?>
