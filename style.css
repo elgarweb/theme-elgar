@@ -146,7 +146,10 @@ a[name] {
 		color: #26D691;
 	} */
 
-fieldset p { margin-bottom: 0.5em !important; }
+
+fieldset { border: none; }
+	fieldset p { margin-bottom: 0.5em !important; }
+
 
 button { border: solid 1px #26D691; }
 
@@ -575,7 +578,7 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
 
 button[disabled], html input[disabled], .disabled { 
 	background-color: buttonface !important;
-	color: graytext;
+	color: graytext !important;
 	box-shadow: none;
 	cursor: default;
 }
@@ -1507,7 +1510,7 @@ div.editable {
 			right: 6px;
 			height: 2px;
 			background: #26D691;
-			line-height: 4rem;
+			line-height: 4rem !important;
 			width: 65%;
 			margin: auto;
 

@@ -44,12 +44,20 @@ switch($res['tpl']) {
 		$text_back = __("Go back to the directory");
 	break;
 
-	case 'arrete':
+	/*case 'arrete':
 		$type = 'arrete';
 		$media = false;
 		$dir = encode(__('Decrees'));// 'arretes'
 		$url_back = encode(__('Decrees'));
 		$text_back = __("Go back to decrees");
+	break;*/
+
+	case 'publication':
+		$type = 'publication';
+		$media = false;
+		$dir = encode(__('Publications'));
+		$url_back = encode(__('Publications'));
+		$text_back = __("Back to publications");
 	break;
 } 
 ?>
@@ -68,16 +76,13 @@ switch($res['tpl']) {
 			<?php if($media) { ?>
 			<div class="<?=(isset($GLOBALS['content']['visuel'])) ? '' : 'editable-hidden ' ?>prm">
 
-				<figure>
+				<figure role="group"<?=(isset($GLOBALS['content']['texte-legende-visuel']))?' aria-label="'.strip_tags($GLOBALS['content']['texte-legende-visuel']).'"':''?>>
 
 					<?php media('visuel', array('size' => '300x225', 'lazy' => true, 'dir' => $dir, 'class' => 'brd'));	?>
 
 					<figcaption>
-
 						<?php txt('texte-legende-visuel', 'italic ptt plt'); ?>
-
 					</figcaption>
-
 
 				</figure>
 				
@@ -118,9 +123,18 @@ switch($res['tpl']) {
 
 				<!-- Date événement -->
 				<?php 
-				if(stristr($res['tpl'], 'event') or stristr($res['tpl'], 'arrete'))
+				if(stristr($res['tpl'], 'event') or stristr($res['tpl'], 'publication'))
 				{
-				?>
+					// Si arreté ou conseil
+					if($res['tpl'] == 'publication')
+					{
+						?>
+						<div class="editable-hidden bold red"><?= _e("Published on");?></div>
+						<?php
+						input("aaaa-mm-jj-publication", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
+					}
+
+					?>
 					<div class="editable-hidden bold"><?= _e("Start date");?></div>
 					<?php
 					input("aaaa-mm-jj", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
@@ -143,14 +157,31 @@ switch($res['tpl']) {
 					}
 
 
+
+					// Date de publication
+					if(@$GLOBALS["content"]["aaaa-mm-jj-publication"])
+					{
+						echo '<p>'.__("Published on").' ';
+
+						if($lang == 'eu') echo str_replace('-', '/', $GLOBALS["content"]["aaaa-mm-jj-publication"]);
+						else echo date_lang($GLOBALS["content"]["aaaa-mm-jj-publication"]);
+
+						echo '</p>';						
+					}
+
+
+
 					// Affichage date de début
 					if(@$GLOBALS["content"]["aaaa-mm-jj"])
 					{
 						echo '<p class="mbn">';
 
-						if(@$GLOBALS["content"]["aaaa-mm-jj-fin"]) echo __("Du").' ';
+						if(@$GLOBALS["content"]["aaaa-mm-jj-fin"]) echo __("From").' ';
 
-						if($lang == 'eu') echo str_replace('-', '/', $GLOBALS["content"]["aaaa-mm-jj"]);
+						if($lang == 'eu') {
+							echo str_replace('-', '/', $GLOBALS["content"]["aaaa-mm-jj"]);
+							if(@$GLOBALS["content"]["aaaa-mm-jj-fin"]) echo 'tik';
+						}
 						else echo date_lang($GLOBALS["content"]["aaaa-mm-jj"]);
 
 						if(@$GLOBALS["content"]["heure-ouverture"]){
@@ -180,12 +211,16 @@ switch($res['tpl']) {
 					}
 
 
+
 					// Affichage date de fin
 					if(@$GLOBALS["content"]["aaaa-mm-jj-fin"])
 					{
 						if(!@$GLOBALS["content"]["aaaa-mm-jj"]) echo '<p class="mbn">';
 
-						if($lang == 'eu') echo str_replace('-', '/', $GLOBALS["content"]["aaaa-mm-jj-fin"]);
+						if($lang == 'eu') {
+							echo str_replace('-', '/', $GLOBALS["content"]["aaaa-mm-jj-fin"]);
+							if(@$GLOBALS["content"]["aaaa-mm-jj"]) echo 'ra';
+						}
 						else echo date_lang($GLOBALS["content"]["aaaa-mm-jj-fin"]);
 
 						if(@$GLOBALS["content"]["heure-ouverture-fin"]){
@@ -261,7 +296,18 @@ switch($res['tpl']) {
 		<!-- Contenu de l'article -->
 		<article class="clear ptl">
 
-			<?php txt('texte', array('dir' => $dir));?>
+			<?php
+			txt('texte', array('dir' => $dir));
+
+			// Téléchargement
+			if($res['tpl'] == 'publication')
+			{
+				?><div class="highlight<?=(!@$GLOBALS['content']['telechargement']?' editable-hidden':'');?>">
+					<h2 class="mtn"><?php _e("To download");?></h2><?php
+					txt('telechargement', array('dir' => $dir));
+				?></div><?php
+			}
+			?>
 					
 		</article>
 		
@@ -312,6 +358,7 @@ $(function()
 	        dateFormat: 'yy-mm-dd',
 	        firstDay: 1
 	    });
+		$("#aaaa-mm-jj-publication").datepicker();
 		$("#aaaa-mm-jj").datepicker();
 		$("#aaaa-mm-jj-fin").datepicker();
 	});

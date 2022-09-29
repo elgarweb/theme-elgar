@@ -52,8 +52,13 @@ function block($url_img, $url_title, $title, $description, $date = null, $date_f
 					<?php } */ 
 
 					// Titre H3 en home / H2 dans les listes
-					if($res['tpl'] == 'home') echo '<h3 class="pbm">'.str_replace($search, $replace, $title).'</h3>';
-					if($res['tpl'] == 'article-liste' or $res['tpl'] == 'annuaire-liste') echo '<h2 class="h3-like tl pbm">'.str_replace($search, $replace, $title).'</h2>';
+					if($res['tpl'] == 'home') 
+						echo '<h3 class="pbm">'.str_replace($search, $replace, $title).'</h3>';
+					
+					if($res['tpl'] == 'article-liste' or
+						$res['tpl'] == 'annuaire-liste' or
+						$res['tpl'] == 'publication-liste')
+							echo '<h2 class="h3-like tl pbm">'.str_replace($search, $replace, $title).'</h2>';
 
 					//Description
 					if(isset($description)) echo '<p class="description">'.word_cut($description, '80', '...').'</p>';
