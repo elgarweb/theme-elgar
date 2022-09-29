@@ -50,9 +50,10 @@ if(!$alert_view){?>
 				<?php
 				// Taille de l'image par défaut
 				if(!isset($GLOBALS['intro-visuel-size'])) $GLOBALS['intro-visuel-size'] = '550x260';
+				if(!isset($GLOBALS['intro-visuel-crop'])) $GLOBALS['intro-visuel-crop'] = false;
 
 				// Grand visuel
-				media('intro-visuel', array('size' => $GLOBALS['intro-visuel-size'], 'lazy' => true));
+				media('intro-visuel', array('size' => $GLOBALS['intro-visuel-size'], 'lazy' => true, 'crop' => $GLOBALS['intro-visuel-crop']));
 				?>
 			</div>
 			
@@ -233,7 +234,22 @@ if(!$alert_view){?>
 
 
 <!-- AGENDA -->
-<section id="home-agenda" class="bg-color-3 ptl pbl">
+<?
+// Construction de la requete
+$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
+
+// Pour le tri par date pour les events
+$sql.=" JOIN ".$tm." AS event ON event.id=".$tc.".id AND event.type='aaaa-mm-jj'";
+
+$sql.=" WHERE (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft') AND ".$tc.".lang='".$lang."' AND state='active'";
+
+// Tri par date de l'evenement
+$sql.=" ORDER BY event.cle ASC";
+$sql.=" LIMIT 3";
+
+$sel_event = $connect->query($sql);
+?>
+<section id="home-agenda" class="bg-color-3 ptl pbl<?=($sel_event->num_rows>0?'':' editable-hidden')?>">
 
 	<article class="mw960p center">
 
@@ -242,20 +258,6 @@ if(!$alert_view){?>
 		<div class="blocks grid-3 space-xl">
 			
 			<?php 
-			// Construction de la requete
-			$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
-
-			// Pour le tri par date pour les events
-			$sql.=" JOIN ".$tm." AS event ON event.id=".$tc.".id AND event.type='aaaa-mm-jj'";
-
-			$sql.=" WHERE (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft') AND ".$tc.".lang='".$lang."' AND state='active'";
-			
-			// Tri par date de l'evenement
-			$sql.=" ORDER BY event.cle ASC";
-			$sql.=" LIMIT 3";
-
-			$sel_event = $connect->query($sql);
-
 			while($res_event = $sel_event->fetch_assoc())
 			{
 				$content_event = json_decode($res_event['content'], true);
