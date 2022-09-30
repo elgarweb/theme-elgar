@@ -133,32 +133,36 @@ switch($res['tpl']) {
 						<?php
 						input("aaaa-mm-jj-publication", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
 					}
-
-					?>
-					<div class="editable-hidden bold"><?= _e("Start date");?></div>
-					<?php
-					input("aaaa-mm-jj", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
-
-					if(stristr($res['tpl'], 'event')) 
+					else
 					{
-						input('heure-ouverture', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));			
-						input('heure-fermeture', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));
+
+						?>
+						<div class="editable-hidden bold"><?= _e("Start date");?></div>
+						<?php
+						input("aaaa-mm-jj", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
+
+						if(stristr($res['tpl'], 'event')) 
+						{
+							input('heure-ouverture', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));			
+							input('heure-fermeture', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));
+						}
+						?>
+
+						<div class="editable-hidden bold"><?= _e("End date");?></div>
+						<?php
+						input("aaaa-mm-jj-fin", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
+
+						if(stristr($res['tpl'], 'event')) 
+						{
+							input('heure-ouverture-fin', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));			
+							input('heure-fermeture-fin', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));
+						}
+
 					}
-					?>
-
-					<div class="editable-hidden bold"><?= _e("End date");?></div>
-					<?php
-					input("aaaa-mm-jj-fin", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
-
-					if(stristr($res['tpl'], 'event')) 
-					{
-						input('heure-ouverture-fin', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));			
-						input('heure-fermeture-fin', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));
-					}
 
 
 
-					// Date de publication
+					// Affichage Date de publication
 					if(@$GLOBALS["content"]["aaaa-mm-jj-publication"])
 					{
 						echo '<p>'.__("Published on").' ';
@@ -171,7 +175,7 @@ switch($res['tpl']) {
 
 
 
-					// Affichage date de début
+					// Affichage Date de début
 					if(@$GLOBALS["content"]["aaaa-mm-jj"])
 					{
 						echo '<p class="mbn">';
