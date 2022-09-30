@@ -270,7 +270,7 @@ switch(@$_GET['mode'])
 
 
 						// header
-						$header = "From:".$GLOBALS['email_contact']."\r\n";// Pour une meilleure délivrabilité des mails
+						$header = "From:".$GLOBALS['email_from']."\r\n";// Pour une meilleure délivrabilité des mails
 						$header.= "Reply-To: ".$from."\r\n";
 						$header.= "Content-Type: text/plain; charset=utf-8\r\n";// utf-8 ISO-8859-1
 
