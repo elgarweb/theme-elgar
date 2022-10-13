@@ -89,18 +89,18 @@ switch(@$_GET['mode'])
 
 
 	<?
-	tag("agenda", array('class'=>'editable-hidden mw960p center mbm', 'tag' => 'div'));
+	tag(encode(__('News')), array('class'=>'editable-hidden mw960p center mbm', 'tag' => 'div'));
 
 	if(isset($GLOBALS['tags']))
 	{?>
-	<!-- AGENDA -->
+	<!-- Actu -->
 	<div class="ptm mbm">
 		
 		<section id="home-agenda" class="bg-color-3 ptl pbl">
 
 			<article class="mw960p center">
 
-				<h2 id="titre-events"><?php _e('Agenda')?></h2>
+				<?php h2('titre-events', '')?>
 
 				<div class="blocks grid-3 space-xl">
 					
@@ -115,7 +115,7 @@ switch(@$_GET['mode'])
 						ON
 						(
 							".$tt.".id = ".$tc.".id AND
-							".$tt.".zone = 'agenda' AND
+							".$tt.".zone = '".encode(__('News'))."' AND
 							".$tt.".lang = '".$lang."' AND (";
 
 							$i = 1;
@@ -132,12 +132,13 @@ switch(@$_GET['mode'])
 					}
 
 					// Pour le tri par date pour les events
-					$sql.=" JOIN ".$tm." AS event ON event.id=".$tc.".id AND event.type='aaaa-mm-jj'";
+					//$sql.=" JOIN ".$tm." AS event ON event.id=".$tc.".id AND event.type='aaaa-mm-jj'";
 
-					$sql.=" WHERE (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft') AND ".$tc.".lang='".$lang."' AND state='active'";
+					//$sql.=" WHERE (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft') AND ".$tc.".lang='".$lang."' AND state='active'";
+					$sql.=" WHERE (".$tc.".type='article') AND ".$tc.".lang='".$lang."' AND state='active'";
 					
 					// Tri par date de l'evenement
-					$sql.=" ORDER BY event.cle ASC";
+					$sql.=" ORDER BY ".$tc.".date_insert DESC";
 					$sql.=" LIMIT 3";
 
 					//echo $sql;
@@ -156,8 +157,8 @@ switch(@$_GET['mode'])
 
 				<!-- Bouton vers tous les événements -->
 				<div class="lien-bt ptl">
-					<a href="<?=make_url(__('agenda'), array("domaine" => true))?>" class="bt">
-						<?php span('txt-lien-agenda', array('default' => __("See all the events"))); ?>
+					<a <?href('url-lien-agenda');?>>
+						<?php span('txt-lien-agenda', array('default' => __("See all the events"), 'class' => 'bt')); ?>
 					</a>
 				</div>		
 

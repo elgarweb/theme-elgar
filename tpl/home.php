@@ -53,7 +53,7 @@ if(!$alert_view){?>
 				if(!isset($GLOBALS['intro-visuel-crop'])) $GLOBALS['intro-visuel-crop'] = false;
 
 				// Grand visuel
-				media('intro-visuel', array('size' => $GLOBALS['intro-visuel-size'], 'lazy' => true, 'crop' => $GLOBALS['intro-visuel-crop']));
+				media('intro-visuel', array('size' => $GLOBALS['intro-visuel-size'], 'crop' => $GLOBALS['intro-visuel-crop']));
 				?>
 			</div>
 			
@@ -238,14 +238,36 @@ if(!$alert_view){?>
 // Construction de la requete
 $sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
 
-// Pour le tri par date pour les events
-$sql.=" JOIN ".$tm." AS event ON event.id=".$tc.".id AND event.type='aaaa-mm-jj' AND event.cle >= '".date("Y-m-d")."'";
+
+//***** Pour le tri par date pour les events
+// Tous les évènements
+//$sql.=" JOIN ".$tm." AS event ON event.id=".$tc.".id AND event.type='aaaa-mm-jj'";
+
+// Que les évènements a venir
+$sql.=" JOIN ".$tm." AS event_deb ON event_deb.id=".$tc.".id AND event_deb.type='aaaa-mm-jj' AND event_deb.cle >= '".date("Y-m-d")."'";
+
+
+// Que les évènements en cours
+//$sql.=" JOIN ".$tm." AS event_deb ON event_deb.id=".$tc.".id AND event_deb.type='aaaa-mm-jj'";
+//$sql.=" LEFT JOIN ".$tm." AS event_fin ON event_fin.id=".$tc.".id AND event_fin.type='aaaa-mm-jj-fin'";
 
 $sql.=" WHERE (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft') AND ".$tc.".lang='".$lang."' AND state='active'";
 
-// Tri par date de l'evenement
-$sql.=" ORDER BY event.cle ASC";
+// Que les évènements en cours
+//$sql.=" AND (event_fin.cle >= '".date("Y-m-d")."' OR event_deb.cle >= '".date("Y-m-d")."')";
+
+
+//***** Tri par date de l'evenement
+// Que les évènements en cours
+//$sql.=" ORDER BY event_deb.cle ASC, event_fin.cle ASC";
+
+// Que les évènements a venir
+$sql.=" ORDER BY event_deb.cle ASC";
+
+
 $sql.=" LIMIT 3";
+
+//echo $sql;
 
 $sel_event = $connect->query($sql);
 ?>

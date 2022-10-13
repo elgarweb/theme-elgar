@@ -120,7 +120,11 @@ switch(@$_REQUEST['mode'])
 
 					echo'<li data-id="'.$res_lang['id'].'">';
 
-						echo'<a href="'.make_url($res_lang['url'], array('domaine' => $GLOBALS['scheme'].$GLOBALS['domain_lang'][$res_lang['lang']].$GLOBALS['path'])).'" lang="'.$res_lang['lang'].'" target="_blank">'.$res_lang['title'].'</a>';
+						// Si domaine configurer
+						if(isset($GLOBALS['domain_lang'][$res_lang['lang']]))
+							echo'<a href="'.make_url($res_lang['url'], array('domaine' => $GLOBALS['scheme'].$GLOBALS['domain_lang'][$res_lang['lang']].$GLOBALS['path'])).'" lang="'.$res_lang['lang'].'" target="_blank">'.$res_lang['title'].'</a>';
+						else 
+							echo $res_lang['title'];
 
 						echo ' - '.$res_lang['lang'];
 
