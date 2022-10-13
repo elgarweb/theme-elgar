@@ -169,7 +169,8 @@ if(is_array($array))
 		// Si date de fin et != de la date de début
 		if(@$val['DATESs'][0]['Datedefin'] and @$val['DATESs'][0]['Datededebut'] != @$val['DATESs'][0]['Datedefin'])
 			$date_fin = explode('T', @$val['DATESs'][0]['Datedefin'])[0];
-		else $date_fin = null;
+		else 
+			$date_fin = null;
 
 		// On regarde si la description est courtes ou longue
 		if(strlen($val['DESCRIPTIFSs'][0]['Descriptioncommerciale'])<500) {
@@ -252,6 +253,17 @@ if(is_array($array))
 			'cle' => "'".$date."'"
 		))."),";
 
+	    // Si date de fin pour l'évènement on l'ajoute au méta
+		if(isset($date_fin))
+	    $sql_meta.="(".implode(",", array(
+			//'id' => $id_start+$key,
+			//'type' => "'aaaa-mm-jj'",
+			//'cle' => "'".date('Y-m-d', strtotime(str_replace('-', '/', $val['DATESs'][0]['Datededebut'])))."'"
+			'id' => -$key,
+			'type' => "'aaaa-mm-jj-fin'",
+			'cle' => "'".$date_fin."'"
+		))."),";
+
 	    
 	     // Ajout des tag lié
 		//[ObjectTypeName] => Fêtes et manifestations
@@ -302,7 +314,7 @@ if($GLOBALS['connect']->error) die($GLOBALS['connect']->error);
 
 
 
-//echo '<br><br>'.str_replace('),','),<br><br>', $sql);
+//echo '<br><br>'.str_replace('),','),<br><br>', $sql_meta);
 
 echo '<br>time : '.benchmark().'s';
 ?>

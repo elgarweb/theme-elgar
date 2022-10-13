@@ -72,20 +72,30 @@ $url_back = encode($res['url']);
 		)";
 
 		// Pour le tri par date pour les events
-		if($res['url']=='agenda')
-			$sql.=" JOIN ".$tm." AS event ON event.id=".$tc.".id AND event.type='aaaa-mm-jj'";
+		if($res['url']=='agenda'){
+			//$sql.=" JOIN ".$tm." AS event ON event.id=".$tc.".id AND event.type='aaaa-mm-jj'";
+			$sql.=" JOIN ".$tm." AS event_deb ON event_deb.id=".$tc.".id AND event_deb.type='aaaa-mm-jj'";
+			$sql.=" LEFT JOIN ".$tm." AS event_fin ON event_fin.id=".$tc.".id AND event_fin.type='aaaa-mm-jj-fin'";
+		}
 
-		$sql.=" WHERE ".$tc.".lang='".$lang."' ".$sql_state." AND";
+		$sql.=" WHERE ".$tc.".lang='".$lang."' ".$sql_state."";
 
 		// Type de contenu event ou article
-		if($res['url']=='agenda') 
-			$sql.=" (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft')";
+		if($res['url']=='agenda') {
+			$sql.=" AND (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft')";
+
+			// Que les évènements >= date de début OU <= date de fin
+			$sql.=" AND (event_fin.cle >= '".date("Y-m-d")."' OR event_deb.cle >= '".date("Y-m-d")."')";
+		}
 		else
-			$sql.=" ".$tc.".type='article'";
+			$sql.=" AND ".$tc.".type='article'";
 
 		// Si event on tri par date de l'evenement
-		if($res['url']=='agenda') $sql.=" ORDER BY event.cle ASC";
-		else $sql.=" ORDER BY ".$tc.".date_insert DESC";
+		if($res['url']=='agenda') 
+			$sql.=" ORDER BY event_deb.cle ASC, event_fin.cle ASC";
+			//$sql.=" ORDER BY event.cle ASC";
+		else 
+			$sql.=" ORDER BY ".$tc.".date_insert DESC";
 
 		$sql.=" LIMIT ".$start.", ".$num_pp;
 
