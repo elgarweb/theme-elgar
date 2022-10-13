@@ -12,12 +12,11 @@ switch(@$_REQUEST['mode'])
 
 		login('high', 'edit-page');// Vérifie que l'on a le droit d'éditer les contenus
 
-		if($_REQUEST['checked'] == 'true')
-			$sql = "INSERT INTO ".$table_meta." SET id='".(int)$_REQUEST['id']."', type='".encode($_REQUEST['type'])."', cle='alaune'";
-		else 
-			$sql = "DELETE FROM ".$table_meta." WHERE id='".(int)$_REQUEST['id']."' AND type='".encode($_REQUEST['type'])."' AND cle='alaune'";
+		// Supprime les alaune
+		$connect->query("DELETE FROM ".$table_meta." WHERE cle='alaune'");
 
-		$connect->query($sql);
+		if($_REQUEST['checked'] == 'true')
+			$connect->query("INSERT INTO ".$table_meta." SET id='".(int)$_REQUEST['id']."', type='".encode($_REQUEST['type'])."', cle='alaune'");
 
 		echo $connect->error;
 
