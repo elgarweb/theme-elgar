@@ -256,7 +256,9 @@ switch(@$_GET['mode'])
 
 
 						// Message
-						$message = (strip_tags($_POST["message"]));
+						$message = "Message de : ".htmlspecialchars($_POST["email-from"])."\n\n";
+						
+						$message .= (strip_tags($_POST["message"]));
 
 						$message .= "\n\n-------------------------------------------------------\n";
 
