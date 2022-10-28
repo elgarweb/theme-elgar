@@ -97,13 +97,20 @@ $add_translation = array(
 
 
 	// ANNUAIRE
-	"Add annuaire" => array("fr" => "Ajouter un annuaire", "eu" => "Aurkibide 1 gehitu"),
-	"Edit annuaire" => array("fr" => "Edition d'un annuaire", "eu" => "Aurkibide baten argitaratzea "),
+	"Add annuaire" => array("fr" => "Ajouter une fiche annuaire", "eu" => ""),//Aurkibide 1 gehitu
+	
+	"Edit annuaire" => array("fr" => "Edition d'une fiche annuaire", "eu" => "Aurkibide baten argitaratzea "),
+	
+	"Add autre" => array("fr" => "Ajouter une fiche autre annuaire", "eu" => ""),
+	"Edit autre" => array("fr" => "Edition d'une fiche annuaire autre", "eu" => "Aurkibide baten argitaratzea "),
+
 	"Go back to the directory" => array("fr" => "Retour à l'annuaire", "eu" => "Aurkibidera itzuli"),
+
 
 	// COMMERCE
 	"Add commerce" => array("fr" => "Ajouter un commerce"),
 	"Edit commerce" => array("fr" => "Edition d'un commerce"),
+
 
 	// ARRETES
 	"Add arrete" => array("fr" => "Ajouter un arrêté", "eu" => "Erabaki bat gehitu"),
@@ -126,7 +133,7 @@ $add_translation = array(
 
 
 	// TOURINSOFT
-	"Add event-tourinsoft" => array("fr" => "Ajouter un événement Tourinsoft", "eu" => "Tourinsoft gertakari bat gehitu"),
+	"Add event-tourinsoft" => array("fr" => "Ajouter un évènement Tourinsoft", "eu" => "Tourinsoft gertakari bat gehitu"),
 	"Edit event-tourinsoft" => array("fr" => "Edition d'un événement Tourinsoft", "eu" => "Tourinsoft gertakari baten argitaratzea"),
 
 
@@ -178,6 +185,10 @@ $add_translation = array(
 
 	"Directory" => array("fr" => "Annuaire", "eu" => "Aurkitegia"),
 		"annuaire" => array("fr" => "Annuaire"),
+
+	"Other Directory" => array("fr" => "Annuaire autre", "eu" => "Direktorio"),
+		"annuaire-autre" => array("fr" => "Annuaire autre"),
+		"autre" => array("fr" => "Annuaire autre"),
 	
 	"Commerce" => array("fr" => "Commerce", "eu" => "Merkataritza"),
 		"commerce" => array("fr" => "Commerce"),

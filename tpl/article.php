@@ -36,6 +36,14 @@ switch($res['tpl']) {
 		$text_back = __("Go back to the directory");
 	break;
 
+	case 'annuaire-autre':
+		$type = 'autre';
+		$media = true;
+		$dir = encode(__('Other Directory'));
+		$url_back = encode(__('Other Directory'));
+		$text_back = __("Go back to the directory");
+	break;
+
 	case 'commerce':
 		$type = 'commerce';
 		$media = true;

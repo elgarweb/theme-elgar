@@ -93,14 +93,18 @@ if(is_array($array))
 
 		if($verbose) echo '<hr><h2>'.$key.'. '.$val['SyndicObjectName'].'</h2>';
 
+
 		// construction de l'url
 		$url = encode($val['SyndicObjectName']);
+
 		$url = mb_convert_encoding($url, 'UTF-8', 'UTF-8');// Supprime les caractères utf8 de l'url
-		
+
 		if(@$list_url[$url]) $url = $url.'-'.$key;// Si l'url existe on ajoute le numéro de la fiche en fin d'url
 		$list_url[$url] = true;
 
 		$url = str_replace('--','-', $url);// Supprime les double tiré lié à la suppression des caractères utf8
+
+		$url = trim($url, '-');// Supp les tirés de début et fin
 
 
 		// Retravaille des images

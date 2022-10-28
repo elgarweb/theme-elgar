@@ -70,6 +70,8 @@ $url_back = encode($res['url']);
 
 		if($res['url'] == encode(__('Directory'))) 
 			$sql.=" ".$tc.".type='annuaire'";
+		else if($res['url'] == encode(__('Other Directory'))) 
+			$sql.=" ".$tc.".type='autre'";
 		else
 			$sql.=" ".$tc.".type='commerce'";
 
