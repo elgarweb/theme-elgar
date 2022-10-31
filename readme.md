@@ -151,11 +151,11 @@ Pour le bon fonctionnement du site vous devez créer des pages types dont le per
 - `recherche` à partir du template `recherche`
 - `contact` à partir du template `contact`
 
-En plus si votre site comporte certaines sections comme des actualités vous devez créer des pages qui permettent de les lister :
+En plus si votre site comporte certaines sections comme des actualités vous devez créer des pages qui permettent de les lister avec les permaliens suivants :
 - `actualites` à partir du template `article-liste`
 - `agenda` à partir du template `article-liste`
 - `annuaire` à partir du template `annuaire-liste`
-- `arretes` à partir du template `arrete-liste`
+- `publication` à partir du template `publication-liste`
 
 Il est important de garder ces permaliens car la zone de filtres des tags/catégories se nomme ainsi dans le code.
 
