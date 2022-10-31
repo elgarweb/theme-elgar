@@ -97,7 +97,7 @@ $add_translation = array(
 
 
 	// ANNUAIRE
-	"Add annuaire" => array("fr" => "Ajouter une fiche annuaire", "eu" => ""),//Aurkibide 1 gehitu
+	"Add annuaire" => array("fr" => "Ajouter une fiche annuaire"),//Aurkibide 1 gehitu
 	
 	"Edit annuaire" => array("fr" => "Edition d'une fiche annuaire", "eu" => "Aurkibide baten argitaratzea "),
 	
