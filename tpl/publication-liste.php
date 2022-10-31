@@ -154,7 +154,7 @@ $mois = array(
 		if(@$GLOBALS['filter']['month'] or @$GLOBALS['filter']['year']) {
 			$sql.=" JOIN ".$tm." ON (
 				".$tm.".id=".$tc.".id AND
-				".$tm.".type='aaaa-mm-jj' AND";
+				".$tm.".type='aaaa-mm-jj-publication' AND";
 
 				if(@$GLOBALS['filter']['month'] and @$GLOBALS['filter']['year'])
 					$sql.=" ".$tm.".cle LIKE '".(int)$GLOBALS['filter']['year']."-".sprintf("%02d", (int)$GLOBALS['filter']['month'])."-%'";
