@@ -23,15 +23,15 @@ if(!token_check(@$_SESSION['token']))
 ini_set('mbstring.substitute_character', 'none');
 
 $verbose = (@$_SERVER['PHP_AUTH_PW']?false:true);// $verbose = false;// Affiche les infos de rapatriement
-$verbose_source = (@$_SERVER['PHP_AUTH_PW']?false:false);// $verbose_source = false;// Affiche le tableau du json
+$verbose_source = (@$_SERVER['PHP_AUTH_PW']?false:($dev?true:false));// $verbose_source = false;// Affiche le tableau du json
 
 $img = true;// get img
 $keep_img = true;// garde les images originales sur le serveur
 //$_REQUEST['clean'] = true;// Force la vidange des dossiers images
 
-$sql_content = $sql_meta = $visuel_dest = null;
+$sql_content = $sql_meta = $sql_tag = $visuel_dest = null;
 $id_start = -1000000000;// Plus utiliser car on a des id négatifs
-$limit = 25;// 50 10 // Nombre d'évènement rapatrié
+$limit = 50;// 50 10 // Nombre d'évènement rapatrié
 
 $chemin_visuel = $GLOBALS['media_dir'].'/tourinsoft';
 $racine = '../../../';
@@ -39,8 +39,9 @@ $new_width = 320;
 
 
 // Construction des requetes mysql
-$sql_init_content="REPLACE LOW_PRIORITY INTO `".$tc."` (`id`, `state`, `lang`, `robots`, `type`, `tpl`, `url`, `title`, `description`, `content`, `user_update`, `date_update`, `user_insert`, `date_insert`) VALUES ";
-$sql_init_meta="REPLACE LOW_PRIORITY INTO `".$tm."` (`id`, `type`, `cle`) VALUES ";
+$sql_init_content = "REPLACE LOW_PRIORITY INTO `".$tc."` (`id`, `state`, `lang`, `robots`, `type`, `tpl`, `url`, `title`, `description`, `content`, `user_update`, `date_update`, `user_insert`, `date_insert`) VALUES ";
+$sql_init_meta = "REPLACE LOW_PRIORITY INTO `".$tm."` (`id`, `type`, `cle`) VALUES ";
+$sql_init_tag = "REPLACE LOW_PRIORITY INTO `".$tt."` (`id`, `zone`, `lang`, `encode`, `name`, `ordre`) VALUES ";
 
 
 // Récupère le fichier json distant
@@ -92,14 +93,18 @@ if(is_array($array))
 
 		if($verbose) echo '<hr><h2>'.$key.'. '.$val['SyndicObjectName'].'</h2>';
 
+
 		// construction de l'url
 		$url = encode($val['SyndicObjectName']);
+
 		$url = mb_convert_encoding($url, 'UTF-8', 'UTF-8');// Supprime les caractères utf8 de l'url
-		
+
 		if(@$list_url[$url]) $url = $url.'-'.$key;// Si l'url existe on ajoute le numéro de la fiche en fin d'url
 		$list_url[$url] = true;
 
 		$url = str_replace('--','-', $url);// Supprime les double tiré lié à la suppression des caractères utf8
+
+		$url = trim($url, '-');// Supp les tirés de début et fin
 
 
 		// Retravaille des images
@@ -159,7 +164,6 @@ if(is_array($array))
 		}
 
 
-		// @todo date 
 		// $val['DATESs'][0]['Datededebut'] 
 		// $val['DATESs'][0]['Heuredouverture1'] $val['DATESs'][0]['Heuredefermeture1']
 		// $val['DATESs'][0]['Heuredouverture2'] $val['DATESs'][0]['Heuredefermeture2']
@@ -169,7 +173,8 @@ if(is_array($array))
 		// Si date de fin et != de la date de début
 		if(@$val['DATESs'][0]['Datedefin'] and @$val['DATESs'][0]['Datededebut'] != @$val['DATESs'][0]['Datedefin'])
 			$date_fin = explode('T', @$val['DATESs'][0]['Datedefin'])[0];
-		else $date_fin = null;
+		else 
+			$date_fin = null;
 
 		// On regarde si la description est courtes ou longue
 		if(strlen($val['DESCRIPTIFSs'][0]['Descriptioncommerciale'])<500) {
@@ -252,9 +257,32 @@ if(is_array($array))
 			'cle' => "'".$date."'"
 		))."),";
 
+	    // Si date de fin pour l'évènement on l'ajoute au méta
+		if(isset($date_fin))
+	    $sql_meta.="(".implode(",", array(
+			//'id' => $id_start+$key,
+			//'type' => "'aaaa-mm-jj'",
+			//'cle' => "'".date('Y-m-d', strtotime(str_replace('-', '/', $val['DATESs'][0]['Datededebut'])))."'"
+			'id' => -$key,
+			'type' => "'aaaa-mm-jj-fin'",
+			'cle' => "'".$date_fin."'"
+		))."),";
+
 	    
-	     // @todo: Ajout des tag lié ?
+	     // Ajout des tag lié
 		//[ObjectTypeName] => Fêtes et manifestations
+	    foreach($val['TYPEs'][0]['Typedemanifestation'] as $key_tag => $val_tag) 
+	    {
+	    	$sql_tag.="(".implode(",", array(
+				'id' => -$key,
+				'zone' => "'".encode(__('Agenda'))."'",
+				'lang' => "'fr'",
+				'encode' => "'".encode($val_tag['ThesLibelle'])."'",
+				'name' => "'".$GLOBALS['connect']->real_escape_string($val_tag['ThesLibelle'])."'",
+				'ordre' => "'".($key_tag+1)."'"
+			))."),";
+	    }
+		
 
 	    if($key >= $limit) break;
 	}
@@ -284,9 +312,13 @@ if($GLOBALS['connect']->error) die($GLOBALS['connect']->error);
 $GLOBALS['connect']->query(trim($sql_init_meta.$sql_meta,','));
 if($GLOBALS['connect']->error) die($GLOBALS['connect']->error);
 
+// Insertion dans la table TAG
+$GLOBALS['connect']->query(trim($sql_init_tag.$sql_tag,','));
+if($GLOBALS['connect']->error) die($GLOBALS['connect']->error);
 
 
-//echo '<br><br>'.str_replace('),','),<br><br>', $sql);
+
+//echo '<br><br>'.str_replace('),','),<br><br>', $sql_meta);
 
 echo '<br>time : '.benchmark().'s';
 ?>

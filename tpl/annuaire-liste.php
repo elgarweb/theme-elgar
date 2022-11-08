@@ -21,7 +21,7 @@ $url_back = encode($res['url']);
 		<nav role="navigation" aria-label="<?php _e("Filter by")?>" class="flex wrap space jcc tc ptl pbm">
 			<ul class="unstyled pln"><?php 
 				while($res_tag_list = $sel_tag_list->fetch_assoc()) {
-					echo'<li class="inline prs"><a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="bt-tag">'.$res_tag_list['name'].'</a></li>';
+					echo'<li class="inbl prs"><a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="bt-tag">'.$res_tag_list['name'].'</a></li>';
 					$i++;
 				}
 				?>
@@ -70,6 +70,8 @@ $url_back = encode($res['url']);
 
 		if($res['url'] == encode(__('Directory'))) 
 			$sql.=" ".$tc.".type='annuaire'";
+		else if($res['url'] == encode(__('Other Directory'))) 
+			$sql.=" ".$tc.".type='autre'";
 		else
 			$sql.=" ".$tc.".type='commerce'";
 
@@ -140,8 +142,17 @@ $url_back = encode($res['url']);
 							if(isset($content_fiche['mail-contact']))
 								echo '<li class="pbn"><details class="pts" aria-live="polite"><summary class="tel color pointer tdu bold inbl" data-encode="'.$content_fiche['mail-contact'].'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary><p class="inline pls bold"></p></details></li>';
 
-							if(isset($content_fiche['adresse']))
-								echo '<li class="bold pbn pts"><i class="fa fa-fw fa-location" aria-hidden="true"></i>'.__('Address').'<p class="plt">'.$content_fiche['adresse'].'</p></li>';
+							if(isset($content_fiche['adresse'])){
+								echo '<li class="bold pbn pts"><i class="fa fa-fw fa-location" aria-hidden="true"></i>'.__('Address');
+
+								// Adresse dans un paragraphe ?
+								if(preg_match('%(<p[^>]*>.*?</p>)%i', $content_fiche['adresse'], $regs)) 
+									echo $content_fiche['adresse'];
+								else 
+									echo '<p>'.$content_fiche['adresse'].'</p>';
+
+								echo'</li>';
+							}
 							?>
 							</ul>
 						<!-- Lien vers détail -->

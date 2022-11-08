@@ -5,7 +5,7 @@ if(!isset($GLOBALS['domain'])) exit;
 $GLOBALS['table_lang'] = $GLOBALS['tl'] = $GLOBALS['db_prefix'].'lang';
 
 // Fonction affichage blocs img + titre + extrait texte
-function block($url_img, $url_title, $title, $description, $date = null, $tags = null)
+function block($url_img, $url_title, $title, $description, $date = null, $date_fin = null, $tags = null)
 {
 	global $res, $res_fiche, $state, $num_fiche;
 
@@ -25,14 +25,14 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 			<article class="h100">
 				<!-- Image -->
 				<?php //Affichage images des 3 premières actus seulement
-				if($num_fiche <= 3) { ?>
+				if($num_fiche <= 3 and isset($url_img)) { ?>
 					<figure>
 						<div class="nor" data-bg="<?=(isset(parse_url($url_img)['scheme'])?'':$GLOBALS['home']).$url_img?>" data-lazy="bg">
 						</div>
 					</figure>
 				<?php } ?>
 				
-				<div class="pam<?= ($num_fiche <= 3) ? ' brd-top' : '' ?>">				
+				<div class="pam<?= ($num_fiche <= 3 and isset($url_img)) ? ' brd-top' : '' ?>">				
 					<?php 
 					/* Affichage tags supprimé pour Elgarweb - laisser en commentaire si besoin pour autre mairie */
 					/* Tag  (que sur le listing des articles car query + longue)
@@ -52,17 +52,30 @@ function block($url_img, $url_title, $title, $description, $date = null, $tags =
 					<?php } */ 
 
 					// Titre H3 en home / H2 dans les listes
-					if($res['tpl'] == 'home') echo '<h3 class="pbm">'.str_replace($search, $replace, $title).'</h3>';
-					if($res['tpl'] == 'article-liste' or $res['tpl'] == 'annuaire-liste') echo '<h2 class="h3-like tl pbm">'.str_replace($search, $replace, $title).'</h2>';
+					if($res['tpl'] == 'home') 
+						echo '<h3 class="pbm">'.str_replace($search, $replace, $title).'</h3>';
+					else//if($res['tpl'] == 'article-liste' or $res['tpl'] == 'annuaire-liste' or $res['tpl'] == 'publication-liste')
+						echo '<h2 class="h3-like tl pbm">'.str_replace($search, $replace, $title).'</h2>';
 
 					//Description
 					if(isset($description)) echo '<p class="description">'.word_cut($description, '80', '...').'</p>';
 
 					//Date évènement
-					if(isset($date)) {
+					if(isset($date)) 
+					{
 						echo '<p class="date bold mbm">';
+
 							if($GLOBALS['lang'] == 'eu') echo str_replace('-', '/', $date);
 							else echo date_lang($date);
+
+							if(isset($date_fin))
+							{
+								echo' '.__("to");
+
+								if($GLOBALS['lang'] == 'eu') echo str_replace('-', '/', $date_fin);
+								else echo ' '.date_lang($date_fin);
+							}
+
 						echo '</p>';
 					}
 					?>

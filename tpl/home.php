@@ -50,9 +50,10 @@ if(!$alert_view){?>
 				<?php
 				// Taille de l'image par défaut
 				if(!isset($GLOBALS['intro-visuel-size'])) $GLOBALS['intro-visuel-size'] = '550x260';
+				if(!isset($GLOBALS['intro-visuel-crop'])) $GLOBALS['intro-visuel-crop'] = false;
 
 				// Grand visuel
-				media('intro-visuel', array('size' => $GLOBALS['intro-visuel-size'], 'lazy' => true));
+				media('intro-visuel', array('size' => $GLOBALS['intro-visuel-size'], 'crop' => $GLOBALS['intro-visuel-crop']));
 				?>
 			</div>
 			
@@ -156,18 +157,20 @@ if(!$alert_view){?>
 				<div class="<?=(isset($article['title']) ? 'relative flex aic brd3 mbl' : 'none'); ?>">
 
 					<!-- Image -->
+					<?php if(isset($article['content']['visuel'])){?>
 					<figure class="brd-right">
-
-						<div class="nor" data-bg="<?= $article['content']['visuel']; ?>" data-lazy="bg">
+						
+						<div class="nor" data-bg="<?=$article['content']['visuel'];?>" data-lazy="bg">
 						</div>
 
 					</figure>
+					<?php }?>
 
 					<div class="ptm pbl plm prm">
 
 						<!-- Titre -->
 						<h3 class="mtn bold">
-							<a href="<?= make_url($article['title'], array("domaine" => true)); ?>" class="tdn"><?= $article['title']; ?></a>
+							<a href="<?= make_url($article['url'], array("domaine" => true)); ?>" class="tdn"><?= $article['title']; ?></a>
 						</h3>
 						
 						<!-- Extrait texte -->
@@ -177,7 +180,7 @@ if(!$alert_view){?>
 
 						<!-- Lien Lire la suite -->
 						<div class="plus">
-							<a class="absolute bot15 right15" href="<?=make_url($article['title'], array("domaine" => true));?>" aria-label="<?php echo __("Read more")." ". $article['title'];?> "><?php _e("Read more")?></a>
+							<a class="absolute bot15 right15" href="<?=make_url($article['url'], array("domaine" => true));?>" aria-label="<?php echo __("Read more")." ". $article['title'];?> "><?php _e("Read more")?></a>
 						</div>
 					</div>
 				</div>
@@ -231,7 +234,44 @@ if(!$alert_view){?>
 
 
 <!-- AGENDA -->
-<section id="home-agenda" class="bg-color-3 ptl pbl">
+<?
+// Construction de la requete
+$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
+
+
+//***** Pour le tri par date pour les events
+// Tous les évènements
+//$sql.=" JOIN ".$tm." AS event ON event.id=".$tc.".id AND event.type='aaaa-mm-jj'";
+
+// Que les évènements a venir
+$sql.=" JOIN ".$tm." AS event_deb ON event_deb.id=".$tc.".id AND event_deb.type='aaaa-mm-jj' AND event_deb.cle >= '".date("Y-m-d")."'";
+
+
+// Que les évènements en cours
+//$sql.=" JOIN ".$tm." AS event_deb ON event_deb.id=".$tc.".id AND event_deb.type='aaaa-mm-jj'";
+//$sql.=" LEFT JOIN ".$tm." AS event_fin ON event_fin.id=".$tc.".id AND event_fin.type='aaaa-mm-jj-fin'";
+
+$sql.=" WHERE (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft') AND ".$tc.".lang='".$lang."' AND state='active'";
+
+// Que les évènements en cours
+//$sql.=" AND (event_fin.cle >= '".date("Y-m-d")."' OR event_deb.cle >= '".date("Y-m-d")."')";
+
+
+//***** Tri par date de l'evenement
+// Que les évènements en cours
+//$sql.=" ORDER BY event_deb.cle ASC, event_fin.cle ASC";
+
+// Que les évènements a venir
+$sql.=" ORDER BY event_deb.cle ASC";
+
+
+$sql.=" LIMIT 3";
+
+//echo $sql;
+
+$sel_event = $connect->query($sql);
+?>
+<section id="home-agenda" class="bg-color-3 ptl pbl<?=($sel_event->num_rows>0?'':' editable-hidden')?>">
 
 	<article class="mw960p center">
 
@@ -240,25 +280,11 @@ if(!$alert_view){?>
 		<div class="blocks grid-3 space-xl">
 			
 			<?php 
-			// Construction de la requete
-			$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
-
-			// Pour le tri par date pour les events
-			$sql.=" JOIN ".$tm." AS event ON event.id=".$tc.".id AND event.type='aaaa-mm-jj'";
-
-			$sql.=" WHERE (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft') AND ".$tc.".lang='".$lang."' AND state='active'";
-			
-			// Tri par date de l'evenement
-			$sql.=" ORDER BY event.cle ASC";
-			$sql.=" LIMIT 3";
-
-			$sel_event = $connect->query($sql);
-
 			while($res_event = $sel_event->fetch_assoc())
 			{
 				$content_event = json_decode($res_event['content'], true);
 
-				block(@$content_event['visuel'], $res_event['url'], $res_event['title'], @$content_event['description'], @$content_event['aaaa-mm-jj']);
+				block(@$content_event['visuel'], $res_event['url'], $res_event['title'], @$content_event['description'], @$content_event['aaaa-mm-jj'], @$content_event['aaaa-mm-jj-fin']);
 			}
 			?>
 

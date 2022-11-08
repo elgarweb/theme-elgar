@@ -151,11 +151,11 @@ Pour le bon fonctionnement du site vous devez créer des pages types dont le per
 - `recherche` à partir du template `recherche`
 - `contact` à partir du template `contact`
 
-En plus si votre site comporte certaines sections comme des actualités vous devez créer des pages qui permettent de les lister :
+En plus si votre site comporte certaines sections comme des actualités vous devez créer des pages qui permettent de les lister avec les permaliens suivants :
 - `actualites` à partir du template `article-liste`
 - `agenda` à partir du template `article-liste`
 - `annuaire` à partir du template `annuaire-liste`
-- `arretes` à partir du template `arrete-liste`
+- `publication` à partir du template `publication-liste`
 
 Il est important de garder ces permaliens car la zone de filtres des tags/catégories se nomme ainsi dans le code.
 
@@ -204,7 +204,7 @@ Pour créer une page intermédiaire de navigation vous devez :
 
 #### Plan du site
 Le template `sitemap.php` reprend les éléments du menu dans du header et y ajoute les pages connecter à travers le template `navigation.php`.
-Également y est ajouté à la fin les liens présents dans le `<ul>` du footer contenu dans le champ editable `#footer-liens`. Typiquement des liens vers des pages secondaires (actualité, agenda, téléchargement).
+Également y sont ajoutés à la fin les liens présents dans les `<ul>` du footer contenu dans les champs editable `#footer-liens` et `#footer-liens-webmaster`. Typiquement des liens vers des pages secondaires (actualité, agenda, annuaire, téléchargement).
 
 ## Personnalisation du thème
 Pour personnaliser le thème vous pouvez modifier le fichier `style.css` dans le dossier `theme/elgar/`.

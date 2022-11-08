@@ -77,9 +77,98 @@ switch(@$_GET['mode'])
 			?>
 			</ul>
 
+
+			<div class="highlight no-after-before mbn pbt <?=(isset($GLOBALS['content']['highlight']) ? '' : 'editable-hidden')?>">
+				<?txt("highlight");?>
+			</div>
+
 		</div>
 
 	</section>
+
+
+
+	<?
+	tag(encode(__('News')), array('class'=>'editable-hidden mw960p center mbm', 'tag' => 'div'));
+
+	if(isset($GLOBALS['tags']))
+	{?>
+	<!-- Actu -->
+	<div class="ptm mbm">
+		
+		<section id="home-agenda" class="bg-color-3 ptl pbl">
+
+			<article class="mw960p center">
+
+				<?php h2('titre-events', '')?>
+
+				<div class="blocks grid-3 space-xl">
+					
+					<?php 
+					// Construction de la requete
+					$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
+
+					// Si filtre tag
+					if(isset($GLOBALS['tags']))
+					{
+						$sql.=" RIGHT JOIN ".$tt."
+						ON
+						(
+							".$tt.".id = ".$tc.".id AND
+							".$tt.".zone = '".encode(__('News'))."' AND
+							".$tt.".lang = '".$lang."' AND (";
+
+							$i = 1;
+							foreach($GLOBALS['tags'] as $cle => $val)
+							{
+								if($i > 1) $sql.=" OR ";
+
+								$sql.= $tt.".encode = '".$cle."'";
+
+								++$i;
+							}
+
+						$sql.="))";
+					}
+
+					// Pour le tri par date pour les events
+					//$sql.=" JOIN ".$tm." AS event ON event.id=".$tc.".id AND event.type='aaaa-mm-jj'";
+
+					//$sql.=" WHERE (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft') AND ".$tc.".lang='".$lang."' AND state='active'";
+					$sql.=" WHERE (".$tc.".type='article') AND ".$tc.".lang='".$lang."' AND state='active'";
+					
+					// Tri par date de l'evenement
+					$sql.=" ORDER BY ".$tc.".date_insert DESC";
+					$sql.=" LIMIT 3";
+
+					//echo $sql;
+
+					$sel_event = $connect->query($sql);
+
+					while($res_event = $sel_event->fetch_assoc())
+					{
+						$content_event = json_decode($res_event['content'], true);
+
+						block(@$content_event['visuel'], $res_event['url'], $res_event['title'], @$content_event['description'], @$content_event['aaaa-mm-jj'], @$content_event['aaaa-mm-jj-fin']);
+					}
+					?>
+
+				</div>
+
+				<!-- Bouton vers tous les événements -->
+				<div class="lien-bt ptl">
+					<a <?href('url-lien-agenda');?>>
+						<?php span('txt-lien-agenda', array('default' => __("See all the events"), 'class' => 'bt')); ?>
+					</a>
+				</div>		
+
+			</article>
+
+		</section>
+
+	</div>
+	<?}?>
+	
 
 
 	<script>

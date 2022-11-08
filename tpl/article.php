@@ -36,6 +36,14 @@ switch($res['tpl']) {
 		$text_back = __("Go back to the directory");
 	break;
 
+	case 'annuaire-autre':
+		$type = 'autre';
+		$media = true;
+		$dir = encode(__('Other Directory'));
+		$url_back = encode(__('Other Directory'));
+		$text_back = __("Go back to the directory");
+	break;
+
 	case 'commerce':
 		$type = 'commerce';
 		$media = true;
@@ -44,12 +52,20 @@ switch($res['tpl']) {
 		$text_back = __("Go back to the directory");
 	break;
 
-	case 'arrete':
+	/*case 'arrete':
 		$type = 'arrete';
 		$media = false;
 		$dir = encode(__('Decrees'));// 'arretes'
 		$url_back = encode(__('Decrees'));
 		$text_back = __("Go back to decrees");
+	break;*/
+
+	case 'publication':
+		$type = 'publication';
+		$media = false;
+		$dir = encode(__('Publications'));
+		$url_back = encode(__('Publications'));
+		$text_back = __("Back to publications");
 	break;
 } 
 ?>
@@ -68,16 +84,13 @@ switch($res['tpl']) {
 			<?php if($media) { ?>
 			<div class="<?=(isset($GLOBALS['content']['visuel'])) ? '' : 'editable-hidden ' ?>prm">
 
-				<figure>
+				<figure role="group"<?=(isset($GLOBALS['content']['texte-legende-visuel']))?' aria-label="'.strip_tags($GLOBALS['content']['texte-legende-visuel']).'"':''?>>
 
 					<?php media('visuel', array('size' => '300x225', 'lazy' => true, 'dir' => $dir, 'class' => 'brd'));	?>
 
 					<figcaption>
-
 						<?php txt('texte-legende-visuel', 'italic ptt plt'); ?>
-
 					</figcaption>
-
 
 				</figure>
 				
@@ -118,39 +131,69 @@ switch($res['tpl']) {
 
 				<!-- Date événement -->
 				<?php 
-				if(stristr($res['tpl'], 'event') or stristr($res['tpl'], 'arrete'))
+				if(stristr($res['tpl'], 'event') or stristr($res['tpl'], 'publication'))
 				{
-				?>
-					<div class="editable-hidden bold"><?= _e("Start date");?></div>
-					<?php
-					input("aaaa-mm-jj", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
-
-					if(stristr($res['tpl'], 'event')) 
+					// Si arreté ou conseil
+					if($res['tpl'] == 'publication')
 					{
-						input('heure-ouverture', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));			
-						input('heure-fermeture', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));
+						?>
+						<div class="editable-hidden bold red"><?= _e("Published on");?></div>
+						<?php
+						input("aaaa-mm-jj-publication", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
 					}
-					?>
-
-					<div class="editable-hidden bold"><?= _e("End date");?></div>
-					<?php
-					input("aaaa-mm-jj-fin", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
-
-					if(stristr($res['tpl'], 'event')) 
+					else
 					{
-						input('heure-ouverture-fin', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));			
-						input('heure-fermeture-fin', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));
+
+						?>
+						<div class="editable-hidden bold"><?= _e("Start date");?></div>
+						<?php
+						input("aaaa-mm-jj", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
+
+						if(stristr($res['tpl'], 'event')) 
+						{
+							input('heure-ouverture', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));			
+							input('heure-fermeture', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));
+						}
+						?>
+
+						<div class="editable-hidden bold"><?= _e("End date");?></div>
+						<?php
+						input("aaaa-mm-jj-fin", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
+
+						if(stristr($res['tpl'], 'event')) 
+						{
+							input('heure-ouverture-fin', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));			
+							input('heure-fermeture-fin', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));
+						}
+
 					}
 
 
-					// Affichage date de début
+
+					// Affichage Date de publication
+					if(@$GLOBALS["content"]["aaaa-mm-jj-publication"])
+					{
+						echo '<p>'.__("Published on").' ';
+
+						if($lang == 'eu') echo str_replace('-', '/', $GLOBALS["content"]["aaaa-mm-jj-publication"]);
+						else echo date_lang($GLOBALS["content"]["aaaa-mm-jj-publication"]);
+
+						echo '</p>';						
+					}
+
+
+
+					// Affichage Date de début
 					if(@$GLOBALS["content"]["aaaa-mm-jj"])
 					{
 						echo '<p class="mbn">';
 
-						if(@$GLOBALS["content"]["aaaa-mm-jj-fin"]) echo __("Du").' ';
+						if(@$GLOBALS["content"]["aaaa-mm-jj-fin"]) echo __("From").' ';
 
-						if($lang == 'eu') echo str_replace('-', '/', $GLOBALS["content"]["aaaa-mm-jj"]);
+						if($lang == 'eu') {
+							echo str_replace('-', '/', $GLOBALS["content"]["aaaa-mm-jj"]);
+							if(@$GLOBALS["content"]["aaaa-mm-jj-fin"]) echo 'tik';
+						}
 						else echo date_lang($GLOBALS["content"]["aaaa-mm-jj"]);
 
 						if(@$GLOBALS["content"]["heure-ouverture"]){
@@ -180,12 +223,16 @@ switch($res['tpl']) {
 					}
 
 
+
 					// Affichage date de fin
 					if(@$GLOBALS["content"]["aaaa-mm-jj-fin"])
 					{
 						if(!@$GLOBALS["content"]["aaaa-mm-jj"]) echo '<p class="mbn">';
 
-						if($lang == 'eu') echo str_replace('-', '/', $GLOBALS["content"]["aaaa-mm-jj-fin"]);
+						if($lang == 'eu') {
+							echo str_replace('-', '/', $GLOBALS["content"]["aaaa-mm-jj-fin"]);
+							if(@$GLOBALS["content"]["aaaa-mm-jj"]) echo 'ra';
+						}
 						else echo date_lang($GLOBALS["content"]["aaaa-mm-jj-fin"]);
 
 						if(@$GLOBALS["content"]["heure-ouverture-fin"]){
@@ -220,7 +267,15 @@ switch($res['tpl']) {
 				<?php 
 				if($res['tpl']=='annuaire' or $res['tpl']=='commerce' or $res['tpl']=='event') 
 				{ 
-					echo '<ul class="unstyled pln">';
+					if(!@$GLOBALS['content']['url-site-web'] and
+						!@$GLOBALS['content']['telephone'] and
+						!@$GLOBALS['content']['mail-contact'] and
+						!@$GLOBALS['content']['adresse'])
+						$hidden = true;
+					else 
+						$hidden = false;
+
+					echo '<ul class="unstyled pln'.($hidden?' editable-hidden':'').'">';
 
 						echo '<li class="bold pts pbn'.(!@$GLOBALS['content']['url-site-web']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['url-site-web']?' aria-hidden="true"':'').'><i class="fa fa-fw fa-globe" aria-hidden="true"></i> '.(@$GLOBALS['content']['url-site-web']?'<a href="'.@$GLOBALS['content']['url-site-web'].'" target="_blank">'.__('Website').'</a>':'').'';
 
@@ -253,7 +308,18 @@ switch($res['tpl']) {
 		<!-- Contenu de l'article -->
 		<article class="clear ptl">
 
-			<?php txt('texte', array('dir' => $dir));?>
+			<?php
+			txt('texte', array('dir' => $dir));
+
+			// Téléchargement
+			if($res['tpl'] == 'publication')
+			{
+				?><div class="highlight<?=(!@$GLOBALS['content']['telechargement']?' editable-hidden':'');?>">
+					<h2 class="mtn"><?php _e("To download");?></h2><?php
+					txt('telechargement', array('dir' => $dir));
+				?></div><?php
+			}
+			?>
 					
 		</article>
 		
@@ -304,6 +370,7 @@ $(function()
 	        dateFormat: 'yy-mm-dd',
 	        firstDay: 1
 	    });
+		$("#aaaa-mm-jj-publication").datepicker();
 		$("#aaaa-mm-jj").datepicker();
 		$("#aaaa-mm-jj-fin").datepicker();
 	});

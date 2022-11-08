@@ -28,7 +28,8 @@ a {
 /* Titres */
 h1, .h1-like, 
 h2, .h2-like,
-h3, .h3-like { 
+h3, .h3-like,
+h4, .h4-like { 
 	color: #00253F;
 	/* font-weight: 800; */
 	margin-top: 1rem;
@@ -62,6 +63,7 @@ h1, .h1-like,
 /* Citation */
 blockquote {
     /* quotes: "“" "”" "‘" "’"; */
+    display: table;
     position: relative;
     padding: 1rem 4rem 1rem 4rem;
     /* margin-bottom: 1em !important; */
@@ -96,10 +98,18 @@ blockquote {
 		padding: 0 0.25em 0 0.5em;
 		content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 14' width='7' height='10'%3e%3cpath d='M-.4 12l2 2 7-7-7-7-2 2 5 5z'/%3e%3c/svg%3e");
 	}
+		.hc .ariane nav a:not(:empty):after { filter: invert(1); }
 
 
 /* Mots en langue basque */
 span[lang] { border-bottom: dotted 1px #00253F; }
+
+
+/* Ancre */
+a[name] { 
+	text-decoration: none;
+	border-bottom: dashed 1px #00253F;
+}
 
 
 /* bouton pour les liens */
@@ -136,7 +146,10 @@ span[lang] { border-bottom: dotted 1px #00253F; }
 		color: #26D691;
 	} */
 
-fieldset p { margin-bottom: 0.5em !important; }
+
+fieldset { border: none; }
+	fieldset p { margin-bottom: 0.5em !important; }
+
 
 button { border: solid 1px #26D691; }
 
@@ -249,6 +262,9 @@ header section:first-of-type { font-size: 1.4rem; }
 	}
 
 
+	/* pour le cas ou les marges son modifier par le client */
+	.blocks .plus { margin-bottom: 0 !important; }
+
 	.lien-bt { text-align: center; }
 
 
@@ -260,7 +276,10 @@ header section:first-of-type { font-size: 1.4rem; }
 
 /* NAVIGATION */
 .tpl-navigation h1 { text-align: left; }
-.tpl-navigation .bg-color-3 { padding-left: 2rem; }
+.tpl-navigation .bg-color-3 {
+	padding-left: 2rem;
+	overflow: hidden;
+}
 
 .navigation { list-style: none; }
 	.navigation li { padding-bottom: 1.5rem; }
@@ -559,7 +578,7 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
 
 button[disabled], html input[disabled], .disabled { 
 	background-color: buttonface !important;
-	color: graytext;
+	color: graytext !important;
 	box-shadow: none;
 	cursor: default;
 }
@@ -761,9 +780,13 @@ img.fl, img.fr, figure.fl, figure.fr { margin-bottom: 0.5rem; }
 
 figure.center {	text-align: center; }
 
-article img { max-width: 100%; } /* Pour que les images ne dépassent pas la taille du contener */
+/* Pour que les images ne dépassent pas la taille du contener */
+article img { max-width: 100%; }
 
-/* Pour que l'image au clic soit bien centré dans le figure*/
+/* Pour que les images dans les contenus éditables se redimensionnent bien de façon homothétique */
+.editable img { height: 100%; }
+
+/* Pour que l'image au clic soit bien centré dans le figure */
 figure img { display: inline-block !important; }
 
 
@@ -1109,7 +1132,21 @@ iframe {
 
 
 /* ADMIN  */
-.body-margin-top { margin-top: 50px !important; }
+	.body-margin-top { margin-top: 50px !important; }
+
+
+	/*A LA UNE*/
+	#admin-bar .alaune.switch label	{ background: #c8c8c8; }
+
+	/* Désactivé */
+	#admin-bar .alaune.switch label:before { content: "\e803"; font-size: 0.8em; }/*e806*/
+
+	/* Couleur de fond si activé */
+	#admin-bar .alaune.switch input[type=checkbox]:checked ~ label{ background: #fee566; }
+
+	/* Activé  */
+	#admin-bar .alaune.switch input[type=checkbox]:checked ~ label:before {	content: "\e803"; }
+
 
 
 /* GRIDS */
@@ -1473,7 +1510,7 @@ div.editable {
 			right: 6px;
 			height: 2px;
 			background: #26D691;
-			line-height: 4rem;
+			line-height: 4rem !important;
 			width: 65%;
 			margin: auto;
 
