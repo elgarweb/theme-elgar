@@ -16,7 +16,10 @@
 						<li><a <?href('lien-conformite')?>><?php txt('texte-conformite', array('tag'=>'span')); ?></a></li>
 					</ul>
 				</nav>	
-				<input type="checkbox" name="high-contrast" id="high-contrast"<?=(@$_COOKIE['high-contrast']?'checked="checked"':'')?>> <label class="color" for="high-contrast"><?php _e("Enhanced contrast")?></label>
+
+				<div id="contrast" class="inbl">
+					<input type="checkbox" name="high-contrast" id="high-contrast"<?=(@$_COOKIE['high-contrast']?'checked="checked"':'')?>> <label class="color" for="high-contrast"><?php _e("Enhanced contrast")?></label>
+				</div>
 
 			</div>
 
@@ -26,7 +29,7 @@
 			else $switch_lang='fr';
 
 			if(isset($GLOBALS['domain_lang'][$switch_lang])){?>
-			<a href="<?=$GLOBALS['scheme'].$GLOBALS['domain_lang'][$switch_lang].$GLOBALS['path'];?>" lang="<?=$switch_lang?>" class="fr pbs"><?=$GLOBALS['translation']['home other language'][$switch_lang]?></a>
+			<a href="<?=$GLOBALS['scheme'].$GLOBALS['domain_lang'][$switch_lang].$GLOBALS['path'];?>" lang="<?=$switch_lang?>" class="fr pbs" id="switch-lang"><?=$GLOBALS['translation']['home other language'][$switch_lang]?></a>
 			<?}?>
 
 		</div>

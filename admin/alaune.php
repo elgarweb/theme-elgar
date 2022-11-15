@@ -13,10 +13,10 @@ switch(@$_REQUEST['mode'])
 		login('high', 'edit-page');// Vérifie que l'on a le droit d'éditer les contenus
 
 		// Supprime les alaune
-		$connect->query("DELETE FROM ".$table_meta." WHERE cle='alaune'");
+		$connect->query("DELETE FROM ".$table_meta." WHERE type='alaune' and cle='".$lang."'");
 
 		if($_REQUEST['checked'] == 'true')
-			$connect->query("INSERT INTO ".$table_meta." SET id='".(int)$_REQUEST['id']."', type='".encode($_REQUEST['type'])."', cle='alaune'");
+			$connect->query("INSERT INTO ".$table_meta." SET id='".(int)$_REQUEST['id']."', type='alaune', cle='".$lang."'");
 
 		echo $connect->error;
 
@@ -36,7 +36,7 @@ switch(@$_REQUEST['mode'])
 
 				// Position du bouton par défaut
 				<?
-				$sel_alaune = $connect->query("SELECT * FROM ".$table_meta." WHERE id='".$res['id']."' AND type='".$res['type']."' AND cle='alaune' LIMIT 1");
+				$sel_alaune = $connect->query("SELECT * FROM ".$table_meta." WHERE id='".$res['id']."' AND type='alaune' AND cle='".$lang."' LIMIT 1");
 				$res_alaune = $sel_alaune->fetch_assoc();
 				if(isset($res_alaune['id']))
 				{?>
