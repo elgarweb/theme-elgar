@@ -37,52 +37,86 @@ h4, .h4-like {
 	position: relative;
 }
 
-h1, .h1-like { text-align: center; }
+
+h1, .h1-like { 
+	text-align: center;
+	padding: 0 150px;
+}
 
 	/** Picto déco titres **/
-	/* .picto:before {
-		content: url('/theme/elgar/img/vaguelette.svg');
-		position: relative;
-		width: 60px;
-		display: block;
-		margin: auto;
-		top: 15px;
-	} */
+	main:not(.tpl-home) .picto:before {
+		content: '';
+	    position: absolute;
+	    width: 150px;
+	    top: 25px;
+	    left: 0;
+	    border-bottom: 1px solid #20828F;
+	}
+	main:not(.tpl-home) .picto:after {
+		content: '';
+	    position: absolute;
+	    width: 150px;
+	    top: 25px;
+	    right: 0;
+	    border-bottom: 1px solid #20828F;
+	}
 
 
 h2 { padding: 0 !important; }
+
 	h2:before {
 		content: "";
 		border-left: solid 4px #C51A1B;
 		position: absolute;
+		top: 8%;
 		left: -15px;
 		height: 85%;
 	}
 
 
-h3, .h3-like { padding-bottom: 2rem !important; }
+h3, .h3-like { padding-bottom: 1rem !important; }
+
+.tpl-home h3, .tpl-home .h3-like { padding-bottom: 2rem !important; }
+
 	h3:after, .h3-like:after {
 	    position: absolute;
 	    content: '';
 	    width: 38px;
 	    left: 0;
-	    right: 0;
 	    bottom: 0;
 	    margin: auto;	    
 	    border-bottom: 1px solid #000;
 	}
 
+	.tpl-home h3:after, .tpl-home .h3-like:after {
+	    right: 0;	    
+	}
+
 	.h3-like:before { content: none; }
+
+
+h4 { color: #20828F; }
 
 
 /* Mise en avant contenu */
 .highlight {
+	position: relative;
 	width: 60%;
 	margin: auto;	
-	background-color: #00253F1A;
-	padding: 2.5rem 2rem;
+	background-color: #20828F;
+	color: #fff;
+	padding: 2.5rem 2rem 1rem;
 	margin-bottom: 2rem;
+	border-radius: 0px 0px 25px 0px;
+	border-top: 7px solid #C51A1B;
 }
+	.highlight:after {
+	  	content: url('/theme/elgar/img/highlight.svg');
+	    position: absolute;
+	    width: 28px;
+	    bottom: -25px;
+	    right: -18px;
+	}
 
 
 /* Citation */
@@ -175,7 +209,39 @@ fieldset { border: none; }
 button { border: solid 1px #26D691; }
 
 /* Listes à puces */
-article ul li { padding-bottom: 1rem; }
+article ul,
+	#sommaire ol ol { list-style: none; }
+
+	article ul li {
+		position: relative;
+		padding-bottom: 1rem;
+	}
+
+	#sommaire ol ol { padding-top: 1rem; }
+
+	#sommaire ol li,
+	#sommaire a { position: relative; }	
+	#sommaire a { 
+		text-decoration: none;
+		z-index: 1;
+	}
+	#sommaire a:hover { text-decoration: underline; }
+
+		article ul li:before,
+		#sommaire ol ol li:before {
+			color: #20828F;
+			content: "\2022";
+			font-size: 6rem;
+			position: absolute;
+			top: -38px;
+			left: -30px;
+			/* background-color: red; */
+		}
+
+		.tpl-annuaire-liste article ul li:before,
+		footer article ul li:before
+		{ content: none; }
+
 
 /* Couleurs */
 .color { color: #00253F; }
@@ -210,7 +276,7 @@ article ul li { padding-bottom: 1rem; }
 /* .brd3 { border: 3px solid #00253F; } */
 .brd-left { border-left: 1px solid #00253F; }
 /* .brd-right { border-right: 1px solid #00253F; } */
-/* .brd-alt { border: 2px solid #26D691; } */
+.brd-alt { border: 2px solid #20828F; }
 /* .brd-top { border-top: solid 3px #00253F; } */
 .brd-top-2 { border-top: 2px solid #008891; }
 /* .brd-top-3 { border-top: solid 3px #26D691; } */
@@ -286,7 +352,7 @@ header section:first-of-type { font-size: 1.4rem; }
 	}
 		#encart .col:first-child, #encart .col:first-child img {
 			background-color: #F7F7F7;
-			border-radius: 25px;
+			border-radius: 25px 0 0 25px;
 		}
 
 
@@ -421,7 +487,14 @@ header section:first-of-type { font-size: 1.4rem; }
 		padding-bottom: 2rem;
 		position: relative;
 	}
-		.navigation li::before {
+
+	#sommaire ol > li {
+		list-style: none;
+		padding-bottom: 1rem;
+	}
+
+		.navigation li:before,
+		#sommaire ol > li:before {
 		    content: url('/theme/elgar/img/fleches.svg');
 		    width: 15px;
 		    top: -5px;
@@ -465,7 +538,13 @@ header section:first-of-type { font-size: 1.4rem; }
 
 
 /* ANNUAIRE */
+	.tpl-annuaire-liste article {
+		border: 2px solid #000000;
+		border-radius: 0px 0px 25px 0px;
+	}
+
 	.tpl-annuaire-liste figure { width: 300px; }
+	.tpl-annuaire-liste .h3-like { margin-top: 0; }
 
 	#adresse p {  margin-bottom: 0; }
 
@@ -476,13 +555,16 @@ header section:first-of-type { font-size: 1.4rem; }
 	grid-template-rows: 150px 60px 120px auto;
 	justify-items: center;
 	width: 300px;
-	background-color: #00253F1A;
+	
 	margin-top: 2rem;
 	padding: 4rem 2rem;
-	border-top-left-radius: 25px;
-	border-bottom-right-radius: 25px;
+	
+	background-color: #F7F7F7;
+	box-shadow: 0px 3px 6px #00000029;
+	border-radius: 0px 0px 25px 0px;
 }
 	.tpl-personnalites .h3-like { font-weight: bold; }
+		.tpl-personnalites .h3-like:after { content: none; }
 
 	.tpl-personnalites .blocks li p {
 		margin-bottom: 0;
@@ -529,20 +611,18 @@ header section:first-of-type { font-size: 1.4rem; }
 		.flex-sommaire { display: flex; }
 
 		#sommaire {
-			border: 1px solid #E5E5E5;
-			border-left: 0;
+			background-color: #F7F7F7;
 
 			/* position: fixed; */
 		   	/* top: 260px; */
 		    /* left: 0; */
-    		padding: 1rem;  
+    		padding: 0rem 2rem 1rem 1rem;  
     		margin-left: 10px;  
 		    overflow: auto;
 		    max-width: 320px;
 		    max-height: 300px;
 
 		    z-index: 1;
-    		background-color: #fff;
 		}
 	}
 
@@ -575,10 +655,12 @@ footer #contacts {
 	footer input.editable-href { position: relative; }
 
 	/* Icônes footer */
+	main .fa,
 	footer .fa {
 		color: #C51A1B;
-		padding-right: 1.8rem;
+		padding-right: 1rem;
 		font-size: 2rem;
+		text-align: left;
 	}
 
 	footer ul, .ulinline ul {
@@ -798,8 +880,8 @@ main p, footer p
 h1, .h1-like { font-size: 3.4rem; }
 h2, .h2-like { font-size: 3rem; }
 h3, .h3-like { font-size: 2.4rem; }
-/* h4, .h4-like { font-size: 2rem; }
-h5, .h5-like { font-size: 1.8rem; }
+h4, .h4-like { font-size: 2rem; }
+/* h5, .h5-like { font-size: 1.8rem; }
 h6, .h6-like { font-size: 1.6rem; } */
 
 em, .italic, address, cite, i, var { font-style: italic; }
@@ -1584,7 +1666,7 @@ div.editable {
 		display: inline-block;
 		padding: 0;
 		/* margin-top: 2rem; */
-		min-height: 80px;
+		min-height: 60px;
 		justify-content: center;
 	}
 		header nav > ul li {
@@ -1595,7 +1677,7 @@ div.editable {
 			/* margin: auto; */
 			padding: 0 0.5rem;
 			max-width: 150px;
-			min-height: 80px;
+			/* min-height: 80px; */
 			/* align-items: center; */
 			text-align: left;
 		}
@@ -1897,7 +1979,10 @@ div.editable {
 		/* padding-left: 0.5rem !important; */
 		/* padding-right: 0.5rem !important; */
 	}
-		
+
+	main:not(.tpl-home) .picto:before { width: 10px; }
+	main:not(.tpl-home) .picto:after { width: 10px; }
+
 	.highlight { width: 80%; }
 
 	.editable img.fl, .editable img.fr {
