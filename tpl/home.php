@@ -132,7 +132,7 @@ if(!$alert_view){?>
 			$sql_alaune="
 			SELECT ".$tc.".* FROM ".$tc."
 			JOIN 
-				".$tm." ON ".$tc.".id = ".$tm.".id AND ".$tm.".type = 'article' 
+				".$tm." ON ".$tc.".id = ".$tm.".id AND ".$tm.".type = 'alaune' AND ".$tm.".cle = '".$lang."' 
 			WHERE 
 				".$tc.".type = 'article' AND ".$tc.".lang = '".$lang."' AND state = 'active'
 			ORDER BY ".$tc.".date_insert DESC
@@ -175,7 +175,7 @@ if(!$alert_view){?>
 						
 						<!-- Extrait texte -->
 						<p class="pbm">
-							<?php if(isset($article['content']['texte'])) echo word_cut($article['content']['texte'], '100', '...');?>
+							<?php if(isset($article['content']['description'])) echo word_cut($article['content']['description'], '150', '...');?>
 						</p>
 
 						<!-- Lien Lire la suite -->

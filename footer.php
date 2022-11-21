@@ -28,7 +28,7 @@
 	<?}?>
 
 	<!-- RENSEIGNEMENTS COMPLEMENTAIRES -->
-	<section class="<?=(isset($GLOBALS['content']['texte-renseignements']) ? 'bg-color-2 ptl pbt' : 'editable-hidden'); ?>">
+	<section id="renseignement" class="<?=(isset($GLOBALS['content']['texte-renseignements']) ? 'bg-color-2 ptl pbt' : 'editable-hidden'); ?>">
 
 		<?php txt('texte-renseignements', array('tag' => 'article', 'class' => 'mw960p center bold tc')); ?>
 
