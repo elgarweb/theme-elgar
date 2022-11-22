@@ -47,7 +47,7 @@ $mois = array(
 	<?php
 	}
 
-	txt('description', array('class'=>'tc ptm','tag'=>'p'));
+	txt('description', array('class'=>'ptm'));//,'tag'=>'p'
 	?>
 
 	<form id="filtre-date-publication" class="bg-color-3 pam">
@@ -150,23 +150,29 @@ $mois = array(
 			)";
 
 
+		// Pour le tri par date de publication
+		$sql.=" JOIN ".$tm." ON (
+				".$tm.".id=".$tc.".id AND
+				".$tm.".type='aaaa-mm-jj-publication'";
+
 		// Filtre par date
 		if(@$GLOBALS['filter']['month'] or @$GLOBALS['filter']['year']) {
-			$sql.=" JOIN ".$tm." ON (
+			/*$sql.=" JOIN ".$tm." ON (
 				".$tm.".id=".$tc.".id AND
-				".$tm.".type='aaaa-mm-jj-publication' AND";
+				".$tm.".type='aaaa-mm-jj-publication' AND";*/
+			$sql.=" AND";
 
-				if(@$GLOBALS['filter']['month'] and @$GLOBALS['filter']['year'])
-					$sql.=" ".$tm.".cle LIKE '".(int)$GLOBALS['filter']['year']."-".sprintf("%02d", (int)$GLOBALS['filter']['month'])."-%'";
+			if(@$GLOBALS['filter']['month'] and @$GLOBALS['filter']['year'])
+				$sql.=" ".$tm.".cle LIKE '".(int)$GLOBALS['filter']['year']."-".sprintf("%02d", (int)$GLOBALS['filter']['month'])."-%'";
 
-				if(@$GLOBALS['filter']['month'] and !@$GLOBALS['filter']['year'])
-					$sql.=" ".$tm.".cle LIKE '%-".sprintf("%02d", (int)$GLOBALS['filter']['month'])."-%'";
+			if(@$GLOBALS['filter']['month'] and !@$GLOBALS['filter']['year'])
+				$sql.=" ".$tm.".cle LIKE '%-".sprintf("%02d", (int)$GLOBALS['filter']['month'])."-%'";
 
-				if(!@$GLOBALS['filter']['month'] and @$GLOBALS['filter']['year'])
-					$sql.=" ".$tm.".cle LIKE '".(int)$GLOBALS['filter']['year']."-%'";
-
-			$sql.=")";
+			if(!@$GLOBALS['filter']['month'] and @$GLOBALS['filter']['year'])
+				$sql.=" ".$tm.".cle LIKE '".(int)$GLOBALS['filter']['year']."-%'";
 		}
+
+		$sql.=")";
 
 
 		// Filtre par date
@@ -185,10 +191,10 @@ $mois = array(
 
 		$sql.=" WHERE ".$tc.".lang='".$lang."' ".$sql_state." AND ".$tc.".type='publication'";
 
-		if(@$GLOBALS['filter']['start'] or @$GLOBALS['filter']['end'])
-			$sql.=" ORDER BY ".$tm.".cle ASC";
-		else 
-			$sql.=" ORDER BY ".$tc.".date_insert DESC";
+		//if(@$GLOBALS['filter']['start'] or @$GLOBALS['filter']['end'])
+			$sql.=" ORDER BY ".$tm.".cle DESC";
+		//else 
+			//$sql.=" ORDER BY ".$tc.".date_insert DESC";
 
 		$sql.=" LIMIT ".$start.", ".$num_pp;
 

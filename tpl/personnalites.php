@@ -37,6 +37,9 @@
 	const allTitles = document.querySelectorAll('h2, h3, h4');
 	allTitles.forEach(function(theTitle) {
 		contentTitle = theTitle.innerHTML
-		if(contentTitle.length === 0) theTitle.setAttribute("aria-hidden", true);
+		if(contentTitle.length === 0) {
+			theTitle.setAttribute("aria-hidden", true);
+			theTitle.classList.add("editable-hidden");
+		}
 	});	
 </script>
