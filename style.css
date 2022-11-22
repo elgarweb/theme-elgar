@@ -363,7 +363,7 @@ header section:first-of-type { font-size: 1.4rem; }
 }
 
 	#alert { 
-		background: url('/theme/elgar/img/bg.png') no-repeat center, linear-gradient(to right, #20828F 40%, transparent 0);
+		background: url('/theme/elgar/img/bg-bleu.svg') no-repeat center, linear-gradient(to right, #20828F 40%, transparent 0);
 		padding: 5rem 0;
 	}
 		#alert > article {
@@ -431,7 +431,16 @@ header section:first-of-type { font-size: 1.4rem; }
 			transform: rotate(-3deg);
 		}
 		#home-actualites:after {
-			content: '';
+			content: url(/theme/elgar/img/pointille.png);
+		    position: absolute;
+		    top: 27px;
+		    left: 0;
+		    right: 0;
+		    width: 273px;
+		    margin: auto;
+		    transform: rotate(-3deg);
+
+			/* content: '';
 			position: absolute;
 		    top: 36px;
 		    left: 0;
@@ -444,7 +453,7 @@ header section:first-of-type { font-size: 1.4rem; }
 			background-image: linear-gradient(to right, #c51a1b 20%, rgba(255,255,255,0) 0%);
 			background-position: bottom;
 			background-size: 15px 3px;
-			background-repeat: repeat-x;
+			background-repeat: repeat-x; */
 		}
 
 		/* #home-actualites .blocks > div { background-color: #00253F1A; } */
@@ -533,7 +542,7 @@ header section:first-of-type { font-size: 1.4rem; }
 		#sommaire ol > li:before {
 		    content: url('/theme/elgar/img/fleches.svg');
 		    width: 15px;
-		    top: -5px;
+		    top: -1px;
 		    left: -25px;
 		    position: absolute;
 		}
@@ -576,11 +585,26 @@ header section:first-of-type { font-size: 1.4rem; }
 /* ANNUAIRE */
 	.tpl-annuaire-liste article {
 		border: 2px solid #000000;
-		border-radius: 0px 0px 25px 0px;
+		border-radius: 0px 0px 25px 0px;		
+		grid-template-columns: 300px auto;
+    	display: grid;
 	}
 
-	.tpl-annuaire-liste figure { width: 300px; }
-	.tpl-annuaire-liste .h3-like { margin-top: 0; }
+	.tpl-annuaire-liste figure { 
+		background: #fff;
+		width: 300px;
+	}
+	.tpl-annuaire-liste .h3-like {
+		margin-top: 0;
+		margin-bottom: 3rem;
+	}
+		.tpl-annuaire-liste .h3-like:after { 
+			background: url('/theme/elgar/img/pointille.png') repeat-x left bottom;
+			border: none;
+			width: 100%;
+		    height: 5px;
+		    bottom: -10px;
+		}
 
 	#adresse p {  margin-bottom: 0; }
 
@@ -588,7 +612,7 @@ header section:first-of-type { font-size: 1.4rem; }
 /* PERSONNALITES */
 .tpl-personnalites .blocks li {
 	display: grid;
-	grid-template-rows: 150px 60px 120px auto;
+	/* grid-template-rows: 150px 60px 120px auto; */
 	justify-items: center;
 	width: 300px;
 	
@@ -605,6 +629,12 @@ header section:first-of-type { font-size: 1.4rem; }
 	.tpl-personnalites .blocks li p { margin-bottom: 0;	}
 
 	.tpl-personnalites .brd-alt { border: 2px solid #20828F; }
+
+	.tpl-personnalites .asc:not(:empty) {
+		background: url('/theme/elgar/img/pointille.png') no-repeat top center;	
+		padding-top: 3rem;	
+		width: 100%;
+	}
 
 
 /* PUBLICATIONS  */
@@ -2191,6 +2221,10 @@ div.editable {
 
 }
 
+/* Pour bug avec le menu sous Firefox en portrait */
+@media print and (max-width: 850px) {
+	#main-navigation { visibility: hidden !important; }
+}
 
 /* ---------------------------------- */
 /* ==Icons                            */
