@@ -32,7 +32,7 @@ $url_back = encode($res['url']);
 				</nav>
 			<?}?>
 			
-			<?php txt('description', array('class'=>'tc ptm')); ?>
+			<?php txt('description', array('class'=>'ptm'));//tc ?>
 
 		</div>
 
