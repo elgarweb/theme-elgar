@@ -25,7 +25,7 @@ if(!$alert_view){?>
 
 	<article class="mw960p mod flex wrap space-l aic jcc center pam">
 					
-		<?php media('alerte-img', array('size' => '300', 'lazy' => true)); ?>
+		<?php media('alerte-img', array('size' => '500', 'lazy' => true)); ?>
 		
 		<div>
 			<?php txt('alerte-texte', 'mw600p'); ?>
