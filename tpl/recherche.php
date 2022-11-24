@@ -1,6 +1,9 @@
 <?
 if(!$GLOBALS['domain']) exit;
 
+// Pour faire fonctionner la recherche il faut ajouter 'recherche' (le permalien) dans config.php au tableau $GLOBALS['filter_auth'] = array('page', user', 'recherche');
+
+// Mets en avant le contenu de la recherche dans l'extrait // Plus utilisé car créé des bugs collatéraux
 function highlight($txt, $recherche)
 {
 	// Supprime les <br> multiples
