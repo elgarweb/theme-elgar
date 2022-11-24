@@ -2,6 +2,8 @@
 if(!$GLOBALS['domain']) exit;
 if(!@$GLOBALS['content']['titre']) $GLOBALS['content']['titre'] = $GLOBALS['content']['title'];
 
+$infos = false;
+
 // Variables
 switch($res['tpl']) {
 	default:
@@ -26,6 +28,7 @@ switch($res['tpl']) {
 		$dir = encode(__('Agenda'));
 		$url_back = encode(__('Agenda'));
 		$text_back = __("Go back to the agenda");
+		$infos = true;
 	break;
 
 	case 'annuaire':
@@ -34,6 +37,7 @@ switch($res['tpl']) {
 		$dir = encode(__('Directory'));// 'annuaire'
 		$url_back = encode(__('Directory'));
 		$text_back = __("Go back to the directory");
+		$infos = true;
 	break;
 
 	case 'annuaire-autre':
@@ -42,6 +46,7 @@ switch($res['tpl']) {
 		$dir = encode(__('Other Directory'));
 		$url_back = encode(__('Other Directory'));
 		$text_back = __("Go back to the directory");
+		$infos = true;
 	break;
 
 	case 'commerce':
@@ -50,6 +55,7 @@ switch($res['tpl']) {
 		$dir = encode(__('Commerce'));// 'commerce'
 		$url_back = encode(__('Commerce'));
 		$text_back = __("Go back to the directory");
+		$infos = true;
 	break;
 
 	/*case 'arrete':
@@ -265,7 +271,7 @@ switch($res['tpl']) {
 
 				<!-- Chapô -->
 				<?php 
-				if($res['tpl']=='annuaire' or $res['tpl']=='commerce' or $res['tpl']=='event') 
+				if($infos) 
 				{ 
 					if(!@$GLOBALS['content']['url-site-web'] and
 						!@$GLOBALS['content']['telephone'] and
