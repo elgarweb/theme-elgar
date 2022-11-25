@@ -400,6 +400,7 @@ header section:first-of-type { font-size: 1.4rem; }
 	#enunclic {
 		z-index: 1;
 		position: relative;
+		padding-top: 3rem;
 	}
 
 	#enunclic a.white { color: inherit !important; }
@@ -407,7 +408,7 @@ header section:first-of-type { font-size: 1.4rem; }
 	#enunclic li { 
 		max-width: 150px; 
 		padding-bottom: 4rem; 
-		margin: auto;
+		/* margin: auto; */
 	}
 
 	#enunclic img {
@@ -2114,6 +2115,10 @@ div.editable {
 		display: flex;
     	flex-wrap: wrap;
     }
+    	#enunclic li {
+	    	margin: 0 auto;
+	    	width: 100%;
+	    }
 }
 
 /* RESPONSIVE small */
@@ -2559,3 +2564,5 @@ div.editable {
 	background: black !important;
 	border: .15em solid white !important;
 }
+
+.hc header .selected a { color: #06B0BB !important; }
