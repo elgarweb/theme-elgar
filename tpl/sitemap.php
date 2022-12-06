@@ -99,7 +99,8 @@ $(function()
 		// Si le lien n'est pas déjà présent
 		if(!sitemap[window.location.origin + $(this).attr("href")]) 
 		{
-			$("#sitemap").append('<li><a href="'+$(this).attr("href")+'">'+$(this).html()+'</a></li>');
+			// Regex pour supprimer les FontAwesome
+			$("#sitemap").append('<li><a href="'+$(this).attr("href")+'">'+$(this).html().replace(/<i[^>]*>[\s\S]*?<\/i>/, '')+'</a></li>');
 
 			sitemap[window.location.origin + $(this).attr("href")] = $(this).html();
 		}
