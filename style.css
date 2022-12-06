@@ -2566,3 +2566,11 @@ div.editable {
 }
 
 .hc header .selected a { color: #06B0BB !important; }
+
+.hc .burger span,
+.hc .burger span:before,
+.hc .burger span:after
+{ background: #fff !important; }
+
+.hc.responsive-nav .burger span
+{ background: transparent !important; }
