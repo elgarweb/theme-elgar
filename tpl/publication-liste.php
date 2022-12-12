@@ -50,7 +50,7 @@ $mois = array(
 	txt('description', array('class'=>'ptm'));//,'tag'=>'p'
 	?>
 
-	<form id="filtre-date-publication" class="bg-color-3 pam">
+	<form id="filtre-date-publication" class="mod bg-color-3 pam">
 
 		<!-- 
 		<div class="mbt"><?_e("Filter by date (format DD/MM/YYYY)")?> :</div>
@@ -69,33 +69,37 @@ $mois = array(
 
 			<?php echo txt("comment-filtrer");?>
 
-			<div class="mts">
+			<div class="flex wrap">
 
-				<label for="year"><?_e("Year")?> :</label>
-				<select id="year" class="pat" aria-describedby="comment-filtrer">
-					<option value="" <?=(!@$GLOBALS['filter']['year']?'selected':'')?>><?_e("Year")?></option>
-					<?php 
-					for($i=1980; $i<=date("Y"); $i++) { 
-						echo'<option value="'.$i.'"'.(@$GLOBALS['filter']['year']==$i?' selected':'').'>'.$i.'</option>';
-					}
-					?>
-				</select>
+				<div class="mts">
+					<label for="year"><?_e("Year")?> :</label>
+					<select id="year" class="pat mrm" aria-describedby="comment-filtrer">
+						<option value="" <?=(!@$GLOBALS['filter']['year']?'selected':'')?>><?_e("Year")?></option>
+						<?php 
+						for($i=1980; $i<=date("Y"); $i++) { 
+							echo'<option value="'.$i.'"'.(@$GLOBALS['filter']['year']==$i?' selected':'').'>'.$i.'</option>';
+						}
+						?>
+					</select>
+				</div>
 
-				<label for="month" class="mlm"><?_e("Month")?> :</label>
-				<select class="pat" id="month">
-					<option value="" <?=(!@$GLOBALS['filter']['month']?'selected':'')?>><?_e("Month")?></option>
-					<?php 
-					foreach($mois as $num => $nom){
-						echo'<option value="'.$num.'"'.(@$GLOBALS['filter']['month']==$num?' selected':'').'>'.__($nom).'</option>';
-					}
-					?>
-				</select>
+				<div class="mts">
+					<label for="month"><?_e("Month")?> :</label>
+					<select class="pat" id="month">
+						<option value="" <?=(!@$GLOBALS['filter']['month']?'selected':'')?>><?_e("Month")?></option>
+						<?php 
+						foreach($mois as $num => $nom){
+							echo'<option value="'.$num.'"'.(@$GLOBALS['filter']['month']==$num?' selected':'').'>'.__($nom).'</option>';
+						}
+						?>
+					</select>
+				</div>
 
 			</div>
 
 		</fieldset>
 		
-		<button type="submit" class="bt fr mtl mrl"><?_e("Filter")?></button>
+		<button type="submit" class="bt fr mtm mrl"><?_e("Filter")?></button>
 
 	</form>
 	<script>
