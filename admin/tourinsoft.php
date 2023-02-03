@@ -295,7 +295,7 @@ $GLOBALS['connect']->query("DELETE FROM ".$tt." WHERE zone='agenda' AND id<=0");
 if($GLOBALS['connect']->error) die($GLOBALS['connect']->error);
 
 // Suppression des dates dans les méta avant ajout ?
-$GLOBALS['connect']->query("DELETE FROM ".$tm." WHERE type='aaaa-mm-jj' AND id<=0");
+$GLOBALS['connect']->query("DELETE FROM ".$tm." WHERE (type='aaaa-mm-jj' OR type='aaaa-mm-jj-fin') AND id<=0");
 if($GLOBALS['connect']->error) die($GLOBALS['connect']->error);
 
 // Suppression des contenus
