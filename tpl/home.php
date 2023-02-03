@@ -238,40 +238,54 @@ if(!$alert_view){?>
 // Construction de la requete
 $sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
 
-
-//***** Pour le tri par date pour les events
 // Tous les évènements
 //$sql.=" JOIN ".$tm." AS event ON event.id=".$tc.".id AND event.type='aaaa-mm-jj'";
 
 // Que les évènements a venir
 $sql.=" JOIN ".$tm." AS event_deb ON event_deb.id=".$tc.".id AND event_deb.type='aaaa-mm-jj' AND event_deb.cle >= '".date("Y-m-d")."'";
 
-
-// Que les évènements en cours
-//$sql.=" JOIN ".$tm." AS event_deb ON event_deb.id=".$tc.".id AND event_deb.type='aaaa-mm-jj'";
-//$sql.=" LEFT JOIN ".$tm." AS event_fin ON event_fin.id=".$tc.".id AND event_fin.type='aaaa-mm-jj-fin'";
-
 $sql.=" WHERE (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft') AND ".$tc.".lang='".$lang."' AND state='active'";
-
-// Que les évènements en cours
-//$sql.=" AND (event_fin.cle >= '".date("Y-m-d")."' OR event_deb.cle >= '".date("Y-m-d")."')";
-
-
-//***** Tri par date de l'evenement
-// Que les évènements en cours
-//$sql.=" ORDER BY event_deb.cle ASC, event_fin.cle ASC";
 
 // Que les évènements a venir
 $sql.=" ORDER BY event_deb.cle ASC";
 
-
 $sql.=" LIMIT 3";
 
-//echo $sql;
+//echo "<b>A venir :</b> ".$sql;
 
 $sel_event = $connect->query($sql);
+$num_event = $sel_event->num_rows;
+
+
+
+// Si peut d'évènement à venir, on prend aussi les en cours
+if($num_event<3) 
+{
+	// Construction de la requete
+	$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
+
+	// Que les évènements en cours
+	$sql.=" JOIN ".$tm." AS event_deb ON event_deb.id=".$tc.".id AND event_deb.type='aaaa-mm-jj'";
+	$sql.=" LEFT JOIN ".$tm." AS event_fin ON event_fin.id=".$tc.".id AND event_fin.type='aaaa-mm-jj-fin'";
+
+	$sql.=" WHERE (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft') AND ".$tc.".lang='".$lang."' AND state='active'";
+
+	// Que les évènements en cours
+	$sql.=" AND (event_fin.cle >= '".date("Y-m-d")."' OR event_deb.cle >= '".date("Y-m-d")."')";
+
+	// Que les évènements en cours
+	$sql.=" ORDER BY event_deb.cle ASC, event_fin.cle ASC";
+
+	$sql.=" LIMIT 3";
+
+	//echo "<br><b>En cours :</b> ".$sql;
+
+	$sel_event = $connect->query($sql);
+	$num_event = $sel_event->num_rows;
+}
+
 ?>
-<section id="home-agenda" class="bg-color-3 ptl pbl<?=($sel_event->num_rows>0?'':' editable-hidden')?>">
+<section id="home-agenda" class="bg-color-3 ptl pbl<?=($num_event>0?'':' editable-hidden')?>">
 
 	<article class="mw960p center">
 
