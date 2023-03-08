@@ -234,7 +234,7 @@ if(!$alert_view){?>
 
 
 <!-- AGENDA -->
-<?
+<?php
 // Construction de la requete
 $sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
 

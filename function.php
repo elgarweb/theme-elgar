@@ -1,4 +1,4 @@
-<?
+<?php
 if(!isset($GLOBALS['domain'])) exit;
 
 // Table des traductions
