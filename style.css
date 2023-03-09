@@ -400,7 +400,7 @@ header section:first-of-type { font-size: 1.4rem; }
 	#enunclic {
 		z-index: 1;
 		position: relative;
-		padding-top: 3rem;
+		padding-top: 5rem;
 	}
 
 	#enunclic a.white { color: inherit !important; }

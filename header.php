@@ -24,13 +24,13 @@
 			</div>
 
 			<!-- Changement de site en fonction de la langue -->
-			<?
+			<?php
 			if($lang=='fr') $switch_lang='eu';
 			else $switch_lang='fr';
 
 			if(isset($GLOBALS['domain_lang'][$switch_lang])){?>
 			<a href="<?=$GLOBALS['scheme'].$GLOBALS['domain_lang'][$switch_lang].$GLOBALS['path'];?>" lang="<?=$switch_lang?>" class="fr pbs" id="switch-lang"><?=$GLOBALS['translation']['home other language'][$switch_lang]?></a>
-			<?}?>
+			<?php }?>
 
 		</div>
 

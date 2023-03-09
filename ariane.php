@@ -18,9 +18,9 @@
 					$array_navigation['href'] = $GLOBALS['path'].encode(@$content['navigation']);
 				}
 
-				?><li class="inline"<?=(isset($content['navigation'])?'':' aria-hidden="true"')?>><?
+				?><li class="inline"<?=(isset($content['navigation'])?'':' aria-hidden="true"')?>><?php
 				select('navigation', $array_navigation);
-				?></li><?
+				?></li><?php
 			}
 
 			// Si page fiche ou listing avec tag
@@ -30,7 +30,7 @@
 				// Supprime le nom de la page en cours pour le chemin
 				if($tag or $GLOBALS['filter']) $title = preg_replace('/^'.preg_quote($res['title'].' - ').'*/', '', $title);
 
-				?><li class="inline"><a href="/<?=encode($url_back)?>"><?php _e(encode($url_back))?></a></li><?
+				?><li class="inline"><a href="/<?=encode($url_back)?>"><?php _e(encode($url_back))?></a></li><?php
 			}
 
 			// Supprime le nom du site
@@ -44,17 +44,17 @@
 
 
 
-	<?if((isset($GLOBALS['tags'])) || (@$res['type']=='article') || (@$res['type']=='event' or $res['type']=='event-tourinsoft')) { ?>
+	<?php if((isset($GLOBALS['tags'])) || (@$res['type']=='article') || (@$res['type']=='event' or $res['type']=='event-tourinsoft')) { ?>
 	<script>
-		<?if(isset($GLOBALS['tags'])) {// Si tag de navigation on met en selected dans la navigation principal?>
+		<?php if(isset($GLOBALS['tags'])) {// Si tag de navigation on met en selected dans la navigation principal?>
 			$("header nav [href$='<?=array_keys($GLOBALS['tags'])[0]?>']").parent().addClass("selected");
-		<?}?>
-		<?if(@$res['type']=='article') {?>
+		<?php }?>
+		<?php if(@$res['type']=='article') {?>
 			$("header nav [href$='actualites'").parent().addClass("selected");
-		<?}?>
-		<?if(@$res['type']=='event' or $res['type']=='event-tourinsoft') {?>
+		<?php }?>
+		<?php if(@$res['type']=='event' or $res['type']=='event-tourinsoft') {?>
 			$("header nav [href$='agenda'").parent().addClass("selected");
-		<?}?>
+		<?php }?>
 	</script>
 	<?php } 
 

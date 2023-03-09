@@ -2,9 +2,9 @@
 
 <footer role="contentinfo">
 
-	<div class="editable-hidden tc ptm"><i class="fa fa-attention" aria-hidden="true"></i><?_e("Have you taken the accessibility rules into account when entering your content?")?></div>
+	<div class="editable-hidden tc ptm"><i class="fa fa-attention" aria-hidden="true"></i><?php _e("Have you taken the accessibility rules into account when entering your content?")?></div>
 
-	<?if(isset($res['url'])){?>
+	<?php if(isset($res['url'])){?>
 		<!-- PARTAGE RÉSEAUX SOCIAUX -->
 		<section id="partage" class="mw960p flex wrap jcc center tc ptl pbs">
 
@@ -20,12 +20,12 @@
 
 				<li class="inline"><a href="https://www.facebook.com/sharer/sharer.php?u=<?=$url_encode?>" target="_blank"><i class="fa fa-fw fa-facebook big" aria-hidden="true"></i>Facebook</a></li>
 				
-				<li class="inline"><a href="mailto:?subject=<?=$titre_encode?>&body=<?=$url_encode?>" target="_blank"><i class="fa fa-fw fa-mail big mlm mrs" aria-hidden="true"></i><?_e("Mail")?></a></li>
+				<li class="inline"><a href="mailto:?subject=<?=$titre_encode?>&body=<?=$url_encode?>" target="_blank"><i class="fa fa-fw fa-mail big mlm mrs" aria-hidden="true"></i><?php _e("Mail")?></a></li>
 
 			</ul>
 
 		</section>
-	<?}?>
+	<?php }?>
 
 	<!-- RENSEIGNEMENTS COMPLEMENTAIRES -->
 	<section id="renseignement" class="<?=(isset($GLOBALS['content']['texte-renseignements']) ? 'bg-color-2 ptl pbt' : 'editable-hidden'); ?>">
@@ -43,7 +43,7 @@
 
 			<article class="prm">
 
-				<?if(isset($GLOBALS['newsletter-key'][$lang])){?>
+				<?php if(isset($GLOBALS['newsletter-key'][$lang])){?>
 				<form id="newsletter" method="post" action="https://newsletter.infomaniak.com/external/submit" target="_blank" class="pbm mbs">
 
 					<input type="email" name="email" style="display:none" />
@@ -69,13 +69,13 @@
 					// Message d'erreur en cas de mauvaise saisie du mail. Pour l'accessibilité
 					var email_newsletter = document.getElementById("email_newsletter");
 					email_newsletter.addEventListener("invalid", function() {
-						email_newsletter.setCustomValidity("<?_e("Invalid email")?>. <?_e("Expected format")?> : dupont@exemple.com")
+						email_newsletter.setCustomValidity("<?php _e("Invalid email")?>. <?php _e("Expected format")?> : dupont@exemple.com")
 					}, false);
 					email_newsletter.addEventListener("input", function() {
 						email_newsletter.setCustomValidity("");
 					}, false);
 				</script>
-				<?}?>
+				<?php }?>
 
 				<!-- Réseaux sociaux -->
 				<?php txt('texte-reseaux'); ?>
@@ -107,13 +107,13 @@
 	// Ajout du title "nouvelle fenêtre" au lien sortant
 	$("a[target='_blank']").each(function() 
 	{
-		if(!$(this).attr("aria-label")) $(this).attr("aria-label", $(this).text() + " - <?_e("New window");?>");
+		if(!$(this).attr("aria-label")) $(this).attr("aria-label", $(this).text() + " - <?php _e("New window");?>");
 
 		if($(this).children().prop("tagName") != "IMG")
 			$(this).addClass("external");// Pour l'icône d'ouverture dans un nouvel onglet
 	});
 
-	<?if(isset($GLOBALS['plausible_auth'])){?>
+	<?php if(isset($GLOBALS['plausible_auth'])){?>
 	$(function()
 	{
 		edit.push(function() 
@@ -150,7 +150,7 @@
 
 		});
 	});
-	<?}?>
+	<?php }?>
 </script>
 
-<? include("theme/".$GLOBALS['theme']."/admin/lang.php"); ?>
+<?php include("theme/".$GLOBALS['theme']."/admin/lang.php"); ?>
