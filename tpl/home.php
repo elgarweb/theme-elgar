@@ -79,12 +79,12 @@ if(!$alert_view){?>
 
 	<div class="mw960p center">
 
-		<?php h2('titre-clic', 'color-alt'); ?>
+		<?php h2('titre-clic', 'color-alt mbn'); ?>
 
 		<div>
 
 			<!-- .module pour bien identifier que ce sont les elements à dupliquer et a sauvegardé -->
-			<ul id="enunclic" class="module unstyled grid space-l jic tc pan ptm">
+			<ul id="enunclic" class="module unstyled grid space-l jic tc pan ptl mtn">
 			<?php
 			// nom du module "enunclic" = id du module, et au début des id des txt() media() ...
 			$module = module("enunclic");
@@ -100,7 +100,7 @@ if(!$alert_view){?>
 						</div>
 						
 						<div class="ptm">
-							<?php txt("enunclic-texte-".$key, array("tag" => "span"));?>
+							<?php txt("enunclic-texte-".$key);?>						
 						</div>
 
 					</a>
