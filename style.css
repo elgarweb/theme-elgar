@@ -655,7 +655,8 @@ header section:first-of-type { font-size: 1.4rem; }
 
 
 /* SOMMAIRE */
-/* .mw1600p { max-width: 960px; } *//* Version non flottant */
+/* Version non flottant */
+/* .mw1600p { max-width: 960px; } */
 .mw1600p { max-width: 1600px; }
 
 	#sommaire { 

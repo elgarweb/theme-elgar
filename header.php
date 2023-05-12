@@ -4,7 +4,7 @@
 
 	<section class="mw960p mod center relative">
 
-		<div class="pts">
+		<div class="navigation-secondaire pts">
 			
 			<!-- Accessibilité -->
 			<div id="accessibilite" class="fl pbs">
@@ -13,7 +13,7 @@
 					<ul class="exclude">
 						<li><a href="#main" class="acces-rapide"><?php _e("Skip to content")?></a></li>
 						<li><a href="/<?=encode(__("Contact"))?>"><?php _e("Contact")?></a></li>
-						<li><a <?href('lien-conformite')?>><?php txt('texte-conformite', array('tag'=>'span')); ?></a></li>
+						<li><a <?php href('lien-conformite')?>><?php txt('texte-conformite', array('tag'=>'span')); ?></a></li>
 					</ul>
 				</nav>	
 
