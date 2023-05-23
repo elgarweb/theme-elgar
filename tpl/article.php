@@ -303,7 +303,7 @@ switch($res['tpl']) {
 				}
 
 				// Description : s'affiche sur la liste
-				if($res['tpl']=='article' or $res['tpl']=='event')
+				if($res['tpl']!='publication')// Affichage dans les actu, agenda, annuaire
 					txt('description', array('class'=>'mbn'));//,'tag'=>'p'
 				?>
 
