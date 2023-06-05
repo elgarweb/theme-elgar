@@ -130,6 +130,11 @@ $url_back = encode($res['url']);
 							<?=$res_fiche['title']?>
 						</h2>
 
+						<?php // Description
+						if(@$content_fiche['description']) 
+							echo"<div class='description'>".$content_fiche['description']."</div>";
+						?>
+
 						<!-- Coordonnées -->
 						<ul class="unstyled pln">
 						<?php 
@@ -154,13 +159,17 @@ $url_back = encode($res['url']);
 								echo'</li>';
 							}
 							?>
-							</ul>
+						</ul>
+
+						<?php
+						if(@$content_fiche['texte'] or @$_SESSION['auth']['edit-annuaire']){?>
 						<!-- Lien vers détail -->
 						<div class="absolute bot15 right15 plus">
 
 							<a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" aria-label="<?php echo __("See the sheet")." ".$res_fiche['title']?>"><?php _e("See the sheet")?></a>
 							
 						</div>
+						<?php }?>
 
 					</div>
 

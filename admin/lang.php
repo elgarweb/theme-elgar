@@ -56,6 +56,31 @@ switch(@$_REQUEST['mode'])
 									// Si pas de layer on l'inject // Sinon on remplace le contenu et ouvre
 									if(!$("#lang .absolute").length) $("#lang").append(html);
 									else $("#lang .absolute").replaceWith(html).fadeIn();
+
+									// Compte les mots	
+									var total_charCount = total_wordCount = 0;		
+
+									// Boucle sur les contenus éditables dans le main
+									$("main .editable").each(function() {
+										// Supprime les ponctuations et espaces de début/fin
+										var txt = $.trim($(this).text().replace(/[.,;:?!]+/g, ""))
+										
+										// nombre de caractère
+										, charCount = txt.length
+
+										// nombre de mots séparés par des espaces [\r\n\t\f\v ]
+										, wordCount = txt.split(/\s+/).length;
+
+										if(txt)// Si contenu on ajoute au compteur
+										{
+											total_charCount += charCount;
+											total_wordCount += wordCount;
+										}
+									});
+									
+									// Affichage des chiffres
+									$("#charcount").text(total_charCount);
+									$("#wordcount").text(total_wordCount);
 								}
 							});
 						}
@@ -84,7 +109,7 @@ switch(@$_REQUEST['mode'])
 	break;
 
 
-	case"view":
+	case"view":// Affichage des options de langue
 
 		$lang = get_lang();// Sélectionne  la langue
 		load_translation('api');// Chargement des traductions du système
@@ -166,9 +191,14 @@ switch(@$_REQUEST['mode'])
 					}
 				}
 				?>
-				<button id="dupliquer" class="small"><?_e("Duplicate")?> <i class="fa fa-fw fa-doc-text"></i></button>
+				<button id="dupliquer" class="small"><?_e("Duplicate")?> <i class="fa fa-fw fa-doc-text" aria-hidden="true"></i></button>
 			</div>
 
+			<!-- Informations sur le nombre de mots dans le contenu pour traduction -->	
+			<div>
+				<hr class="mts mbs">	
+				<i class="fa fa-fw fa-info-circled" aria-hidden="true"></i> <span id="wordcount"></span> mots, <span id="charcount"></span> caractères
+			</div>
 
 		</div>
 
