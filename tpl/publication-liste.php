@@ -122,7 +122,7 @@ $mois = array(
 	
 </section>
 
-<section class="mw960p mod center">
+<section class="liste mw960p mod center">
 
 	<div class="blocks grid-3 space-xl">
 		
