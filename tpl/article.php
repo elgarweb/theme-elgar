@@ -103,7 +103,7 @@ switch($res['tpl']) {
 			</div>
 			<?php } ?>
 	
-			<div class="mw600p">
+			<div <?php if($media) { ?>class="mw600p"<?php } ?>>
 
 				<!-- Tag -->
 				<div id="tags">
@@ -312,7 +312,7 @@ switch($res['tpl']) {
 		</div>
     
 		<!-- Contenu de l'article -->
-		<article class="clear ptl">
+		<article class="clear ptm">
 
 			<?php
 			txt('texte', array('dir' => $dir));
