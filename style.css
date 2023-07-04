@@ -688,6 +688,9 @@ header section:first-of-type { font-size: 1.4rem; }
 			margin: 0 1rem 3rem;
     		border-bottom: 1px solid #E5E5E5;
 		}
+			#sommaire h2 { margin-top: 0; }
+
+		.tpl-page-sommaire article { margin: 0 1.5rem; }
 	}
 
 	/* Sommaire Flotant 1740px */
@@ -2058,7 +2061,10 @@ div.editable {
 	header #accessibilite .mrs
 	{ margin: 0; }
 
-	header .jcsb { justify-content: center; }
+	header .jcsb { 
+		padding-top: 0;
+		justify-content: center;
+	}
 
 	#rechercher { padding-top: 1rem; }
 
