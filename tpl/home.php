@@ -42,7 +42,10 @@ if(!$alert_view){?>
 
 	<div class="mw960p center pbl pll prl">
 	
-		<?php h1('titre', 'picto'); ?>
+		<?php
+		// Si on demande le h1 au dessu de l'image et texte
+		if(@$GLOBALS['home-titre-place'] != 'in') h1('titre', 'picto');
+		?>
 
 		<article class="<?=(isset($GLOBALS['content']['intro-texte']) ? 'row' : 'editable-hidden'); ?>">
 			
@@ -59,7 +62,12 @@ if(!$alert_view){?>
 			
 			<div class="col bg-color-2">
 
-				<?php txt('intro-texte', 'pam pbt'); ?>
+				<?php 
+				// Si on demande le h1 dans le bloc texte
+				if(@$GLOBALS['home-titre-place'] == 'in') h1('titre', 'picto');
+
+				txt('intro-texte', 'pam pbt');
+				?>
 
 				<div class="plus mlm mrm <?=(isset($GLOBALS['content']['intro-lien'])?'':' editable-hidden')?>">
 					<a <?href('intro-lien');?>><?php span('intro-texte-lien', ''); ?></a>

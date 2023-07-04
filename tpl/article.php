@@ -103,7 +103,7 @@ switch($res['tpl']) {
 			</div>
 			<?php } ?>
 	
-			<div class="mw600p">
+			<div <?php if($media) { ?>class="mw600p"<?php } ?>>
 
 				<!-- Tag -->
 				<div id="tags">
@@ -312,7 +312,7 @@ switch($res['tpl']) {
 		</div>
     
 		<!-- Contenu de l'article -->
-		<article class="clear ptl">
+		<article class="clear ptm">
 
 			<?php
 			txt('texte', array('dir' => $dir));
@@ -341,46 +341,74 @@ switch($res['tpl']) {
 </section>
 
 <script>
-$(function()
-{
-	// Décode
-	$(".tel, .mailto").on("click", function(event) { 
-		//event.preventDefault();
-		//document.location.href = $(event.target).attr("class") + ":" + atob($(event.target).parent().next(".encode").val());
-		$(event.target).next('p').html(atob($(event.target).parent().next(".encode").val()));
-	});
-
-	// Avant la sauvegarde
-	before_save.push(function() {
-		// Encode
-		if(data["content"]["mail-contact"] != undefined) 
-			data["content"]["mail-contact"] = btoa(data["content"]["mail-contact"]);
-
-		if(data["content"]["telephone"] != undefined)
-			data["content"]["telephone"] = btoa(data["content"]["telephone"]);
-	});
-
-	// Action si on lance le mode d'edition
-	edit.push(function()
+	function dateOrder(id) {
+		val = $("#"+id).val();
+		if(val){
+			parts = val.split("-");
+			if(parts[2].length == 4)
+				$("#"+id).val(parts[2]+"-"+parts[1]+"-"+parts[0])
+		}
+	}
+	function heureFormat(id) {
+		val = $("#"+id).val();
+		parts = val.split("h");
+		if(parts.length > 1)// Si un h on met :
+			$("#"+id).val(parts[0]+":"+parts[1])
+	}
+		
+	$(function()
 	{
 		// Décode
-		$("#mail-contact, #telephone").val(function(index, value) {
-			if(value) return atob(value);
+		$(".tel, .mailto").on("click", function(event) { 
+			//event.preventDefault();
+			//document.location.href = $(event.target).attr("class") + ":" + atob($(event.target).parent().next(".encode").val());
+			$(event.target).next('p').html(atob($(event.target).parent().next(".encode").val()));
 		});
 
-		// DATEPIKER pour la date de l'event
-		$.datepicker.setDefaults({
-	        altField: "#datepicker",
-	        monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-	        dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-	        dateFormat: 'yy-mm-dd',
-	        firstDay: 1
-	    });
-		$("#aaaa-mm-jj-publication").datepicker();
-		$("#aaaa-mm-jj").datepicker();
-		$("#aaaa-mm-jj-fin").datepicker();
+		before_data.push(function() {
+			// Vérifie le format des dates
+			dateOrder("aaaa-mm-jj-publication");
+			dateOrder("aaaa-mm-jj");
+			dateOrder("aaaa-mm-jj-fin");
+			
+			// Vérifie les formats des heures
+			heureFormat("heure-ouverture");
+			heureFormat("heure-ouverture-fin");
+			heureFormat("heure-fermeture");
+			heureFormat("heure-fermeture-fin");
+		});
+
+		// Avant la sauvegarde
+		before_save.push(function() {
+			// Encode
+			if(data["content"]["mail-contact"] != undefined) 
+				data["content"]["mail-contact"] = btoa(data["content"]["mail-contact"]);
+
+			if(data["content"]["telephone"] != undefined)
+				data["content"]["telephone"] = btoa(data["content"]["telephone"]);
+		});
+
+		// Action si on lance le mode d'edition
+		edit.push(function()
+		{
+			// Décode
+			$("#mail-contact, #telephone").val(function(index, value) {
+				if(value) return atob(value);
+			});
+
+			// DATEPIKER pour la date de l'event
+			$.datepicker.setDefaults({
+				altField: "#datepicker",
+				monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+				dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+				dateFormat: 'yy-mm-dd',
+				firstDay: 1
+			});
+			$("#aaaa-mm-jj-publication").datepicker();
+			$("#aaaa-mm-jj").datepicker();
+			$("#aaaa-mm-jj-fin").datepicker();
+		});
 	});
-});
 </script>
 
 <!-- Actualité à la une -->

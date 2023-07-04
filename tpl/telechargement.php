@@ -18,7 +18,7 @@ if(!isset($telechargements)) $telechargements = 5;
 
 				<?h2('titre-'.$i, array('class' => 'tl mtm', 'dir' => 'telechargement'));?>
 
-				<ul id="telechargement-<?=$i?>" class="module unstyled grid-4 tc pan">					
+				<ul id="telechargement-<?=$i?>" class="module unstyled grid-4 space tc pan">					
 					<?php 
 					$module = module("telechargement-".$i);
 					foreach($module as $key => $value) {?>
