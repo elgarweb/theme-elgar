@@ -27,6 +27,10 @@ $mois = array(
 	<?php
 	h1('title', 'picto');
 
+
+	txt('description', array('class'=>'ptm'));//,'tag'=>'p'
+
+
 	// Liste les tags pour filtrer la page
 	$i = 1;
 	$sel_tag_list = $connect->query("SELECT distinct encode, name FROM ".$table_tag." WHERE zone='".$res['url']."' AND lang='".$lang."' GROUP BY encode, name ORDER BY encode ASC");
@@ -34,7 +38,7 @@ $mois = array(
 	
 	if($sel_tag_list->num_rows > 0) {
 	?>
-		<nav role="navigation" aria-label="<?php _e("Filter by")?>" class="flex wrap space jcc tc ptl pbm">
+		<nav role="navigation" aria-label="<?php _e("Filter by")?>" class="flex wrap space jcc tc ptm pbm">
 			<ul class="unstyled pln">
 				<?php 
 				while($res_tag_list = $sel_tag_list->fetch_assoc()) {
@@ -47,9 +51,11 @@ $mois = array(
 	<?php
 	}
 
-	txt('description', array('class'=>'ptm'));//,'tag'=>'p'
-	?>
 
+	// Si pas de tag ou tag selectionné on affiche le formulaire de filtrage par date
+	if($sel_tag_list->num_rows <= 0 or isset($tag))
+	{
+	?>
 	<form id="filtre-date-publication" class="mod bg-color-3 pam">
 
 		<!-- 
@@ -119,9 +125,18 @@ $mois = array(
 			document.location.href = url;
 		});
 	</script>
+
+	<?php
+	}?>
 	
 </section>
 
+
+<?php
+// Si pas de tag ou tag selectionné on affiche le formulaire de filtrage par date
+if($sel_tag_list->num_rows <= 0 or isset($tag))
+{
+?>
 <section class="liste mw960p mod center">
 
 	<div class="blocks grid-3 space-xl">
@@ -233,3 +248,6 @@ $mois = array(
 	</div>
 
 </section>
+<?php
+}
+?>
