@@ -346,14 +346,16 @@ switch($res['tpl']) {
 		if(val){
 			parts = val.split("-");
 			if(parts[2].length == 4)
-				$("#"+id).val(parts[2]+"-"+parts[1]+"-"+parts[0])
+				$("#"+id).val(parts[2]+"-"+parts[1]+"-"+parts[0]);
 		}
 	}
 	function heureFormat(id) {
 		val = $("#"+id).val();
-		parts = val.split("h");
-		if(parts.length > 1)// Si un h on met :
-			$("#"+id).val(parts[0]+":"+parts[1])
+		if(val){
+			parts = val.split("h");
+			if(parts.length > 1)// Si un h on met :
+				$("#"+id).val(parts[0]+":"+parts[1]);
+		}
 	}
 		
 	$(function()
