@@ -47,7 +47,7 @@ if(!$alert_view){?>
 		if(@$GLOBALS['home-titre-place'] != 'in') h1('titre', 'picto');
 		?>
 
-		<article class="<?=(isset($GLOBALS['content']['intro-texte']) ? 'row' : 'editable-hidden'); ?>">
+		<article class="<?=((isset($GLOBALS['content']['intro-texte']) or isset($GLOBALS['content']['intro-visuel'])) ? 'row' : 'editable-hidden'); ?>">
 			
 			<div class="col brd">
 				<?php

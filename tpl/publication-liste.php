@@ -38,7 +38,7 @@ $mois = array(
 	
 	if($sel_tag_list->num_rows > 0) {
 	?>
-		<nav role="navigation" aria-label="<?php _e("Filter by")?>" class="flex wrap space jcc tc ptm pbm">
+		<nav role="navigation" aria-label="<?php _e("Filter by")?>" class="flex wrap space jcc tc ptm pbl">
 			<ul class="unstyled pln">
 				<?php 
 				while($res_tag_list = $sel_tag_list->fetch_assoc()) {
