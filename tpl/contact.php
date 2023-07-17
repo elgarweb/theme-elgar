@@ -75,6 +75,8 @@ switch(@$_GET['mode'])
 						<!-- Question -->
 						<?
 						$chiffre = array('zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten');
+						$chiffre_file = array('zero', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf', 'dix');
+
 						$operators = array("+", "-");
 						$operator = $operators[array_rand($operators)];
 						$nb1 = rand(1, 5);//10
@@ -86,7 +88,15 @@ switch(@$_GET['mode'])
 						<div>
 							<label for="question">
 								<?php _e("For security reasons, please solve the following calculation")?><span class="red">*</span><br>
-								<span id="calcul"><?=(__($chiffre[$nb1])." ".($operator=='-'?'−':$operator)." ".__($chiffre[$nb2]));?> = </span>
+
+								<img src="/theme/elgar/img/chiffre/<?=$chiffre_file[$nb1];?>.png" alt="<?=__($chiffre[$nb1]);?>" class="vatt">
+								<?=($operator=='-'?'−':$operator);?>
+								<img src="/theme/elgar/img/chiffre/<?=$chiffre_file[$nb2];?>.png" alt="<?=__($chiffre[$nb2]);?>" class="vatt">
+								=
+
+								<!-- Version pour l'affichage en cas d'erreur -->
+								<span id="calcul" class="none"><?=(__($chiffre[$nb1])." ".($operator=='-'?'−':$operator)." ".__($chiffre[$nb2]));?> = </span>
+
 							</label>
 							<input type="text" name="question" id="question" placeholder="?" class="w50p tc" autocomplete="off" required>
 
