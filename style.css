@@ -206,12 +206,12 @@ a[name] {
 
 
 /* bouton pour les liens */
-.bt:not(.vam), .bt.internal {
+.bt:not(.vam), .bt.internal, .bt-tag {
 	background-color: #C51A1B;
 	color: #fff;
 }
 
-.bt:not(.fixed):not(.vam) { 
+.bt:not(.fixed):not(.vam), .bt-tag { 
 	font-family: 'Proximanova', sans-serif;
 	font-weight: bold;
 	padding: 1rem 3rem; 
