@@ -18,10 +18,10 @@ $url_back = encode($res['url']);
 
 	if($sel_tag_list->num_rows > 0) {
 	?>
-		<nav role="navigation" aria-label="<?php _e("Filter by")?>" class="flex wrap space jcc tc ptl pbm">
+		<nav role="navigation" aria-label="<?php _e("Filter by")?>" class="flex wrap space jcc tc ptl">
 			<ul class="unstyled pln"><?php 
 				while($res_tag_list = $sel_tag_list->fetch_assoc()) {
-					echo'<li class="inbl prs"><a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="bt-tag'.($tag==$res_tag_list['encode']?' selected':'').'">'.$res_tag_list['name'].'</a></li>';
+					echo'<li class="inbl prs pbs"><a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="bt-tag'.($tag==$res_tag_list['encode']?' selected':'').'">'.$res_tag_list['name'].'</a></li>';
 					$i++;
 				}
 				?>
