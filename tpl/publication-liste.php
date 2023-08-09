@@ -20,7 +20,7 @@ $mois = array(
 );
 ?>
 
-<section class="mw960p mod center mbl">
+<section class="mw960p center mbl">
 
 	<?php include('theme/'.$GLOBALS['theme'].'/ariane.php')?>
 	
@@ -137,7 +137,7 @@ $mois = array(
 if($sel_tag_list->num_rows <= 0 or isset($tag))
 {
 ?>
-<section class="liste mw960p mod center">
+<section class="liste mw960p center">
 
 	<div class="blocks grid-3 space-xl">
 		
