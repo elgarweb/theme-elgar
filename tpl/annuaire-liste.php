@@ -105,7 +105,7 @@ $url_back = encode($res['url']);
 
 					</figure>
 
-					<div class="ptm pbl plm prm brd-left">
+					<div class="information ptm pbl plm prm brd-left">
 						
 						<!-- Tags -->
 						<!-- <div class="mbm">
@@ -148,7 +148,7 @@ $url_back = encode($res['url']);
 								echo '<li class="pbn"><details class="pts" aria-live="polite"><summary class="tel color pointer tdu bold inbl" data-encode="'.$content_fiche['mail-contact'].'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary><p class="inline pls bold"></p></details></li>';
 
 							if(isset($content_fiche['adresse'])){
-								echo '<li class="bold pbn pts"><i class="fa fa-fw fa-location" aria-hidden="true"></i>'.__('Address');
+								echo '<li class="adresse bold pbn pts"><i class="fa fa-fw fa-location" aria-hidden="true"></i>'.__('Address');
 
 								// Adresse dans un paragraphe ?
 								if(preg_match('%(<p[^>]*>.*?</p>)%i', $content_fiche['adresse'], $regs)) 
