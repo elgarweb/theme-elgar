@@ -616,7 +616,7 @@ header section:first-of-type { font-size: 1.4rem; }
 		    bottom: -10px;
 		}
 
-	#adresse p {  margin-bottom: 0; }
+	.adresse p, #adresse p {  margin-bottom: 0; }
 
 
 /* PERSONNALITES */
@@ -749,9 +749,8 @@ footer #contacts {
 	main .fa,
 	footer .fa {
 		color: #C51A1B;
-		padding-right: 1rem;
+		margin-right: 1rem;
 		font-size: 2rem;
-		text-align: left;
 	}
 	.bt .fa { color: #fff; }
 
