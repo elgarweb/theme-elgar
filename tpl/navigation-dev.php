@@ -176,12 +176,13 @@ switch(@$_GET['mode'])
 
 	<script>
 		num = 0;
-		// Ajoute un élément à la navigation
+		
+		//***** Ajoute un élément à la navigation *****//
 		function add_li() 
 		{
 			num = num + 1;
 
-			$(".navigation").append("<li><span class='dragger'></span><div class='mod'><span id='visuel-"+num+"' class='editable-media fl' data-dir='navigation' data-width='300'></span><div class='fl mls'><div id='titre-"+num+"' class='editable' placeholder='Titre avec lien'></div><div id='description-"+num+"' class='editable' placeholder='Description'></div></div></div></li>");
+			$(".navigation").append("<li><span class='dragger'></span><div class='mod'><span id='visuel-"+num+"' class='editable-media fl' data-dir='navigation' data-width='300'></span><div class='fl mls'><div id='titre-"+num+"' class='editable find-link' placeholder='Titre avec lien'></div><div id='description-"+num+"' class='editable' placeholder='Description'></div></div></div></li>");
 			// contenteditable='true'
 
 			// Rend les champs éditables
@@ -191,10 +192,40 @@ switch(@$_GET['mode'])
 			editable_event();
 			editable_media_event();
 		}
+		
 
-		// Ordre editable
+		// Mode édition
 		edit.push(function()
 		{
+			//***** Recherche dans les contenus du site *****//
+			$(document).on("keydown.autocomplete", ".find-link", function() 
+			{
+				$(this).autocomplete({
+					minLength: 0,
+					source: path + "api/ajax.admin.php?mode=links&nonce="+ $("#nonce").val() +"&dir="+ ($(memo_node).closest(".editable").data("dir") || ""),
+					select: function(event, ui) 
+					{ 	
+						// id, label => nom, type=page,article,media..., value=url		
+						// Champ titre	
+						$(this).html('<a href="'+ui.item.value+'">'+ui.item.label+'</a>');
+
+						// data-id dans le li
+						$(this).closest("li").attr("data-id", ui.item.id);
+			
+						return false;// Coupe l'execution automatique d'ajout du terme
+					}
+				})
+				.focus(function(){
+					console.log("focus11")
+					//$(this).data("uiAutocomplete").search($(this).val());// Ouvre les suggestions au focus			
+				})
+				.autocomplete("instance")._renderItem = function(ul, item) {// Mise en page des résultats
+					return $("<li>").append("<div title='"+item.value+"'>"+item.label+" <span class='grey italic'>"+item.type+"</span></div>").appendTo(ul);
+				};
+			});
+
+			
+			//***** Ordre editable ******//
 			// Désactive les liens
 			$(".content .navigation a").click(function() { return false; });
 
