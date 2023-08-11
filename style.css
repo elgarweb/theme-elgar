@@ -556,6 +556,15 @@ header section:first-of-type { font-size: 1.4rem; }
 		    left: -25px;
 		    position: absolute;
 		}
+			.lucide .navigation .dragger {
+				display: block;
+				position: absolute;
+				width: 15px;
+				height: 20px;
+				top: -1px;
+				left: -25px;	
+				cursor: all-scroll;			
+			}
 
 		.navigation a { text-decoration: none; }
 			.navigation a:hover { text-decoration: underline; }
@@ -1105,10 +1114,16 @@ figure.center {	text-align: center; }
 article img { max-width: 100%; }
 
 /* Pour que les images dans les contenus éditables se redimensionnent bien de façon homothétique */
-.editable img { height: 100%; }
+.editable img { 
+	height: 100%;
+	margin-bottom: 1.5rem;
+}
 
 /* Pour que l'image au clic soit bien centré dans le figure */
-figure img { display: inline-block !important; }
+figure img { 
+	display: inline-block !important;
+	margin-bottom: 0.5rem !important;
+}
 
 
 /* Table layout */
