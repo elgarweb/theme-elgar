@@ -101,7 +101,7 @@ switch(@$_GET['mode'])
 				else $url = '';
 
 				echo"
-				<li data-id='".$res_nav['id']."' data-url='".$url."'>					
+				<li ".($res_nav['id']?"data-id='".$res_nav['id']."'":"")." ".($url?"data-url='".$url."'":"").">					
 					<span class='dragger'></span>
 					<div class='content'>";
 
@@ -117,7 +117,7 @@ switch(@$_GET['mode'])
 								//echo"<div id='titre-".$li."' class='editable titre' placeholder='Titre avec lien'></div>";
 							else
 								// lien simple
-								echo"<div id='titre-".$li."' class='editable titre' placeholder='Titre avec lien'><a href='".$url."'>".$res_nav['title']."</a></div>";//.$state						
+								echo"<div id='titre-".$li."' class='titre'><a href='".$url."'>".$res_nav['title']."</a> ".$state."</div>";//.$state						
 
 							// description
 							txt("description-".$li, "description");
@@ -258,35 +258,31 @@ switch(@$_GET['mode'])
 		edit.push(function()
 		{
 			//***** Recherche dans les contenus du site *****//
-			$(document).on("keydown.autocomplete", ".titre", function() 
-			{
-				$(this).autocomplete({
-					minLength: 0,
-					source: path + "api/ajax.admin.php?mode=links&nonce="+ $("#nonce").val() +"&dir="+ ($(memo_node).closest(".editable").data("dir") || ""),
-					select: function(event, ui) 
-					{ 	
-						// id, label => nom, type=page,article,media..., value=url		
-						// Champ titre	
-						$(this).html('<a href="'+ui.item.value+'">'+ui.item.label+'</a>');
+			// $(document).on("keydown.autocomplete", ".titre", function() 
+			// {
+			// 	$(this).autocomplete({
+			// 		minLength: 0,
+			// 		source: path + "api/ajax.admin.php?mode=links&nonce="+ $("#nonce").val() +"&dir="+ ($(memo_node).closest(".editable").data("dir") || ""),
+			// 		select: function(event, ui) 
+			// 		{ 	
+			// 			// id, label => nom, type=page,article,media..., value=url		
+			// 			// Champ titre	
+			// 			$(this).html('<a href="'+ui.item.value+'">'+ui.item.label+'</a>');
 
-						// data-id dans le li
-						$(this).closest("li").attr("data-id", ui.item.id).attr("data-url", ui.item.value);
+			// 			// data-id dans le li
+			// 			$(this).closest("li").attr("data-id", ui.item.id).attr("data-url", ui.item.value);
 			
-						return false;// Coupe l'execution automatique d'ajout du terme
-					}
-				})
-				// .focus(function(){
-				// 	console.log("focus")
-				// 	//$(this).data("uiAutocomplete").search($(this).val());// Ouvre les suggestions au focus			
-				// })
-				.autocomplete("instance")._renderItem = function(ul, item) {// Mise en page des résultats
-					return $("<li>").append("<div title='"+item.value+"'>"+item.label+" <span class='grey italic'>"+item.type+"</span></div>").appendTo(ul);
-				};
-			});
+			// 			return false;// Coupe l'execution automatique d'ajout du terme
+			// 		}
+			// 	})
+			// 	.autocomplete("instance")._renderItem = function(ul, item) {// Mise en page des résultats
+			// 		return $("<li>").append("<div title='"+item.value+"'>"+item.label+" <span class='grey italic'>"+item.type+"</span></div>").appendTo(ul);
+			// 	};
+			// });
 
 
 			//***** Ajoute un outil pour supprimer la ligne ******//
-			$("ul.navigation li").append("<i onclick='$(this).parent().remove();tosave();' class='fa fa-cancel red' title='"+ __("Remove") +"'></i>");
+			$("ul.navigation li:not([data-id])").append("<i onclick='$(this).parent().remove();tosave();' class='fa fa-cancel red' title='"+ __("Remove") +"'></i>");
 
 			
 			//***** Ordre editable ******//
@@ -298,16 +294,16 @@ switch(@$_GET['mode'])
 		});
 
 		// Sauvegarde de l'ordre
-		before_save.push(function()
-		{
-			// On vérifie que les URL pointe sur des pages spécifiques, sinon on supprime la connexion réciproque (fil d'aryenne)
-			$(".navigation [data-url]").each(function(event) {
-				//console.log($(this).attr("data-url"));
-				//console.log($(".titre a", this).attr("href"));
-				if($(this).attr("data-url") != $(".titre a", this).attr("href"))
-					$(this).removeAttr("data-id").removeAttr("data-url");
-			});
-		});
+		// before_save.push(function()
+		// {
+		// 	// On vérifie que les URL pointe sur des pages spécifiques, sinon on supprime la connexion réciproque (fil d'aryenne)
+		// 	$(".navigation [data-url]").each(function(event) {
+		// 		//console.log($(this).attr("data-url"));
+		// 		//console.log($(".titre a", this).attr("href"));
+		// 		if($(this).attr("data-url") != $(".titre a", this).attr("href"))
+		// 			$(this).removeAttr("data-id").removeAttr("data-url");
+		// 	});
+		// });
 
 		// Sauvegarde de l'ordre
 		after_save.push(function()
