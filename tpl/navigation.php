@@ -1,4 +1,6 @@
 <?php
+// @todo pour ajouter le lien sur l'image pour facilité l'accès
+
 switch(@$_GET['mode'])
 {
 	default:
@@ -45,42 +47,104 @@ switch(@$_GET['mode'])
 
 
 			// Version avec select dans le fil d'ariane
-			$sql ="SELECT ".$tc.".id,".$tc.".url, ".$tc.".title, ".$tc.".state FROM ".$tc;
-			$sql.=" JOIN ".$tm."
+			// $sql ="SELECT ".$tc.".id,".$tc.".url, ".$tc.".title, ".$tc.".state, ".$tm.".val FROM ".$tc;
+			// $sql.=" JOIN ".$tm."
+			// ON
+			// (
+			// 	".$tm.".id = ".$tc.".id AND
+			// 	".$tm.".type='navigation' AND
+			// 	".$tm.".cle='".$res['url']."'
+			// )";
+			// $sql.=" WHERE ".$tc.".lang='".$lang."' ".$sql_state."";
+			// $sql.=" ORDER BY ".$tm.".ordre ASC, ".$tc.".date_insert DESC";
+			// //$sql.=" ORDER BY ".$tc.".date_insert DESC";
+			// $sql.=" LIMIT ".$start.", ".$num_pp;
+
+
+			// Version avec des entrées ajoutée manuellement
+			$sql ="SELECT ".$tc.".id,".$tc.".url, ".$tc.".title, ".$tc.".state, ".$tm.".val";
+			$sql.=" FROM ".$tm;
+			$sql.=" LEFT JOIN ".$tc."
 			ON
 			(
 				".$tm.".id = ".$tc.".id AND
-				".$tm.".type='navigation' AND
-				".$tm.".cle='".$res['url']."'
+				".$tc.".lang='".$lang."'
+				".$sql_state."
 			)";
-			$sql.=" WHERE ".$tc.".lang='".$lang."' ".$sql_state."";
+			$sql.=" WHERE ".$tm.".type='navigation' AND	".$tm.".cle='".$res['url']."' ";
 			$sql.=" ORDER BY ".$tm.".ordre ASC, ".$tc.".date_insert DESC";
 			//$sql.=" ORDER BY ".$tc.".date_insert DESC";
 			$sql.=" LIMIT ".$start.", ".$num_pp;
-
-
-			//echo $sql;
+			
 			$sel_nav = $connect->query($sql);
+
+			//echo $sql; echo $connect->error;
 
 			//$num_total = $connect->query("SELECT FOUND_ROWS()")->fetch_row()[0];// Nombre total de fiche
 
+			$li = 1;
 			while($res_nav = $sel_nav->fetch_assoc())
 			{
 				// Page invisible ou pas
-				if($res_nav['state'] != "active") $state=" <i class='fa fa-eye-off' title='Désactivé'></i>";
-				else $state="";
+				if($res_nav['state'] != "active") 
+					$state=" <i class='fa fa-eye-off ' title='Désactivé'></i>";
+				else 
+					$state="";
 
-				echo'<li data-id="'.$res_nav['id'].'"><a href="'.make_url($res_nav['url'], array("domaine" => true)).'">'.$res_nav['title'].$state.'</a></li>';
+				// Extraction des données spécifique val
+				$val = json_decode($res_nav['val'], true);
+				$GLOBALS['content']["visuel-".$li] = @$val["media"];
+				$GLOBALS['content']["titre-".$li] = @$val["titre"];
+				$GLOBALS['content']["description-".$li] = @$val["description"];
+				
+				//$(".navigation").append("<li><span class='dragger'></span><div class='mod'><span id='visuel-"+num+"' class='editable-media fl' data-dir='navigation' data-width='300'></span><div class='fl mls'><div id='titre-"+num+"' class='editable titre' placeholder='Titre avec lien'></div></div></div></li>");
+
+				if($res_nav['url']) $url = make_url($res_nav['url'], array("domaine" => true));
+				else $url = '';
+
+				echo"
+				<li ".($res_nav['id']?"data-id='".$res_nav['id']."'":"")." ".($url?"data-url='".$url."'":"").">					
+					<span class='dragger'></span>
+					<div class='content'>";
+
+						// media
+						if($res['tpl'] == 'navigation-edit')
+						media("visuel-".$li."", array("dir" => "navigation", "size" => "300"));
+
+						echo"<div class='texte'>";
+
+							if(@$val["titre"])
+								// titre
+								txt("titre-".$li, "titre");
+							else
+								// lien simple
+								echo"<div id='titre-".$li."' class='titre'><a href='".$url."'>".$res_nav['title']."</a> ".$state."</div>";//.$state						
+
+							// description
+							if($res['tpl'] == 'navigation-edit')
+							txt("description-".$li, "description");
+
+						echo"</div>
+
+					</div>
+				</li>";
+
+				++$li;
 			}
 
 			//page($num_total, $page);
 			?>
 			</ul>
 
+			<?php if($res['tpl'] == 'navigation-edit'){?>
+			<div class="editable-hidden tr mts mbm"><a href="javascript:add_li();void(0)">Ajouter un élément <i class="fa fa-fw fa-plus vam" aria-hidden="true"></i></a></div>
+			<?php }?>
 
-			<div class="highlight no-after-before mbn pbt <?=(isset($GLOBALS['content']['highlight']) ? '' : 'editable-hidden')?>">
-				<?txt("highlight");?>
-			</div>
+			<?php if($res['tpl'] == 'navigation-event' or isset($GLOBALS['content']['highlight'])){?>
+				<div class="highlight no-after-before mbn pbt <?=(isset($GLOBALS['content']['highlight']) ? '' : 'editable-hidden')?>">
+					<?txt("highlight");?>
+				</div>
+			<?php }?>
 
 		</div>
 
@@ -88,9 +152,12 @@ switch(@$_GET['mode'])
 
 
 
-	<?
-	tag(encode(__('News')), array('class'=>'editable-hidden mw960p center mbm', 'tag' => 'div'));
+	<?php
+	// Tag pour les actualités connexes
+	if($res['tpl'] == 'navigation-event')	
+		tag(encode(__('News')), array('class'=>'editable-hidden mw960p center mbm', 'tag' => 'div'));
 
+	// Si Tag on charge les atualités connexes
 	if(isset($GLOBALS['tags']))
 	{?>
 	<!-- Actu -->
@@ -172,15 +239,75 @@ switch(@$_GET['mode'])
 
 
 	<script>
-		// Ordre editable
+		num = <?=$li;?>;
+		
+		//***** Ajoute un élément à la navigation *****//
+		function add_li() 
+		{
+			$(".navigation").append("<li><i onclick='$(this).parent().remove();tosave();' class='fa fa-cancel red' title='"+ __("Remove") +"'></i><span class='dragger'></span><div class='mod'><span id='visuel-"+num+"' class='editable-media' data-dir='navigation' data-width='300'></span><div class='fl mls'><div id='titre-"+num+"' class='editable titre' placeholder='Titre avec lien'></div><div id='description-"+num+"' class='editable description' placeholder='Description'></div></div></div></li>");
+			// contenteditable='true'
+
+			// Rend les champs éditables
+			$(".editable").off();
+			$(".editable-media").off(".editable-media");
+
+			editable_event();
+			editable_media_event();
+
+			num = num + 1;
+		}
+		
+
+		// Mode édition
 		edit.push(function()
 		{
+			//***** Recherche dans les contenus du site *****//
+			// $(document).on("keydown.autocomplete", ".titre", function() 
+			// {
+			// 	$(this).autocomplete({
+			// 		minLength: 0,
+			// 		source: path + "api/ajax.admin.php?mode=links&nonce="+ $("#nonce").val() +"&dir="+ ($(memo_node).closest(".editable").data("dir") || ""),
+			// 		select: function(event, ui) 
+			// 		{ 	
+			// 			// id, label => nom, type=page,article,media..., value=url		
+			// 			// Champ titre	
+			// 			$(this).html('<a href="'+ui.item.value+'">'+ui.item.label+'</a>');
+
+			// 			// data-id dans le li
+			// 			$(this).closest("li").attr("data-id", ui.item.id).attr("data-url", ui.item.value);
+			
+			// 			return false;// Coupe l'execution automatique d'ajout du terme
+			// 		}
+			// 	})
+			// 	.autocomplete("instance")._renderItem = function(ul, item) {// Mise en page des résultats
+			// 		return $("<li>").append("<div title='"+item.value+"'>"+item.label+" <span class='grey italic'>"+item.type+"</span></div>").appendTo(ul);
+			// 	};
+			// });
+
+
+			//***** Ajoute un outil pour supprimer la ligne ******//
+			$("ul.navigation li:not([data-id])").append("<i onclick='$(this).parent().remove();tosave();' class='fa fa-cancel red' title='"+ __("Remove") +"'></i>");
+
+			
+			//***** Ordre editable ******//
 			// Désactive les liens
 			$(".content .navigation a").click(function() { return false; });
 
 			// Element déplaçable
-			$(".content .navigation").sortable({ stop: function(event, ui) { tosave(); } });
+			$(".content .navigation").sortable({ <?=($res['tpl'] == 'navigation-edit'?'handle: ".dragger",':'')?> axis: "y", stop: function(event, ui) { tosave(); } });
 		});
+
+		// Sauvegarde de l'ordre
+		// before_save.push(function()
+		// {
+		// 	// On vérifie que les URL pointe sur des pages spécifiques, sinon on supprime la connexion réciproque (fil d'aryenne)
+		// 	$(".navigation [data-url]").each(function(event) {
+		// 		//console.log($(this).attr("data-url"));
+		// 		//console.log($(".titre a", this).attr("href"));
+		// 		if($(this).attr("data-url") != $(".titre a", this).attr("href"))
+		// 			$(this).removeAttr("data-id").removeAttr("data-url");
+		// 	});
+		// });
 
 		// Sauvegarde de l'ordre
 		after_save.push(function()
@@ -188,10 +315,25 @@ switch(@$_GET['mode'])
 			// Liste l'ordre des li
 			navigation = {};
 			var i = 1;
-			$(document).find(".content .navigation li").each(function() {
-				navigation[$(this).data("id")] = i;
+			$(document).find(".content .navigation li").each(function() 
+			{
+				var li_id = $(this).data("id");
+
+				if(li_id == undefined) li_id = -i;
+
+				navigation[li_id] = {};
+
+				navigation[li_id]["ordre"] = i;
+
+				if($(".editable-media img", this).attr("src") != undefined) 
+				navigation[li_id]["media"] = $(".editable-media img", this).attr("src");
+
+				navigation[li_id]["titre"] = $(".titre", this).html();
+
+				if($(".description", this).html()) navigation[li_id]["description"] = $(".description", this).html();
 				i++;
 			});
+			console.log(navigation)
 
 			// Sauvegarde l'ordre
 			$.ajax({
@@ -211,7 +353,6 @@ switch(@$_GET['mode'])
 	break;
 
 
-
 	case'save':
 		include_once($_SERVER['DOCUMENT_ROOT'].'/config.php');// Les variables si on ajax
 		include_once($_SERVER['DOCUMENT_ROOT'].'/api/function.php');// Les fonctions si on ajax
@@ -219,13 +360,48 @@ switch(@$_GET['mode'])
 
 		login('high', 'edit-page');// Vérifie que l'on a le droit d'éditer les contenus
 
-		//print_r($_POST['navigation']);
+		print_r($_POST['navigation']);
 
-		foreach($_POST['navigation'] as $id => $ordre)
+		// Supprime pour nétoyer les entrées
+		$connect->query("DELETE FROM ".$table_meta." WHERE type='navigation' AND cle='".encode($_POST['permalink'])."'");
+
+		// Ajoute et remplace les entrées
+		foreach($_POST['navigation'] as $id => $navigation)
 		{
-			$connect->query("UPDATE ".$table_meta." SET ordre='".(int)$ordre."' WHERE id='".(int)$id."' AND type='navigation' AND cle='".encode($_POST['permalink'])."' LIMIT 1");
+			$ordre = $navigation['ordre'];
+
+			if($id>0) unset($navigation['titre']);// Nettoie le tableau du titre s'il est connecté à une page
+
+			unset($navigation['ordre']);// Nettoie le tableau des donnée supplementaire
+			
+			$json = json_encode($navigation, JSON_UNESCAPED_UNICODE);
+
+			$sql = "REPLACE INTO ".$table_meta." SET id='".(int)$id."', type='navigation', cle='".encode($_POST['permalink'])."', ordre='".(int)$ordre."', val='".addslashes($json)."'";
+			
+			$connect->query($sql);
+
+			echo $sql."\n";
+			echo $connect->error."\n";
 		}
 
 	break;
+
+
+	// case"del":
+
+	// 	include_once($_SERVER['DOCUMENT_ROOT'].'/config.php');// Les variables si on ajax
+	// 	include_once($_SERVER['DOCUMENT_ROOT'].'/api/function.php');// Les fonctions si on ajax
+	// 	include_once($_SERVER['DOCUMENT_ROOT'].'/api/db.php');// Connexion à la db
+
+	// 	login('high', 'edit-page');// Vérifie que l'on a le droit d'éditer les contenus
+
+	// 	// Supprime l'entrée
+	// 	$connect->query("DELETE FROM ".$table_meta." WHERE id='".(int)$id."' AND type='navigation' AND cle='".encode($_POST['permalink'])."'");
+
+	// 	echo $connect->error;
+
+	// 	exit;
+		
+	// break;
 }
 ?>
