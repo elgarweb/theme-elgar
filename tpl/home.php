@@ -208,8 +208,8 @@ if(!$alert_view){?>
 				// Construction de la requete
 				$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
 
-				$sql.=" WHERE ".$tc.".type='article'";
-				if(isset($articles)) $sql.=" AND id!='".$article['id']."'";
+				$sql.=" WHERE (".$tc.".type='article' OR ".$tc.".type='article-intramuros')";
+				if(isset($articles)) $sql.=" AND id!='".(int)$article['id']."'";
 
 				$sql.=" AND ".$tc.".lang='".$lang."' AND state='active' ORDER BY ".$tc.".date_insert DESC
 				LIMIT 3";
