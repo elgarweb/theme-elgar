@@ -88,7 +88,7 @@ $url_back = encode($res['url']);
 			$sql.=" AND (event_fin.cle >= '".date("Y-m-d")."' OR event_deb.cle >= '".date("Y-m-d")."')";
 		}
 		else
-			$sql.=" AND ".$tc.".type='article'";
+			$sql.=" AND (".$tc.".type='article' OR ".$tc.".type='article-intramuros')";
 
 		// Si event on tri par date de l'evenement
 		if($res['url']=='agenda') 
