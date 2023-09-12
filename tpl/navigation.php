@@ -64,13 +64,14 @@ switch(@$_GET['mode'])
 			// Version avec des entrées ajoutée manuellement
 			$sql ="SELECT ".$tc.".id,".$tc.".url, ".$tc.".title, ".$tc.".state, ".$tm.".val";
 			$sql.=" FROM ".$tm;
+
 			$sql.=" LEFT JOIN ".$tc."
 			ON
 			(
 				".$tm.".id = ".$tc.".id AND
 				".$tc.".lang='".$lang."'
-				".$sql_state."
-			)";
+			)";//".$sql_state."
+
 			$sql.=" WHERE ".$tm.".type='navigation' AND	".$tm.".cle='".$res['url']."' ";
 			$sql.=" ORDER BY ".$tm.".ordre ASC, ".$tc.".date_insert DESC";
 			//$sql.=" ORDER BY ".$tc.".date_insert DESC";
@@ -85,12 +86,6 @@ switch(@$_GET['mode'])
 			$li = 1;
 			while($res_nav = $sel_nav->fetch_assoc())
 			{
-				// Page invisible ou pas
-				if($res_nav['state'] != "active") 
-					$state=" <i class='fa fa-eye-off ' title='Désactivé'></i>";
-				else 
-					$state="";
-
 				// Extraction des données spécifique val
 				$val = json_decode($res_nav['val'], true);
 				$GLOBALS['content']["visuel-".$li] = @$val["media"];
@@ -103,7 +98,7 @@ switch(@$_GET['mode'])
 				else $url = '';
 
 				echo"
-				<li ".($res_nav['id']?"data-id='".$res_nav['id']."'":"")." ".($url?"data-url='".$url."'":"").">					
+				<li ".($res_nav['id']?"data-id='".$res_nav['id']."'":"")." ".($url?"data-url='".$url."'":"").(($res_nav['id'] and $res_nav['state']!="active")?" class='editable-hidden'":"").">					
 					<span class='dragger'></span>
 					<div class='content'>";
 
@@ -118,7 +113,7 @@ switch(@$_GET['mode'])
 								txt("titre-".$li, "titre");
 							else
 								// lien simple
-								echo"<div id='titre-".$li."' class='titre'><a href='".$url."'>".$res_nav['title']."</a> ".$state."</div>";//.$state						
+								echo"<div id='titre-".$li."' class='titre'><a href='".$url."'>".$res_nav['title']."</a>".($res_nav['state']!="active"?" <i class='fa fa-eye-off' title='Désactivé'></i>":"")."</div>";
 
 							// description
 							if($res['tpl'] == 'navigation-edit')
