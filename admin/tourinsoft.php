@@ -27,7 +27,7 @@ $verbose_source = (@$_SERVER['PHP_AUTH_PW']?false:($dev?true:false));// $verbose
 
 $img = true;// get img
 $keep_img = true;// garde les images originales sur le serveur
-//$_REQUEST['clean'] = true;// Force la vidange des dossiers images
+$_REQUEST['clean'] = true;// Force la vidange des dossiers images
 
 $sql_content = $sql_meta = $sql_tag = $visuel_dest = null;
 $id_start = -1000000000;// Plus utiliser car on a des id négatifs
