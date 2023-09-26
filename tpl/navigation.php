@@ -21,8 +21,8 @@ switch(@$_GET['mode'])
 			// Récupération du filtre dans l'url pour rechercher les pages connexes
 
 			// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs
-			if(!@$_SESSION['auth']['edit-page']) $sql_state = "AND state='active'";
-			else $sql_state = "";
+			//if(!@$_SESSION['auth']['edit-page']) $sql_state = "AND state='active'";
+			//else $sql_state = "";
 
 			// Navigation par page
 			$num_pp = 20;
@@ -98,7 +98,7 @@ switch(@$_GET['mode'])
 				else $url = '';
 
 				echo"
-				<li ".($res_nav['id']?"data-id='".$res_nav['id']."'":"")." ".($url?"data-url='".$url."'":"").(($res_nav['id'] and $res_nav['state']!="active")?" class='editable-hidden'":"").">					
+				<li ".($res_nav['id']?"data-id='".$res_nav['id']."'":"")." ".($url?"data-url='".$url."'":"").(($res_nav['id'] and $res_nav['state']!="active" and !@$_SESSION['auth']['edit-page'])?" class='editable-hidden'":"").">					
 					<span class='dragger'></span>
 					<div class='content'>";
 

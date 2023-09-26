@@ -101,6 +101,11 @@ h2 {
 		height: 85%;
 	}
 
+	h2[aria-hidden="true"]:before,
+	h2[aria-hidden="true"]:after
+	{ content: none; }
+
+
 
 h3, .h3-like { padding-bottom: 1rem !important; }
 
