@@ -146,6 +146,7 @@ $add_translation = array(
 	"Please check your entry and tick the box to accept the storage and processing of this information" => array("fr" => "Merci de vérifier votre saisie et de cocher la case afin d’accepter le stockage et le traitement de ces informations", "eu" => "Milesker idatzi dituzun datuak egiaztatzea eta laukia markatzea, informazio hauen estrategia eta tratamendua onartzeko gisan."),
 	"Recipient email" => array("fr" => "Courriel du destinataire", "eu" => "Hartzailearen e-mezua"),
 	"Subject" => array("fr" => "Sujet", "eu" => "Gaia"),
+	"Message" => array("fr" => "Message", "eu" => "Mezua"),
 	"Send" => array("fr" => "Envoyer", "eu" => "Bidali"),
 
 	"zero" => array("fr" => "zéro", "eu" => "huts"),
