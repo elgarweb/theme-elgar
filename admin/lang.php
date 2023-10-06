@@ -30,7 +30,7 @@ switch(@$_REQUEST['mode'])
 			edit.push(function()
 			{
 				// Ajout du bouton langue avec la langue en cours
-				$("#admin-bar #del").after('<div id="lang" class="fr"><button class="mat small o50 ho1 t5" title="<?_e("Language")?>"><span class="noss"><?_e("Language")?></span> '+$("html").attr("lang")+' <i class="fa fa-fw fa-language"></i></button></div>');
+				$("#admin-bar #del, #admin-bar #archive").after('<div id="lang" class="fr"><button class="mat small o50 ho1 t5" title="<?_e("Language")?>"><span class="noss"><?_e("Language")?></span> '+$("html").attr("lang")+' <i class="fa fa-fw fa-language"></i></button></div>');
 
 				// Ouverture de l'admin des langues au clique sur le bouton
 				$("#lang button").on("click",// mouseenter touchstart

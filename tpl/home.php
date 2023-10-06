@@ -134,33 +134,36 @@ if(!$alert_view){?>
 		
 		<?php h2('titre-actus', 'picto pbm'); ?>
 		
-		<!-- Actualité à la une -->
-		<article id="actualaune">
-			<?php
-			$sql_alaune="
-			SELECT ".$tc.".* FROM ".$tc."
-			JOIN 
-				".$tm." ON ".$tc.".id = ".$tm.".id AND ".$tm.".type = 'alaune' AND ".$tm.".cle = '".$lang."' 
-			WHERE 
-				".$tc.".type = 'article' AND ".$tc.".lang = '".$lang."' AND state = 'active'
-			ORDER BY ".$tc.".date_insert DESC
-			LIMIT 1";
+		
+		<?php
+		// Actualité à la une
+		
+		$sql_alaune="
+		SELECT ".$tc.".* FROM ".$tc."
+		JOIN 
+			".$tm." ON ".$tc.".id = ".$tm.".id AND ".$tm.".type = 'alaune' AND ".$tm.".cle = '".$lang."' 
+		WHERE 
+			".$tc.".type = 'article' AND ".$tc.".lang = '".$lang."' AND state = 'active'
+		ORDER BY ".$tc.".date_insert DESC
+		LIMIT 1";
 
-			//echo $sql_alaune."<br>";
+		//echo $sql_alaune."<br>";
 
-			$sel_alaune = $connect->query($sql_alaune);
+		$sel_alaune = $connect->query($sql_alaune);
 
-			while($res_alaune = $sel_alaune->fetch_assoc())
-			{
-				$articles[$res_alaune['id']] = $res_alaune;
-				$articles[$res_alaune['id']]['content'] = json_decode($res_alaune['content'], true);
-			}
-			
-			if(isset($articles))
-			foreach($articles as $key => $article)
-			{
-				// var_dump($article['id']);
-				?>
+		while($res_alaune = $sel_alaune->fetch_assoc())
+		{
+			$articles[$res_alaune['id']] = $res_alaune;
+			$articles[$res_alaune['id']]['content'] = json_decode($res_alaune['content'], true);
+		}
+		
+		if(isset($articles))
+		foreach($articles as $key => $article)
+		{
+			// var_dump($article['id']);
+			?>
+			<!-- Actualité à la une -->
+			<article id="actualaune">
 
 				<div class="<?=(isset($article['title']) ? 'relative flex aic brd3 mbl' : 'none'); ?>">
 
@@ -192,11 +195,11 @@ if(!$alert_view){?>
 						</div>
 					</div>
 				</div>
-			
-			<?php
-			}
-			?>
-		</article>
+
+			</article>
+		<?php
+		}
+		?>
 
 
 		<!-- Dernières actualités -->
