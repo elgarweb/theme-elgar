@@ -561,40 +561,38 @@ header section:first-of-type { font-size: 1.4rem; }
 		    left: -25px;
 		    position: absolute;
 		}
-			.lucide .navigation .dragger {
-				display: block;
-				position: absolute;
-				width: 15px;
-				height: 20px;
-				top: -1px;
-				left: -25px;	
-				cursor: all-scroll;			
-			}
+			.navigation a { text-decoration: none; }
+			.navigation a:hover { text-decoration: underline; }
 
+
+		/* Carrefour éditable */
+		.lucide .navigation .dragger {
+			display: block;
+			position: absolute;
+			width: 15px;
+			height: 20px;
+			top: -1px;
+			left: -25px;	
+			cursor: all-scroll;			
+		}
 
 		.navigation li .content { overflow: hidden;	}
-
-			.navigation li .editable-media { 
-				float: left;
-			}
+			.navigation li p { margin-bottom: 0; }
+			.navigation li .editable-media { float: left; }
 			.navigation li .texte { 
 				float: left;
 				margin-left: 1rem;
 			}
+			.navigation li i.fa-cancel {
+				position: absolute;
+				cursor: pointer;
+				margin: 0;
+				top: 0;
+				right: 0;
+				z-index: 1;
+				font-size: inherit;
+			}
 
-			.navigation a { text-decoration: none; }
-			.navigation a:hover { text-decoration: underline; }
-
-			
-		.navigation li i.fa-cancel {
-			position: absolute;
-			cursor: pointer;
-			margin: 0;
-			top: 0;
-			right: 0;
-			z-index: 1;
-			font-size: inherit;
-		}
 
 /* ACTUALITÉS... */
 	/* Pagination */
