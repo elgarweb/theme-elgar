@@ -87,44 +87,48 @@ switch(@$_GET['mode'])
 			while($res_nav = $sel_nav->fetch_assoc())
 			{
 				// Extraction des données spécifique val
-				$val = json_decode($res_nav['val'], true);
-				$GLOBALS['content']["visuel-".$li] = @$val["media"];
-				$GLOBALS['content']["titre-".$li] = @$val["titre"];
-				$GLOBALS['content']["description-".$li] = @$val["description"];
+				$json = json_decode($res_nav['val'], true);
+				$GLOBALS['content']["visuel-".$li] = @$json["media"];
+				$GLOBALS['content']["titre-".$li] = @$json["titre"];
+				$GLOBALS['content']["description-".$li] = @$json["description"];
 				
 				//$(".navigation").append("<li><span class='dragger'></span><div class='mod'><span id='visuel-"+num+"' class='editable-media fl' data-dir='navigation' data-width='300'></span><div class='fl mls'><div id='titre-"+num+"' class='editable titre' placeholder='Titre avec lien'></div></div></div></li>");
 
 				if($res_nav['url']) $url = make_url($res_nav['url'], array("domaine" => true));
 				else $url = '';
 
-				echo"
-				<li ".($res_nav['id']?"data-id='".$res_nav['id']."'":"")." ".($url?"data-url='".$url."'":"").(($res_nav['id'] and $res_nav['state']!="active" and !@$_SESSION['auth']['edit-page'])?" class='editable-hidden'":"").">					
-					<span class='dragger'></span>
-					<div class='content'>";
+				// Si le contenu n'est pas vide (pour gérer les cas des pages supprimées et pas supprimer de la table méta)
+				if(!empty($json) or !empty($res_nav['id']))
+				{
+					echo"
+					<li ".($res_nav['id']?"data-id='".$res_nav['id']."'":"")." ".($url?"data-url='".$url."'":"").(($res_nav['id'] and $res_nav['state']!="active" and !@$_SESSION['auth']['edit-page'])?" class='editable-hidden'":"").">					
+						<span class='dragger'></span>
+						<div class='content'>";
 
-						// media
-						if($res['tpl'] == 'navigation-edit')
-						media("visuel-".$li."", array("dir" => "navigation", "size" => "300"));
-
-						echo"<div class='texte'>";
-
-							if(@$val["titre"])
-								// titre
-								txt("titre-".$li, "titre");
-							else
-								// lien simple
-								echo"<div id='titre-".$li."' class='titre'><a href='".$url."'>".$res_nav['title']."</a>".($res_nav['state']!="active"?" <i class='fa fa-eye-off' title='Désactivé'></i>":"")."</div>";
-
-							// description
+							// media
 							if($res['tpl'] == 'navigation-edit')
-							txt("description-".$li, "description");
+							media("visuel-".$li."", array("dir" => "navigation", "size" => "300"));
 
-						echo"</div>
+							echo"<div class='texte'>";
 
-					</div>
-				</li>";
+								if(@$json["titre"])
+									// titre
+									txt("titre-".$li, "titre");
+								else
+									// lien simple
+									echo"<div id='titre-".$li."' class='titre'><a href='".$url."'>".$res_nav['title']."</a>".($res_nav['state']!="active"?" <i class='fa fa-eye-off' title='Désactivé'></i>":"")."</div>";
 
-				++$li;
+								// description
+								if($res['tpl'] == 'navigation-edit')
+								txt("description-".$li, "description");
+
+							echo"</div>
+
+						</div>
+					</li>";
+
+					++$li;
+				}
 			}
 
 			//page($num_total, $page);
