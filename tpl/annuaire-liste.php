@@ -43,7 +43,7 @@ $url_back = encode($res['url']);
 		<?php 
 		// Si on n'a pas les droits d'édition des articles on affiche uniquement ceux actifs
 		if(!@$_SESSION['auth']['edit-annuaire']) $sql_state = "AND state='active'";
-		else $sql_state = "";
+		else $sql_state = "AND state!='archive'";
 
 		// Navigation par page
 		$num_pp = 10;
