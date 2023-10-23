@@ -80,7 +80,7 @@ switch($res['tpl']) {
 
 <section class="<?= $res['tpl'] == 'event' ? 'bg-color-3' : ''; ?>">
 
-	<div class="mw960p mod center">
+	<div class="mw960p center">
 
 
 		<?php h1('title', 'picto'); ?>
