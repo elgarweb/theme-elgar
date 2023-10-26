@@ -32,6 +32,8 @@
 		<?php } ?>
 	</div>
 
+	<?php txt('texte'); ?>
+
 </section>
 <script>
 	const allTitles = document.querySelectorAll('h2, h3, h4');
