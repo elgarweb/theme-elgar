@@ -1557,6 +1557,9 @@ iframe {
 	grid-template-columns: repeat(4, 1fr);
 }
 
+	/* Grid dans les contenus éditable */
+	.editable .grid { margin-bottom: 1.5rem; }
+
 	/* space */
 	.grid.space,
 	[class*=" grid-"].space,
