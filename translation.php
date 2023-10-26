@@ -52,6 +52,7 @@ $add_translation = array(
 	"Summary" => array("fr" => "Sommaire", "eu" => "Aurkibidea"),
 	"Page" => array("fr" => "Page", "eu" => "Orrialdea"),
 	"Disabled page" => array("fr" => "Page désactivée", "eu" => "Orrialdea desaktibatua"),
+	"Under Construction" => array("fr" => "En construction", "eu" => "Sortzen ari den orria"),
 
 
 	// ACTUALITÉS - AGENDA
@@ -59,7 +60,7 @@ $add_translation = array(
 	"Go back to the news" => array("fr" => "Retour aux actualités", "eu" => "Itzuli aktualitateetara"),
 	"Go back to the agenda" => array("fr" => "Retour à l'agenda", "eu" => "Itzuli agendara"),
 	"Edit event" => array("fr" => "Edition d'un événement", "eu" => "Gertakari baten argitalpena"),
-	"Event" => array("fr" => "Événement", "eu" => ""),
+	"Event" => array("fr" => "Événement", "eu" => "Agenda"),
 	"Categories" => array("fr" => "Catégories/Tags", "eu" => "Sailak/Tags"),
 	"Start date" => array("fr" => "Date de début", "eu" => "Hastapeneko data"),
 	"End date" => array("fr" => "Date de fin", "eu" => "Amaiera-data"),
@@ -99,10 +100,10 @@ $add_translation = array(
 	// ANNUAIRE
 	"Add annuaire" => array("fr" => "Ajouter une fiche annuaire"),//Aurkibide 1 gehitu
 	
-	"Edit annuaire" => array("fr" => "Edition d'une fiche annuaire", "eu" => "Aurkibide baten argitaratzea "),
+	"Edit annuaire" => array("fr" => "Edition d'une fiche annuaire", "eu" => "Aurkibide baten argitaratzea"),
 	
-	"Add autre" => array("fr" => "Ajouter une fiche autre annuaire", "eu" => ""),
-	"Edit autre" => array("fr" => "Edition d'une fiche annuaire autre", "eu" => "Aurkibide baten argitaratzea "),
+	"Add autre" => array("fr" => "Ajouter une fiche autre annuaire", "eu" => "Ajouter une fiche autre annuaire"),
+	"Edit autre" => array("fr" => "Edition d'une fiche annuaire autre", "eu" => "Aurkibide baten argitaratzea"),
 
 	"Go back to the directory" => array("fr" => "Retour à l'annuaire", "eu" => "Aurkibidera itzuli"),
 
