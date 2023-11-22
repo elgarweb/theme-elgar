@@ -368,7 +368,7 @@ switch(@$_REQUEST['mode'])
 		$res = $sel->fetch_assoc();
 		$fiche = json_decode($res['content'], true);
 
-		$fiche['title'] = $fiche['title'].' '.strtoupper(encode($_REQUEST['lang-dest']));// Changement du titre H1
+		$fiche['title'] = $res['title'].' '.strtoupper(encode($_REQUEST['lang-dest']));// Changement du titre H1
 		//unset($fiche['og-image'], $fiche['visuel']);
 
 		$json_content = json_encode($fiche, JSON_UNESCAPED_UNICODE);
@@ -385,6 +385,8 @@ switch(@$_REQUEST['mode'])
 		$sql .= "content = '".addslashes($json_content)."', ";
 		$sql .= "user_insert = '".(int)$_SESSION['uid']."', ";
 		$sql .= "date_insert = '".$res['date_insert']."' ";
+
+		echo $sql;
 		
 		$connect->query($sql);
 

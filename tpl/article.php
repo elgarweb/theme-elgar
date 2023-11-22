@@ -201,7 +201,7 @@ switch($res['tpl']) {
 							if(@$GLOBALS["content"]["aaaa-mm-jj-fin"]) echo 'tik';
 						}
 						else echo date_lang($GLOBALS["content"]["aaaa-mm-jj"]);
-
+						
 						if(@$GLOBALS["content"]["heure-ouverture"]){
 							echo ', '.@date_format(date_create($GLOBALS["content"]["heure-ouverture"]), 'H:i');
 
@@ -354,7 +354,7 @@ switch($res['tpl']) {
 		if(val){
 			parts = val.split("h");
 			if(parts.length > 1)// Si un h on met :
-				$("#"+id).val(parts[0]+":"+parts[1]);
+				$("#"+id).val(parts[0]+":"+(parts[1]?parts[1]:'00'));
 		}
 	}
 		
