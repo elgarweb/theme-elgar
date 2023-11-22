@@ -115,7 +115,7 @@ $add_translation = array(
 
 	// ARRETES
 	"Add arrete" => array("fr" => "Ajouter un arrêté", "eu" => "Erabaki bat gehitu"),
-	"Add publication" => array("fr" => "Ajouter une publication", "eu" => "Argitalpen bat gehitu"),
+	"Add publication" => array("fr" => "Ajouter une publication", "eu" => "Ajouter une publication"),//Argitalpen bat gehitu
 	"Edit arrete" => array("fr" => "Edition d'un arrêté", "eu" => "Erabaki baten argitaratzea"),
 	"See the sheet" => array("fr" => "Voir la fiche", "eu" => "Ikus fitxa"),
 	"Filter by date (format DD/MM/YYYY)" => array("fr" => "Filtrer par date (format JJ/MM/AAAA)", "eu" => "Dataz irazi (UUUU/HH/EE formatua)"),
