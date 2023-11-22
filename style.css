@@ -792,6 +792,7 @@ footer #contacts {
 		padding-left: 0;
 		margin-left: 0;
 	}
+		.lucide footer ul { list-style: disc; }
 		
 		footer #texte-reseaux ul li {padding-bottom: 0.5em;}
 	footer #texte-reseaux p {margin-bottom: 1em;}
@@ -1005,8 +1006,8 @@ h1, .h1-like { font-size: 3.4rem; }
 h2, .h2-like { font-size: 3rem; }
 h3, .h3-like { font-size: 2.4rem; }
 h4, .h4-like { font-size: 2rem; }
-/* h5, .h5-like { font-size: 1.8rem; }
-h6, .h6-like { font-size: 1.6rem; } */
+h5, .h5-like { font-size: 1.8rem; }
+h6, .h6-like { font-size: 1.6rem; }
 
 em, .italic, address, cite, i, var { font-style: italic; }
 
