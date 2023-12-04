@@ -1816,7 +1816,8 @@ div.editable {
 			/* text-align: left; */
 		}
 			/* Soulignement menu sélectionné */
-			header nav > ul li.selected:before {
+			header nav > ul li.selected:before,
+			#main-navigation li a:hover::before {
 				/* content: "";
 				border-left: solid 2px #C51A1B;
 				position: absolute;

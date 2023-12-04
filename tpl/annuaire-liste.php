@@ -139,7 +139,7 @@ $url_back = encode($res['url']);
 						<ul class="unstyled pln">
 						<?php 
 							if(isset($content_fiche['url-site-web']))
-								echo '<li class="bold pbn"><i class="fa fa-fw fa-globe" aria-hidden="true"></i> <a href="'.$content_fiche['url-site-web'].'" target="_blank">'.__('Website').'</a></li>';
+								echo '<li class="bold pbn"><i class="fa fa-fw fa-globe" aria-hidden="true"></i><a href="'.$content_fiche['url-site-web'].'" target="_blank">'.__('Website').'</a></li>';
 
 							if(isset($content_fiche['telephone']))
 								echo '<li class="pbn"><details class="pts" aria-live="polite"><summary class="tel color pointer tdu bold  inbl" data-encode="'.$content_fiche['telephone'].'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary><p class="inline pls bold"></p></details></li>';
