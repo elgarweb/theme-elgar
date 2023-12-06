@@ -172,7 +172,7 @@ function highlight($txt, $recherche)
 		$content_fiche = json_decode($res_fiche['content'], true);
 
 		?>
-		<article class="mod mtl">
+		<article class="clear ptl">
 
 			<h2><a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" class="tdn"><?php echo highlight($res_fiche['title'], @$_POST['recherche'])?></a><?php echo $state?></h2>
 			
@@ -199,7 +199,7 @@ function highlight($txt, $recherche)
 	</div>
 
 
-	<div class="tc mtl"><?php page($num_total, $page, array('aria-label'=>__("Browsing by page")));?></div>
+	<div class="clear tc ptl"><?php page($num_total, $page, array('aria-label'=>__("Browsing by page")));?></div>
 
 
 </section>
