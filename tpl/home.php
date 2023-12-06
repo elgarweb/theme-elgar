@@ -128,29 +128,43 @@ if(!$alert_view){?>
 
 
 <!-- ACTUALITÉS -->
-<section id="home-actualites" class="ptl pbl">
+<?php
+
+// Actualité à la une
+$sql_alaune="
+SELECT ".$tc.".* FROM ".$tc."
+JOIN 
+	".$tm." ON ".$tc.".id = ".$tm.".id AND ".$tm.".type = 'alaune' AND ".$tm.".cle = '".$lang."' 
+WHERE 
+	".$tc.".type = 'article' AND ".$tc.".lang = '".$lang."' AND state = 'active'
+ORDER BY ".$tc.".date_insert DESC
+LIMIT 1";
+
+//echo $sql_alaune."<br>";
+$sel_alaune = $connect->query($sql_alaune);
+$num_alaune = $sel_alaune->num_rows;
+
+
+// Les 3 actus
+$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
+
+$sql.=" WHERE (".$tc.".type='article' OR ".$tc.".type='article-intramuros')";
+if(isset($articles)) $sql.=" AND id!='".(int)$article['id']."'";
+
+$sql.=" AND ".$tc.".lang='".$lang."' AND state='active' ORDER BY ".$tc.".date_insert DESC
+LIMIT 3";
+
+$sel_article = $connect->query($sql);
+$num_article = $sel_article->num_rows;
+
+?>
+<section id="home-actualites" class="ptl pbl <?=(($num_alaune>0 or $num_article>0)?'':' editable-hidden')?>">
 
 	<div class="mw960p center">
 		
 		<?php h2('titre-actus', 'picto pbm'); ?>
 		
-		
 		<?php
-		// Actualité à la une
-		
-		$sql_alaune="
-		SELECT ".$tc.".* FROM ".$tc."
-		JOIN 
-			".$tm." ON ".$tc.".id = ".$tm.".id AND ".$tm.".type = 'alaune' AND ".$tm.".cle = '".$lang."' 
-		WHERE 
-			".$tc.".type = 'article' AND ".$tc.".lang = '".$lang."' AND state = 'active'
-		ORDER BY ".$tc.".date_insert DESC
-		LIMIT 1";
-
-		//echo $sql_alaune."<br>";
-
-		$sel_alaune = $connect->query($sql_alaune);
-
 		while($res_alaune = $sel_alaune->fetch_assoc())
 		{
 			$articles[$res_alaune['id']] = $res_alaune;
@@ -208,17 +222,6 @@ if(!$alert_view){?>
 			<div class="blocks grid-3 space-xl">
 				
 				<?php 
-				// Construction de la requete
-				$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
-
-				$sql.=" WHERE (".$tc.".type='article' OR ".$tc.".type='article-intramuros')";
-				if(isset($articles)) $sql.=" AND id!='".(int)$article['id']."'";
-
-				$sql.=" AND ".$tc.".lang='".$lang."' AND state='active' ORDER BY ".$tc.".date_insert DESC
-				LIMIT 3";
-
-				$sel_article = $connect->query($sql);
-
 				while($res_article = $sel_article->fetch_assoc())
 				{
 					$content_article = json_decode($res_article['content'], true);
@@ -266,7 +269,6 @@ $sql.=" LIMIT 3";
 
 $sel_event = $connect->query($sql);
 $num_event = $sel_event->num_rows;
-
 
 
 // Si peut d'évènement à venir, on prend aussi les en cours
