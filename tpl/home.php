@@ -44,7 +44,8 @@ if(!$alert_view){?>
 	
 		<?php
 		// Si on demande le h1 au dessu de l'image et texte
-		if(@$GLOBALS['home-titre-place'] != 'in') h1('titre', 'picto');
+		if(@$GLOBALS['home-titre-place'] != 'in' and @$GLOBALS['home-titre-place'] != 'noh1')
+			h1('titre', 'picto');
 		?>
 
 		<article class="<?=((isset($GLOBALS['content']['intro-texte']) or isset($GLOBALS['content']['intro-visuel'])) ? 'row' : 'editable-hidden'); ?>">
