@@ -1233,11 +1233,11 @@ input[type="search"]::-webkit-search-results-decoration {
   display: none;
 }
 ::-webkit-input-placeholder {
-  color: #777;
+  color: #616161;
 }
 input:-moz-placeholder,
 textarea:-moz-placeholder {
-  color: #777;
+  color: #616161;
 }
 /* unstyled forms */
 button.unstyled,
