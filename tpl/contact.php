@@ -140,7 +140,7 @@ switch(@$_GET['mode'])
 
 		<script>
 			// Titre de la page en cours
-			title = document.title;
+			origin_title = document.title;
 
 			// Pour rétablir le fonctionnement du formulaire
 			function activation_form(){
@@ -292,7 +292,7 @@ switch(@$_GET['mode'])
 							?>
 							<script>
 								popin(__("Message sent"), 'nofade', 'popin', $("#send"));
-								document.title = title +' - '+ __("Message sent");
+								document.title = origin_title +' - '+ __("Message sent");
 
 								// Icone envoyer
 								$("#contact #send .fa-spin").removeClass("fa-spin fa-cog").addClass("fa-ok");
@@ -303,7 +303,7 @@ switch(@$_GET['mode'])
 							?>
 							<script>
 								error(__("Error sending email"), 'nofade', $("#send"));
-								document.title = title +' - '+ __("Error sending email");
+								document.title = origin_title +' - '+ __("Error sending email");
 								
 								activation_form();// On rétablie le formulaire
 							</script>
@@ -316,7 +316,7 @@ switch(@$_GET['mode'])
 						?>
 						<script>
 							error(__("Wrong answer to the verification question! Please check your calculation")+".");//+" : "+$("#calcul").text()+$("#question").val(), 'nofade', $("#question")
-							document.title = title +' - '+ __("Wrong answer to the verification question! Please check your calculation")+".";//+" : "+$("#calcul").text()+$("#question").val()
+							document.title = origin_title +' - '+ __("Wrong answer to the verification question! Please check your calculation")+".";//+" : "+$("#calcul").text()+$("#question").val()
 							
 							activation_form();// On rétablie le formulaire
 						</script>
@@ -328,7 +328,7 @@ switch(@$_GET['mode'])
 					?>
 					<script>
 						error(__("Invalid email"), 'nofade', $("#email-from"));
-						document.title = title +' - '+ __("Invalid email");
+						document.title = origin_title +' - '+ __("Invalid email");
 						
 						activation_form();// On rétablie le formulaire
 					</script>

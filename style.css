@@ -222,10 +222,13 @@ a[name] {
 	font-weight: bold;
 	padding: 1rem 3rem; 
 	border-radius: 30px;
+	transition: all .3s;
 }
 
 	.bt:not(.vam):hover, 
-	.bt.selected { text-decoration: underline;	}
+	.bt.selected,
+	.bt-tag:hover
+	{ text-decoration: underline;	}
 
 /* .bt-tag {
 	display: inline-block;
