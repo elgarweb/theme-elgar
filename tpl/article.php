@@ -88,7 +88,7 @@ switch($res['tpl']) {
 		<div class="flex wrap space-xl ptl">
 
 			<?php if($media) { ?>
-			<div class="<?=(isset($GLOBALS['content']['visuel'])) ? '' : 'editable-hidden ' ?>prm">
+			<div class="visuel prm <?=(isset($GLOBALS['content']['visuel'])) ? '' : 'editable-hidden' ?>">
 
 				<figure role="group"<?=(isset($GLOBALS['content']['texte-legende-visuel']))?' aria-label="'.strip_tags($GLOBALS['content']['texte-legende-visuel']).'"':''?>>
 
