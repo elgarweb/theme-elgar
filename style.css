@@ -140,12 +140,17 @@ h4 { color: #20828F; }
 	margin: auto;	
 	background-color: #20828F;
 	color: #fff;
-	padding: 2.5rem 2rem 1rem;
+	padding: 2rem 2rem 1rem;
 	margin-bottom: 2rem;
 	border-radius: 0px 0px 25px 0px;
 	border-top: 7px solid #C51A1B;
 }
 	.highlight h2, .highlight h3, .highlight h4, .highlight a { color: #fff; }
+
+	.highlight h2:first-of-type,
+	.highlight h3:first-of-type
+	{ margin-top: 0; }
+
 
 	.highlight ul li:before { color: #fff; }
 	
@@ -599,6 +604,7 @@ header section:first-of-type { font-size: 1.4rem; }
 
 
 /* ACTUALITÉS... */
+
 	/* Pagination */
 	.page .bt {
 		text-decoration: underline;
@@ -2173,6 +2179,11 @@ div.editable {
 	    	margin: 0 auto;
 	    	width: 100%;
 	    }
+
+	.visuel { 
+		padding: 0;
+		margin: auto;
+	}
 }
 
 /* RESPONSIVE small */
@@ -2628,3 +2639,5 @@ div.editable {
 
 .hc.responsive-nav .burger span
 { background: transparent !important; }
+
+.hc header #logo img { border-radius: 5px; }
