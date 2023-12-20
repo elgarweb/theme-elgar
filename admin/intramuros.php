@@ -223,7 +223,7 @@ if(is_array($array))
 			'id' => -$key,
 			'state' => "'active'",
 			'lang' => "'fr'",
-			'robot' => "''",
+			'robot' => "'noindex'",
 			'type' => "'article-intramuros'",
 			'tpl' => "'article'",
 			'url' => "'".$url."'",

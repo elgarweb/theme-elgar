@@ -227,7 +227,7 @@ if(is_array($array))
 			'id' => -$key,
 			'state' => "'active'",
 			'lang' => "'fr'",
-			'robot' => "''",
+			'robot' => "'noindex'",
 			'type' => "'event-tourinsoft'",
 			'tpl' => "'event'",
 			'url' => "'".$url."'",
