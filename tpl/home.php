@@ -131,7 +131,7 @@ if(!$alert_view){?>
 <!-- ACTUALITÉS -->
 <?php
 
-// Actualité à la une
+// ACTUALITÉ À LA UNE
 $sql_alaune="
 SELECT ".$tc.".* FROM ".$tc."
 JOIN 
@@ -143,15 +143,15 @@ LIMIT 1";
 
 //echo $sql_alaune."<br>";
 $sel_alaune = $connect->query($sql_alaune);
+$res_alaune = $sel_alaune->fetch_assoc();
 $num_alaune = $sel_alaune->num_rows;
 
 
-// Les 3 actus
+// LES 3 ACTUS
 $sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
-
 $sql.=" WHERE (".$tc.".type='article' OR ".$tc.".type='article-intramuros')";
-if(isset($articles)) $sql.=" AND id!='".(int)$article['id']."'";
-
+// Supprime l'article à la une de la liste des 3 actus
+if(isset($res_alaune['id'])) $sql.=" AND id!='".(int)$res_alaune['id']."'";
 $sql.=" AND ".$tc.".lang='".$lang."' AND state='active' ORDER BY ".$tc.".date_insert DESC
 LIMIT 3";
 
@@ -166,27 +166,22 @@ $num_article = $sel_article->num_rows;
 		<?php h2('titre-actus', 'picto pbm'); ?>
 		
 		<?php
-		while($res_alaune = $sel_alaune->fetch_assoc())
+		if(isset($res_alaune['id']))
 		{
-			$articles[$res_alaune['id']] = $res_alaune;
-			$articles[$res_alaune['id']]['content'] = json_decode($res_alaune['content'], true);
-		}
-		
-		if(isset($articles))
-		foreach($articles as $key => $article)
-		{
-			// var_dump($article['id']);
+			$res_alaune['content'] = json_decode($res_alaune['content'], true);
+
+			// var_dump($res_alaune['id']);
 			?>
 			<!-- Actualité à la une -->
 			<article id="actualaune">
 
-				<div class="<?=(isset($article['title']) ? 'relative flex aic brd3 mbl' : 'none'); ?>">
+				<div class="relative flex aic brd3 mbl">
 
 					<!-- Image -->
-					<?php if(isset($article['content']['visuel'])){?>
+					<?php if(isset($res_alaune['content']['visuel'])){?>
 					<figure class="brd-right">
 						
-						<div class="nor" data-bg="<?=$article['content']['visuel'];?>" data-lazy="bg">
+						<div class="nor" data-bg="<?=$res_alaune['content']['visuel'];?>" data-lazy="bg">
 						</div>
 
 					</figure>
@@ -196,17 +191,17 @@ $num_article = $sel_article->num_rows;
 
 						<!-- Titre -->
 						<h3 class="mtn bold">
-							<a href="<?= make_url($article['url'], array("domaine" => true)); ?>" class="tdn"><?= $article['title']; ?></a>
+							<a href="<?= make_url($res_alaune['url'], array("domaine" => true)); ?>" class="tdn"><?= $res_alaune['title']; ?></a>
 						</h3>
 						
 						<!-- Extrait texte -->
 						<p class="pbm">
-							<?php if(isset($article['content']['description'])) echo word_cut($article['content']['description'], '150', '...');?>
+							<?php if(isset($res_alaune['content']['description'])) echo word_cut($res_alaune['content']['description'], '150', '...');?>
 						</p>
 
 						<!-- Lien Lire la suite -->
 						<div class="plus">
-							<a class="absolute bot15 right15" href="<?=make_url($article['url'], array("domaine" => true));?>" aria-label="<?php echo __("Read more")." ". $article['title'];?> "><?php _e("Read more")?></a>
+							<a class="absolute bot15 right15" href="<?=make_url($res_alaune['url'], array("domaine" => true));?>" aria-label="<?php echo __("Read more")." ". $res_alaune['title'];?> "><?php _e("Read more")?></a>
 						</div>
 					</div>
 				</div>
