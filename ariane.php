@@ -30,7 +30,7 @@
 				// Supprime le nom de la page en cours pour le chemin
 				if($tag or $GLOBALS['filter']) $title = preg_replace('/^'.preg_quote($res['title'].' - ', '/').'*/', '', $title);
 
-				?><li class="inline"><a href="/<?=encode($url_back)?>"><?php _e(encode($url_back))?></a></li><?php
+				?><li class="inline"><a href="/<?=encode($url_back)?>"><?php echo ucfirst(__(encode($url_back)))?></a></li><?php
 			}
 
 			// Supprime le nom du site
