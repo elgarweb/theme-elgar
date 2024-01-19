@@ -143,35 +143,50 @@ switch($res['tpl']) {
 					if($res['tpl'] == 'publication')
 					{
 						?>
-						<div class="editable-hidden bold red"><?= _e("Published on");?></div>
+						<div class="editable-hidden bold red">
+							<label for="aaaa-mm-jj-publication" class="block"><?= _e("Published on");?></label>
+							<?php
+							input("aaaa-mm-jj-publication", array("type" => "date", "autocomplete" => "off", "class" => "meta tc"));
+							?>
+							<a href="javascript:$('#aaaa-mm-jj-publication').val('');void(0);" title="Remise à zéro">raz</a>
+						</div>
 						<?php
-						input("aaaa-mm-jj-publication", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
 					}
 					else
 					{
-
 						?>
-						<div class="editable-hidden bold"><?= _e("Start date");?></div>
+						<div class="editable-hidden bold">
+							<label for="aaaa-mm-jj" class="block"><?= _e("Start date");?></label>
+							<?php
+							input("aaaa-mm-jj", array("type" => "date", "autocomplete" => "off", "class" => "meta tc "));
+
+							if(stristr($res['tpl'], 'event')) 
+							{
+								echo" ".__("Opening")." ";
+								input('heure-ouverture', array("type" => "time", "autocomplete" => "off", "class" => "w100p"));		
+								echo" ".__("Closing")." ";
+								input('heure-fermeture', array("type" => "time", "autocomplete" => "off", "class" => "w100p"));
+							}
+							?>
+							<a href="javascript:$('#aaaa-mm-jj').val('');$('#heure-ouverture').val('');$('#heure-fermeture').val('');void(0);" title="Remise à zéro">raz</a>
+						</div>
+
+						<div class="editable-hidden bold">
+							<label for="aaaa-mm-jj" class="block"><?= _e("End date");?></label>
+							<?php
+							input("aaaa-mm-jj-fin", array("type" => "date", "autocomplete" => "off", "class" => "meta tc"));
+
+							if(stristr($res['tpl'], 'event')) 
+							{
+								echo" ".__("Opening")." ";
+								input('heure-ouverture-fin', array("type" => "time", "autocomplete" => "off", "class" => "w100p"));		
+								echo" ".__("Closing")." ";
+								input('heure-fermeture-fin', array("type" => "time", "autocomplete" => "off", "class" => "w100p"));
+							}
+							?>
+							<a href="javascript:$('#aaaa-mm-jj-fin').val('');$('#heure-ouverture-fin').val('');$('#heure-fermeture-fin').val('');void(0);" title="Remise à zéro">raz</a>
+						</div>
 						<?php
-						input("aaaa-mm-jj", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
-
-						if(stristr($res['tpl'], 'event')) 
-						{
-							input('heure-ouverture', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));			
-							input('heure-fermeture', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));
-						}
-						?>
-
-						<div class="editable-hidden bold"><?= _e("End date");?></div>
-						<?php
-						input("aaaa-mm-jj-fin", array("type" => "hidden", "autocomplete" => "off", "class" => "meta tc"));
-
-						if(stristr($res['tpl'], 'event')) 
-						{
-							input('heure-ouverture-fin', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));			
-							input('heure-fermeture-fin', array("type" => "hidden", "autocomplete" => "off", "class" => "w150p"));
-						}
-
 					}
 
 
