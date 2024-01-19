@@ -197,7 +197,7 @@ $add_translation = array(
 		"autre" => array("fr" => "Annuaire autre"),
 	
 	"Commerce" => array("fr" => "Commerce", "eu" => "Merkataritza"),
-		"commerce" => array("fr" => "Commerce"),
+		"commerce" => array("fr" => "Commerce", "eu" => "Merkataritza"),
 
 	"Decrees" => array("fr" => "Arrêtés", "eu" => "Erabakiak"),
 		"arretes" => array("fr" => "Arrêtés"),

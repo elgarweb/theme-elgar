@@ -82,6 +82,9 @@ if(is_array($array))
 	}, $array), SORT_ASC, $array);
 
 
+	// Affichage du tableau des données
+	echo $lang.'<br>';
+	echo $GLOBALS['tourinsoft_flux'].'<br>';
 	if($verbose_source) highlight_string(print_r($array, true));
 
 
@@ -177,13 +180,13 @@ if(is_array($array))
 			$date_fin = null;
 
 		// On regarde si la description est courtes ou longue
-		if(strlen($val['DESCRIPTIFSs'][0]['Descriptioncommerciale'])<500) {
-			$description = $val['DESCRIPTIFSs'][0]['Descriptioncommerciale'];
+		if(strlen(@$val['DESCRIPTIFSs'][0]['Descriptioncommerciale'])<500) {
+			$description = @$val['DESCRIPTIFSs'][0]['Descriptioncommerciale'];
 			$texte = '';
 		}
 		else {
 			$description = '';
-			$texte = $val['DESCRIPTIFSs'][0]['Descriptioncommerciale'];
+			$texte = @$val['DESCRIPTIFSs'][0]['Descriptioncommerciale'];
 		}
 
 
@@ -203,8 +206,8 @@ if(is_array($array))
 			'visuel' => $visuel_dest,
 			'visuel-alt' => '',//@$val['PHOTOSs'][0]['Photo']['Titre'].' - '.@$val['PHOTOSs'][0]['Photo']['Credit']
 			'aaaa-mm-jj' => $date,
-			'heure-ouverture' => $val['DATESs'][0]['Heuredouverture1'],
-			'heure-fermeture' => $val['DATESs'][0]['Heuredefermeture1'],
+			'heure-ouverture' => @$val['DATESs'][0]['Heuredouverture1'],
+			'heure-fermeture' => @$val['DATESs'][0]['Heuredefermeture1'],
 			'aaaa-mm-jj-fin' => @$date_fin,
 			'heure-ouverture-fin' => @$val['DATESs'][0]['Heuredouverture2'],
 			'heure-fermeture-fin' => @$val['DATESs'][0]['Heuredefermeture2'],
@@ -213,7 +216,7 @@ if(is_array($array))
 			'url-site-web' => @$com['C5'],
 			'telephone' => (@$com['C1']?base64_encode(@$com['C1']) : (@$com['C6']?base64_encode(@$com['C6']):'')),
 			'mail-contact' => (@$com['C4']?base64_encode(@$com['C4']):''),
-			'adresse' => (@$val['ADRESSEs'][0]['CodePostal']?'<p>'.$val['ADRESSEs'][0]['Adresse2'].'<br>'.$val['ADRESSEs'][0]['CodePostal'].' '.$val['ADRESSEs'][0]['Commune'].'</p>':''),
+			'adresse' => (@$val['ADRESSEs'][0]['CodePostal']?'<p>'.(@$val['ADRESSEs'][0]['Adresse1']?@$val['ADRESSEs'][0]['Adresse1'].'<br>':'').(@$val['ADRESSEs'][0]['Adresse2']?@$val['ADRESSEs'][0]['Adresse2'].'<br>':'').@$val['ADRESSEs'][0]['CodePostal'].' '.@$val['ADRESSEs'][0]['Commune'].'</p>':''),
 			'latitude' => $val['GmapLatitude'],
 			'longitude' => $val['GmapLongitude'],
 		);
@@ -226,7 +229,7 @@ if(is_array($array))
 			//'id' => $id_start+$key,
 			'id' => -$key,
 			'state' => "'active'",
-			'lang' => "'fr'",
+			'lang' => "'".$lang."'",
 			'robot' => "'noindex'",
 			'type' => "'event-tourinsoft'",
 			'tpl' => "'event'",
@@ -276,7 +279,7 @@ if(is_array($array))
 	    	$sql_tag.="(".implode(",", array(
 				'id' => -$key,
 				'zone' => "'".encode(__('Agenda'))."'",
-				'lang' => "'fr'",
+				'lang' => "'".$lang."'",
 				'encode' => "'".encode($val_tag['ThesLibelle'])."'",
 				'name' => "'".$GLOBALS['connect']->real_escape_string($val_tag['ThesLibelle'])."'",
 				'ordre' => "'".($key_tag+1)."'"
@@ -291,7 +294,7 @@ if(is_array($array))
 
 
 // Suppression des tag lié au évènement tourinsoft
-$GLOBALS['connect']->query("DELETE FROM ".$tt." WHERE zone='agenda' AND id<=0");
+$GLOBALS['connect']->query("DELETE FROM ".$tt." WHERE zone='agenda' AND id<=0 AND lang='".$lang."'");
 if($GLOBALS['connect']->error) die($GLOBALS['connect']->error);
 
 // Suppression des dates dans les méta avant ajout ?
@@ -299,7 +302,7 @@ $GLOBALS['connect']->query("DELETE FROM ".$tm." WHERE (type='aaaa-mm-jj' OR type
 if($GLOBALS['connect']->error) die($GLOBALS['connect']->error);
 
 // Suppression des contenus
-$GLOBALS['connect']->query("DELETE FROM ".$tc." WHERE type='event-tourinsoft'");// AND id<=0
+$GLOBALS['connect']->query("DELETE FROM ".$tc." WHERE type='event-tourinsoft' AND lang='".$lang."'");// AND id<=0
 if($GLOBALS['connect']->error) die($GLOBALS['connect']->error);
 
 
