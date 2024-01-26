@@ -32,6 +32,7 @@ $_REQUEST['clean'] = true;// Force la vidange des dossiers images
 $sql_content = $sql_meta = $sql_tag = $visuel_dest = null;
 $id_start = -1000000000;// Plus utiliser car on a des id négatifs
 $limit = 50;// 50 10 // Nombre d'évènement rapatrié
+$id_start = 1000;// pour ne pas se supperposer à l'autre langue au niveau des id
 
 $chemin_visuel = $GLOBALS['media_dir'].'/tourinsoft';
 $racine = '../../../';
@@ -57,10 +58,12 @@ if(is_array($array))
 	
 
 	// Nettoie les images dans le dossier
-	if(@$_REQUEST['clean'])
+	if(@$_REQUEST['clean'] and $lang != 'eu')
 	{
 		array_map('unlink', array_filter((array) glob(rtrim($_SERVER['DOCUMENT_ROOT'], '/').'/'.$chemin_visuel.'/*')));
 		array_map('unlink', array_filter((array) glob(rtrim($_SERVER['DOCUMENT_ROOT'], '/').'/'.$GLOBALS['media_dir'].'/resize/tourinsoft/*')));
+
+		echo '<b>Clean file !</b><br>';
 
 		//exit('clean');
 	}
@@ -91,14 +94,14 @@ if(is_array($array))
 	// CRÉATION DE LA REQUÊTE D'AJOUT DES CONTENUS
 	foreach($array as $key => $val) 
 	{
-		$key = $key + 1;
+		$key = $key + ($lang=='fr'? 1 : $id_start);
 		$copy = false;
 
-		if($verbose) echo '<hr><h2>'.$key.'. '.$val['SyndicObjectName'].'</h2>';
+		if($verbose) echo '<hr><h2>'.$key.'. '.$val['NOMOFFREs'][0]['Nomdelamanifestation'].'</h2>';
 
 
 		// construction de l'url
-		$url = encode($val['SyndicObjectName']);
+		$url = encode($val['NOMOFFREs'][0]['Nomdelamanifestation']);
 
 		$url = mb_convert_encoding($url, 'UTF-8', 'UTF-8');// Supprime les caractères utf8 de l'url
 
@@ -202,7 +205,7 @@ if(is_array($array))
 
 		// Contenu de l'article
 		$content = array (
-			'title' => $val['SyndicObjectName'],
+			'title' => $val['NOMOFFREs'][0]['Nomdelamanifestation'],
 			'visuel' => $visuel_dest,
 			'visuel-alt' => '',//@$val['PHOTOSs'][0]['Photo']['Titre'].' - '.@$val['PHOTOSs'][0]['Photo']['Credit']
 			'aaaa-mm-jj' => $date,
@@ -234,7 +237,7 @@ if(is_array($array))
 			'type' => "'event-tourinsoft'",
 			'tpl' => "'event'",
 			'url' => "'".$url."'",
-			'title' => "'".$GLOBALS['connect']->real_escape_string($val['SyndicObjectName'])."'",
+			'title' => "'".$GLOBALS['connect']->real_escape_string($val['NOMOFFREs'][0]['Nomdelamanifestation'])."'",
 			'description' => "''",
 			'content' => "'".$GLOBALS['connect']->real_escape_string($json_content)."'",
 			'user_update' => 1,
@@ -287,7 +290,7 @@ if(is_array($array))
 	    }
 		
 
-	    if($key >= $limit) break;
+	    if($key >= ($lang=='fr'? $limit : ($id_start+$limit))) break;// On arrete les rapatriements au bout de $limit
 	}
 }
 
@@ -297,9 +300,13 @@ if(is_array($array))
 $GLOBALS['connect']->query("DELETE FROM ".$tt." WHERE zone='agenda' AND id<=0 AND lang='".$lang."'");
 if($GLOBALS['connect']->error) die($GLOBALS['connect']->error);
 
-// Suppression des dates dans les méta avant ajout ?
-$GLOBALS['connect']->query("DELETE FROM ".$tm." WHERE (type='aaaa-mm-jj' OR type='aaaa-mm-jj-fin') AND id<=0");
-if($GLOBALS['connect']->error) die($GLOBALS['connect']->error);
+// Suppression des dates dans les méta avant ajout ? Que si pas lang = eu
+if($lang != 'eu') 
+{
+	echo"<br><b>Clean date meta !</b><br>";
+	$GLOBALS['connect']->query("DELETE FROM ".$tm." WHERE (type='aaaa-mm-jj' OR type='aaaa-mm-jj-fin') AND id<=0");
+	if($GLOBALS['connect']->error) die($GLOBALS['connect']->error);
+}
 
 // Suppression des contenus
 $GLOBALS['connect']->query("DELETE FROM ".$tc." WHERE type='event-tourinsoft' AND lang='".$lang."'");// AND id<=0
