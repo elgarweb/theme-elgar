@@ -97,11 +97,11 @@ if(is_array($array))
 		$key = $key + ($lang=='fr'? 1 : $id_start);
 		$copy = false;
 
-		if($verbose) echo '<hr><h2>'.$key.'. '.$val['SyndicObjectName'].'</h2>';
+		if($verbose) echo '<hr><h2>'.$key.'. '.$val['NOMOFFREs'][0]['Nomdelamanifestation'].'</h2>';
 
 
 		// construction de l'url
-		$url = encode($val['SyndicObjectName']);
+		$url = encode($val['NOMOFFREs'][0]['Nomdelamanifestation']);
 
 		$url = mb_convert_encoding($url, 'UTF-8', 'UTF-8');// Supprime les caractères utf8 de l'url
 
@@ -205,7 +205,7 @@ if(is_array($array))
 
 		// Contenu de l'article
 		$content = array (
-			'title' => $val['SyndicObjectName'],
+			'title' => $val['NOMOFFREs'][0]['Nomdelamanifestation'],
 			'visuel' => $visuel_dest,
 			'visuel-alt' => '',//@$val['PHOTOSs'][0]['Photo']['Titre'].' - '.@$val['PHOTOSs'][0]['Photo']['Credit']
 			'aaaa-mm-jj' => $date,
@@ -237,7 +237,7 @@ if(is_array($array))
 			'type' => "'event-tourinsoft'",
 			'tpl' => "'event'",
 			'url' => "'".$url."'",
-			'title' => "'".$GLOBALS['connect']->real_escape_string($val['SyndicObjectName'])."'",
+			'title' => "'".$GLOBALS['connect']->real_escape_string($val['NOMOFFREs'][0]['Nomdelamanifestation'])."'",
 			'description' => "''",
 			'content' => "'".$GLOBALS['connect']->real_escape_string($json_content)."'",
 			'user_update' => 1,
