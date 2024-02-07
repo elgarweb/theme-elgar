@@ -219,8 +219,10 @@ a[name] {
 /* bouton pour les liens */
 .bt:not(.vam), .bt.internal, .bt-tag {
 	background-color: #C51A1B;
-	color: #fff;
 }
+	.bt:not(.vam), .bt.internal, .bt-tag,
+	a.bt.external:after 
+	{ color: #fff; }
 
 .bt:not(.fixed):not(.vam), .bt-tag { 
 	font-family: 'Proximanova', sans-serif;
@@ -795,7 +797,10 @@ footer #contacts {
 		margin-right: 1rem;
 		font-size: 2rem;
 	}
-	.bt .fa { color: #fff; }
+	.bt .fa {
+		color: #fff;
+		transition: all .3s;
+	}
 
 	footer ul, .ulinline ul {
 		list-style: none;
@@ -1143,7 +1148,10 @@ img.fl, figure.fl { margin-right: 1rem; }
 img.fr, figure.fr { margin-left: 1rem; }
 img.fl, img.fr, figure.fl, figure.fr { margin-bottom: 0.5rem; }
 
-figure.center {	text-align: center; }
+figure.center {	
+	text-align: center;
+	margin-bottom: 1rem;
+}
 
 /* Pour que les images ne dépassent pas la taille du contener */
 article img { max-width: 100%; }
@@ -1370,6 +1378,7 @@ iframe {
 		/* box-shadow: 0 -2px 0 rgba(0, 0, 0, 0.2) inset, 0 100px 0 rgba(255, 255, 255, 0.05) inset; Pas utilisé 06/01/2021  */
 	}
 		.bt a:hover { color: #fff; }
+
 	.bt:active, button:active { 
 		box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2) inset, 0 100px 0 rgba(0, 0, 0, 0.1) inset;
 	}
