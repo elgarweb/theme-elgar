@@ -315,7 +315,7 @@ switch(@$_GET['mode'])
 					{
 						?>
 						<script>
-							error(__("Wrong answer to the verification question! Please check your calculation")+".");//+" : "+$("#calcul").text()+$("#question").val(), 'nofade', $("#question")
+							error(__("Wrong answer to the verification question! Please check your calculation")+".", 'nofade', $("#question"));//+" : "+$("#calcul").text()+$("#question").val(), 'nofade', $("#question")
 							document.title = origin_title +' - '+ __("Wrong answer to the verification question! Please check your calculation")+".";//+" : "+$("#calcul").text()+$("#question").val()
 							
 							activation_form();// On rétablie le formulaire
