@@ -105,7 +105,7 @@ $mois = array(
 
 		</fieldset>
 		
-		<button type="submit" class="bt fr mtm mrl"><?_e("Filter")?></button>
+		<button type="submit" class="bt fr mtm mrl" title="<?_e("Filter (reloads the page)")?>"><?_e("Filter")?></button>
 
 	</form>
 	<script>
