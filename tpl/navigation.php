@@ -68,6 +68,7 @@ switch(@$_GET['mode'])
 			$sql.=" LEFT JOIN ".$tc."
 			ON
 			(
+				".$tm.".id > 0 AND
 				".$tm.".id = ".$tc.".id AND
 				".$tc.".lang='".$lang."'
 			)";//".$sql_state."
@@ -330,6 +331,7 @@ switch(@$_GET['mode'])
 				navigation[li_id]["titre"] = $(".titre", this).html();
 
 				if($(".description", this).html()) navigation[li_id]["description"] = $(".description", this).html();
+				
 				i++;
 			});
 			console.log(navigation)

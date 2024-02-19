@@ -126,6 +126,7 @@ $add_translation = array(
 	"Month" => array("fr" => "Mois", "eu" => "Hilabetea"),
 	"Year" => array("fr" => "Année", "eu" => "Urtea"),
 	"Filter" => array("fr" => "Filtrer", "eu" => "Irazi"),
+	"Filter (reloads the page)" => array("fr" => "Filtrer (recharge la page)", "eu" => "Irazi"),
 	"No result" => array("fr" => "Pas de résultat", "eu" => "Emaitzarik ez"),
 	"Go back to decrees" => array("fr" => "Retour aux arrêtés", "eu" => "Erabakietara itzuli"),
 	"Published on" => array("fr" => "Publié le", "eu" => "Ondoko egunean argitaratua"),
