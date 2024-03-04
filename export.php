@@ -38,6 +38,11 @@ function make_json($res)
 		"date-creation" => $res['date_insert']
 	);
 
+	if(@$content['url-site-web']) $json[$res['id']]['site-web'] = $content['url-site-web'];
+	if(@$content['telephone']) $json[$res['id']]['telephone'] = $content['telephone'];
+	if(@$content['mail-contact']) $json[$res['id']]['mail-contact'] = $content['mail-contact'];
+	if(@$content['adresse']) $json[$res['id']]['adresse'] = $content['adresse'];
+
 	if(@$content['aaaa-mm-jj']) $json[$res['id']]['date-debut'] = $content['aaaa-mm-jj'];
 	if(@$content['heure-ouverture']) $json[$res['id']]['heure-ouverture-debut'] = $content['heure-ouverture'];
 	if(@$content['heure-fermeture']) $json[$res['id']]['heure-fermeture-debut'] = $content['heure-fermeture'];
@@ -45,11 +50,6 @@ function make_json($res)
 	if(@$content['aaaa-mm-jj-fin']) $json[$res['id']]['date-fin'] = $content['aaaa-mm-jj-fin'];
 	if(@$content['heure-ouverture-fin']) $json[$res['id']]['heure-ouverture-fin'] = $content['heure-ouverture-fin'];
 	if(@$content['heure-fermeture-fin']) $json[$res['id']]['heure-fermeture-fin'] = $content['heure-fermeture-fin'];
-
-	if(@$content['url-site-web']) $json[$res['id']]['site-web'] = $content['url-site-web'];
-	if(@$content['telephone']) $json[$res['id']]['telephone'] = $content['telephone'];
-	if(@$content['mail-contact']) $json[$res['id']]['mail-contact'] = $content['mail-contact'];
-	if(@$content['adresse']) $json[$res['id']]['adresse'] = $content['adresse'];
 
 	return $json;
 }
