@@ -39,8 +39,8 @@ function make_json($res)
 	);
 
 	if(@$content['url-site-web']) $json[$res['id']]['site-web'] = $content['url-site-web'];
-	if(@$content['telephone']) $json[$res['id']]['telephone'] = $content['telephone'];
-	if(@$content['mail-contact']) $json[$res['id']]['mail-contact'] = $content['mail-contact'];
+	if(@$content['telephone']) $json[$res['id']]['telephone'] = base64_decode($content['telephone']);
+	if(@$content['mail-contact']) $json[$res['id']]['mail-contact'] = base64_decode($content['mail-contact']);
 	if(@$content['adresse']) $json[$res['id']]['adresse'] = $content['adresse'];
 
 	if(@$content['aaaa-mm-jj']) $json[$res['id']]['date-debut'] = $content['aaaa-mm-jj'];
