@@ -268,7 +268,7 @@ $num_event = $sel_event->num_rows;
 
 
 // Si peut d'évènement à venir, on prend aussi les en cours
-if($num_event<3) 
+if($num_event < 3) 
 {
 	// Construction de la requete
 	$sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;

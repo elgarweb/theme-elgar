@@ -262,6 +262,8 @@ button { border: solid 1px #fff; }
 article ul,
 	#sommaire ol ol { list-style: none; }
 
+	article ul { margin-bottom: 2rem;	}
+
 	main article ul li {
 		position: relative;
 		padding-bottom: 1rem;
