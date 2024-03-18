@@ -40,6 +40,17 @@ a {
 		text-decoration: none; 
 	}
 	
+	a.no-access:after{
+		font-family: FontAwesome;
+		content: '\e86d';
+		font-size: .85em;
+		color: #00253F;
+		padding: 0 .2em 0 .25em;
+	}
+	#contacts a.no-access:after,
+	.hc a.no-access:after
+	{ color: #FFF;}
+	
 	a.external:after{
 		/* content: open-quote; */
 	  font-family: FontAwesome;
@@ -48,7 +59,9 @@ a {
 	  color: #00253F;
 	  padding: 0 .5em 0 .25em;
 	}
-	#contacts a.external:after,.hc a.external:after{ color: #FFF;}
+	#contacts a.external:after,
+	.hc a.external:after
+	{ color: #FFF;}
 
 /* Titres */
 h1, .h1-like, 
@@ -2431,6 +2444,8 @@ div.editable {
 .fa-floppy:before { content: '\e837'; } /* '' */
 .fa-key:before { content: '\e838'; } /* '' */
 .fa-login:before { content: '\e839'; } /* '' */
+.fa-x-twitter:before { content: '\e86c'; } /* '' */
+.fa-no-access:before { content: '\e86d'; } /* '' */
 .fa-move:before { content: '\f047'; } /* '' */
 .fa-link-ext:before { content: '\f08e'; } /* '' */
 .fa-twitter:before { content: '\f099'; } /* '' */
