@@ -124,7 +124,7 @@
 	$("a.no-access").each(function() 
 	{
 		$(this)
-			.attr("aria-label", ($(this).attr("aria-label") ? $(this).attr("aria-label") : $(this).text()) + " - <?php _e("Link destination not accessible");?>")
+			.attr("aria-label", $(this).text() + ($(this).hasClass("external")?" - <?php _e("New window");?>":"") + " - <?php _e("Link destination not accessible");?>")
 			.attr("aria-describedby","texte-aide-access");
 
 		noAccess = true;
