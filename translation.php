@@ -166,6 +166,7 @@ $add_translation = array(
 
 	// FONCTIONS
 	"New window" => array("fr" => "Nouvelle fenêtre", "eu" => "Leiho berria"),
+	"Link destination not accessible" => array("fr" => "Destination du lien non accessible", "eu" => "Destination du lien non accessible"),
 
 	// Accessibilité
 	"Skip to content" => array("fr" => "Aller au contenu", "eu" => "Joan edukira"),

@@ -112,6 +112,7 @@ $url_back = encode($res['url']);
 			if($res_fiche['state'] != "active") $state = " <span class='deactivate pat'>".__("Article d&eacute;sactiv&eacute;")."</span>";
 			else $state = "";
 
+			if(isset($res_fiche['content']))
 			$content_fiche = json_decode($res_fiche['content'], true);
 
 			block(@$content_fiche['visuel'], $res_fiche['url'], $res_fiche['title'], @$content_fiche['description'], @$content_fiche['aaaa-mm-jj'], @$content_fiche['aaaa-mm-jj-fin'], 'tags');

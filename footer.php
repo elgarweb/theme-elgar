@@ -4,6 +4,9 @@
 
 	<div class="editable-hidden tc ptm"><i class="fa fa-attention" aria-hidden="true"></i><?php _e("Have you taken the accessibility rules into account when entering your content?")?></div>
 
+	<!-- Aide accessibilité -->
+	<?php txt('texte-aide-access', array('tag' => 'article', 'class' => 'mw960p center tc ptl editable-hidden')); ?>
+
 	<?php if(isset($res['url'])){?>
 		<!-- PARTAGE RÉSEAUX SOCIAUX -->
 		<section id="partage" class="mw960p flex wrap jcc center tc ptl pbs">
@@ -104,14 +107,31 @@
 </footer>
 
 <script>
-	// Ajout du title "nouvelle fenêtre" au lien sortant
+	noAccess = false;
+
+	// Ajout du aria-label "nouvelle fenêtre" au lien sortant
 	$("a[target='_blank']").each(function() 
 	{
-		if(!$(this).attr("aria-label")) $(this).attr("aria-label", $(this).text() + " - <?php _e("New window");?>");
-
+		//if(!$(this).attr("aria-label"))		
+			$(this).attr("aria-label", $(this).text() + " - <?php _e("New window");?>");
+		
 		if($(this).children().prop("tagName") != "IMG")
 			$(this).addClass("external");// Pour l'icône d'ouverture dans un nouvel onglet
 	});
+
+	// Ajout du aria-label pour dire que la destination du lien est non accessible
+	// Ajout d'un lien avec la phrase d'aide en bas de page
+	$("a.no-access").each(function() 
+	{
+		$(this)
+			.attr("aria-label", $(this).text() + ($(this).hasClass("external")?" - <?php _e("New window");?>":"") + " - <?php _e("Link destination not accessible");?>")
+			.attr("aria-describedby","texte-aide-access");
+
+		noAccess = true;
+	});
+
+	// Si contenu non accessible on affiche le message d'aide
+	if(noAccess) $("#texte-aide-access").show();
 
 	<?php if(isset($GLOBALS['plausible_auth'])){?>
 	$(function()
