@@ -5,7 +5,7 @@
 	<div class="editable-hidden tc ptm"><i class="fa fa-attention" aria-hidden="true"></i><?php _e("Have you taken the accessibility rules into account when entering your content?")?></div>
 
 	<!-- Aide accessibilité -->
-	<?php txt('texte-aide-access', array('tag' => 'article', 'class' => 'mw960p center tc ptl editable-hidden')); ?>
+	<?php txt('texte-aide-access', array('tag' => 'p', 'class' => 'mw960p center tc ptl editable-hidden')); ?>
 
 	<?php if(isset($res['url'])){?>
 		<!-- PARTAGE RÉSEAUX SOCIAUX -->
