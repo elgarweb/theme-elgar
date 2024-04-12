@@ -43,8 +43,7 @@ a {
 	a.no-access:after{
 		font-family: FontAwesome;
 		content: '\e86f';
-		font-size: .85em;
-		/* color: #00253F; */
+		font-size: 1.08em;
 		padding: 0 .2em 0 .25em;
 	}
 	#contacts a.no-access:after,
@@ -1530,18 +1529,22 @@ iframe {
 	.body-margin-top { margin-top: 50px !important; }
 
 
-	/*A LA UNE*/
-	#admin-bar .alaune.switch label	{ background: #c8c8c8; }
+	/* A LA UNE / Intranet */
+	#admin-bar .alaune.switch label,
+	#admin-bar .intranet.switch label
+	{ background: #c8c8c8; }
 
 	/* Désactivé */
 	#admin-bar .alaune.switch label:before { content: "\e803"; font-size: 0.8em; }/*e806*/
+	#admin-bar .intranet.switch label:before { content: "\e811"; font-size: 0.8em; }
 
 	/* Couleur de fond si activé */
 	#admin-bar .alaune.switch input[type=checkbox]:checked ~ label{ background: #fee566; }
+	#admin-bar .intranet.switch input[type=checkbox]:checked ~ label{ background: #aa8ebf; }
 
 	/* Activé  */
 	#admin-bar .alaune.switch input[type=checkbox]:checked ~ label:before {	content: "\e803"; }
-
+	#admin-bar .intranet.switch input[type=checkbox]:checked ~ label:before { content: "\e82a"; }
 
 
 /* GRIDS */

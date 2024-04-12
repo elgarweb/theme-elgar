@@ -1,11 +1,11 @@
 <?
 if(!$GLOBALS['domain'] or !$GLOBALS['connect']) exit;
 
-// @todo: tester l'access en cas d'erreur
+// @todo: tester l'access en cas d'erreur + test sans nonce forcé
 
 // Notice
-// Créer la page /login & /forgot
-// Dans config : $GLOBALS['public_account'] = true; + activé auth_level => 'edit-public' => 'Public content'
+// Créer la page /connexion
+// Dans config : auth_level => intranet
 
 // Désactive le nonce courant pour en créer un nouveau lors de la connexion
 unset($_SESSION['nonce']);
