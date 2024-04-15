@@ -133,7 +133,7 @@
 	// Si contenu non accessible on affiche le message d'aide
 	if(noAccess) $("#texte-aide-access").show();
 
-	<?php if(isset($GLOBALS['plausible_auth']) or $intranet){?>
+	<?php if(isset($GLOBALS['plausible_auth']) or $admin_intranet){?>
 	$(function()
 	{
 		edit.push(function() 
@@ -173,12 +173,12 @@
 			<?php }
 
 			// Intranet
-			if($intranet){?>
+			if($admin_intranet){?>
 				// Bouton contenu Intranet
 				$("#admin-bar").append("<div class='intranet fr mat mrs switch o50 ho1 t5'><input type='checkbox' id='intranet-bar' class='none'><label for='intranet-bar' title=\"Contenu Intranet\"><i></i></label></div>");
 
 				// Checkbox pour la savegarde
-				$(".content").append("<input type='checkbox' id='intranet' class='editable-input none'>");
+				$("body > .content").append("<input type='checkbox' id='intranet' class='editable-input none'>");
 
 				// Position du bouton par défaut
 				<?if(@$content['intranet'] == 'true'){?>
@@ -187,6 +187,8 @@
 
 				// Action sur le bouton intranet
 				$("#intranet-bar").click(function(event){
+					console.log($(this).prop("checked"))
+					console.log($("#intranet").prop("checked"))
 					
 					// Change le statut de la checkbox dans le contenu editable pour la sauvegarde
 					$("#intranet").prop("checked", $(this).prop("checked"));
