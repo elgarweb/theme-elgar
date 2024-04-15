@@ -1,6 +1,6 @@
 <?php if(!$GLOBALS['domain']) exit;
 
-$intranet = true;
+$admin_intranet = true;
 
 // @todo test redirection
 
