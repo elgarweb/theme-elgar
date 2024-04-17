@@ -4,12 +4,28 @@
 
 	<nav role="navigation" aria-label="<?php _e("Breadcrumb")?>" class="fl ptm" itemprop="breadcrumb">
 		<ul class="inline pln">
+
 			<li class="inline"><a href="/"><?php _e("Home")?></a></li>
-			<?php 
+
+			<?php
 			// Page navigation/carrefour
 			//tag('navigation', array('tag' => 'span', 'separator' => ' > '));// ancienne version
 			if($res['tpl']!='navigation')
 			{
+				// Si intranet on ajoute toutes les pages carrefour dans le choix du fil d'ariane
+				if($intranet)
+				{
+					// @todo pour optim potentielement changer le chargement de cette requête que lors de l'édition, avec un inject avant édition dans les options du editable-select
+					$sql='SELECT DISTINCT tpl, url, title FROM '.$tc.' WHERE tpl LIKE "navigation%" ORDER BY url ASC LIMIT 20';
+					//echo '<br>'.$sql.'<br>';
+					$sel_nav = $connect->query($sql);
+					while($res_nav = $sel_nav->fetch_assoc())
+					{
+						$navigation[$res_nav['url']] = $res_nav['title'];
+					}
+				}
+
+				// Option du menu select pour accrocher à des pages carrefour
 				$array_navigation = array('option' => json_encode($navigation, true), 'class'=>'meta');
 
 				// Si un élément selectionner on affiche le lien, sinon c'est un span vide pas lisible
