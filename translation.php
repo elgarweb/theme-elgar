@@ -64,6 +64,7 @@ $add_translation = array(
 	"Categories" => array("fr" => "Catégories/Tags", "eu" => "Sailak/Tags"),
 	"Start date" => array("fr" => "Date de début", "eu" => "Hastapeneko data"),
 	"End date" => array("fr" => "Date de fin", "eu" => "Amaiera-data"),
+	"Publication end date" => array("fr" => "Date de fin de publication", "eu" => "Amaiera-data"),
 	"Website" => array("fr" => "Site web", "eu" => "Webgunea"),	
 	"Click to display the" => array("fr" => "Cliquer pour afficher le", "eu" => "Egin klik bistaratzeko"),
 	"Telephone" => array("fr" => "Téléphone", "eu" => "Telefonoa"),
