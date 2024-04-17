@@ -96,7 +96,8 @@ switch(@$_GET['mode'])
 					while($res_nav = $sel_nav->fetch_assoc())
 					{
 						// Extraction des données spécifique val
-						$json = json_decode($res_nav['val'], true);
+						if(isset($res_nav['val'])) $json = json_decode($res_nav['val'], true);
+
 						$GLOBALS['content']["visuel-".$li] = @$json["media"];
 						$GLOBALS['content']["titre-".$li] = @$json["titre"];
 						$GLOBALS['content']["description-".$li] = @$json["description"];
