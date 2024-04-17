@@ -133,7 +133,7 @@
 	// Si contenu non accessible on affiche le message d'aide
 	if(noAccess) $("#texte-aide-access").show();
 
-	<?php if(isset($GLOBALS['plausible_auth']) or $admin_intranet){?>
+	<?php if(isset($GLOBALS['plausible_auth']) or ($intranet and $admin_intranet)){?>
 	$(function()
 	{
 		edit.push(function() 
@@ -173,7 +173,7 @@
 			<?php }
 
 			// Intranet
-			if($admin_intranet){?>
+			if($intranet and $admin_intranet){?>
 				// Bouton contenu Intranet
 				$("#admin-bar").append("<div class='intranet fr mat mrs switch o50 ho1 t5'><input type='checkbox' id='intranet-bar' class='none'><label for='intranet-bar' title=\"Contenu Intranet\"><i></i></label></div>");
 
