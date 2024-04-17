@@ -1,14 +1,12 @@
 <?
 if(!$GLOBALS['domain'] or !$GLOBALS['connect']) exit;
 
-// @todo: tester l'access en cas d'erreur + test sans nonce forcé
-
 // Notice
 // Créer la page /connexion
 // Dans config : auth_level => intranet
 
 // Désactive le nonce courant pour en créer un nouveau lors de la connexion
-unset($_SESSION['nonce']);
+//unset($_SESSION['nonce']);
 
 // SI PAS LOGÉ ON AFFICHE LE FORMULAIRE DE LOGIN
 if(!login('medium', null, 'true'))// error 
@@ -74,7 +72,7 @@ if(!login('medium', null, 'true'))// error
 		$(function()
 		{
 			// Update les nonces dans la page courante pour éviter de perdre le nonce
-			$("#nonce").val('<?=$_SESSION['nonce']?>');
+			//$("#nonce").val('<?=$_SESSION['nonce']?>');
 
 			// LOGIN
 			$("#public-login").submit(function(event) 
