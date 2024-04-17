@@ -2,12 +2,6 @@
 
 $admin_intranet = true;
 
-// @todo test redirection
-
-//echo 'auth intranet:'.@$_SESSION['auth']['intranet'].'<br>';
-//print_r(@$_SESSION['auth']);
-//echo '<br>intranet:'.@$content['intranet'];
-
 // Page normale ou si page intranet + autorisation intranet
 if(@$content['intranet'] != 'true' or (@$content['intranet'] == 'true' and (isset($_SESSION['auth']['intranet']) or isset($_SESSION['auth']['edit-page'])))) 
 {?>
