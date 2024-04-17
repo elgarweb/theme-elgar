@@ -40,7 +40,7 @@
 					$sql.=" ORDER BY ".$tt.".ordre ASC";*/
 
 					// Version avec select dans le fil d'ariane
-					$sql ="SELECT ".$tc.".url, ".$tc.".title FROM ".$tc;
+					$sql ="SELECT ".$tc.".url, ".$tc.".title, ".$tc.".content FROM ".$tc;
 					$sql.=" JOIN ".$tm."
 					ON
 					(
@@ -56,13 +56,19 @@
 					$sel_nav = $connect->query($sql);
 					while($res_nav = $sel_nav->fetch_assoc())
 					{
-						// Si pas de ul ouvert
-						if(!$ul) { 
-							$sitemap.='<ul>';
-							$ul = true;
-						}
+						$content_fiche = json_decode($res_nav['content'], true);
 
-						$sitemap.='<li><a href="'.make_url($res_nav['url'], array("domaine" => true)).'">'.$res_nav['title'].'</a></li>';
+						// Si contenu intranet on ne l'affiche pas
+						if(@$content_fiche['intranet'] != 'true' or (@$content_fiche['intranet'] == 'true' and (isset($_SESSION['auth']['intranet']) or isset($_SESSION['auth']['edit-page'])))) 
+						{
+							// Si pas de ul ouvert
+							if(!$ul) { 
+								$sitemap.='<ul>';
+								$ul = true;
+							}
+
+							$sitemap.='<li><a href="'.make_url($res_nav['url'], array("domaine" => true)).'">'.$res_nav['title'].'</a></li>';
+						}
 					}
 
 					// Ferme le sous ul

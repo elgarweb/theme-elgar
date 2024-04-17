@@ -171,31 +171,48 @@ function highlight($txt, $recherche)
 
 		$content_fiche = json_decode($res_fiche['content'], true);
 
+		// Picto pour dire si c'est un contenu intranet
+		if(@$content_fiche['intranet'] == 'true') $state.="<i class='fa fa-lock mls'  title=\"".__("Intranet content")."\"></i>";
+
 		?>
 		<article class="clear ptl">
 
-			<h2><a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" class="tdn"><?php echo highlight($res_fiche['title'], @$_POST['recherche'])?></a><?php echo $state?></h2>
-			
 			<?php
-			if(isset($content_fiche['description'])) $texte = $content_fiche['description'];
-			elseif(isset($content_fiche['texte'])) $texte = $content_fiche['texte'];
-			
-			if(isset($texte))
+			// Contenu normale ou si contenu intranet + autorisation intranet
+			if(@$content_fiche['intranet'] != 'true' or (@$content_fiche['intranet'] == 'true' and (isset($_SESSION['auth']['intranet']) or isset($_SESSION['auth']['edit-page'])))) 
 			{
-				// Pour éviter les textes collés quand les Hn sont supprimés
-				$texte = str_replace('</h2>','</h2><br>',$texte);
-				$texte = str_replace('</h3>','</h3><br>',$texte);
-				$texte = str_replace('</h4>','</h4><br>',$texte);
+				?>
+				<h2><a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" class="tdn"><?php echo highlight($res_fiche['title'], @$_POST['recherche'])?></a><?php echo $state?></h2>
+				
+				<?php
+				if(isset($content_fiche['description'])) $texte = $content_fiche['description'];
+				elseif(isset($content_fiche['texte'])) $texte = $content_fiche['texte'];
+				
+				if(isset($texte))
+				{
+					// Pour éviter les textes collés quand les Hn sont supprimés
+					$texte = str_replace('</h2>','</h2><br>',$texte);
+					$texte = str_replace('</h3>','</h3><br>',$texte);
+					$texte = str_replace('</h4>','</h4><br>',$texte);
 
-				echo '<p class="mbn">'.highlight(word_cut($texte, '350', '...', '<br>'), @$_POST['recherche']).'</p>';
+					echo '<p class="mbn">'.highlight(word_cut($texte, '350', '...', '<br>'), @$_POST['recherche']).'</p>';
+				}
+				?>
+
+				<a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" class="bt bold fr mtm" aria-label="<?php _e("Lire")?> <?php echo $res_fiche['title']?>"><?php _e("Lire")?></a>
+				<?php 
+			}
+			else
+			{
+				?>
+				<h2><?php echo __("Intranet content")?></h2>
+				<?php 
 			}
 			?>
 
-			<a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" class="bt bold fr mtm" aria-label="<?php _e("Lire")?> <?php echo $res_fiche['title']?>"><?php _e("Lire")?></a>
-
 		</article>
-		<?php
-	}?>
+
+	<?php }?>
 	</div>
 
 

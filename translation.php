@@ -164,6 +164,10 @@ $add_translation = array(
 	"ten" => array("fr" => "dix", "eu" => "hamar"),
 
 
+	// Intranet
+	"Intranet content" => array("fr" => "Contenu intranet", "eu" => "Contenu intranet"),
+
+
 	// FONCTIONS
 	"New window" => array("fr" => "Nouvelle fenêtre", "eu" => "Leiho berria"),
 	"Link destination not accessible" => array("fr" => "Destination du lien non accessible", "eu" => "Destination du lien non accessible"),

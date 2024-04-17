@@ -5,7 +5,7 @@
 	<div class="editable-hidden tc ptm"><i class="fa fa-attention" aria-hidden="true"></i><?php _e("Have you taken the accessibility rules into account when entering your content?")?></div>
 
 	<!-- Aide accessibilité -->
-	<?php txt('texte-aide-access', array('tag' => 'article', 'class' => 'mw960p center tc ptl editable-hidden')); ?>
+	<?php txt('texte-aide-access', array('tag' => 'p', 'class' => 'mw960p center tc ptl editable-hidden')); ?>
 
 	<?php if(isset($res['url'])){?>
 		<!-- PARTAGE RÉSEAUX SOCIAUX -->
@@ -133,41 +133,69 @@
 	// Si contenu non accessible on affiche le message d'aide
 	if(noAccess) $("#texte-aide-access").show();
 
-	<?php if(isset($GLOBALS['plausible_auth'])){?>
+	<?php if(isset($GLOBALS['plausible_auth']) or ($intranet and $admin_intranet)){?>
 	$(function()
 	{
 		edit.push(function() 
 		{
-			// Bouton admin Statistique
-			if(get_cookie('auth').indexOf('view-stats') !== -1)
-				$("#admin-bar").append("<button id='statistique' class='fl mat small t5 popin'><i class='fa fa-chart-bar big vatt'></i> <span class='no-small-screen'>Statistique</span></button>");
+			<?php
+			// Statistique Plausible
+			if(isset($GLOBALS['plausible_auth'])){?>
+				// Bouton admin Statistique
+				if(get_cookie('auth').indexOf('view-stats') !== -1)
+					$("#admin-bar").append("<button id='statistique' class='fl mat small t5 popin'><i class='fa fa-chart-bar big vatt'></i> <span class='no-small-screen'>Statistique</span></button>");
 
-			// OUVERTUR DE LA DIALOG ADMIN
-			$("#admin-bar button.popin").on("click",
-				function(event) {
-					that = this;
+				// OUVERTUR DE LA DIALOG ADMIN
+				$("#admin-bar button.popin").on("click",
+					function(event) {
+						that = this;
 
-					$.ajax({
-				        url: path+"theme/"+theme+"/admin/"+ that.id +".php?nonce="+$("#nonce").val(),
-						success: function(html)
-						{				
-							$("body").append(html);
+						$.ajax({
+							url: path+"theme/"+theme+"/admin/"+ that.id +".php?nonce="+$("#nonce").val(),
+							success: function(html)
+							{				
+								$("body").append(html);
 
-							$(".dialog").dialog({
-								autoOpen: false,
-								modal: true,
-								width: "90%",//"850" "auto"
-				        		position: { my: "center top", at: "center bottom+10px", of: $("#admin-bar") },
-								show: function() {$(this).fadeIn(300);},
-								close: function() { $(".dialog").remove(); }
-							});
+								$(".dialog").dialog({
+									autoOpen: false,
+									modal: true,
+									width: "90%",//"850" "auto"
+									position: { my: "center top", at: "center bottom+10px", of: $("#admin-bar") },
+									show: function() {$(this).fadeIn(300);},
+									close: function() { $(".dialog").remove(); }
+								});
 
-							$(".dialog").dialog("open");
-						}
-				    });
-				}
-			);
+								$(".dialog").dialog("open");
+							}
+						});
+					}
+				);
+			<?php }
 
+			// Intranet
+			if($intranet and $admin_intranet){?>
+				// Bouton contenu Intranet
+				$("#admin-bar").append("<div class='intranet fr mat mrs switch o50 ho1 t5'><input type='checkbox' id='intranet-bar' class='none'><label for='intranet-bar' title=\"Contenu Intranet\"><i></i></label></div>");
+
+				// Checkbox pour la savegarde
+				$("body > .content").append("<input type='checkbox' id='intranet' class='editable-input none'>");
+
+				// Position du bouton par défaut
+				<?if(@$content['intranet'] == 'true'){?>
+					$("#intranet, #intranet-bar").prop("checked", true);
+				<?}?>
+
+				// Action sur le bouton intranet
+				$("#intranet-bar").click(function(event){
+					console.log($(this).prop("checked"))
+					console.log($("#intranet").prop("checked"))
+					
+					// Change le statut de la checkbox dans le contenu editable pour la sauvegarde
+					$("#intranet").prop("checked", $(this).prop("checked"));
+
+					tosave();
+				});
+			<?php }?>	
 		});
 	});
 	<?php }?>
