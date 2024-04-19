@@ -78,7 +78,7 @@ $url_back = encode($res['url']);
 			$sql.=" LEFT JOIN ".$tm." AS event_fin ON event_fin.id=".$tc.".id AND event_fin.type='aaaa-mm-jj-fin'";
 		}
 
-		$sql.=" WHERE ".$tc.".lang='".$lang."' ".$sql_state."";
+		$sql.=" WHERE ".$tc.".lang='".$lang."' AND date_insert <= NOW() ".$sql_state."";
 
 		// Type de contenu event ou article
 		if($res['url']=='agenda') {

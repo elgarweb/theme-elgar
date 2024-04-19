@@ -67,7 +67,7 @@ function highlight($txt, $recherche)
 	$sql ="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
 
 
-	$sql.=" WHERE url!='recherche' AND lang='".$lang."' ".$sql_state." ";	
+	$sql.=" WHERE url!='recherche' AND lang='".$lang."' AND date_insert <= NOW() ".$sql_state." ";	
 
 
 	if(@$_POST['recherche'] or $GLOBALS['filter'])
