@@ -156,7 +156,7 @@ switch($res['tpl']) {
 					{
 						// Si actu juste créer on ajoute une date de fin dans 6 mois
 						if(!isset($GLOBALS["content"]["aaaa-mm-jj-fin"]) and stristr($res['tpl'], 'article'))
-							$GLOBALS["content"]["aaaa-mm-jj-fin"] = date("Y-m-d", strtotime("6 months"));
+							$GLOBALS["content"]["aaaa-mm-jj-fin"] = date("Y-m-d", strtotime($GLOBALS['expire-time']." months"));
 
 						if($res['tpl'] == 'event')
 						{

@@ -149,9 +149,18 @@ $num_alaune = $sel_alaune->num_rows;
 
 // LES 3 ACTUS
 $sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
+
+// Les dates de fin des actu
+$sql.=" LEFT JOIN ".$tm." AS actu_fin ON actu_fin.id=".$tc.".id AND actu_fin.type='aaaa-mm-jj-fin'";
+
 $sql.=" WHERE (".$tc.".type='article' OR ".$tc.".type='article-intramuros')";
+
+// Que les actu en cours (avec date de fin), ou pas documentés sur la date de fin
+$sql.=" AND (actu_fin.id IS NULL OR actu_fin.cle >= '".date("Y-m-d")."')";
+
 // Supprime l'article à la une de la liste des 3 actus
 if(isset($res_alaune['id'])) $sql.=" AND id!='".(int)$res_alaune['id']."'";
+
 $sql.=" AND ".$tc.".lang='".$lang."' AND date_insert <= NOW() AND state='active' ORDER BY ".$tc.".date_insert DESC
 LIMIT 3";
 
