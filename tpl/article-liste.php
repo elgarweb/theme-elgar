@@ -77,8 +77,13 @@ $url_back = encode($res['url']);
 			$sql.=" JOIN ".$tm." AS event_deb ON event_deb.id=".$tc.".id AND event_deb.type='aaaa-mm-jj'";
 			$sql.=" LEFT JOIN ".$tm." AS event_fin ON event_fin.id=".$tc.".id AND event_fin.type='aaaa-mm-jj-fin'";
 		}
+		else
+		{		
+			// Les dates de fin des actu
+			$sql.=" LEFT JOIN ".$tm." AS actu_fin ON actu_fin.id=".$tc.".id AND actu_fin.type='aaaa-mm-jj-fin'";
+		}
 
-		$sql.=" WHERE ".$tc.".lang='".$lang."' ".$sql_state."";
+		$sql.=" WHERE ".$tc.".lang='".$lang."' AND date_insert <= NOW() ".$sql_state."";
 
 		// Type de contenu event ou article
 		if($res['url']=='agenda') {
@@ -87,8 +92,12 @@ $url_back = encode($res['url']);
 			// Que les évènements >= date de début OU <= date de fin
 			$sql.=" AND (event_fin.cle >= '".date("Y-m-d")."' OR event_deb.cle >= '".date("Y-m-d")."')";
 		}
-		else
+		else {
 			$sql.=" AND (".$tc.".type='article' OR ".$tc.".type='article-intramuros')";
+
+			// Que les actu en cours (avec date de fin), ou pas documentés sur la date de fin
+			$sql.=" AND (actu_fin.id IS NULL OR actu_fin.cle >= '".date("Y-m-d")."')";
+		}
 
 		// Si event on tri par date de l'evenement
 		if($res['url']=='agenda') 

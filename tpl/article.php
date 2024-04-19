@@ -137,13 +137,13 @@ switch($res['tpl']) {
 
 				<!-- Date événement -->
 				<?php 
-				if(stristr($res['tpl'], 'event') or stristr($res['tpl'], 'publication'))
+				if(in_array($res['tpl'], array('event', 'article', 'publication')))
 				{
 					// Si arreté ou conseil
 					if($res['tpl'] == 'publication')
 					{
 						?>
-						<div class="editable-hidden bold red">
+						<div class="editable-hidden bold red mts">
 							<label for="aaaa-mm-jj-publication" class="block"><?= _e("Published on");?></label>
 							<?php
 							input("aaaa-mm-jj-publication", array("type" => "date", "autocomplete" => "off", "class" => "meta tc"));
@@ -154,9 +154,17 @@ switch($res['tpl']) {
 					}
 					else
 					{
+						// Si actu juste créer on ajoute une date de fin dans 6 mois
+						if(!isset($GLOBALS["content"]["aaaa-mm-jj-fin"]) and stristr($res['tpl'], 'article'))
+							$GLOBALS["content"]["aaaa-mm-jj-fin"] = date("Y-m-d", strtotime($GLOBALS['expire-time']." months"));
+
+						if($res['tpl'] == 'event')
+						{
 						?>
-						<div class="editable-hidden bold">
+						<div class="editable-hidden bold mts">
+
 							<label for="aaaa-mm-jj" class="block"><?= _e("Start date");?></label>
+
 							<?php
 							input("aaaa-mm-jj", array("type" => "date", "autocomplete" => "off", "class" => "meta tc "));
 
@@ -168,11 +176,18 @@ switch($res['tpl']) {
 								input('heure-fermeture', array("type" => "time", "autocomplete" => "off", "class" => "w100p"));
 							}
 							?>
-							<a href="javascript:$('#aaaa-mm-jj').val('');$('#heure-ouverture').val('');$('#heure-fermeture').val('');void(0);" title="Remise à zéro">raz</a>
-						</div>
 
-						<div class="editable-hidden bold">
-							<label for="aaaa-mm-jj" class="block"><?= _e("End date");?></label>
+							<a href="javascript:$('#aaaa-mm-jj').val('');$('#heure-ouverture').val('');$('#heure-fermeture').val('');void(0);" title="Remise à zéro">raz</a>
+
+						</div>
+						<?php
+						}
+						?>
+
+						<div class="editable-hidden bold mts mbs">
+
+							<label for="aaaa-mm-jj-fin" class="block"><?=__("Publication end date");?></label>
+
 							<?php
 							input("aaaa-mm-jj-fin", array("type" => "date", "autocomplete" => "off", "class" => "meta tc"));
 
@@ -184,7 +199,9 @@ switch($res['tpl']) {
 								input('heure-fermeture-fin', array("type" => "time", "autocomplete" => "off", "class" => "w100p"));
 							}
 							?>
+
 							<a href="javascript:$('#aaaa-mm-jj-fin').val('');$('#heure-ouverture-fin').val('');$('#heure-fermeture-fin').val('');void(0);" title="Remise à zéro">raz</a>
+
 						</div>
 						<?php
 					}
@@ -245,8 +262,8 @@ switch($res['tpl']) {
 
 
 
-					// Affichage date de fin
-					if(@$GLOBALS["content"]["aaaa-mm-jj-fin"])
+					// Affichage date de fin pour les évènement
+					if(@$GLOBALS["content"]["aaaa-mm-jj-fin"] and stristr($res['tpl'], 'event'))
 					{
 						if(!@$GLOBALS["content"]["aaaa-mm-jj"]) echo '<p class="mbn">';
 

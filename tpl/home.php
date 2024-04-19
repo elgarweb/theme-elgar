@@ -137,7 +137,7 @@ SELECT ".$tc.".* FROM ".$tc."
 JOIN 
 	".$tm." ON ".$tc.".id = ".$tm.".id AND ".$tm.".type = 'alaune' AND ".$tm.".cle = '".$lang."' 
 WHERE 
-	".$tc.".type = 'article' AND ".$tc.".lang = '".$lang."' AND state = 'active'
+	".$tc.".type = 'article' AND ".$tc.".lang = '".$lang."' AND date_insert <= NOW() AND state = 'active'
 ORDER BY ".$tc.".date_insert DESC
 LIMIT 1";
 
@@ -149,10 +149,19 @@ $num_alaune = $sel_alaune->num_rows;
 
 // LES 3 ACTUS
 $sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
+
+// Les dates de fin des actu
+$sql.=" LEFT JOIN ".$tm." AS actu_fin ON actu_fin.id=".$tc.".id AND actu_fin.type='aaaa-mm-jj-fin'";
+
 $sql.=" WHERE (".$tc.".type='article' OR ".$tc.".type='article-intramuros')";
+
+// Que les actu en cours (avec date de fin), ou pas documentés sur la date de fin
+$sql.=" AND (actu_fin.id IS NULL OR actu_fin.cle >= '".date("Y-m-d")."')";
+
 // Supprime l'article à la une de la liste des 3 actus
 if(isset($res_alaune['id'])) $sql.=" AND id!='".(int)$res_alaune['id']."'";
-$sql.=" AND ".$tc.".lang='".$lang."' AND state='active' ORDER BY ".$tc.".date_insert DESC
+
+$sql.=" AND ".$tc.".lang='".$lang."' AND date_insert <= NOW() AND state='active' ORDER BY ".$tc.".date_insert DESC
 LIMIT 3";
 
 $sel_article = $connect->query($sql);
@@ -254,7 +263,7 @@ $sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
 // Que les évènements a venir
 $sql.=" JOIN ".$tm." AS event_deb ON event_deb.id=".$tc.".id AND event_deb.type='aaaa-mm-jj' AND event_deb.cle >= '".date("Y-m-d")."'";
 
-$sql.=" WHERE (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft') AND ".$tc.".lang='".$lang."' AND state='active'";
+$sql.=" WHERE (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft') AND ".$tc.".lang='".$lang."' AND date_insert <= NOW() AND state='active'";
 
 // Que les évènements a venir
 $sql.=" ORDER BY event_deb.cle ASC";
@@ -277,7 +286,7 @@ if($num_event < 3)
 	$sql.=" JOIN ".$tm." AS event_deb ON event_deb.id=".$tc.".id AND event_deb.type='aaaa-mm-jj'";
 	$sql.=" LEFT JOIN ".$tm." AS event_fin ON event_fin.id=".$tc.".id AND event_fin.type='aaaa-mm-jj-fin'";
 
-	$sql.=" WHERE (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft') AND ".$tc.".lang='".$lang."' AND state='active'";
+	$sql.=" WHERE (".$tc.".type='event' OR ".$tc.".type='event-tourinsoft') AND ".$tc.".lang='".$lang."' AND date_insert <= NOW() AND state='active'";
 
 	// Que les évènements en cours
 	$sql.=" AND (event_fin.cle >= '".date("Y-m-d")."' OR event_deb.cle >= '".date("Y-m-d")."')";
