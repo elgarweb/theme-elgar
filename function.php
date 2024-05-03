@@ -64,9 +64,26 @@ function block($url_img, $url_title, $title, $description, $date = null, $date_f
 					if(isset($date)) 
 					{
 						echo '<p class="date bold mbm">';
-
+					
 							if($GLOBALS['lang'] == 'eu') echo str_replace('-', '/', $date);
-							else echo date_lang($date);
+							else 
+							{
+								// On affiche en entier la date de début ?
+								$exp_date = explode('-', $date);
+								if(isset($date_fin)) 
+								{
+									$exp_date_fin = explode('-', $date_fin);
+
+									// Si année et mois identique on affiche que le jour
+									if($exp_date[0] == $exp_date_fin[0] and $exp_date[1] == $exp_date_fin[1])
+										echo $exp_date[2];
+									else 
+										echo date_lang($date);
+								}
+								else 
+									echo date_lang($date);
+								
+							}
 
 							if(isset($date_fin))
 							{
