@@ -16,7 +16,7 @@
 				if($intranet)
 				{
 					// @todo pour optim potentielement changer le chargement de cette requête que lors de l'édition, avec un inject avant édition dans les options du editable-select
-					$sql='SELECT DISTINCT tpl, url, title FROM '.$tc.' WHERE tpl LIKE "navigation%" ORDER BY url ASC LIMIT 20';
+					$sql='SELECT DISTINCT tpl, url, title FROM '.$tc.' WHERE lang="'.$lang.'" AND tpl LIKE "navigation%" ORDER BY url ASC LIMIT 20';
 					//echo '<br>'.$sql.'<br>';
 					$sel_nav = $connect->query($sql);
 					while($res_nav = $sel_nav->fetch_assoc())
