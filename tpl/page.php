@@ -13,7 +13,7 @@ if(@$content['intranet'] != 'true' or (@$content['intranet'] == 'true' and (isse
 
 	<article>
 
-		<?php txt('texte'); ?>
+		<?php txt('texte', array('lazy' => true)); ?>
 
 	</article>
 

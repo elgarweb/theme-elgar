@@ -347,7 +347,7 @@ switch($res['tpl']) {
 		<article class="clear ptm">
 
 			<?php
-			txt('texte', array('dir' => $dir));
+			txt('texte', array('dir' => $dir, 'lazy' => true));
 
 			// Téléchargement
 			if($res['tpl'] == 'publication')
