@@ -165,7 +165,7 @@ $sql.=" AND ".$tc.".lang='".$lang."' AND date_insert <= NOW() AND state='active'
 LIMIT 3";
 
 $sel_article = $connect->query($sql);
-$num_article = $sel_article->num_rows;
+$num_article = ($sel_article?$sel_article->num_rows:0);
 
 ?>
 <section id="home-actualites" class="ptl pbl <?=(($num_alaune>0 or $num_article>0)?'':' editable-hidden')?>">
@@ -227,6 +227,7 @@ $num_article = $sel_article->num_rows;
 			<div class="blocks grid-3 space-xl">
 				
 				<?php 
+				if($sel_article)
 				while($res_article = $sel_article->fetch_assoc())
 				{
 					$content_article = json_decode($res_article['content'], true);

@@ -82,7 +82,7 @@ $mois = array(
 					<select id="year" class="pat mrm" aria-describedby="comment-filtrer">
 						<option value="" <?=(!@$GLOBALS['filter']['year']?'selected':'')?>><?_e("Year")?></option>
 						<?php 
-						for($i=1980; $i<=date("Y"); $i++) { 
+						for($i=date("Y"); $i>=1980; $i--) { 
 							echo'<option value="'.$i.'"'.(@$GLOBALS['filter']['year']==$i?' selected':'').'>'.$i.'</option>';
 						}
 						?>
