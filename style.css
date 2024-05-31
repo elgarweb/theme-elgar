@@ -786,6 +786,14 @@ header section:first-of-type { font-size: 1.4rem; }
 	#contact input[name='reponse'] { display: none; }
 
 
+/* FORMULAIRE */
+#formulaire {
+	list-style: none;
+	position: relative;
+	padding: 0;
+}
+	#formulaire li::before { content: ''; }
+
 
 /* FOOTER */
 footer #renseignement { 
