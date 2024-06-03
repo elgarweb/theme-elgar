@@ -9,13 +9,18 @@
 //@todo tous les attributs de l'édition ne sont pas dans les fonctions _event du coup l'edition n'est pas complete lors de l'ajout à la volé d'un élément editable
 
 // @todo
+// - corriger la construction du formulaire pour faire fonctionner les éléments imbriqué dans les fieldsets
 // - ajout filedset editable
+// - checkbox réel en input et pas en interpréter
+// - ajout de radio dans un filedset déjà existant
 // - ajout js sort imbricable
 // - savegarde avec 2 profondeurs en cas de champs dans un fieldset
 // - restitution en fonction des imbrications avec les fieldset
 // - tableau avec nom compréhensible des tpl dans le dossier builder
-// - voir pour une version sans ul/li, mais visiblement complexe de changer le tag à la volé pour faire le tri une fois edit lancer
 // - lors du drag&drop masquer la toolbox et éviter les erreurs de memo_focus
+
+// Plus tard
+// - voir pour une version sans ul/li, mais visiblement complexe de changer le tag à la volé pour faire le tri une fois edit lancer
 
 switch(@$_GET['mode'])
 {
@@ -108,7 +113,7 @@ switch(@$_GET['mode'])
 			/* ul.formulaire li.placeholder { position: relative; }
 			ul.formulaire li.placeholder:before { position: absolute; } */
 
-			#formulaire li, #builder li {
+			#formulaire > li, #builder li {
 				/* display: block;
 				margin: 5px;
 				padding: 5px;
@@ -171,7 +176,7 @@ switch(@$_GET['mode'])
 		</style>
 
 
-		<ul id="builder" class="unstyled tc connected">
+		<ul id="builder" class="unstyled tc">
 			<?php
 			// Liste les elements du builder - boucle dossier builder
 			$dir = $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['path']."theme/".$GLOBALS['theme']."/tpl/formulaire/";
@@ -196,29 +201,29 @@ switch(@$_GET['mode'])
 			$(function()
 			{
 				// DÉPLACEMENT & AJOUT d'un élément
-				// Ajout d'une zone de drag pour chaque élément
-				$("[data-builder], #builder li").prepend("<i class='fa fa-move'></i>");
+				// Ajout d'une zone de drag pour chaque élément du builder
+				$("#builder li").prepend("<i class='fa fa-move'></i>");//[data-builder],
 
-				$("#formulaire").sortable({
-					//containerSelector: '.formulaire',
-					//itemPath: '.formulaire',
-					//pullPlaceholder: false,
-					//itemSelector: ".move"
-
+				
+				// Déplacement dans les fieldset + ajout depuis le builder
+				$(".fieldset").sortable({
 					group: 'connected',
 					handle: ".fa-move",
-
+					
 					// Duplique l'item draggé depuit la liste de choix
 					onDragStart: function ($item, container, _super) {
 						
-						if(!container.options.drop) $item.clone().insertAfter($item);
+						if(!container.options.drop) 
+							$item.clone().insertAfter($item);
+
 						_super($item, container);
+
 					},
 
 					// Inject l'élément de formulaire demandé
 					onDrop: function  ($item, container, _super) {
-						console.log("item", $($item).data("file"));
-						console.log("container", container);
+						//console.log("item", $($item).data("file"));
+						//console.log("container", container);
 
 						// Execute l'action drop
 						_super($item, container);
@@ -243,6 +248,9 @@ switch(@$_GET['mode'])
 								// Insertion du contenu éditable
 								$($item).replaceWith(html);
 
+								// Ajout de l'outil de suppression et déplacement
+								add_tools();
+
 								// Relance les events d'edition
 								editable_event();
 								editable_media_event();
@@ -252,27 +260,40 @@ switch(@$_GET['mode'])
 						});
 					},
 				});
+				
 
-				$("#builder").sortable({
+				// Déplacement des éléments du formulaire global
+				$("#formulaire").sortable({
 					group: 'connected',
-					drop: false,
 
-					//containerSelector: '.formulaire',
-					//itemPath: '.formulaire',
-					//pullPlaceholder: false,
-					//handle: ".fa-move",
-					//itemSelector: ".move"
-					//handle: "li",
 				});
 				
 
-				// SUPPRESSION
-				add_remove = function(that) {
-					// Ajout de la suppression au survole d'un bloc
-					$("[data-builder]").append("<a href='javascript:void(0)' onclick='remove_builder(this)'><i class='fa fa-cancel absolute none red pointer' style='top: 0; right: 0; z-index: 10;' title='"+ __("Remove") +"'></i></a>");
+				// Déplacement des éléments du builder pour ajouter dans le formulaire
+				$("#builder").sortable({
+					group: 'connected',
+					drop: false
+				});
+
+
+
+				// TOOLS : Suppression & Déplacement
+				add_tools = function(that)
+				{
+					// On parcourt tous les éléments du formulaire
+					$("#formulaire li").each(function(key, val)//[data-builder]
+					{
+						// Ajout du dragger, si pas déjà présent
+						if($(".fa-move", this).length <= 0)
+							$(this).prepend("<i class='fa fa-move'></i>");
+
+						// Ajout de la suppression au survol d'un bloc, si pas déjà présent
+						if($(".fa-cancel", this).length <= 0)
+							$(this).append("<a href='javascript:void(0)' onclick='remove_builder(this)'><i class='fa fa-cancel absolute none red pointer' style='top: 0; right: 0; z-index: 10;' title='"+ __("Remove") +"'></i></a>");
+					});
 				};
 
-				add_remove();
+				add_tools();// Execution
 
 				// Fonction pour supprimer un bloc
 				remove_builder = function(that) {
@@ -280,6 +301,7 @@ switch(@$_GET['mode'])
 						this.remove();
 					});
 				};
+
 
 
 				// SAVE
@@ -337,7 +359,7 @@ switch(@$_GET['mode'])
 				before_save.push(function()
 				{
 					// Remets les options pour supprimer un élément
-					add_remove();
+					add_tools();
 				});
 
 			});

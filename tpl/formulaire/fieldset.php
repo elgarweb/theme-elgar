@@ -1,7 +1,16 @@
 <?php if(!$GLOBALS['domain']) exit;?>
 
-<fieldset data-builder="fieldset">
-	
-	<legend><?php txt()?></legend>
+<li data-builder="fieldset">
 
-</fieldset>
+	<fieldset>
+		
+		<legend><?php txt('', array('tag' => 'span'))?></legend>
+
+		<ul class="fieldset">
+			<li>test 1</li>
+			<li>test 2</li>
+		</ul>
+
+	</fieldset>
+
+</li>
