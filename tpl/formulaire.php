@@ -9,7 +9,7 @@
 //@todo tous les attributs de l'édition ne sont pas dans les fonctions _event du coup l'edition n'est pas complete lors de l'ajout à la volé d'un élément editable
 
 // @todo
-// - corriger la construction du formulaire pour faire fonctionner les éléments imbriqué dans les fieldsets
+// - corriger la construction du formulaire pour faire fonctionner les éléments imbriqué dans les fieldsets. voir si besoin lors de la sauvegarde et après la lecture du json
 // - ajout filedset editable
 // - checkbox réel en input et pas en interpréter
 // - ajout de radio dans un filedset déjà existant
@@ -18,6 +18,7 @@
 // - restitution en fonction des imbrications avec les fieldset
 // - tableau avec nom compréhensible des tpl dans le dossier builder
 // - lors du drag&drop masquer la toolbox et éviter les erreurs de memo_focus
+// - ne pas rendre supprimable le premier li aria-hidden des fieldsets
 
 // Plus tard
 // - voir pour une version sans ul/li, mais visiblement complexe de changer le tag à la volé pour faire le tri une fois edit lancer
@@ -43,23 +44,33 @@ switch(@$_GET['mode'])
 			?>
 			<article>
 
-				<ul id="formulaire"><?php
+				<ul id="formulaire">
 
-				// Include les éléments du builder pour affichage
-				if(isset($GLOBALS['content']['builder']) and is_array($GLOBALS['content']['builder']))
-				foreach($GLOBALS['content']['builder'] as $index => $array)
-				{
-					// init les clé
-					$GLOBALS['editkey'] = key($array);
+					<?php
+					// Include les éléments du builder pour affichage
+					if(isset($GLOBALS['content']['builder']) and is_array($GLOBALS['content']['builder']))
+					foreach($GLOBALS['content']['builder'] as $index => $array)
+					{
+						// init les clé
+						$GLOBALS['editkey'] = key($array);
 
-					// Insert l'élément
-					include($_SERVER['DOCUMENT_ROOT'] . $GLOBALS['path']."theme/".$GLOBALS['theme']."/tpl/formulaire/".current($array).".php");
+						// Insert l'élément
+						include($_SERVER['DOCUMENT_ROOT'] . $GLOBALS['path']."theme/".$GLOBALS['theme']."/tpl/formulaire/".current($array).".php");
 
-					// pour l'ajout d'élément builder
-					if($GLOBALS['editkey'] > $_SESSION['editkey']) 
-						$_SESSION['editkey'] = $GLOBALS['editkey'];
-				}
-				?>
+						// pour l'ajout d'élément builder
+						if(@$GLOBALS['editkey'] and $GLOBALS['editkey'] > $_SESSION['editkey']) 
+							$_SESSION['editkey'] = $GLOBALS['editkey'];
+					}
+					?>
+
+					<!-- Pour initialiser la possibilité d'imbrication -->
+					<li aria-hidden="true" class="none">
+						<fieldset>
+							<legend></legend>
+							<ul class="fieldset"><li></li></ul>
+						</fieldset>
+					</li>
+
 				</ul>
 
 			</article>
@@ -198,15 +209,18 @@ switch(@$_GET['mode'])
 		<script src='<?=$GLOBALS['path']."theme/".$GLOBALS['theme']."/";?>jquery-sortable.min.js'></script>
 
 		<script>
-			$(function()
+			// Fonction pour trié les éléments du formulaire
+			function sorter()
 			{
-				// DÉPLACEMENT & AJOUT d'un élément
-				// Ajout d'une zone de drag pour chaque élément du builder
-				$("#builder li").prepend("<i class='fa fa-move'></i>");//[data-builder],
+				if($(".tpl-formulaire .fieldset").length > 0)
+					selecter = $(".tpl-formulaire .fieldset");
+				else 
+					selecter = $("#formulaire");
 
-				
+				console.log("sorter", selecter);
+
 				// Déplacement dans les fieldset + ajout depuis le builder
-				$(".fieldset").sortable({
+				selecter.sortable({
 					group: 'connected',
 					handle: ".fa-move",
 					
@@ -256,6 +270,14 @@ switch(@$_GET['mode'])
 								editable_media_event();
 								editable_href_event();
 								editable_bg_event();
+
+								// Si tri fieldset on re-init le tri
+								var array_fieldset = ["fieldset.php", "radio.php", "checkbox.php"];
+								if($.inArray($($item).data("file"), array_fieldset) !== -1){
+									console.log("re-init")
+									unsorter();
+									sorter();
+								}
 							}
 						});
 					},
@@ -263,18 +285,46 @@ switch(@$_GET['mode'])
 				
 
 				// Déplacement des éléments du formulaire global
-				$("#formulaire").sortable({
-					group: 'connected',
-
-				});
+				if($(".tpl-formulaire .fieldset").length > 0){
+					console.log("#formulaire")
+					$("#formulaire").sortable({
+						group: 'connected',
+					});
+				}
 				
-
+				
 				// Déplacement des éléments du builder pour ajouter dans le formulaire
 				$("#builder").sortable({
 					group: 'connected',
 					drop: false
 				});
+			}
 
+
+			// Désactive le tri
+			function unsorter() 
+			{
+				console.log("unsorter");
+
+				if($(".tpl-formulaire .fieldset").length > 0)
+					$(".fieldset").sortable("destroy");
+
+				if($("#formulaire").length > 0)
+					$("#formulaire").sortable("destroy");
+
+				$("#builder").sortable("destroy");
+			}
+
+
+
+			$(function()
+			{
+				// DÉPLACEMENT & AJOUT d'un élément
+				// Ajout d'une zone de drag pour chaque élément du builder
+				$("#builder li").prepend("<i class='fa fa-move'></i>");//[data-builder],
+
+				// Tri
+				sorter();
 
 
 				// TOOLS : Suppression & Déplacement
@@ -297,7 +347,7 @@ switch(@$_GET['mode'])
 
 				// Fonction pour supprimer un bloc
 				remove_builder = function(that) {
-					$(that).closest("[data-builder]").fadeOut("slow", function() {
+					$(that).closest("[data-builder]").slideUp("slow", function() {
 						this.remove();
 					});
 				};

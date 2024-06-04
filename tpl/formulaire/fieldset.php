@@ -7,8 +7,7 @@
 		<legend><?php txt('', array('tag' => 'span'))?></legend>
 
 		<ul class="fieldset">
-			<li>test 1</li>
-			<li>test 2</li>
+			<li aria-hidden="true" class="">Votre liste</li>
 		</ul>
 
 	</fieldset>
