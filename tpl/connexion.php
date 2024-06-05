@@ -23,15 +23,17 @@ if(!login('medium', null, 'true'))// error
 		<article class="tc pal">
 
 			<form id="public-login">
+
+				<p class="mbm"><?_e("All fields are mandatory")?></p>
 				
 				<label for="email" class="block">
 					<?php _e("My email");?>
 					(<?_e("Expected format" )?> : dupont@exemple.com)
 				</label>
-				<input type="email" id="email" autocomplete="email" class="w300p" required>
+				<input type="email" id="email" autocomplete="email" class="w200p" required>
 			
 				<label for="password" class="block mts"><?php _e("My password");?></label>
-				<input type="password" id="password" autocomplete="current-password" class="w300p" required>
+				<input type="password" id="password" autocomplete="current-password" class="w200p" required>
 
 				<div class="mts mbt none">
 					<input type="checkbox" id="rememberme"> <label for="rememberme"><?_e("Remember me");?></label>
@@ -74,6 +76,17 @@ if(!login('medium', null, 'true'))// error
 			// Update les nonces dans la page courante pour éviter de perdre le nonce
 			//$("#nonce").val('<?=$_SESSION['nonce']?>');
 
+
+			// Message d'erreur en cas de mauvaise saisie du mail. Pour l'accessibilité
+			var email = document.getElementById("email");
+			email.addEventListener("invalid", function() {
+				email.setCustomValidity("<?_e("Invalid email")?>. <?_e("Expected format")?> : dupont@exemple.com")
+			}, false);
+			email.addEventListener("input", function() {
+				email.setCustomValidity("");
+			}, false);
+
+			
 			// LOGIN
 			$("#public-login").submit(function(event) 
 			{
