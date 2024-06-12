@@ -19,6 +19,9 @@
 // - tableau avec nom compréhensible des tpl dans le dossier builder
 // - lors du drag&drop masquer la toolbox et éviter les erreurs de memo_focus
 // - ne pas rendre supprimable le premier li aria-hidden des fieldsets
+// - save imbriquer à l'infinit
+// - lecture imbriquer à l'infinit
+// le legend du fieldset n'a pas le bon id lors de la récup...
 
 // Plus tard
 // - voir pour une version sans ul/li, mais visiblement complexe de changer le tag à la volé pour faire le tri une fois edit lancer
@@ -47,20 +50,62 @@ switch(@$_GET['mode'])
 				<ul id="formulaire">
 
 					<?php
-					// Include les éléments du builder pour affichage
-					if(isset($GLOBALS['content']['builder']) and is_array($GLOBALS['content']['builder']))
-					foreach($GLOBALS['content']['builder'] as $index => $array)
+					function builder_array($builder_array, $level = 0)
 					{
-						// init les clé
-						$GLOBALS['editkey'] = key($array);
+						//global $builder_array;
 
-						// Insert l'élément
-						include($_SERVER['DOCUMENT_ROOT'] . $GLOBALS['path']."theme/".$GLOBALS['theme']."/tpl/formulaire/".current($array).".php");
+						// Include les éléments du builder pour affichage
+						if(isset($builder_array) and is_array($builder_array))
+						foreach($builder_array[$level] as $index => $array)
+						{
+							// print_r("=> ".$index." | ");
+							// if(is_array($array))
+							// {
+							// 	print_r($array);
+							// 	echo count($array)."<br>";
+							// }
 
-						// pour l'ajout d'élément builder
-						if(@$GLOBALS['editkey'] and $GLOBALS['editkey'] > $_SESSION['editkey']) 
-							$_SESSION['editkey'] = $GLOBALS['editkey'];
+							// if(is_array($array) and count($array) > 1) 
+							// {
+							// 	//builder_array($array);
+							// 	//break;
+							// }
+							// else
+							{
+								// init les clé
+								if(is_array($array))// Si tableau d'éléments
+								{
+									//$GLOBALS['editkey'] = trim(key($array), "key");
+									$current = current($array);
+								}
+								else// Si un seul élément
+								{
+									$GLOBALS['editkey'] = trim($index, "key");// Clean la clé
+									$level = trim($index, "key");// Niveau de profondeur
+									$current = $array;// index courant
+								}
+
+								// print_r("index:".$index." | key:".$GLOBALS['editkey']." ");
+								// print_r($array);
+								// print_r("|current:".$current);
+
+								// Insert l'élément
+								include($_SERVER['DOCUMENT_ROOT'] . $GLOBALS['path']."theme/".$GLOBALS['theme']."/tpl/formulaire/".$current.".php");
+
+								// pour l'ajout d'élément builder
+								if(isset($GLOBALS['editkey']) and isset($_SESSION['editkey']) and $GLOBALS['editkey'] > $_SESSION['editkey']) 
+									$_SESSION['editkey'] = $GLOBALS['editkey'];
+
+								//unset($GLOBALS['content']['builder'][$GLOBALS['editkey']]);
+								//unset($GLOBALS['content']['builder'][$index]);
+								//unset($builder_array[$index]);
+								//unset($GLOBALS['content'][$index]);
+							}
+						}
 					}
+
+					if(isset($GLOBALS['content']['builder']))
+						builder_array($GLOBALS['content']['builder']);
 					?>
 
 					<!-- Pour initialiser la possibilité d'imbrication -->
@@ -104,61 +149,22 @@ switch(@$_GET['mode'])
 
 		?>
 		<style>
-			main {
-				min-height: 500px;
-			}
+			main { min-height: 500px; }
 
 			/* supprime le bouton pour remonter en haut */
 			.bt.fixed.top { display: none !important; }
-
 			
 			body.dragging, body.dragging * { cursor: move !important; }
 
-			.dragged {
-				position: absolute;
-				/* top: 0 !important; */
-				/* left: 0 !important; */
-				opacity: 0.5;
-				z-index: 2000;
-			}
-			/* ul.formulaire li.placeholder { position: relative; }
-			ul.formulaire li.placeholder:before { position: absolute; } */
-
-			#formulaire > li, #builder li {
-				/* display: block;
-				margin: 5px;
-				padding: 5px;
-				border: 1px solid #cccccc;
-				color: #0088cc;
-				background: #eeeeee; */
-				
-				border: 1px dashed #cccccc;
-				padding: 0.5rem;
-				margin: 0.5rem;
-			}
-				#formulaire li.placeholder, #builder li.placeholder {
-					position: relative;
-					margin: 0;
-					padding: 0;
-					border: none; 
+				.dragged {
+					position: absolute;
+					/* top: 0 !important; */
+					/* left: 0 !important; */
+					opacity: 0.5;
+					z-index: 2000;
 				}
-					#formulaire li.placeholder:before, #builder li.placeholder:before {
-						position: absolute;
-						content: "";
-						width: 0;
-						height: 0;
-						margin-top: -5px;
-						left: -5px;
-						top: -4px;
-						border: 5px solid transparent;
-						border-left-color: #C51A1B;
-						border-right: none; 
-					}
-
-			#formulaire .fa-move, #builder .fa-move {
-				font-size: 1.5rem !important;
-				margin-right: 0.5rem !important;
-			}
+				/* ul.formulaire li.placeholder { position: relative; }
+				ul.formulaire li.placeholder:before { position: absolute; } */
 
 
 			#builder {
@@ -183,7 +189,52 @@ switch(@$_GET['mode'])
 
 				/* .lucide [data-builder] { position: relative; } */
 
-				[data-builder] .fa-cancel { font-size: 1.4rem; }
+
+			[data-builder] .fa-cancel { font-size: 1.4rem; }
+
+
+			#formulaire li:not(.exclude), #builder li {
+				/* display: block;
+				margin: 5px;
+				padding: 5px;
+				border: 1px solid #cccccc;
+				color: #0088cc;
+				background: #eeeeee; */
+				
+				border: 1px dashed #cccccc;
+				padding: 0.5rem;
+				margin: 0.5rem;
+			}
+				#formulaire li.placeholder {
+					position: relative;
+					margin: 0;
+					padding: 0;
+					border: 1px solid red; 
+				}
+					#formulaire li.placeholder:before {
+						position: absolute;
+						content: "";
+						width: 0;
+						height: 0;
+						margin-top: -5px;
+						left: -5px;
+						top: -4px;
+						border: 5px solid transparent;
+						border-left-color: #C51A1B;
+						border-right: none; 
+					}
+
+			#formulaire .fa-move, #builder .fa-move {
+				font-size: 1.5rem !important;
+				margin-right: 0.5rem !important;
+			}
+
+			.active { border: 1px solid #333333; }
+
+			.exclude .fa-move,
+			.exclude .fa-cancel
+			{ display: none; }
+			
 		</style>
 
 
@@ -203,7 +254,7 @@ switch(@$_GET['mode'])
 			?>
 		</ul>
 
-		<a href='javascript:move_builder();' class="bt-move-builder" title="Déplacer les éléments">Déplacer <i class='fa fa-fw fa-move big'></i></a>
+		<!-- <a href='javascript:move_builder();' class="bt-move-builder" title="Déplacer les éléments">Déplacer <i class='fa fa-fw fa-move big'></i></a> -->
 
 
 		<script src='<?=$GLOBALS['path']."theme/".$GLOBALS['theme']."/";?>jquery-sortable.min.js'></script>
@@ -212,17 +263,31 @@ switch(@$_GET['mode'])
 			// Fonction pour trié les éléments du formulaire
 			function sorter()
 			{
-				if($(".tpl-formulaire .fieldset").length > 0)
-					selecter = $(".tpl-formulaire .fieldset");
-				else 
-					selecter = $("#formulaire");
+				// if($(".tpl-formulaire .fieldset").length > 0)
+				// 	selecter = $(".tpl-formulaire .fieldset");
+				// else 
+				// 	selecter = $("#formulaire");
 
-				console.log("sorter", selecter);
+				// console.log("sorter", selecter);
+
+				var oldContainer;
 
 				// Déplacement dans les fieldset + ajout depuis le builder
-				selecter.sortable({
+				$("#formulaire").sortable({
 					group: 'connected',
 					handle: ".fa-move",
+					//exclude: '.exclude',
+
+					// afterMove: function (placeholder, container) {
+					// 	if(oldContainer != container)
+					// 	{
+					// 		if(oldContainer) oldContainer.el.removeClass("active");
+
+					// 		container.el.addClass("active");
+
+					// 		oldContainer = container;
+					// 	}
+					// },
 					
 					// Duplique l'item draggé depuit la liste de choix
 					onDragStart: function ($item, container, _super) {
@@ -238,6 +303,8 @@ switch(@$_GET['mode'])
 					onDrop: function  ($item, container, _super) {
 						//console.log("item", $($item).data("file"));
 						//console.log("container", container);
+
+						//container.el.removeClass("active");
 
 						// Execute l'action drop
 						_super($item, container);
@@ -285,12 +352,13 @@ switch(@$_GET['mode'])
 				
 
 				// Déplacement des éléments du formulaire global
-				if($(".tpl-formulaire .fieldset").length > 0){
-					console.log("#formulaire")
-					$("#formulaire").sortable({
-						group: 'connected',
-					});
-				}
+				//if($(".tpl-formulaire .fieldset").length > 0)
+				// {
+				// 	console.log("#formulaire")
+				// 	$(".tpl-formulaire .fieldset").sortable({
+				// 		group: 'connected',
+				// 	});
+				// }
 				
 				
 				// Déplacement des éléments du builder pour ajouter dans le formulaire
@@ -306,10 +374,10 @@ switch(@$_GET['mode'])
 			{
 				console.log("unsorter");
 
-				if($(".tpl-formulaire .fieldset").length > 0)
-					$(".fieldset").sortable("destroy");
+				// if($(".tpl-formulaire .fieldset").length > 0)
+				// 	$(".fieldset").sortable("destroy");
 
-				if($("#formulaire").length > 0)
+				//if($("#formulaire").length > 0)
 					$("#formulaire").sortable("destroy");
 
 				$("#builder").sortable("destroy");
@@ -325,6 +393,9 @@ switch(@$_GET['mode'])
 
 				// Tri
 				sorter();
+
+				// Supprime les <filedset> pour pouvoir faire les tris
+				$('fieldset').contents().unwrap();
 
 
 				// TOOLS : Suppression & Déplacement
@@ -382,9 +453,27 @@ switch(@$_GET['mode'])
 				{
 					// Envoie les datas
 					data["content"]["builder"] = {};
+					increment = 0;
+					data["content"]["builder"][increment] = {};
 					$(document).find(".content [data-builder]").each(function(index, element)
 					{
-						data["content"]["builder"][index] = {};// index pour l'ordre d'affichage des éléments
+						//console.log("element", $(element));
+						console.log("fieldset", $(element).parent().data("fieldset"));
+						console.log("parent", $(element).parent());
+						
+						
+						// && $(element).parent().data("fieldset") != undefined
+						if($(element).parent().data("fieldset") != increment) {
+							increment = $(element).parent().data("fieldset");
+							data["content"]["builder"][increment] = {};// index pour l'ordre d'affichage des éléments
+						}
+						
+						if(increment == undefined) increment = 0;
+
+						console.log("increment", increment);
+						
+						// index pour l'ordre d'affichage des éléments
+						//data["content"]["builder"][index] = {};
 
 						// Clé de l'élément build en cours
 						var key = find_key(element);
@@ -399,10 +488,14 @@ switch(@$_GET['mode'])
 							// Récupère le numéro de l'element en fonction de son type d'edition
 							var key = find_key(elem);
 						}
+
+						console.log("index:"+index, key+" element:"+$(element).data("builder"))
 						
 						// Ajoute l'élément à la liste du builder avec le bon numéro d'id
-						data["content"]["builder"][index][key] = $(element).data("builder");
+						data["content"]["builder"][increment]["key"+key] = $(element).data("builder");
 					});
+
+					console.log("[content][builder]", data["content"]["builder"]);
 				});
 
 				// Après la sauvegarde
