@@ -2,6 +2,7 @@
 
 <li data-builder="radio">
 	
-	<label for=""><?php txt('', array('tag' => 'span'))?></label> <?radio();?>
-
+	<?radio('', 'fieldset-'.@$fieldset);?>
+	<label for=""><?php txt('', array('tag' => 'span', 'placeholder' => 'Label radio'))?></label>
+	
 </li>

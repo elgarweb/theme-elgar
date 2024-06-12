@@ -15,8 +15,38 @@ $url_back = encode($res['url']);
 			<?php
 			h1('title', 'picto');
 
+
 			// Liste les tags pour filtrer la page
-			$sel_tag_list = $connect->query("SELECT distinct encode, name FROM ".$table_tag." WHERE zone='".$res['url']."' AND lang='".$lang."' GROUP BY encode, name ORDER BY encode ASC");
+			$sql="SELECT distinct ".$tt.".encode, ".$tt.".name FROM ".$tt;
+
+			// Filtre par date pour les tags des events
+			if($res['url'] == 'agenda')
+			{
+				$sql.=" JOIN ".$tm." AS event_deb ON event_deb.id=".$tt.".id AND event_deb.type='aaaa-mm-jj'";
+				$sql.=" LEFT JOIN ".$tm." AS event_fin ON event_fin.id=".$tt.".id AND event_fin.type='aaaa-mm-jj-fin'";
+			}
+			// Si actualités // Filtre trop, il est obligé d'avoir des dates de fin pour que le tag apparaisse
+			// elseif($res['url'] == encode(__('News')))
+			// 	$sql.=" JOIN ".$tm." AS event_fin ON event_fin.id=".$tt.".id AND event_fin.type='aaaa-mm-jj-fin'";
+
+			// AND ".$tc."date_insert <= NOW() AND ".$tc."state='active'
+			$sql.=" WHERE ".$tt.".zone='".$res['url']."' AND ".$tt.".lang='".$lang."' ";
+
+			// Que les tags des évènements >= date de début OU <= date de fin
+			if($res['url']=='agenda')
+				$sql.=" AND (event_fin.cle >= '".date("Y-m-d")."' OR event_deb.cle >= '".date("Y-m-d")."')";
+			// Si actualités
+			// elseif($res['url'] == encode(__('News')))
+			// 	$sql.=" AND event_fin.cle >= '".date("Y-m-d")."'";
+
+			$sql.=" GROUP BY ".$tt.".encode, ".$tt.".name ORDER BY ".$tt.".encode ASC";
+
+			//"SELECT distinct encode, name FROM ".$table_tag." WHERE zone='".$res['url']."' AND lang='".$lang."' GROUP BY encode, name ORDER BY encode ASC"
+
+			//echo $sql;
+			
+			$sel_tag_list = $connect->query($sql);
+
 			//echo $connect->error;
 
 			if($sel_tag_list->num_rows > 0) {
@@ -109,6 +139,7 @@ $url_back = encode($res['url']);
 		$sql.=" LIMIT ".$start.", ".$num_pp;
 
 		//echo $sql;
+
 		$sel_fiche = $connect->query($sql);
 
 		$num_total = $connect->query("SELECT FOUND_ROWS()")->fetch_row()[0];// Nombre total de fiche

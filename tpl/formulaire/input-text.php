@@ -3,7 +3,7 @@
 <li data-builder="input-text">
 
 	<label for="">
-		<?php txt('', array('tag' => 'span'))?>
+		<?php txt('', array('tag' => 'span', 'placeholder' => 'Label'))?>
 		<span class="red">*</span>
 	</label>
 
@@ -16,6 +16,12 @@
 	// autocomplete
 
 	input('');//, array('builder' => 'input')
+
+	//print_r($GLOBALS['content']);
+	//unset($GLOBALS['content'][($GLOBALS['editkey'])]);
+
+	//unset($GLOBALS['content']['txt-'.($GLOBALS['editkey']-2)]);
+	//unset($GLOBALS['content']['input-'.($GLOBALS['editkey']-1)]);
 	?>
 
 </li>

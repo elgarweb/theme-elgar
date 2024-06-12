@@ -159,7 +159,7 @@ $sql.=" WHERE (".$tc.".type='article' OR ".$tc.".type='article-intramuros')";
 $sql.=" AND (actu_fin.id IS NULL OR actu_fin.cle >= '".date("Y-m-d")."')";
 
 // Supprime l'article à la une de la liste des 3 actus
-if(isset($res_alaune['id'])) $sql.=" AND id!='".(int)$res_alaune['id']."'";
+if(isset($res_alaune['id'])) $sql.=" AND ".$tc.".id!='".(int)$res_alaune['id']."'";
 
 $sql.=" AND ".$tc.".lang='".$lang."' AND date_insert <= NOW() AND state='active' ORDER BY ".$tc.".date_insert DESC
 LIMIT 3";

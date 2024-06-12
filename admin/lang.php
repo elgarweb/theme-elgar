@@ -22,7 +22,7 @@ function creat_table_lang(){
 switch(@$_REQUEST['mode'])
 {
 	default:
-		if(strpos(@$res['tpl'], '-liste') === false) 
+		if(isset($res['tpl']) and strpos(@$res['tpl'], '-liste') === false) 
 		{
 		?>
 		<script>
