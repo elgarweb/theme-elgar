@@ -6,11 +6,12 @@
 		<?
 		//print_r($GLOBALS['content']['builder']);
 		//$level = $GLOBALS['editkey'];
+		$fieldset = $GLOBALS['editkey']-1;
 		?>
 		
 		<legend><?php txt('', array('tag' => 'span', 'placeholder' => 'Légende'))?></legend>
 
-		<ul class="fieldset" data-fieldset="<?=($GLOBALS['editkey']-1)?>">
+		<ul class="fieldset" data-fieldset="<?=$fieldset?>">
 			<li aria-hidden="true" class="exclude">Liste</li>
 
 			<?
@@ -19,8 +20,6 @@
 				//echo"in filedset "; print_r($array);
 
 				builder_array($GLOBALS['content']['builder'], $level);
-
-				//unset($GLOBALS['content']['builder'][$key]);
 			} 
 			?>
 		</ul>

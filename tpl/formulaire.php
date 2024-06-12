@@ -52,7 +52,7 @@ switch(@$_GET['mode'])
 					<?php
 					function builder_array($builder_array, $level = 0)
 					{
-						//global $builder_array;
+						global $fieldset;
 
 						// Include les éléments du builder pour affichage
 						if(isset($builder_array) and is_array($builder_array))
@@ -95,11 +95,6 @@ switch(@$_GET['mode'])
 								// pour l'ajout d'élément builder
 								if(isset($GLOBALS['editkey']) and isset($_SESSION['editkey']) and $GLOBALS['editkey'] > $_SESSION['editkey']) 
 									$_SESSION['editkey'] = $GLOBALS['editkey'];
-
-								//unset($GLOBALS['content']['builder'][$GLOBALS['editkey']]);
-								//unset($GLOBALS['content']['builder'][$index]);
-								//unset($builder_array[$index]);
-								//unset($GLOBALS['content'][$index]);
 							}
 						}
 					}
@@ -123,11 +118,18 @@ switch(@$_GET['mode'])
 			<script>
 			$(function()
 			{
-				// Affecte les id des radio/checkbox au for des labels
+				// Parcours les radio/checkbox
 				$("#formulaire input[type='radio'], #formulaire input[type='checkbox']").each(function() 
 				{
-					console.log($(this))
+					// Affecte les id des radio/checkbox au for des labels
 					$(this).next("label").attr('for', $(this).attr("id"));
+
+					// Si radio on affect un name commun en fonction du fieldset
+					if($(this).attr("type") == "radio") 
+					{
+						var fieldset = $(this).closest(".fieldset").data("fieldset");
+						if(fieldset != undefined) $(this).attr("name", "fieldset-"+ fieldset);
+					}
 				});
 
 				// Mode édition
@@ -252,11 +254,12 @@ switch(@$_GET['mode'])
 			$dir = $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['path']."theme/".$GLOBALS['theme']."/tpl/formulaire/";
 			if(is_dir($dir))// Le dossier existe
 			{
+				// @todo ne plus listé les tpl du dossier, mais les listés depuis les tpl_name s'il existe, dans le bon ordre...
 				$scandir = array_diff(scandir($dir), array('..', '.'));// Nettoyage
 				foreach($scandir as $cle => $filename)
 				{
 					$pathinfo = pathinfo($filename, PATHINFO_FILENAME);
-					echo'<li data-file="'.$filename.'">'.$pathinfo.'</li>';
+					echo'<li data-file="'.$filename.'">'.(isset($GLOBALS['tpl_name'][$pathinfo])?$GLOBALS['tpl_name'][$pathinfo]:$pathinfo).'</li>';
 				}
 			}
 			?>
