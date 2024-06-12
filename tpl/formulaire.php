@@ -123,6 +123,14 @@ switch(@$_GET['mode'])
 			<script>
 			$(function()
 			{
+				// Affecte les id des radio/checkbox au for des labels
+				$("#formulaire input[type='radio'], #formulaire input[type='checkbox']").each(function() 
+				{
+					console.log($(this))
+					$(this).next("label").attr('for', $(this).attr("id"));
+				});
+
+				// Mode édition
 				edit.push(function()
 				{
 					$.ajax(
@@ -458,8 +466,8 @@ switch(@$_GET['mode'])
 					$(document).find(".content [data-builder]").each(function(index, element)
 					{
 						//console.log("element", $(element));
-						console.log("fieldset", $(element).parent().data("fieldset"));
-						console.log("parent", $(element).parent());
+						//console.log("fieldset", $(element).parent().data("fieldset"));
+						//console.log("parent", $(element).parent());
 						
 						
 						// && $(element).parent().data("fieldset") != undefined
@@ -470,7 +478,7 @@ switch(@$_GET['mode'])
 						
 						if(increment == undefined) increment = 0;
 
-						console.log("increment", increment);
+						//console.log("increment", increment);
 						
 						// index pour l'ordre d'affichage des éléments
 						//data["content"]["builder"][index] = {};
@@ -483,19 +491,19 @@ switch(@$_GET['mode'])
 						{
 							//console.log("elem")
 							// Récupère le 1er élément editable
-							var elem = $(element).find(".editable, editable-media, [data-href], [data-bg]").first();
+							var elem = $(element).find(".editable, .editable-input, editable-media, [data-href], [data-bg]").first();
 
 							// Récupère le numéro de l'element en fonction de son type d'edition
 							var key = find_key(elem);
 						}
 
-						console.log("index:"+index, key+" element:"+$(element).data("builder"))
+						//console.log("index:"+index, key+" element:"+$(element).data("builder"))
 						
 						// Ajoute l'élément à la liste du builder avec le bon numéro d'id
 						data["content"]["builder"][increment]["key"+key] = $(element).data("builder");
 					});
 
-					console.log("[content][builder]", data["content"]["builder"]);
+					//console.log("[content][builder]", data["content"]["builder"]);
 				});
 
 				// Après la sauvegarde
