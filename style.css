@@ -794,6 +794,8 @@ header section:first-of-type { font-size: 1.4rem; }
 }
 	#formulaire li::before { content: ''; }
 
+	#formulaire li { border: 1px solid violet;}
+
 
 /* FOOTER */
 footer #renseignement { 
