@@ -254,13 +254,30 @@ switch(@$_GET['mode'])
 			$dir = $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['path']."theme/".$GLOBALS['theme']."/tpl/formulaire/";
 			if(is_dir($dir))// Le dossier existe
 			{
-				// @todo ne plus listé les tpl du dossier, mais les listés depuis les tpl_name s'il existe, dans le bon ordre...
-				$scandir = array_diff(scandir($dir), array('..', '.'));// Nettoyage
-				foreach($scandir as $cle => $filename)
+				// Les tpl
+				$tpl_builder = array(
+					"h2" => "Titre niveau 2 (H2)",
+				
+					"fieldset" => "Ensemble de champs (fieldset)",
+					"checkbox" => "Case à cocher (checkbox)",
+					"radio" => "Case d'option (radio)",
+					
+					"textarea" => "Grande zone de texte (textarea)",
+					"input-text" => "Champ texte simple (text)",
+				);
+
+				foreach($tpl_builder as $filename => $name)
 				{
-					$pathinfo = pathinfo($filename, PATHINFO_FILENAME);
-					echo'<li data-file="'.$filename.'">'.(isset($GLOBALS['tpl_name'][$pathinfo])?$GLOBALS['tpl_name'][$pathinfo]:$pathinfo).'</li>';
+					echo'<li data-file="'.$filename.'.php">'.$name.'</li>';
 				}
+
+				// Ancienne méthode en fonction des fichiers dans le dossier
+				// $scandir = array_diff(scandir($dir), array('..', '.'));// Nettoyage
+				// foreach($scandir as $cle => $filename)
+				// {
+				// 	$pathinfo = pathinfo($filename, PATHINFO_FILENAME);
+				// 	echo'<li data-file="'.$filename.'">'.(isset($GLOBALS['tpl_name'][$pathinfo])?$GLOBALS['tpl_name'][$pathinfo]:$pathinfo).'</li>';
+				// }
 			}
 			?>
 		</ul>

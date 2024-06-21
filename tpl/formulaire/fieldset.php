@@ -6,7 +6,7 @@
 		<?
 		//print_r($GLOBALS['content']['builder']);
 		//$level = $GLOBALS['editkey'];
-		$fieldset = $GLOBALS['editkey']-1;
+		$fieldset = $GLOBALS['editkey'];
 		?>
 		
 		<legend><?php txt('', array('tag' => 'span', 'placeholder' => 'Légende'))?></legend>
