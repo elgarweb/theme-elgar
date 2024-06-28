@@ -22,7 +22,8 @@
 // - save imbriquer à l'infinit
 // - lecture imbriquer à l'infinit
 // le legend du fieldset n'a pas le bon id lors de la récup...
-// @bug qd on ajoute un input dans un double filedset dans un fiedset, ça fait sauté le 2ème fieldset et ce qu'ils contient
+// @finalisé le tri et connexion entre les élément et le formulaire
+// faire des test massif sur la modification et suppression d'élément
 
 // Plus tard
 // - voir pour une version sans ul/li, mais visiblement complexe de changer le tag à la volé pour faire le tri une fois edit lancer
@@ -220,6 +221,7 @@ switch(@$_GET['mode'])
 					position: relative;
 					margin: 0;
 					padding: 0;
+					height: 30px;
 					border: 1px solid red; 
 				}
 					#formulaire li.placeholder:before {
@@ -286,7 +288,8 @@ switch(@$_GET['mode'])
 		<!-- <a href='javascript:move_builder();' class="bt-move-builder" title="Déplacer les éléments">Déplacer <i class='fa fa-fw fa-move big'></i></a> -->
 
 
-		<script src='<?=$GLOBALS['path']."theme/".$GLOBALS['theme'];?>/admin/jquery-sortable.min.js'></script>
+		<!-- <script src='<?=$GLOBALS['path']."theme/".$GLOBALS['theme'];?>/admin/jquery-sortable.min.js'></script> -->
+		<script src='<?=$GLOBALS['path']."theme/".$GLOBALS['theme'];?>/admin/jquery-mjs.nestedSortable.js'></script>
 
 		<script>
 			// Fonction pour trié les éléments du formulaire
@@ -416,15 +419,35 @@ switch(@$_GET['mode'])
 
 			$(function()
 			{
+				// Supprime les <filedset> pour pouvoir faire les tris
+				$('fieldset').contents().unwrap();
+
+
 				// DÉPLACEMENT & AJOUT d'un élément
 				// Ajout d'une zone de drag pour chaque élément du builder
 				$("#builder li").prepend("<i class='fa fa-move'></i>");//[data-builder],
 
 				// Tri
-				sorter();
+				//sorter();
 
-				// Supprime les <filedset> pour pouvoir faire les tris
-				$('fieldset').contents().unwrap();
+				// $("#formulaire").nestedSortable({
+				// 	//connectWith: '#builder',
+				// 	listType: 'ul',
+				// 	//handle: '.fa-move',
+				// 	items: 'li',
+				// 	//placeholder: 'placeholder',   
+				// 	//maxLevels: 2,      
+				// 	//opacity: .5,
+				// 	//protectRoot: true,
+				// });
+
+				$('#formulaire').nestedSortable({
+					listType: 'ul',
+					items: 'li',
+					handle: '.fa-move',
+					placeholder: 'placeholder',
+					//toleranceElement: '> div'
+				});
 
 
 				// TOOLS : Suppression & Déplacement
