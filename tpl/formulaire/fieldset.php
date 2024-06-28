@@ -12,7 +12,7 @@
 		<legend><?php txt('', array('tag' => 'span', 'placeholder' => 'Légende'))?></legend>
 
 		<ul class="fieldset" data-fieldset="<?=$fieldset?>">
-			<li aria-hidden="true" class="exclude">Liste</li>
+			<li aria-hidden="true" class="exclude">Liste :</li>
 
 			<?
 			if(isset($level) and isset($GLOBALS['content']['builder'][$level]) and is_array($GLOBALS['content']['builder'][$level])) 

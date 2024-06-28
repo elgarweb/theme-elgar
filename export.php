@@ -61,7 +61,7 @@ $json = null;
 
 
 
-// Construction de la requete pour les actu
+// Construction de la requete pour LES ACTU
 $sql="SELECT ".$tc.".* FROM ".$tc;
 
 $sql.=" WHERE (".$tc.".type='article' OR ".$tc.".type='article-intramuros') AND ".$tc.".lang='".$lang."' AND state='active'";
@@ -83,7 +83,7 @@ while($res = $sel->fetch_assoc())
 
 
 
-// Construction de la requete pour les événements
+// Construction de la requete pour LES ÉVÉNEMENTS
 $sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
 
 // Tous les évènements
@@ -105,7 +105,7 @@ $sel_event = $connect->query($sql);
 $num_event = $sel_event->num_rows;
 
 
-// Si peut d'évènement à venir, on prend aussi les en cours
+// SI PEUT D'ÉVÈNEMENT À VENIR, on prend aussi les en cours
 if($num_event < $num_pp) 
 {
 	// Construction de la requete

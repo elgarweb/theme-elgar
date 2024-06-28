@@ -792,9 +792,14 @@ header section:first-of-type { font-size: 1.4rem; }
 	position: relative;
 	padding: 0;
 }
-	#formulaire li::before { content: ''; }
+	#formulaire li { 
+		border: 1px dashed #a5a5a5;
+		margin: 0.2rem;
+		padding: 0.5rem 0.5rem;
+	}
+		#formulaire li::before { content: ''; }
 
-	#formulaire li { border: 1px solid violet;}
+	#formulaire ul { margin-bottom: 0; }
 
 
 /* FOOTER */
