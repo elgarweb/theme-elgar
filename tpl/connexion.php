@@ -6,10 +6,11 @@ if(!$GLOBALS['domain'] or !$GLOBALS['connect']) exit;
 // Dans config : auth_level => intranet
 
 // Désactive le nonce courant pour en créer un nouveau lors de la connexion
-//unset($_SESSION['nonce']);
+// Evite un retour d'erreur sur le nonce qui entraine un sleep
+unset($_SESSION['nonce']);
 
 // SI PAS LOGÉ ON AFFICHE LE FORMULAIRE DE LOGIN
-if(!login('medium', null, 'true'))// error 
+if(!login('medium', null, 'true'))// true error 
 {
 	?>
 	<section class="mw960p center">
