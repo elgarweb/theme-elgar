@@ -589,6 +589,9 @@ header section:first-of-type { font-size: 1.4rem; }
 			.navigation a { text-decoration: none; }
 			.navigation a:hover { text-decoration: underline; }
 
+			.navigation .description a { text-decoration: underline; }
+				.navigation .description a:hover { text-decoration: none; }
+
 
 		/* Carrefour éditable */
 		.lucide .navigation .dragger {
@@ -1973,8 +1976,16 @@ div.editable {
 		/* active state, i.e. menu open */
 		.burger.active { background-color: #20828F; }
 			.burger.active span { background: none; }
-				.burger.active span::before { top: 0; transform: rotate(45deg);	}
-				.burger.active span::after { bottom: 0; transform: rotate(-45deg); }
+				.burger.active span::before { 
+					top: 0;
+					transform: rotate(45deg);
+					width: 70%;
+				}
+				.burger.active span::after { 
+					bottom: 0;
+					transform: rotate(-45deg);
+					width: 70%;
+				}
 				.burger.active span::before,
 				.burger.active span::after { transition-delay: 0s, 0.3s; }
 
@@ -2675,7 +2686,7 @@ div.editable {
 	border: .15em solid white !important;
 }
 
-.hc header .selected a { color: #06B0BB !important; }
+.hc header .selected a { color: #09ddec !important; }
 
 .hc .burger span,
 .hc .burger span:before,
