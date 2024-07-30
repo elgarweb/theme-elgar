@@ -255,6 +255,8 @@ $num_article = ($sel_article?$sel_article->num_rows:0);
 
 <!-- AGENDA -->
 <?php
+// Requête différente de la page listing, car sinon certain événement permanent sont affichés trop longtemps sur la page d'accueil.
+
 // Construction de la requete
 $sql="SELECT SQL_CALC_FOUND_ROWS ".$tc.".id, ".$tc.".* FROM ".$tc;
 

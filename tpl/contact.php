@@ -89,13 +89,15 @@ switch(@$_GET['mode'])
 							<label for="question">
 								<?php _e("For security reasons, please solve the following calculation")?><span class="red">*</span><br>
 
-								<img src="/theme/elgar/img/chiffre/<?=$chiffre_file[$nb1];?>.png" alt="<?=__($chiffre[$nb1]);?>" class="vatt">
+								<!-- // plus utilisé  <img src="/theme/elgar/img/chiffre/<?=$chiffre_file[$nb1];?>.png" alt="<?=__($chiffre[$nb1]);?>" class="vatt"> -->
+								<?=$nb1?>
 								<?=($operator=='-'?'−':$operator);?>
-								<img src="/theme/elgar/img/chiffre/<?=$chiffre_file[$nb2];?>.png" alt="<?=__($chiffre[$nb2]);?>" class="vatt">
+								<!-- // plus utilisé <img src="/theme/elgar/img/chiffre/<?=$chiffre_file[$nb2];?>.png" alt="<?=__($chiffre[$nb2]);?>" class="vatt"> -->
+								<?=$nb2?>
 								=
 
-								<!-- Version pour l'affichage en cas d'erreur -->
-								<span id="calcul" class="none"><?=(__($chiffre[$nb1])." ".($operator=='-'?'−':$operator)." ".__($chiffre[$nb2]));?> = </span>
+								<!-- Version pour l'affichage en cas d'erreur // plus utilisé -->
+								<!-- <span id="calcul" class="none"><?=(__($chiffre[$nb1])." ".($operator=='-'?'−':$operator)." ".__($chiffre[$nb2]));?> = </span> -->
 
 							</label>
 							<input type="text" name="question" id="question" placeholder="?" class="w50p tc" autocomplete="off" required>
