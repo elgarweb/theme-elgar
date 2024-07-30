@@ -78,11 +78,11 @@
 	<!-- Menu principal -->
 	<section class="bg-color">
 
-		<nav role="navigation" class="mw960p center brd-top-3 mtl tc" aria-label="<?php _e("Browsing menu")?>">
+		<nav role="navigation" class="mw960p center brd-top-3 mtl tc" aria-label="<?php _e("Menu")?>">
 
 			<button type="button" class="burger" aria-expanded="false" aria-controls="main-navigation">
 				<span class="open"><?php _e("Menu")?></span>
-				<span class="close none"><?php _e("Close")?></span>
+				<!-- <span class="close none"><?php _e("Close")?></span> @supp 03/07/2024 état du menu est déjà donner par le lecteur d'écran -->
 			</button>
 
 			<ul id="main-navigation" class="flex wrap space-l">
