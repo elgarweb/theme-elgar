@@ -133,8 +133,8 @@ $add_translation = array(
 	"Published on" => array("fr" => "Publié le", "eu" => "Ondoko egunean argitaratua"),
 	"Back to publications" => array("fr" => "Retour aux publications", "eu" => "Argitalpenetara itzultzea"),
 	"To download" => array("fr" => "À télécharger", "eu" => "Telekargatzeko"),
-
-
+	"Download file" => array("fr" => "Télécharger le fichier", "eu" => "Telekargatzeko"),
+	
 	// TOURINSOFT
 	"Add event-tourinsoft" => array("fr" => "Ajouter un évènement Tourinsoft", "eu" => "Tourinsoft gertakari bat gehitu"),
 	"Edit event-tourinsoft" => array("fr" => "Edition d'un événement Tourinsoft", "eu" => "Tourinsoft gertakari baten argitaratzea"),

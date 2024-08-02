@@ -7,11 +7,25 @@ $GLOBALS['table_lang'] = $GLOBALS['tl'] = $GLOBALS['db_prefix'].'lang';
 // Fonction affichage blocs img + titre + extrait texte
 function block($url_img, $url_title, $title, $description, $date = null, $date_fin = null, $tags = null)
 {
-	global $res, $res_fiche, $state, $num_fiche;
+	global $res, $res_fiche, $content_fiche, $state, $num_fiche;
 
     /* Ajout espaces insécables */
     $search = array("« ", " »", " ?");
     $replace = array("«&nbsp;", "&nbsp;»", "&nbsp;?");
+
+	if($res['tpl'] == 'publication-liste' and @$content_fiche['telechargement'])
+	{
+		$dom = new \DOMDocument;
+		$dom->loadHTML($content_fiche['telechargement']);
+		$dom_a = $dom->getElementsByTagName('a');
+
+		if(count($dom_a) == 1)
+			$telechargement = true;
+		else 
+			$telechargement = false;
+	} 
+	else 
+		$telechargement = false;
     ?>
 
     <div class="<?= $res['url'] == 'actualites' ? 'bg-color-3 ' : 'bg-white '; ?>relative brd-top-3 brd">
@@ -21,7 +35,10 @@ function block($url_img, $url_title, $title, $description, $date = null, $date_f
 			<?=$state?>
 		</div>
 	    
-		<a href="<?=make_url($url_title, array("domaine" => true));?>"  class="tdn">
+		<?if(!$telechargement){?>
+		<a href="<?=make_url($url_title, array("domaine" => true));?>" class="tdn">
+		<?}?>
+
 			<article class="h100">
 				<!-- Image -->
 				<?php //Affichage images des 3 premières actus seulement
@@ -95,15 +112,32 @@ function block($url_img, $url_title, $title, $description, $date = null, $date_f
 
 						echo '</p>';
 					}
-					?>
 
-					<!-- Lien vers détail -->
-					<p class="plus absolute bot15 bold tdu mbn">
-						<?php _e("Read more")?>						
-					</p>
+					// Affichage du lien de téléchargement pour les publications
+					if($telechargement)
+					{
+						// Si un seul fichier => lien de téléchargement
+						echo'<p class="lien_dl pbs"><a href="'.$dom_a->item(0)->getAttribute('href').'" aria-label="'.__("Télécharger le fichier").' '.mb_convert_encoding($dom_a->item(0)->nodeValue, 'ISO-8859-1', 'auto').'"><i class="fa fa-doc" aria-hidden="true"></i>'.__("Download file").'</a></p>';
+						
+						// Si texte explicatif ou admin => lien "lire la suite"
+						if(@$content_fiche['texte'] or @$_SESSION['auth']['edit-publication'])
+							echo'<p class="plus absolute bot15 bold tdu mbn"><a href="'.make_url($url_title, array("domaine" => true)).'" class="tdn">'.__("Read more").'</a></p>';
+					}
+					else
+					{?>
+						<!-- Lien vers détail -->
+						<p class="plus absolute bot15 bold tdu mbn">
+							<?php _e("Read more")?>						
+						</p>
+					<?}?>
+
 				</div>
 			</article>
+
+		<?if(!$telechargement){?>
 		</a>
+		<?}?>
+
 	</div>
     <?php
 }
