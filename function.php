@@ -120,7 +120,7 @@ function block($url_img, $url_title, $title, $description, $date = null, $date_f
 						echo'<p class="lien_dl pbs"><a href="'.$dom_a->item(0)->getAttribute('href').'" aria-label="'.__("Télécharger le fichier").' '.mb_convert_encoding($dom_a->item(0)->nodeValue, 'ISO-8859-1', 'auto').'"><i class="fa fa-doc" aria-hidden="true"></i>'.__("Download file").'</a></p>';
 						
 						// Si texte explicatif ou admin => lien "lire la suite"
-						if(@$content_fiche['texte'] or @$_SESSION['auth']['edit-publication'])
+						//if(@$content_fiche['texte'] or @$_SESSION['auth']['edit-publication'])
 							echo'<p class="plus absolute bot15 bold tdu mbn"><a href="'.make_url($url_title, array("domaine" => true)).'" class="tdn">'.__("Read more").'</a></p>';
 					}
 					else
