@@ -24,6 +24,7 @@
 // le legend du fieldset n'a pas le bon id lors de la récup...
 // @finalisé le tri et connexion entre les élément et le formulaire
 // faire des test massif sur la modification et suppression d'élément
+// - ajout des tag <form> avec id
 
 // Plus tard
 // - voir pour une version sans ul/li, mais visiblement complexe de changer le tag à la volé pour faire le tri une fois edit lancer
@@ -192,20 +193,24 @@ switch(@$_GET['mode'])
 				animation: slide-up .3s 1 ease-out;
 			}
 			/* #builder:hover { background-color: rgba(240, 240, 240, 0.95); } */
-				#builder li {
+				#builder li:not(.nodrag) {
 					background-color: rgba(61, 128, 179, 0.05);
 					border: 1px dotted rgba(61, 128, 179, 0.2);
 					border-radius: 5px;
 					text-align: left;
+					/* cursor: move; */
 				}
 
 				/* .lucide [data-builder] { position: relative; } */
+
+				.allowed { background-color: #cff0f2; }
+				.notallowed { background-color: #9e1e1e45; }
 
 
 			[data-builder] .fa-cancel { font-size: 1.4rem; }
 
 
-			#formulaire li:not(.exclude), #builder li {
+			#formulaire li:not(.exclude), #builder li:not(.nodrag) {
 				/* display: block;
 				margin: 5px;
 				padding: 5px;
@@ -222,7 +227,7 @@ switch(@$_GET['mode'])
 					margin: 0;
 					padding: 0;
 					height: 30px;
-					border: 1px solid red; 
+					border: 1px dashed #008891; 
 				}
 					#formulaire li.placeholder:before {
 						position: absolute;
@@ -252,6 +257,7 @@ switch(@$_GET['mode'])
 
 
 		<ul id="builder" class="unstyled tc">
+			<li class="nodrag bold mtt">Liste des éléments à ajouter :</li>
 			<?php
 			// Liste les elements du builder - boucle dossier builder
 			$dir = $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['path']."theme/".$GLOBALS['theme']."/tpl/formulaire/";
@@ -288,169 +294,131 @@ switch(@$_GET['mode'])
 		<!-- <a href='javascript:move_builder();' class="bt-move-builder" title="Déplacer les éléments">Déplacer <i class='fa fa-fw fa-move big'></i></a> -->
 
 
-		<!-- <script src='<?=$GLOBALS['path']."theme/".$GLOBALS['theme'];?>/admin/jquery-sortable.min.js'></script> -->
 		<script src='<?=$GLOBALS['path']."theme/".$GLOBALS['theme'];?>/admin/jquery-mjs.nestedSortable.js'></script>
 
 		<script>
-			// Fonction pour trié les éléments du formulaire
-			function sorter()
-			{
-				// if($(".tpl-formulaire .fieldset").length > 0)
-				// 	selecter = $(".tpl-formulaire .fieldset");
-				// else 
-				// 	selecter = $("#formulaire");
-
-				// console.log("sorter", selecter);
-
-				var oldContainer;
-
-				// Déplacement dans les fieldset + ajout depuis le builder
-				$("#formulaire").sortable({
-					group: 'connected',
-					handle: ".fa-move",
-					//exclude: '.exclude',
-
-					// afterMove: function (placeholder, container) {
-					// 	if(oldContainer != container)
-					// 	{
-					// 		if(oldContainer) oldContainer.el.removeClass("active");
-
-					// 		container.el.addClass("active");
-
-					// 		oldContainer = container;
-					// 	}
-					// },
-					
-					// Duplique l'item draggé depuit la liste de choix
-					onDragStart: function ($item, container, _super) {
-						
-						if(!container.options.drop) 
-							$item.clone().insertAfter($item);
-
-						_super($item, container);
-
-					},
-
-					// Inject l'élément de formulaire demandé
-					onDrop: function  ($item, container, _super) {
-						//console.log("item", $($item).data("file"));
-						//console.log("container", container);
-
-						//container.el.removeClass("active");
-
-						// Execute l'action drop
-						_super($item, container);
-						
-						// Si demande d'injection de nouvel élément de formulaire
-						if($($item).data("file") != undefined)
-						$.ajax(
-						{
-							type: "POST",
-							url: path+"theme/"+theme+"/tpl/formulaire.php?mode=add",
-							data: {
-								"file": $($item).data("file"),
-								"nonce": $("#nonce").val()// Pour la signature du formulaire
-							},
-							success: function(html)
-							{
-								// Unbind les events d'edition
-								$(".editable").off();
-								$(".editable-media").off(".editable-media");
-								$(".editable-href").off(".editable-href");
-
-								// Insertion du contenu éditable
-								$($item).replaceWith(html);
-
-								// Ajout de l'outil de suppression et déplacement
-								add_tools();
-
-								// Relance les events d'edition
-								editable_event();
-								editable_media_event();
-								editable_href_event();
-								editable_bg_event();
-
-								// Si tri fieldset on re-init le tri
-								var array_fieldset = ["fieldset.php", "radio.php", "checkbox.php"];
-								if($.inArray($($item).data("file"), array_fieldset) !== -1){
-									console.log("re-init")
-									unsorter();
-									sorter();
-								}
-							}
-						});
-					},
-				});
-				
-
-				// Déplacement des éléments du formulaire global
-				//if($(".tpl-formulaire .fieldset").length > 0)
-				// {
-				// 	console.log("#formulaire")
-				// 	$(".tpl-formulaire .fieldset").sortable({
-				// 		group: 'connected',
-				// 	});
-				// }
-				
-				
-				// Déplacement des éléments du builder pour ajouter dans le formulaire
-				$("#builder").sortable({
-					group: 'connected',
-					drop: false
-				});
-			}
-
-
-			// Désactive le tri
-			function unsorter() 
-			{
-				console.log("unsorter");
-
-				// if($(".tpl-formulaire .fieldset").length > 0)
-				// 	$(".fieldset").sortable("destroy");
-
-				//if($("#formulaire").length > 0)
-					$("#formulaire").sortable("destroy");
-
-				$("#builder").sortable("destroy");
-			}
-
-
-
 			$(function()
 			{
 				// Supprime les <filedset> pour pouvoir faire les tris
-				$('fieldset').contents().unwrap();
+				//$('fieldset').contents().unwrap();
 
 
 				// DÉPLACEMENT & AJOUT d'un élément
 				// Ajout d'une zone de drag pour chaque élément du builder
-				$("#builder li").prepend("<i class='fa fa-move'></i>");//[data-builder],
+				$("#builder li").not(".nodrag").prepend("<i class='fa fa-move'></i>");//[data-builder],
+
+
 
 				// Tri
-				//sorter();
-
-				// $("#formulaire").nestedSortable({
-				// 	//connectWith: '#builder',
-				// 	listType: 'ul',
-				// 	//handle: '.fa-move',
-				// 	items: 'li',
-				// 	//placeholder: 'placeholder',   
-				// 	//maxLevels: 2,      
-				// 	//opacity: .5,
-				// 	//protectRoot: true,
-				// });
-
+				// Déplacement des éléments dans le formulaire, avec imbrication
 				$('#formulaire').nestedSortable({
 					listType: 'ul',
 					items: 'li',
 					handle: '.fa-move',
 					placeholder: 'placeholder',
+					isTree: true,// stabilise les déplacements
+					//maxLevels: 3,
 					//toleranceElement: '> div'
+					isAllowed: function (placeholder, placeholderParent, currentItem)
+					{						
+						//console.log(placeholderParent)
+						//console.log(currentItem)
+						//console.log(placeholderParent.data("builder"))
+
+						// Autorise le drop que si c'est un filedset
+						//!placeholderParent.hasClass("exclude")
+						if(!placeholderParent || placeholderParent[0].nodeName == "FIELDSET")
+						{
+							$(currentItem).removeClass("notallowed").addClass("allowed");
+							return true;
+						}
+						else 
+						{
+							$(currentItem).removeClass("allowed").addClass("notallowed");
+							return false;
+						}
+					}
+				});
+
+				// Drag&drop Depuis la liste des éléments disponibles vers le formulaire
+				$("#builder li").draggable({
+					connectToSortable: "#formulaire",
+					handle: ".fa-move",
+					helper: "clone",
+					//revert: "invalid",// retourne à l'emplacement initial si pas dropé
+					scrollSensitivity: 100,// distance haut et bas à la quel on déclanche le scrooling
+				});
+
+				// Quand on drop un élément depuis la liste des éléments disponibles
+				$("#formulaire").droppable({
+					//accept: "#builder li",
+					drop: function(event, ui)
+					{
+						console.log("drop", ui)
+
+						// L'élément en cours
+						$item = ui.draggable;
+
+						// Si élément zone non droppable on supp l'élément
+						if($($item).hasClass("notallowed")) 
+							$($item).remove();
+						else
+						{
+							// Clean les class lors des déplacement d'élément déjà posé
+							$($item).removeClass("allowed");
+
+							// Si demande d'injection de nouvel élément de formulaire
+							if($($item).data("file") != undefined)
+							{
+								console.log("inject")
+
+								$.ajax(
+								{
+									type: "POST",
+									url: path+"theme/"+theme+"/tpl/formulaire.php?mode=add",
+									data: {
+										"file": $($item).data("file"),
+										"nonce": $("#nonce").val()// Pour la signature du formulaire
+									},
+									success: function(html)
+									{
+										// Unbind les events d'edition
+										$(".editable").off();
+										$(".editable-media").off(".editable-media");
+										$(".editable-href").off(".editable-href");
+
+										// Insertion du contenu éditable
+										$($item).replaceWith(html);
+
+										// Ajout de l'outil de suppression et déplacement
+										add_tools();
+
+										// Relance les events d'edition
+										editable_event();
+										editable_media_event();
+										editable_href_event();
+										editable_bg_event();
+
+										//@todo supp car liée à l'ancienne méthode de sortable
+										// Si tri fieldset on re-init le tri
+										/*var array_fieldset = ["fieldset.php", "radio.php", "checkbox.php"];
+										if($.inArray($($item).data("file"), array_fieldset) !== -1){
+											console.log("re-init")
+											unsorter();
+											sorter();
+										}*/
+
+										tosave();// A sauvegarder
+									}
+								});
+							}
+						}
+					}
 				});
 
 
-				// TOOLS : Suppression & Déplacement
+
+				// TOOLS : Ajout des icons de Suppression & Déplacement
 				add_tools = function(that)
 				{
 					// On parcourt tous les éléments du formulaire
