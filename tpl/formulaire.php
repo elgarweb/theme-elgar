@@ -34,7 +34,6 @@ switch(@$_GET['mode'])
 	// AFFICHAGE de la page
 	default:
 		if(!$GLOBALS['domain']) exit;
-
 		?>
 		<section class="mw960p center">
 
@@ -46,81 +45,109 @@ switch(@$_GET['mode'])
 			txt('description');
 
 			//highlight_string(print_r($GLOBALS['content'], true));
-
 			?>
+			<p class="none isrequired"><?_e("Les champs marqués d'une <span class='red'>*</span> sont obligatoires.")?></p>
+
 			<article>
 
-				<ul id="formulaire">
+				<form id="formulaire">
 
-					<?php
-					function builder_array($builder_array, $level = 0)
-					{
-						global $fieldset;
+					<ul>
 
-						// Include les éléments du builder pour affichage
-						if(isset($builder_array) and is_array($builder_array))
-						foreach($builder_array[$level] as $index => $array)
+						<li class="exclude editable-hidden small grey">Ajouter vos champs au formulaire</li>
+
+						<?php
+						function builder_array($builder_array, $level = 0)
 						{
-							// print_r("=> ".$index." | ");
-							// if(is_array($array))
-							// {
-							// 	print_r($array);
-							// 	echo count($array)."<br>";
-							// }
+							global $fieldset;
 
-							// if(is_array($array) and count($array) > 1) 
-							// {
-							// 	//builder_array($array);
-							// 	//break;
-							// }
-							// else
+							// Include les éléments du builder pour affichage
+							if(isset($builder_array) and is_array($builder_array))
+							foreach($builder_array[$level] as $index => $array)
 							{
-								// init les clé
-								if(is_array($array))// Si tableau d'éléments
+								// print_r("=> ".$index." | ");
+								// if(is_array($array))
+								// {
+								// 	print_r($array);
+								// 	echo count($array)."<br>";
+								// }
+
+								// if(is_array($array) and count($array) > 1) 
+								// {
+								// 	//builder_array($array);
+								// 	//break;
+								// }
+								// else
 								{
-									//$GLOBALS['editkey'] = trim(key($array), "key");
-									$current = current($array);
+									// init les clé
+									if(is_array($array))// Si tableau d'éléments
+									{
+										//$GLOBALS['editkey'] = trim(key($array), "key");
+										$current = current($array);
+									}
+									else// Si un seul élément
+									{
+										$GLOBALS['editkey'] = trim($index, "key");// Clean la clé
+										$level = trim($index, "key");// Niveau de profondeur
+										$current = $array;// index courant
+									}
+
+									// print_r("index:".$index." | key:".$GLOBALS['editkey']." ");
+									// print_r($array);
+									// print_r("|current:".$current);
+
+									// Insert l'élément
+									include($_SERVER['DOCUMENT_ROOT'] . $GLOBALS['path']."theme/".$GLOBALS['theme']."/tpl/formulaire/".$current.".php");
+
+									// pour l'ajout d'élément builder
+									if(isset($GLOBALS['editkey']) and isset($_SESSION['editkey']) and $GLOBALS['editkey'] > $_SESSION['editkey']) 
+										$_SESSION['editkey'] = $GLOBALS['editkey'];
 								}
-								else// Si un seul élément
-								{
-									$GLOBALS['editkey'] = trim($index, "key");// Clean la clé
-									$level = trim($index, "key");// Niveau de profondeur
-									$current = $array;// index courant
-								}
-
-								// print_r("index:".$index." | key:".$GLOBALS['editkey']." ");
-								// print_r($array);
-								// print_r("|current:".$current);
-
-								// Insert l'élément
-								include($_SERVER['DOCUMENT_ROOT'] . $GLOBALS['path']."theme/".$GLOBALS['theme']."/tpl/formulaire/".$current.".php");
-
-								// pour l'ajout d'élément builder
-								if(isset($GLOBALS['editkey']) and isset($_SESSION['editkey']) and $GLOBALS['editkey'] > $_SESSION['editkey']) 
-									$_SESSION['editkey'] = $GLOBALS['editkey'];
 							}
 						}
-					}
 
-					if(isset($GLOBALS['content']['builder']))
-						builder_array($GLOBALS['content']['builder']);
-					?>
+						if(isset($GLOBALS['content']['builder']))
+							builder_array($GLOBALS['content']['builder']);
+						?>
 
-					<!-- Pour initialiser la possibilité d'imbrication -->
-					<li aria-hidden="true" class="none">
-						<fieldset>
-							<legend></legend>
-							<ul class="fieldset"><li></li></ul>
-						</fieldset>
-					</li>
+						<!-- Pour initialiser la possibilité d'imbrication @todo voir si toujours utile avec le nouveau sortable !!! none -->						
+						<li aria-hidden="true" class="none">
+							<fieldset>
+								<legend></legend>
+								<ul class="fieldset"><li></li></ul>
+							</fieldset>
+						</li>
 
-				</ul>
+					</ul>
+
+
+					<!-- Bouton envoyer -->
+					<button type="submit" id="send" class="bt">
+						<?php _e("Send")?>
+					</button>
+
+
+					<!-- RGPB -->
+					<?php txt('texte-rgpd', 'mtl')?>
+
+					<input type="hidden" name="rgpd_text" value="<?=htmlspecialchars(@$GLOBALS['content']['rgpd']);?>">
+
+
+					<input type="hidden" name="nonce_formulaire" value="<?=nonce("nonce_formulaire");?>">
+
+				</form>
 
 			</article>
 
 			<script>
 			$(function()
 			{
+				// Il y a des champs requis
+				if($("#formulaire .required").length) $(".isrequired").show();
+
+				// Si texte rgpd, on le lie au bouton d'envoi
+				if($("#texte-rgpd").text()) $("#send").attr("aria-describedby","texte-rgpd");
+
 				// Parcours les radio/checkbox
 				$("#formulaire input[type='radio'], #formulaire input[type='checkbox']").each(function() 
 				{
@@ -181,12 +208,12 @@ switch(@$_GET['mode'])
 
 
 			#builder {
-				box-shadow: -1px 0 3px rgb(0 0 0 / 30%);
+				box-shadow: 1px 1px 3px rgb(0 0 0 / 30%);
 				background-color: rgba(240, 240, 240, 1);
 				border-radius: 5px;
 				position: fixed;
-				top: 50px;
-				right: 0;
+				top: 45px;
+				right: 5px;
 				z-index: 10;
 				padding: 0;
 				transition: background-color .3s linear;
@@ -256,8 +283,8 @@ switch(@$_GET['mode'])
 		</style>
 
 
-		<ul id="builder" class="unstyled tc">
-			<li class="nodrag bold mtt">Liste des éléments à ajouter :</li>
+		<ul id="builder" class="unstyled tc small">
+			<li class="nodrag bold mtt mlm mrm pointer">Liste des éléments à ajouter <i class="fa fa-resize-small grey"></i></li>
 			<?php
 			// Liste les elements du builder - boucle dossier builder
 			$dir = $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['path']."theme/".$GLOBALS['theme']."/tpl/formulaire/";
@@ -303,20 +330,27 @@ switch(@$_GET['mode'])
 				//$('fieldset').contents().unwrap();
 
 
+				// Réduit le menu des éléments disponible
+				$("#builder .nodrag").on("click", function() { 
+					$("#builder li:not(.nodrag)").slideToggle();
+				});
+				
+
 				// DÉPLACEMENT & AJOUT d'un élément
 				// Ajout d'une zone de drag pour chaque élément du builder
 				$("#builder li").not(".nodrag").prepend("<i class='fa fa-move'></i>");//[data-builder],
 
 
-
 				// Tri
 				// Déplacement des éléments dans le formulaire, avec imbrication
-				$('#formulaire').nestedSortable({
+				$('#formulaire ul').nestedSortable({
 					listType: 'ul',
 					items: 'li',
 					handle: '.fa-move',
 					placeholder: 'placeholder',
 					isTree: true,// stabilise les déplacements
+					tolerance: "pointer",
+
 					//maxLevels: 3,
 					//toleranceElement: '> div'
 					isAllowed: function (placeholder, placeholderParent, currentItem)
@@ -342,7 +376,7 @@ switch(@$_GET['mode'])
 
 				// Drag&drop Depuis la liste des éléments disponibles vers le formulaire
 				$("#builder li").draggable({
-					connectToSortable: "#formulaire",
+					connectToSortable: "#formulaire ul",
 					handle: ".fa-move",
 					helper: "clone",
 					//revert: "invalid",// retourne à l'emplacement initial si pas dropé
@@ -350,7 +384,7 @@ switch(@$_GET['mode'])
 				});
 
 				// Quand on drop un élément depuis la liste des éléments disponibles
-				$("#formulaire").droppable({
+				$("#formulaire ul").droppable({
 					//accept: "#builder li",
 					drop: function(event, ui)
 					{
@@ -360,12 +394,12 @@ switch(@$_GET['mode'])
 						$item = ui.draggable;
 
 						// Si élément zone non droppable on supp l'élément
-						if($($item).hasClass("notallowed")) 
+						if($($item).hasClass("notallowed") && $($item).data("file")) 
 							$($item).remove();
 						else
 						{
 							// Clean les class lors des déplacement d'élément déjà posé
-							$($item).removeClass("allowed");
+							$($item).removeClass("allowed notallowed");
 
 							// Si demande d'injection de nouvel élément de formulaire
 							if($($item).data("file") != undefined)
@@ -399,6 +433,9 @@ switch(@$_GET['mode'])
 										editable_href_event();
 										editable_bg_event();
 
+										// Affiche les options
+										$(".editable-hidden").fadeIn();
+
 										//@todo supp car liée à l'ancienne méthode de sortable
 										// Si tri fieldset on re-init le tri
 										/*var array_fieldset = ["fieldset.php", "radio.php", "checkbox.php"];
@@ -429,7 +466,7 @@ switch(@$_GET['mode'])
 							$(this).prepend("<i class='fa fa-move'></i>");
 
 						// Ajout de la suppression au survol d'un bloc, si pas déjà présent
-						if($(".fa-cancel", this).length <= 0)
+						if($("a .fa-cancel", this).length <= 0)
 							$(this).append("<a href='javascript:void(0)' onclick='remove_builder(this)'><i class='fa fa-cancel absolute none red pointer' style='top: 0; right: 0; z-index: 10;' title='"+ __("Remove") +"'></i></a>");
 					});
 				};

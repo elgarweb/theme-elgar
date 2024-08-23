@@ -790,10 +790,11 @@ header section:first-of-type { font-size: 1.4rem; }
 
 
 /* FORMULAIRE */
-#formulaire {
+#formulaire ul {
 	list-style: none;
 	position: relative;
 	padding: 0;
+	margin-bottom: 0;
 }
 	#formulaire li { 
 		/* border: 1px dashed #a5a5a5; */
@@ -802,7 +803,12 @@ header section:first-of-type { font-size: 1.4rem; }
 	}
 		#formulaire li::before { content: ''; }
 
-	#formulaire ul { margin-bottom: 0; }
+	#formulaire .fa {
+		margin-right: 0;
+		font-size: inherit;
+	}
+
+	#formulaire .required { color: #9f2d2d; }
 
 
 /* FOOTER */

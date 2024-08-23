@@ -9,10 +9,11 @@
 		$fieldset = $GLOBALS['editkey'];
 		?>
 		
-		<legend><?php txt('', array('tag' => 'span', 'placeholder' => 'Légende'))?></legend>
+		<legend><?php txt('', array('tag' => 'span', 'placeholder' => "Légende de l'ensemble de champs"))?></legend>
 
 		<ul class="fieldset" data-fieldset="<?=$fieldset?>">
-			<li aria-hidden="true" class="exclude">Liste :</li>
+
+			<li class="exclude editable-hidden small grey">Ensemble de champs</li>
 
 			<?
 			if(isset($level) and isset($GLOBALS['content']['builder'][$level]) and is_array($GLOBALS['content']['builder'][$level])) 
