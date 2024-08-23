@@ -2,11 +2,12 @@
 
 <li data-builder="textarea">
 
-	<label for="">
+	<label for="textarea-<?=$GLOBALS['editkey']+1?>">
 		<?php txt('', array('tag' => 'span', 'placeholder' => 'Label'))?>
 	</label>
 
-	<textarea id="<?=$GLOBALS['editkey']?>"></textarea>
+	<textarea id="textarea-<?=$GLOBALS['editkey']?>"></textarea>
+	
 	<?php
 	// Message d'erreur
 

@@ -24,6 +24,7 @@
 // le legend du fieldset n'a pas le bon id lors de la récup...
 // @finalisé le tri et connexion entre les élément et le formulaire
 // faire des test massif sur la modification et suppression d'élément
+// - ajout des tag <form> avec id
 
 // Plus tard
 // - voir pour une version sans ul/li, mais visiblement complexe de changer le tag à la volé pour faire le tri une fois edit lancer
@@ -33,7 +34,6 @@ switch(@$_GET['mode'])
 	// AFFICHAGE de la page
 	default:
 		if(!$GLOBALS['domain']) exit;
-
 		?>
 		<section class="mw960p center">
 
@@ -45,81 +45,109 @@ switch(@$_GET['mode'])
 			txt('description');
 
 			//highlight_string(print_r($GLOBALS['content'], true));
-
 			?>
+			<p class="none isrequired"><?_e("Les champs marqués d'une <span class='red'>*</span> sont obligatoires.")?></p>
+
 			<article>
 
-				<ul id="formulaire">
+				<form id="formulaire">
 
-					<?php
-					function builder_array($builder_array, $level = 0)
-					{
-						global $fieldset;
+					<ul>
 
-						// Include les éléments du builder pour affichage
-						if(isset($builder_array) and is_array($builder_array))
-						foreach($builder_array[$level] as $index => $array)
+						<li class="exclude editable-hidden small grey">Ajouter vos champs au formulaire</li>
+
+						<?php
+						function builder_array($builder_array, $level = 0)
 						{
-							// print_r("=> ".$index." | ");
-							// if(is_array($array))
-							// {
-							// 	print_r($array);
-							// 	echo count($array)."<br>";
-							// }
+							global $fieldset;
 
-							// if(is_array($array) and count($array) > 1) 
-							// {
-							// 	//builder_array($array);
-							// 	//break;
-							// }
-							// else
+							// Include les éléments du builder pour affichage
+							if(isset($builder_array) and is_array($builder_array))
+							foreach($builder_array[$level] as $index => $array)
 							{
-								// init les clé
-								if(is_array($array))// Si tableau d'éléments
+								// print_r("=> ".$index." | ");
+								// if(is_array($array))
+								// {
+								// 	print_r($array);
+								// 	echo count($array)."<br>";
+								// }
+
+								// if(is_array($array) and count($array) > 1) 
+								// {
+								// 	//builder_array($array);
+								// 	//break;
+								// }
+								// else
 								{
-									//$GLOBALS['editkey'] = trim(key($array), "key");
-									$current = current($array);
+									// init les clé
+									if(is_array($array))// Si tableau d'éléments
+									{
+										//$GLOBALS['editkey'] = trim(key($array), "key");
+										$current = current($array);
+									}
+									else// Si un seul élément
+									{
+										$GLOBALS['editkey'] = trim($index, "key");// Clean la clé
+										$level = trim($index, "key");// Niveau de profondeur
+										$current = $array;// index courant
+									}
+
+									// print_r("index:".$index." | key:".$GLOBALS['editkey']." ");
+									// print_r($array);
+									// print_r("|current:".$current);
+
+									// Insert l'élément
+									include($_SERVER['DOCUMENT_ROOT'] . $GLOBALS['path']."theme/".$GLOBALS['theme']."/tpl/formulaire/".$current.".php");
+
+									// pour l'ajout d'élément builder
+									if(isset($GLOBALS['editkey']) and isset($_SESSION['editkey']) and $GLOBALS['editkey'] > $_SESSION['editkey']) 
+										$_SESSION['editkey'] = $GLOBALS['editkey'];
 								}
-								else// Si un seul élément
-								{
-									$GLOBALS['editkey'] = trim($index, "key");// Clean la clé
-									$level = trim($index, "key");// Niveau de profondeur
-									$current = $array;// index courant
-								}
-
-								// print_r("index:".$index." | key:".$GLOBALS['editkey']." ");
-								// print_r($array);
-								// print_r("|current:".$current);
-
-								// Insert l'élément
-								include($_SERVER['DOCUMENT_ROOT'] . $GLOBALS['path']."theme/".$GLOBALS['theme']."/tpl/formulaire/".$current.".php");
-
-								// pour l'ajout d'élément builder
-								if(isset($GLOBALS['editkey']) and isset($_SESSION['editkey']) and $GLOBALS['editkey'] > $_SESSION['editkey']) 
-									$_SESSION['editkey'] = $GLOBALS['editkey'];
 							}
 						}
-					}
 
-					if(isset($GLOBALS['content']['builder']))
-						builder_array($GLOBALS['content']['builder']);
-					?>
+						if(isset($GLOBALS['content']['builder']))
+							builder_array($GLOBALS['content']['builder']);
+						?>
 
-					<!-- Pour initialiser la possibilité d'imbrication -->
-					<li aria-hidden="true" class="none">
-						<fieldset>
-							<legend></legend>
-							<ul class="fieldset"><li></li></ul>
-						</fieldset>
-					</li>
+						<!-- Pour initialiser la possibilité d'imbrication @todo voir si toujours utile avec le nouveau sortable !!! none -->						
+						<li aria-hidden="true" class="none">
+							<fieldset>
+								<legend></legend>
+								<ul class="fieldset"><li></li></ul>
+							</fieldset>
+						</li>
 
-				</ul>
+					</ul>
+
+
+					<!-- Bouton envoyer -->
+					<button type="submit" id="send" class="bt">
+						<?php _e("Send")?>
+					</button>
+
+
+					<!-- RGPB -->
+					<?php txt('texte-rgpd', 'mtl')?>
+
+					<input type="hidden" name="rgpd_text" value="<?=htmlspecialchars(@$GLOBALS['content']['rgpd']);?>">
+
+
+					<input type="hidden" name="nonce_formulaire" value="<?=nonce("nonce_formulaire");?>">
+
+				</form>
 
 			</article>
 
 			<script>
 			$(function()
 			{
+				// Il y a des champs requis
+				if($("#formulaire .required").length) $(".isrequired").show();
+
+				// Si texte rgpd, on le lie au bouton d'envoi
+				if($("#texte-rgpd").text()) $("#send").attr("aria-describedby","texte-rgpd");
+
 				// Parcours les radio/checkbox
 				$("#formulaire input[type='radio'], #formulaire input[type='checkbox']").each(function() 
 				{
@@ -180,32 +208,36 @@ switch(@$_GET['mode'])
 
 
 			#builder {
-				box-shadow: -1px 0 3px rgb(0 0 0 / 30%);
+				box-shadow: 1px 1px 3px rgb(0 0 0 / 30%);
 				background-color: rgba(240, 240, 240, 1);
 				border-radius: 5px;
 				position: fixed;
-				top: 50px;
-				right: 0;
+				top: 45px;
+				right: 5px;
 				z-index: 10;
 				padding: 0;
 				transition: background-color .3s linear;
 				animation: slide-up .3s 1 ease-out;
 			}
 			/* #builder:hover { background-color: rgba(240, 240, 240, 0.95); } */
-				#builder li {
+				#builder li:not(.nodrag) {
 					background-color: rgba(61, 128, 179, 0.05);
 					border: 1px dotted rgba(61, 128, 179, 0.2);
 					border-radius: 5px;
 					text-align: left;
+					/* cursor: move; */
 				}
 
 				/* .lucide [data-builder] { position: relative; } */
+
+				.allowed { background-color: #cff0f2; }
+				.notallowed { background-color: #9e1e1e45; }
 
 
 			[data-builder] .fa-cancel { font-size: 1.4rem; }
 
 
-			#formulaire li:not(.exclude), #builder li {
+			#formulaire li:not(.exclude), #builder li:not(.nodrag) {
 				/* display: block;
 				margin: 5px;
 				padding: 5px;
@@ -222,7 +254,7 @@ switch(@$_GET['mode'])
 					margin: 0;
 					padding: 0;
 					height: 30px;
-					border: 1px solid red; 
+					border: 1px dashed #008891; 
 				}
 					#formulaire li.placeholder:before {
 						position: absolute;
@@ -251,7 +283,8 @@ switch(@$_GET['mode'])
 		</style>
 
 
-		<ul id="builder" class="unstyled tc">
+		<ul id="builder" class="unstyled tc small">
+			<li class="nodrag bold mtt mlm mrm pointer">Liste des éléments à ajouter <i class="fa fa-resize-small grey"></i></li>
 			<?php
 			// Liste les elements du builder - boucle dossier builder
 			$dir = $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['path']."theme/".$GLOBALS['theme']."/tpl/formulaire/";
@@ -288,169 +321,141 @@ switch(@$_GET['mode'])
 		<!-- <a href='javascript:move_builder();' class="bt-move-builder" title="Déplacer les éléments">Déplacer <i class='fa fa-fw fa-move big'></i></a> -->
 
 
-		<!-- <script src='<?=$GLOBALS['path']."theme/".$GLOBALS['theme'];?>/admin/jquery-sortable.min.js'></script> -->
 		<script src='<?=$GLOBALS['path']."theme/".$GLOBALS['theme'];?>/admin/jquery-mjs.nestedSortable.js'></script>
 
 		<script>
-			// Fonction pour trié les éléments du formulaire
-			function sorter()
-			{
-				// if($(".tpl-formulaire .fieldset").length > 0)
-				// 	selecter = $(".tpl-formulaire .fieldset");
-				// else 
-				// 	selecter = $("#formulaire");
-
-				// console.log("sorter", selecter);
-
-				var oldContainer;
-
-				// Déplacement dans les fieldset + ajout depuis le builder
-				$("#formulaire").sortable({
-					group: 'connected',
-					handle: ".fa-move",
-					//exclude: '.exclude',
-
-					// afterMove: function (placeholder, container) {
-					// 	if(oldContainer != container)
-					// 	{
-					// 		if(oldContainer) oldContainer.el.removeClass("active");
-
-					// 		container.el.addClass("active");
-
-					// 		oldContainer = container;
-					// 	}
-					// },
-					
-					// Duplique l'item draggé depuit la liste de choix
-					onDragStart: function ($item, container, _super) {
-						
-						if(!container.options.drop) 
-							$item.clone().insertAfter($item);
-
-						_super($item, container);
-
-					},
-
-					// Inject l'élément de formulaire demandé
-					onDrop: function  ($item, container, _super) {
-						//console.log("item", $($item).data("file"));
-						//console.log("container", container);
-
-						//container.el.removeClass("active");
-
-						// Execute l'action drop
-						_super($item, container);
-						
-						// Si demande d'injection de nouvel élément de formulaire
-						if($($item).data("file") != undefined)
-						$.ajax(
-						{
-							type: "POST",
-							url: path+"theme/"+theme+"/tpl/formulaire.php?mode=add",
-							data: {
-								"file": $($item).data("file"),
-								"nonce": $("#nonce").val()// Pour la signature du formulaire
-							},
-							success: function(html)
-							{
-								// Unbind les events d'edition
-								$(".editable").off();
-								$(".editable-media").off(".editable-media");
-								$(".editable-href").off(".editable-href");
-
-								// Insertion du contenu éditable
-								$($item).replaceWith(html);
-
-								// Ajout de l'outil de suppression et déplacement
-								add_tools();
-
-								// Relance les events d'edition
-								editable_event();
-								editable_media_event();
-								editable_href_event();
-								editable_bg_event();
-
-								// Si tri fieldset on re-init le tri
-								var array_fieldset = ["fieldset.php", "radio.php", "checkbox.php"];
-								if($.inArray($($item).data("file"), array_fieldset) !== -1){
-									console.log("re-init")
-									unsorter();
-									sorter();
-								}
-							}
-						});
-					},
-				});
-				
-
-				// Déplacement des éléments du formulaire global
-				//if($(".tpl-formulaire .fieldset").length > 0)
-				// {
-				// 	console.log("#formulaire")
-				// 	$(".tpl-formulaire .fieldset").sortable({
-				// 		group: 'connected',
-				// 	});
-				// }
-				
-				
-				// Déplacement des éléments du builder pour ajouter dans le formulaire
-				$("#builder").sortable({
-					group: 'connected',
-					drop: false
-				});
-			}
-
-
-			// Désactive le tri
-			function unsorter() 
-			{
-				console.log("unsorter");
-
-				// if($(".tpl-formulaire .fieldset").length > 0)
-				// 	$(".fieldset").sortable("destroy");
-
-				//if($("#formulaire").length > 0)
-					$("#formulaire").sortable("destroy");
-
-				$("#builder").sortable("destroy");
-			}
-
-
-
 			$(function()
 			{
 				// Supprime les <filedset> pour pouvoir faire les tris
-				$('fieldset').contents().unwrap();
+				//$('fieldset').contents().unwrap();
 
+
+				// Réduit le menu des éléments disponible
+				$("#builder .nodrag").on("click", function() { 
+					$("#builder li:not(.nodrag)").slideToggle();
+				});
+				
 
 				// DÉPLACEMENT & AJOUT d'un élément
 				// Ajout d'une zone de drag pour chaque élément du builder
-				$("#builder li").prepend("<i class='fa fa-move'></i>");//[data-builder],
+				$("#builder li").not(".nodrag").prepend("<i class='fa fa-move'></i>");//[data-builder],
+
 
 				// Tri
-				//sorter();
-
-				// $("#formulaire").nestedSortable({
-				// 	//connectWith: '#builder',
-				// 	listType: 'ul',
-				// 	//handle: '.fa-move',
-				// 	items: 'li',
-				// 	//placeholder: 'placeholder',   
-				// 	//maxLevels: 2,      
-				// 	//opacity: .5,
-				// 	//protectRoot: true,
-				// });
-
-				$('#formulaire').nestedSortable({
+				// Déplacement des éléments dans le formulaire, avec imbrication
+				$('#formulaire ul').nestedSortable({
 					listType: 'ul',
 					items: 'li',
 					handle: '.fa-move',
 					placeholder: 'placeholder',
+					isTree: true,// stabilise les déplacements
+					tolerance: "pointer",
+
+					//maxLevels: 3,
 					//toleranceElement: '> div'
+					isAllowed: function (placeholder, placeholderParent, currentItem)
+					{						
+						//console.log(placeholderParent)
+						//console.log(currentItem)
+						//console.log(placeholderParent.data("builder"))
+
+						// Autorise le drop que si c'est un filedset
+						//!placeholderParent.hasClass("exclude")
+						if(!placeholderParent || placeholderParent[0].nodeName == "FIELDSET")
+						{
+							$(currentItem).removeClass("notallowed").addClass("allowed");
+							return true;
+						}
+						else 
+						{
+							$(currentItem).removeClass("allowed").addClass("notallowed");
+							return false;
+						}
+					}
+				});
+
+				// Drag&drop Depuis la liste des éléments disponibles vers le formulaire
+				$("#builder li").draggable({
+					connectToSortable: "#formulaire ul",
+					handle: ".fa-move",
+					helper: "clone",
+					//revert: "invalid",// retourne à l'emplacement initial si pas dropé
+					scrollSensitivity: 100,// distance haut et bas à la quel on déclanche le scrooling
+				});
+
+				// Quand on drop un élément depuis la liste des éléments disponibles
+				$("#formulaire ul").droppable({
+					//accept: "#builder li",
+					drop: function(event, ui)
+					{
+						console.log("drop", ui)
+
+						// L'élément en cours
+						$item = ui.draggable;
+
+						// Si élément zone non droppable on supp l'élément
+						if($($item).hasClass("notallowed") && $($item).data("file")) 
+							$($item).remove();
+						else
+						{
+							// Clean les class lors des déplacement d'élément déjà posé
+							$($item).removeClass("allowed notallowed");
+
+							// Si demande d'injection de nouvel élément de formulaire
+							if($($item).data("file") != undefined)
+							{
+								console.log("inject")
+
+								$.ajax(
+								{
+									type: "POST",
+									url: path+"theme/"+theme+"/tpl/formulaire.php?mode=add",
+									data: {
+										"file": $($item).data("file"),
+										"nonce": $("#nonce").val()// Pour la signature du formulaire
+									},
+									success: function(html)
+									{
+										// Unbind les events d'edition
+										$(".editable").off();
+										$(".editable-media").off(".editable-media");
+										$(".editable-href").off(".editable-href");
+
+										// Insertion du contenu éditable
+										$($item).replaceWith(html);
+
+										// Ajout de l'outil de suppression et déplacement
+										add_tools();
+
+										// Relance les events d'edition
+										editable_event();
+										editable_media_event();
+										editable_href_event();
+										editable_bg_event();
+
+										// Affiche les options
+										$(".editable-hidden").fadeIn();
+
+										//@todo supp car liée à l'ancienne méthode de sortable
+										// Si tri fieldset on re-init le tri
+										/*var array_fieldset = ["fieldset.php", "radio.php", "checkbox.php"];
+										if($.inArray($($item).data("file"), array_fieldset) !== -1){
+											console.log("re-init")
+											unsorter();
+											sorter();
+										}*/
+
+										tosave();// A sauvegarder
+									}
+								});
+							}
+						}
+					}
 				});
 
 
-				// TOOLS : Suppression & Déplacement
+
+				// TOOLS : Ajout des icons de Suppression & Déplacement
 				add_tools = function(that)
 				{
 					// On parcourt tous les éléments du formulaire
@@ -461,7 +466,7 @@ switch(@$_GET['mode'])
 							$(this).prepend("<i class='fa fa-move'></i>");
 
 						// Ajout de la suppression au survol d'un bloc, si pas déjà présent
-						if($(".fa-cancel", this).length <= 0)
+						if($("a .fa-cancel", this).length <= 0)
 							$(this).append("<a href='javascript:void(0)' onclick='remove_builder(this)'><i class='fa fa-cancel absolute none red pointer' style='top: 0; right: 0; z-index: 10;' title='"+ __("Remove") +"'></i></a>");
 					});
 				};
