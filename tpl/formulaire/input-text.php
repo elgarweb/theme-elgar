@@ -18,6 +18,14 @@
 	// Champ requis ?
 	if(@$GLOBALS['content']['required-'.$GLOBALS['editkey']] == true) $array['required'] = true;
 
+	// Message d'erreur
+	// Message par défaut
+	$errors = Array(
+		'email' => "E-mail invalide. Format attendu : dupont@exemple.com",
+	);
+	// Si message d'erreur on ajoute le lien à l'input
+	if(@$GLOBALS['content']['error-'.$GLOBALS['editkey']]) 
+		$array['aria-describedby'] = $GLOBALS['content']['error-'.$GLOBALS['editkey']];
 
 	// Type de champs et autocomplete ?
 	// 'autocomplete' = 'type'
@@ -36,7 +44,7 @@
 		'organization' => 'text',
 		'street-address' => 'text',
 		'postal-code' => 'text',
-		'bday' => 'text',
+		'bday' => 'date',
 	);	
 	//print_r($types);
 
@@ -101,11 +109,11 @@
 				);	
 				?>
 				<label for="type-<?=$GLOBALS['editkey']-2;?>">Type de champ</label>
-				<select id="type-<?=$GLOBALS['editkey']-2;?>" class="editable-select">
+				<select id="type-<?=$GLOBALS['editkey']-2;?>" data-id="<?=$GLOBALS['editkey']-2;?>" class="editable-select type">
 					<?php
 					foreach($types as $cle => $val)
 					{
-						echo'<option value="'.$cle.'"'.($type_value == $cle?' selected':'').'>'.$val.'</option>';
+						echo'<option value="'.$cle.'"'.($type_value == $cle?' selected':'').(isset($errors[$cle])?' data-error="'.$errors[$cle].'"':'').'>'.$val.'</option>';
 					}?>
 				</select>
 				
@@ -114,16 +122,12 @@
 		</details>
 
 	</div>
+
 	<?php
-	// type (influe sur l'autocomplete)
-	// autocomplete
-	// Message d'erreur par défaut en fonction du type
-
-	// placeholder => utile ??
-
-	// DONE !
-	// required
-
+	// Message d'erreur s'il en existe un
+	if(@$GLOBALS['content']['error-'.$GLOBALS['editkey']-2]) 
+		txt("error-".($GLOBALS['editkey']-2), array("tag" => "span"));
+	
 	//print_r($GLOBALS['content']);
 	//unset($GLOBALS['content'][($GLOBALS['editkey'])]);
 

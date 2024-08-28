@@ -145,6 +145,40 @@ switch(@$_GET['mode'])
 				// Il y a des champs requis
 				if($("#formulaire .required").length) $(".isrequired").show();
 
+				// Champs avec message d'erreur custom
+				$("#formulaire .type").on("change", function(event)
+				{
+					var text_error = $("option:selected", this).data('error');
+					var input_id = $(this).data('id');
+					var parent = $(this).parentsUntil('[data-builder="input-text"]').last();
+
+					if(text_error)
+					{
+						// Ajout d'un message d'erreur customisable
+						if(!parent.next(".text_error").length)
+						{
+							parent.after("<div class='text_error'>Message en cas d'erreur : <span class='editable red' id='error-"+input_id+"'>"+text_error+"</span></div>");
+
+							editable_event();
+						}
+
+						// On ajoute une focus sur le champs si invalide
+						// var email_from = document.getElementById("email-from");
+						// email_from.addEventListener("invalid", function() {
+						// 	email_from.setCustomValidity("texte")
+						// }, false);
+					}
+					else
+					{
+						// On supprime les messages d'erreur custom
+						if(parent.next(".text_error").length) parent.next(".text_error").remove();
+
+						// On retir le focus si champ invalide
+
+						// TODO VÉRIF LE SAVE DU CHAMPS D'ERREUR ET LE FOCUS EN CAS D'ERREUR EN MODE UTILISATION
+					}
+				});
+
 				// Si texte rgpd, on le lie au bouton d'envoi
 				if($("#texte-rgpd").text()) $("#send").attr("aria-describedby","texte-rgpd");
 
