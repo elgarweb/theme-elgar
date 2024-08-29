@@ -264,7 +264,7 @@ switch(@$_GET['mode'])
 
 				/* .lucide [data-builder] { position: relative; } */
 
-				.allowed { background-color: #cff0f2; }
+				.allowed { background-color: #cff2d5; }
 				.notallowed { background-color: #9e1e1e45; }
 
 
@@ -281,7 +281,7 @@ switch(@$_GET['mode'])
 				
 				border: 1px dashed #cccccc;
 				padding: 0.5rem;
-				margin: 0.5rem;
+				margin: 1rem;
 			}
 				#formulaire li.placeholder {
 					position: relative;

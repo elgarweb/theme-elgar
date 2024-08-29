@@ -9,10 +9,8 @@
 	<textarea id="textarea-<?=$GLOBALS['editkey']?>"></textarea>
 	
 	<?php
-	// Message d'erreur
-
-	// placeholder
 	// required
+	// maxlength
 
 	$GLOBALS['editkey']++;
 	?>

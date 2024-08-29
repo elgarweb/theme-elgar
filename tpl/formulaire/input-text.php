@@ -23,9 +23,8 @@
 	$errors = Array(
 		'email' => "E-mail invalide. Format attendu : dupont@exemple.com",
 	);
-	// Si message d'erreur on ajoute le lien à l'input
-	if(@$GLOBALS['content']['error-'.$GLOBALS['editkey']]) 
-		$array['aria-describedby'] = $GLOBALS['content']['error-'.$GLOBALS['editkey']];
+	// Si message d'erreur on ajoute le lien à l'input // Plus utilisé car on utilise les setCustomValidity
+	//if(@$GLOBALS['content']['error-'.$GLOBALS['editkey']]) $array['aria-describedby'] = 'error-'.$GLOBALS['editkey'];
 
 	// Type de champs et autocomplete ?
 	// 'autocomplete' = 'type'
@@ -126,13 +125,30 @@
 	<?php
 	// Message d'erreur s'il en existe un
 	if(@$GLOBALS['content']['error-'.$GLOBALS['editkey']-2]) 
-		txt("error-".($GLOBALS['editkey']-2), array("tag" => "span"));
+	{
+		$editkey_2 = $GLOBALS['editkey']-2;
+		?>
+		<div class='text_error editable-hidden'>Message en cas d'erreur : <?php
+		txt("error-".$editkey_2, array("tag" => "span", "class" => "red"));
+		?>
+		</div>
+		<script>
+			$(function()
+			{
+				// Message d'erreur en cas de mauvaise saisie du mail. Pour l'accessibilité
+				var error_<?=$editkey_2?> = document.getElementById("input-<?=$editkey_2?>");
+				error_<?=$editkey_2?>.addEventListener("invalid", function() {
+					error_<?=$editkey_2?>.setCustomValidity("<?=$GLOBALS['content']['error-'.$editkey_2]?>")
+				}, false);
+				error_<?=$editkey_2?>.addEventListener("input", function() {
+					error_<?=$editkey_2?>.setCustomValidity("");
+				}, false);
+			});
+		</script>
+		<?php
+	}
 	
 	//print_r($GLOBALS['content']);
-	//unset($GLOBALS['content'][($GLOBALS['editkey'])]);
-
-	//unset($GLOBALS['content']['txt-'.($GLOBALS['editkey']-2)]);
-	//unset($GLOBALS['content']['input-'.($GLOBALS['editkey']-1)]);
 	?>
 
 </li>
