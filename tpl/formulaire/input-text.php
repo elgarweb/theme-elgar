@@ -18,6 +18,20 @@
 	// Champ requis ?
 	if(@$GLOBALS['content']['required-'.$GLOBALS['editkey']] == true) $array['required'] = true;
 
+
+	// Format attendu
+	$formats = Array(
+		'date' => "Format attentu : jour/mois/année",
+		'datetime-local' => "Format attentu : jour/mois/année heure:minute",
+		'time' => "Format attentu : heure:minute",
+		'email' => "Format attendu : dupont@exemple.com",
+	);
+	// Format attendu, s'il en existe un
+	if(@$GLOBALS['content']['format-'.$GLOBALS['editkey']]) {
+		txt("format-".$GLOBALS['editkey'], array("tag" => "span", "placeholder" => "Format attendu", "class" => "text_format mrt italic"));
+		$GLOBALS['editkey'] = $GLOBALS['editkey']-1;
+	}
+
 	// Message d'erreur
 	// Message par défaut
 	$errors = Array(
@@ -26,10 +40,9 @@
 	// Si message d'erreur on ajoute le lien à l'input // Plus utilisé car on utilise les setCustomValidity
 	//if(@$GLOBALS['content']['error-'.$GLOBALS['editkey']]) $array['aria-describedby'] = 'error-'.$GLOBALS['editkey'];
 
-	// Type de champs et autocomplete ?
-	// 'autocomplete' = 'type'
-	// text, url, tel, email, date, time, datetime-local, number, password
-	// given-name (Le prénom), family-name (nom de famille), email, organization-title (titre du poste), organization (nom de l'entreprise/organisation), street-address (adresse postale), postal-code, bday (date de naissance complète), tel, url
+	// Type de champs + autocomplete | 'autocomplete' = 'type'
+	// Type : text, url, tel, email, date, time, datetime-local, number, password
+	// Autocomplete : given-name (Le prénom), family-name (nom de famille), email, organization-title (titre du poste), organization (nom de l'entreprise/organisation), street-address (adresse postale), postal-code, bday (date de naissance complète), tel, url
 
 	$types = Array(
 		'number' => false,
@@ -45,7 +58,6 @@
 		'postal-code' => 'text',
 		'bday' => 'date',
 	);	
-	//print_r($types);
 
 	$type_value = @$GLOBALS['content']['type-'.$GLOBALS['editkey']];
 	if(@$type_value != 'text')// Si ce n'est pas un champs texte simple
@@ -62,6 +74,7 @@
 		else
 			$array['type'] = $type_value;
 	}
+
 
 	//echo 'type_value: '.@$type_value." // ";
 	//echo 'types[type_value]: '.@$types[$type_value]." // ";
@@ -112,7 +125,7 @@
 					<?php
 					foreach($types as $cle => $val)
 					{
-						echo'<option value="'.$cle.'"'.($type_value == $cle?' selected':'').(isset($errors[$cle])?' data-error="'.$errors[$cle].'"':'').'>'.$val.'</option>';
+						echo'<option value="'.$cle.'"'.($type_value == $cle?' selected':'').(isset($errors[$cle])?' data-error="'.$errors[$cle].'"':'').(isset($formats[$cle])?' data-format="'.$formats[$cle].'"':'').'>'.$val.'</option>';
 					}?>
 				</select>
 				
@@ -123,7 +136,7 @@
 	</div>
 
 	<?php
-	// Message d'erreur s'il en existe un
+	// Message d'erreur, s'il en existe un
 	if(@$GLOBALS['content']['error-'.$GLOBALS['editkey']-2]) 
 	{
 		$editkey_2 = $GLOBALS['editkey']-2;

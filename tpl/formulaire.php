@@ -145,12 +145,15 @@ switch(@$_GET['mode'])
 				// Il y a des champs requis
 				if($("#formulaire .required").length) $(".isrequired").show();
 
-				// Champs avec message d'erreur custom
+				// Champs avec message d'erreur/format custom
 				$("#formulaire .type").on("change", function(event)
 				{
-					var text_error = $("option:selected", this).data('error');
 					var input_id = $(this).data('id');
 					var parent = $(this).parentsUntil('[data-builder="input-text"]').last();
+					
+					
+					// Message d'erreur
+					var text_error = $("option:selected", this).data('error');
 
 					if(text_error)
 					{
@@ -161,21 +164,33 @@ switch(@$_GET['mode'])
 
 							editable_event();
 						}
-
-						// On ajoute une focus sur le champs si invalide
-						// var email_from = document.getElementById("email-from");
-						// email_from.addEventListener("invalid", function() {
-						// 	email_from.setCustomValidity("texte")
-						// }, false);
 					}
 					else
 					{
 						// On supprime les messages d'erreur custom
-						if(parent.next(".text_error").length) parent.next(".text_error").remove();
+						if(parent.next(".text_error").length) 
+							parent.next(".text_error").remove();
+					}
 
-						// On retir le focus si champ invalide
 
-						// TODO VÉRIF LE SAVE DU CHAMPS D'ERREUR ET LE FOCUS EN CAS D'ERREUR EN MODE UTILISATION
+					// Format attendu
+					var text_format = $("option:selected", this).data('format');
+					var prev_input = parent.prev(".editable-input");
+
+					if(text_format)
+					{
+						prev_input.prev(".text_format").remove();
+
+						// Ajout d'un message de format attendu customisable
+						prev_input.before("<div class='text_format'>Message de format attendu : <span class='editable green' id='format-"+input_id+"'>"+text_format+"</span></div>");
+
+						editable_event();						
+					}
+					else
+					{
+						// On supprime les messages de format attendu custom
+						if(prev_input.prev(".text_format").length) 
+							prev_input.prev(".text_format").remove();
 					}
 				});
 
@@ -327,6 +342,7 @@ switch(@$_GET['mode'])
 				// Les tpl
 				$tpl_builder = array(
 					"h2" => "Titre niveau 2 (H2)",
+					"txt" => "Texte",
 				
 					"fieldset" => "Ensemble de champs (fieldset)",
 					"checkbox" => "Case à cocher (checkbox)",
