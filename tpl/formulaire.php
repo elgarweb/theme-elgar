@@ -454,7 +454,9 @@ switch(@$_GET['mode'])
 										$(".editable").off();
 										$(".editable-media").off(".editable-media");
 										$(".editable-href").off(".editable-href");
-
+										$(".editable-bg").off(".editable-bg");
+										$(".editable-checkbox, .lucide [for]").not(".lucide #admin-bar [for]").off();
+										
 										// Insertion du contenu éditable
 										$($item).replaceWith(html);
 
@@ -466,6 +468,7 @@ switch(@$_GET['mode'])
 										editable_media_event();
 										editable_href_event();
 										editable_bg_event();
+										editable_checkbox_event();
 
 										// Affiche les options
 										$(".editable-hidden").fadeIn();
