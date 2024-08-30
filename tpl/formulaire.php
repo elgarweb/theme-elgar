@@ -145,6 +145,55 @@ switch(@$_GET['mode'])
 				// Il y a des champs requis
 				if($("#formulaire .required").length) $(".isrequired").show();
 
+				// Champs avec message d'erreur/format custom
+				$("#formulaire .type").on("change", function(event)
+				{
+					var input_id = $(this).data('id');
+					var parent = $(this).parentsUntil('[data-builder="input-text"]').last();
+					
+					
+					// Message d'erreur
+					var text_error = $("option:selected", this).data('error');
+
+					if(text_error)
+					{
+						// Ajout d'un message d'erreur customisable
+						if(!parent.next(".text_error").length)
+						{
+							parent.after("<div class='text_error'>Message en cas d'erreur : <span class='editable red' id='error-"+input_id+"'>"+text_error+"</span></div>");
+
+							editable_event();
+						}
+					}
+					else
+					{
+						// On supprime les messages d'erreur custom
+						if(parent.next(".text_error").length) 
+							parent.next(".text_error").remove();
+					}
+
+
+					// Format attendu
+					var text_format = $("option:selected", this).data('format');
+					var prev_input = parent.prev(".editable-input");
+
+					if(text_format)
+					{
+						prev_input.prev(".text_format").remove();
+
+						// Ajout d'un message de format attendu customisable
+						prev_input.before("<div class='text_format'>Message de format attendu : <span class='editable green' id='format-"+input_id+"'>"+text_format+"</span></div>");
+
+						editable_event();						
+					}
+					else
+					{
+						// On supprime les messages de format attendu custom
+						if(prev_input.prev(".text_format").length) 
+							prev_input.prev(".text_format").remove();
+					}
+				});
+
 				// Si texte rgpd, on le lie au bouton d'envoi
 				if($("#texte-rgpd").text()) $("#send").attr("aria-describedby","texte-rgpd");
 
@@ -230,7 +279,7 @@ switch(@$_GET['mode'])
 
 				/* .lucide [data-builder] { position: relative; } */
 
-				.allowed { background-color: #cff0f2; }
+				.allowed { background-color: #cff2d5; }
 				.notallowed { background-color: #9e1e1e45; }
 
 
@@ -247,7 +296,7 @@ switch(@$_GET['mode'])
 				
 				border: 1px dashed #cccccc;
 				padding: 0.5rem;
-				margin: 0.5rem;
+				margin: 1rem;
 			}
 				#formulaire li.placeholder {
 					position: relative;
@@ -293,6 +342,7 @@ switch(@$_GET['mode'])
 				// Les tpl
 				$tpl_builder = array(
 					"h2" => "Titre niveau 2 (H2)",
+					"txt" => "Texte",
 				
 					"fieldset" => "Ensemble de champs (fieldset)",
 					"checkbox" => "Case à cocher (checkbox)",
@@ -420,7 +470,9 @@ switch(@$_GET['mode'])
 										$(".editable").off();
 										$(".editable-media").off(".editable-media");
 										$(".editable-href").off(".editable-href");
-
+										$(".editable-bg").off(".editable-bg");
+										$(".editable-checkbox, .lucide [for]").not(".lucide #admin-bar [for]").off();
+										
 										// Insertion du contenu éditable
 										$($item).replaceWith(html);
 
@@ -432,6 +484,7 @@ switch(@$_GET['mode'])
 										editable_media_event();
 										editable_href_event();
 										editable_bg_event();
+										editable_checkbox_event();
 
 										// Affiche les options
 										$(".editable-hidden").fadeIn();

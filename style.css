@@ -800,6 +800,7 @@ header section:first-of-type { font-size: 1.4rem; }
 		/* border: 1px dashed #a5a5a5; */
 		margin: 0.2rem;
 		padding: 0.5rem 0.5rem;
+		clear: both;
 	}
 		#formulaire li::before { content: ''; }
 
