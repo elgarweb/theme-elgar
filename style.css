@@ -809,7 +809,7 @@ header section:first-of-type { font-size: 1.4rem; }
 		font-size: inherit;
 	}
 
-	#formulaire .required { color: #9f2d2d; }
+	#formulaire .required:not(ul) { color: #9f2d2d; }
 
 
 /* FOOTER */
