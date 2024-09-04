@@ -6,6 +6,7 @@
 - finalisé le tri et connexion entre les élément et le formulaire
 - faire des test massif sur la modification et suppression d'élément
 - tester depuis une page vide
+- qd supp élément on doit informé de save
 *****/
 
 /**** Plus tard
@@ -600,7 +601,7 @@ switch(@$_GET['mode'])
 										$(".editable-href").off(".editable-href");
 										$(".editable-bg").off(".editable-bg");
 										$(".editable-checkbox, .lucide [for]").not(".lucide #admin-bar [for]").off();
-										
+
 										// Insertion du contenu éditable
 										$($item).replaceWith(html);
 

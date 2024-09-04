@@ -11,14 +11,24 @@
 		<?}?>
 	</label>
 
-	<!-- Input -->
+	<select id="select-<?=$GLOBALS['editkey'];?>"<?=(@$GLOBALS['content']['required-'.$GLOBALS['editkey']] == true?' required':'')?>>
+		<option></option>
+		<?php
+		// Des valeurs dans le input ? => on créer un tableau avec
+		if(isset($GLOBALS['content']['input-'.$GLOBALS['editkey']])) 
+			$array = explode(";",$GLOBALS['content']['input-'.$GLOBALS['editkey']]);
+
+		if(is_array($array))
+		foreach($array as $cle => $val)
+		{
+			echo'<option value="'.$cle.'">'.trim(strip_tags($val)).'</option>';
+		}
+		?>
+	</select>
+
+	<!-- Input pour les données du select -->
 	<?php
-	$array = null;
-
-	// Champ requis ?
-	if(@$GLOBALS['content']['required-'.$GLOBALS['editkey']] == true) $array['required'] = true;
-
-	select('', $array);
+	input('', array("class" => "editable-hidden", "placeholder" => "Valeur 1; Valeur 2; Valeur 3..."));
 	?>
 
 	<!-- Option -->
