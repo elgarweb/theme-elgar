@@ -1,60 +1,62 @@
 <?php 
-// Utilise https://johnny.github.io/jquery-sortable/
 
-// Ajouter ces fichiers dans votre dossier "tpl"
-//// Ajouter un dossier builder/ dans le dossier tpl/
-//// y déposer des fichiers .php avec des sections éditables
+/**** @todo
+- lors du drag&drop masquer la toolbox et éviter les erreurs de memo_focus
+- le legend du fieldset n'a pas le bon id lors de la récup...
+- finalisé le tri et connexion entre les élément et le formulaire
+- faire des test massif sur la modification et suppression d'élément
+- tester depuis une page vide
+- qd supp élément on doit informé de save
+*****/
 
-//@todo si choix tpl builder on regarde dans la base de donnée les pages qui l'uilisent et propose de reprendre la tpl
-//@todo tous les attributs de l'édition ne sont pas dans les fonctions _event du coup l'edition n'est pas complete lors de l'ajout à la volé d'un élément editable
-
-// @todo
-// - corriger la construction du formulaire pour faire fonctionner les éléments imbriqué dans les fieldsets. voir si besoin lors de la sauvegarde et après la lecture du json
-// - ajout filedset editable
-// - checkbox réel en input et pas en interpréter
-// - ajout de radio dans un filedset déjà existant
-// - ajout js sort imbricable
-// - savegarde avec 2 profondeurs en cas de champs dans un fieldset
-// - restitution en fonction des imbrications avec les fieldset
-// - tableau avec nom compréhensible des tpl dans le dossier builder
-// - lors du drag&drop masquer la toolbox et éviter les erreurs de memo_focus
-// - ne pas rendre supprimable le premier li aria-hidden des fieldsets
-// - save imbriquer à l'infinit
-// - lecture imbriquer à l'infinit
-// le legend du fieldset n'a pas le bon id lors de la récup...
-// @finalisé le tri et connexion entre les élément et le formulaire
-// faire des test massif sur la modification et suppression d'élément
-// - ajout des tag <form> avec id
-
-// Plus tard
-// - voir pour une version sans ul/li, mais visiblement complexe de changer le tag à la volé pour faire le tri une fois edit lancer
+/**** Plus tard
+- voir pour une version sans ul/li, mais visiblement complexe de changer le tag à la volé pour faire le tri une fois edit lancer
+- si choix tpl builder on regarde dans la base de donnée les pages qui l'uilisent et propose de reprendre la tpl
+- tous les attributs de l'édition ne sont pas dans les fonctions _event du coup l'edition n'est pas complete lors de l'ajout à la volé d'un élément editable
+*****/
 
 switch(@$_GET['mode'])
 {
 	// AFFICHAGE de la page
 	default:
 		if(!$GLOBALS['domain']) exit;
+
+		// Encrypte le mail pour permettre des envois de mail que vers des mails ajoutés par l'admin
+		$GLOBALS['content']['email-hash'] = hash("sha256", base64_decode(@$GLOBALS['content']['email-to']) . $GLOBALS['pub_hash']);
 		?>
+
 		<section class="mw960p center">
 
-			<?php 
-			include('theme/'.$GLOBALS['theme'].'/ariane.php');
-
-			h1('title');
-
-			txt('description');
-
-			//highlight_string(print_r($GLOBALS['content'], true));
-			?>
-			<p class="none isrequired"><?_e("Les champs marqués d'une <span class='red'>*</span> sont obligatoires.")?></p>
+			<?php include('theme/'.$GLOBALS['theme'].'/ariane.php'); ?>
 
 			<article>
 
-				<form id="formulaire">
+				<?php
+				h1('title');
+
+				txt('description');
+
+				//highlight_string(print_r($GLOBALS['content'], true));
+				?>
+				<p class="none isrequired"><?_e("Les champs marqués d'une <span class='red'>*</span> sont obligatoires.")?></p>
+
+				<form id="formulaire" method="post">
+
+					<div class="editable-hidden small grey mtm mbm">
+
+						<label for="email-to"><?php _e("Recipient email")?> (contact@test.fr)<span class="red">*</span> :</label>
+						
+						<div>
+						<?input("email-to", array('name' => 'email-to', 'placeholder' => __("Recipient email")));?>
+						<?input("email-hash", array('name' => 'email-hash', 'type' => 'hidden', 'class' => 'hidden'));?>
+						</div>
+
+					</div>
+
 
 					<ul>
 
-						<li class="exclude editable-hidden small grey">Ajouter vos champs au formulaire</li>
+						<li class="exclude editable-hidden small grey">Ajouter vos champs au formulaire :</li>
 
 						<?php
 						function builder_array($builder_array, $level = 0)
@@ -140,88 +142,213 @@ switch(@$_GET['mode'])
 			</article>
 
 			<script>
-			$(function()
-			{
-				// Il y a des champs requis
-				if($("#formulaire .required").length) $(".isrequired").show();
+				// Titre de la page en cours
+				origin_title = document.title;
 
-				// Champs avec message d'erreur/format custom
-				$("#formulaire .type").on("change", function(event)
+				// Pour rétablir le fonctionnement du formulaire
+				function activation_form(){
+					desactive = false;
+
+					$("#formulaire #send .fa-cog").removeClass("fa-spin fa-cog").addClass("fa-mail-alt");
+
+					// Activation des champs du formulaire
+					$("#formulaire input, #formulaire textarea, #formulaire button").removeClass("disabled");// .attr("disabled", false) .attr("readonly", false) aria-disabled disabled
+
+					// On peut soumettre le formulaire avec la touche entrée
+					//$("#formulaire").on("submit", function(event) { send_mail(event) });
+					$("#formulaire button").attr("aria-disabled", false);
+				}
+
+				desactive = false;
+				function send_mail(event)
 				{
-					var input_id = $(this).data('id');
-					var parent = $(this).parentsUntil('[data-builder="input-text"]').last();
-					
-					
-					// Message d'erreur
-					var text_error = $("option:selected", this).data('error');
+					event.preventDefault();					
 
-					if(text_error)
+					if($("#question").val()=="" || $("#rgpdcheckbox").prop("checked") == false)
+						error(__("Thank you for completing all the required fields!"));
+					else if(!desactive)
 					{
-						// Ajout d'un message d'erreur customisable
-						if(!parent.next(".text_error").length)
+						desactive = true;
+
+						// Icone envoi en cours
+						$("#formulaire #send .fa-mail-alt").removeClass("fa-mail-alt").addClass("fa-spin fa-cog");
+
+						// Désactive le formulaire
+						$("#formulaire input, #formulaire textarea, #formulaire button").addClass("disabled");// .attr("disabled", true) .attr("readonly", true) aria-disabled disabled
+
+						// Désactive le bouton submit (pour les soumissions avec la touche entrée)
+						//$("#formulaire").off("submit");
+						$("#formulaire button").attr("aria-disabled", true);// => ne permet pas le focus sur le bt une fois envoyer
+
+						$.ajax(
+							{
+								type: "POST",
+								url: path+"theme/"+theme+(theme?"/":"")+"tpl/formulaire.php?mode=send-mail",
+								data: $("#formulaire").serializeArray(),
+								success: function(html){ $("body").append(html); }
+							});
+					}
+				}
+
+				$(function()
+				{
+					// Champs avec message d'erreur/format custom
+					$("#formulaire .type").on("change", function(event)
+					{
+						var input_id = $(this).data('id');
+						var parent = $(this).parentsUntil('[data-builder="input-text"]').last();
+						
+						
+						// Message d'erreur
+						var text_error = $("option:selected", this).data('error');
+
+						if(text_error)
 						{
-							parent.after("<div class='text_error'>Message en cas d'erreur : <span class='editable red' id='error-"+input_id+"'>"+text_error+"</span></div>");
+							// Ajout d'un message d'erreur customisable
+							if(!parent.next(".text_error").length)
+							{
+								parent.after("<div class='text_error'>Message en cas d'erreur : <span class='editable red' id='error-"+input_id+"'>"+text_error+"</span></div>");
 
-							editable_event();
+								editable_event();
+							}
 						}
-					}
-					else
-					{
-						// On supprime les messages d'erreur custom
-						if(parent.next(".text_error").length) 
-							parent.next(".text_error").remove();
-					}
+						else
+						{
+							// On supprime les messages d'erreur custom
+							if(parent.next(".text_error").length) 
+								parent.next(".text_error").remove();
+						}
 
 
-					// Format attendu
-					var text_format = $("option:selected", this).data('format');
-					var prev_input = parent.prev(".editable-input");
+						// Format attendu
+						var text_format = $("option:selected", this).data('format');
+						var prev_input = parent.prev(".editable-input");
 
-					if(text_format)
-					{
-						prev_input.prev(".text_format").remove();
-
-						// Ajout d'un message de format attendu customisable
-						prev_input.before("<div class='text_format'>Message de format attendu : <span class='editable green' id='format-"+input_id+"'>"+text_format+"</span></div>");
-
-						editable_event();						
-					}
-					else
-					{
-						// On supprime les messages de format attendu custom
-						if(prev_input.prev(".text_format").length) 
+						if(text_format)
+						{
 							prev_input.prev(".text_format").remove();
-					}
-				});
 
-				// Si texte rgpd, on le lie au bouton d'envoi
-				if($("#texte-rgpd").text()) $("#send").attr("aria-describedby","texte-rgpd");
+							// Ajout d'un message de format attendu customisable
+							prev_input.before("<div class='text_format'>Message de format attendu : <span class='editable green' id='format-"+input_id+"'>"+text_format+"</span></div>");
 
-				// Parcours les radio/checkbox
-				$("#formulaire input[type='radio'], #formulaire input[type='checkbox']").each(function() 
-				{
-					// Affecte les id des radio/checkbox au for des labels
-					$(this).next("label").attr('for', $(this).attr("id"));
+							editable_event();						
+						}
+						else
+						{
+							// On supprime les messages de format attendu custom
+							if(prev_input.prev(".text_format").length) 
+								prev_input.prev(".text_format").remove();
+						}
+					});
 
-					// Si radio on affect un name commun en fonction du fieldset
-					if($(this).attr("type") == "radio") 
+
+					// Si texte rgpd, on le lie au bouton d'envoi
+					if($("#texte-rgpd").text()) $("#send").attr("aria-describedby","texte-rgpd");
+
+
+					// Fieldset radio required
+					$("#formulaire .fieldset .exclude .editable-checkbox.yes").each(function() 
 					{
-						var fieldset = $(this).closest(".fieldset").data("fieldset");
-						if(fieldset != undefined) $(this).attr("name", "fieldset-"+ fieldset);
-					}
-				});
+						// Met la radio en required
+						$(this).parentsUntil("ul").nextAll("[data-builder=radio]").children("input[type='radio']").attr("required", true)
+					});
 
-				// Mode édition
-				edit.push(function()
-				{
-					$.ajax(
+
+					// Fieldset checkbox required
+					$("#formulaire .fieldset .exclude .editable-checkbox.yes").each(function() 
 					{
-						type: "POST",
-						url: path+"theme/"+theme+"/tpl/formulaire.php?mode=edit",
-						success: function(html){ $("body").append(html); }
+						// Ajout sur le parent class required pour simplifier le controle des checkbox
+						$(this).parentsUntil("ul").parent().addClass("required");
+
+						// Recherche des checkbox dans le fieldset
+						var that = $(this).parentsUntil("ul").nextAll("[data-builder=checkbox]").children("input[type='checkbox']");
+
+						// Si checkbox
+						if(that.length > 0)
+						{
+							// Met les checkbox en required
+							that.attr("required", true);
+
+							// Message d'erreur personnalisé sur la 1er checkbox seulement
+							that[0].addEventListener("invalid", function() {
+								that[0].setCustomValidity("Veuillez cocher au moins une case si vous souhaitez continuer.")
+							}, false);
+						}
+					});
+
+					// Action au click sur une checkbox
+					$("#formulaire .required > li input[type='checkbox']").on("click", function() 
+					{
+						// On remonte au parent pour changer l'état de toutes les checkbox
+						var that = $(this).parentsUntil("ul").parent();
+						
+						if($(this).prop("checked") == true)//:checkbox:checked
+						{
+							// On passe toutes les checkbox en required=off
+							$("input[type='checkbox']", that).attr("required", false);
+
+							// On retire le message d'erreur custom sur la 1er checkbox
+							$("input[type='checkbox']:first", that)[0].setCustomValidity("");
+						}
+						else 
+						{
+							// On remet en required si pas de checkbox checked
+							if($("input[type='checkbox']:checked", that).length == 0)
+								$("input[type='checkbox']", that).attr("required", true);
+						}
+					});
+
+					
+					// Parcours les radio/checkbox
+					$("#formulaire input[type='radio'], #formulaire input[type='checkbox']").each(function() 
+					{
+						// Affecte les id des radio/checkbox au for des labels
+						$(this).next("label").attr('for', $(this).attr("id"));
+
+						// Si radio on affect un name commun en fonction du fieldset
+						if($(this).attr("type") == "radio") 
+						{
+							var fieldset = $(this).closest(".fieldset").data("fieldset");
+							if(fieldset != undefined) $(this).attr("name", "fieldset-"+ fieldset);
+						}
+					});
+
+
+					// Affichage informatif s'il y a des champs requis
+					if($("#formulaire .required").length) $(".isrequired").show();
+
+
+					// Soumettre le formulaire
+					$("#formulaire").submit(function(event)
+					{
+						send_mail(event)
+					});
+
+
+					// Avant la sauvegarde
+					before_save.push(function() {
+						// Encode
+						if(data["content"]["email-to"] != undefined)
+							data["content"]["email-to"] = btoa(data["content"]["email-to"]);
+					});
+
+					// Mode édition
+					edit.push(function()
+					{
+						// Décode
+						$("#email-to").val(function(index, value) {
+							if(value) return atob(value);
+						});
+
+						// Outil d'édition du formulaire
+						$.ajax(
+						{
+							type: "POST",
+							url: path+"theme/"+theme+"/tpl/formulaire.php?mode=edit",
+							success: function(html){ $("body").append(html); }
+						});
 					});
 				});
-			});
 			</script>
 
 		</section>
@@ -326,7 +453,7 @@ switch(@$_GET['mode'])
 			.active { border: 1px solid #333333; }
 
 			.exclude .fa-move,
-			.exclude .fa-cancel
+			.exclude .fa-cancel:not(.editable-checkbox)
 			{ display: none; }
 			
 		</style>
@@ -347,7 +474,9 @@ switch(@$_GET['mode'])
 					"fieldset" => "Ensemble de champs (fieldset)",
 					"checkbox" => "Case à cocher (checkbox)",
 					"radio" => "Case d'option (radio)",
-					
+
+					"select" => "Liste déroulante (select)",
+
 					"textarea" => "Grande zone de texte (textarea)",
 					"input-text" => "Champ texte simple (text)",
 				);
@@ -472,7 +601,7 @@ switch(@$_GET['mode'])
 										$(".editable-href").off(".editable-href");
 										$(".editable-bg").off(".editable-bg");
 										$(".editable-checkbox, .lucide [for]").not(".lucide #admin-bar [for]").off();
-										
+
 										// Insertion du contenu éditable
 										$($item).replaceWith(html);
 

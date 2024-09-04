@@ -9,11 +9,22 @@
 		$fieldset = $GLOBALS['editkey'];
 		?>
 		
-		<legend><?php txt('', array('tag' => 'span', 'placeholder' => "Légende de l'ensemble de champs"))?></legend>
+		<legend>
+			<?php txt('', array('tag' => 'span', 'placeholder' => "Légende de l'ensemble de champs"))?>
+
+			<?if(@$GLOBALS['content']['required-'.$GLOBALS['editkey']-1] == true){?>
+				<span class="required">*</span>
+			<?}?>
+		</legend>
 
 		<ul class="fieldset" data-fieldset="<?=$fieldset?>">
 
-			<li class="exclude editable-hidden small grey">Ensemble de champs</li>
+			<li class="exclude editable-hidden small grey">
+				Ensemble de champs
+				
+				(<label for="required-<?=$GLOBALS['editkey']-1;?>">radio/checkbox obligatoire</label>
+				<?checkbox("required-".($GLOBALS['editkey']-1));?>)
+			</li>
 
 			<?
 			if(isset($level) and isset($GLOBALS['content']['builder'][$level]) and is_array($GLOBALS['content']['builder'][$level])) 
