@@ -6,7 +6,7 @@
 		<?php txt('', array('tag' => 'span', 'placeholder' => 'Label'))?>
 
 		<?if(@$GLOBALS['content']['required-'.$GLOBALS['editkey']] == true){?>
-		<span class="required">*</span>
+			<span class="required">*</span>
 		<?}?>
 	</label>
 

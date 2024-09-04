@@ -1,34 +1,18 @@
 <?php 
-// Utilise https://johnny.github.io/jquery-sortable/
 
-// Ajouter ces fichiers dans votre dossier "tpl"
-//// Ajouter un dossier builder/ dans le dossier tpl/
-//// y déposer des fichiers .php avec des sections éditables
+/**** @todo
+- lors du drag&drop masquer la toolbox et éviter les erreurs de memo_focus
+- le legend du fieldset n'a pas le bon id lors de la récup...
+- finalisé le tri et connexion entre les élément et le formulaire
+- faire des test massif sur la modification et suppression d'élément
+- tester depuis une page vide
+*****/
 
-//@todo si choix tpl builder on regarde dans la base de donnée les pages qui l'uilisent et propose de reprendre la tpl
-//@todo tous les attributs de l'édition ne sont pas dans les fonctions _event du coup l'edition n'est pas complete lors de l'ajout à la volé d'un élément editable
-
-// @todo
-// - corriger la construction du formulaire pour faire fonctionner les éléments imbriqué dans les fieldsets. voir si besoin lors de la sauvegarde et après la lecture du json
-// - ajout filedset editable
-// - checkbox réel en input et pas en interpréter
-// - ajout de radio dans un filedset déjà existant
-// - ajout js sort imbricable
-// - savegarde avec 2 profondeurs en cas de champs dans un fieldset
-// - restitution en fonction des imbrications avec les fieldset
-// - tableau avec nom compréhensible des tpl dans le dossier builder
-// - lors du drag&drop masquer la toolbox et éviter les erreurs de memo_focus
-// - ne pas rendre supprimable le premier li aria-hidden des fieldsets
-// - save imbriquer à l'infinit
-// - lecture imbriquer à l'infinit
-// le legend du fieldset n'a pas le bon id lors de la récup...
-// @finalisé le tri et connexion entre les élément et le formulaire
-// faire des test massif sur la modification et suppression d'élément
-// - ajout des tag <form> avec id
-// tester depuis une page vide
-
-// Plus tard
-// - voir pour une version sans ul/li, mais visiblement complexe de changer le tag à la volé pour faire le tri une fois edit lancer
+/**** Plus tard
+- voir pour une version sans ul/li, mais visiblement complexe de changer le tag à la volé pour faire le tri une fois edit lancer
+- si choix tpl builder on regarde dans la base de donnée les pages qui l'uilisent et propose de reprendre la tpl
+- tous les attributs de l'édition ne sont pas dans les fonctions _event du coup l'edition n'est pas complete lors de l'ajout à la volé d'un élément editable
+*****/
 
 switch(@$_GET['mode'])
 {
@@ -207,10 +191,6 @@ switch(@$_GET['mode'])
 
 				$(function()
 				{
-					// Affichage informatif s'il y a des champs requis
-					if($("#formulaire .required").length) $(".isrequired").show();
-
-
 					// Champs avec message d'erreur/format custom
 					$("#formulaire .type").on("change", function(event)
 					{
@@ -331,6 +311,10 @@ switch(@$_GET['mode'])
 							if(fieldset != undefined) $(this).attr("name", "fieldset-"+ fieldset);
 						}
 					});
+
+
+					// Affichage informatif s'il y a des champs requis
+					if($("#formulaire .required").length) $(".isrequired").show();
 
 
 					// Soumettre le formulaire
@@ -489,7 +473,9 @@ switch(@$_GET['mode'])
 					"fieldset" => "Ensemble de champs (fieldset)",
 					"checkbox" => "Case à cocher (checkbox)",
 					"radio" => "Case d'option (radio)",
-					
+
+					"select" => "Liste déroulante (select)",
+
 					"textarea" => "Grande zone de texte (textarea)",
 					"input-text" => "Champ texte simple (text)",
 				);
