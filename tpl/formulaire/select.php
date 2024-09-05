@@ -18,17 +18,29 @@
 		if(isset($GLOBALS['content']['input-'.$GLOBALS['editkey']])) 
 			$array = explode(";",$GLOBALS['content']['input-'.$GLOBALS['editkey']]);
 
+		$optgroup = false;
+
 		if(is_array($array))
 		foreach($array as $cle => $val)
 		{
-			echo'<option value="'.$cle.'">'.trim(strip_tags($val)).'</option>';
+			if(str_starts_with(trim($val), '#'))
+			{
+				if($optgroup == true) echo'</optgroup>';
+
+				$optgroup = true;
+				echo'<optgroup label="'.ltrim(trim(htmlspecialchars(strip_tags($val))), '#').'">';
+			}
+			else
+				echo'<option value="'.$cle.'">'.trim(strip_tags($val)).'</option>';
 		}
+
+		if($optgroup == true) echo'</optgroup>';
 		?>
 	</select>
 
 	<!-- Input pour les données du select -->
 	<?php
-	input('', array("class" => "editable-hidden", "placeholder" => "Valeur 1; Valeur 2; Valeur 3..."));
+	input('', array("class" => "editable-hidden", "placeholder" => "Valeur 1;Valeur 2;#Groupe;Valeur 3..."));
 	?>
 
 	<!-- Option -->
