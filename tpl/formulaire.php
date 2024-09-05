@@ -7,6 +7,7 @@
 - faire des test massif sur la modification et suppression d'élément
 - tester depuis une page vide
 - qd supp élément on doit informé de save
+- envoi mail : bien liée les textes au champs pour l'envoie en post et retrouver les infos dans le mail
 *****/
 
 /**** Plus tard

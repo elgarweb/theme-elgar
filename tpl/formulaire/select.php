@@ -11,7 +11,7 @@
 		<?}?>
 	</label>
 
-	<select id="select-<?=$GLOBALS['editkey'];?>"<?=(@$GLOBALS['content']['required-'.$GLOBALS['editkey']] == true?' required':'')?>>
+	<select id="select-<?=$GLOBALS['editkey'];?>" name="select-<?=$GLOBALS['editkey'];?>"<?=(@$GLOBALS['content']['required-'.$GLOBALS['editkey']] == true?' required':'')?>>
 		<option></option>
 		<?php
 		// Des valeurs dans le input ? => on créer un tableau avec
@@ -31,7 +31,7 @@
 				echo'<optgroup label="'.ltrim(trim(htmlspecialchars(strip_tags($val))), '#').'">';
 			}
 			else
-				echo'<option value="'.$cle.'">'.trim(strip_tags($val)).'</option>';
+				echo'<option value="'.trim(htmlspecialchars(strip_tags($val))).'">'.trim(strip_tags($val)).'</option>';
 		}
 
 		if($optgroup == true) echo'</optgroup>';
