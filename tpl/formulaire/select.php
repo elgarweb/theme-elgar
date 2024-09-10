@@ -3,7 +3,7 @@
 <li data-builder="select">
 	
 	<!-- Label -->
-	<label for="input-<?=$GLOBALS['editkey']+1?>">
+	<label for="select-<?=$GLOBALS['editkey']+1?>">
 		<?php txt('', array('tag' => 'span', 'placeholder' => 'Label'))?>
 
 		<?if(@$GLOBALS['content']['required-'.$GLOBALS['editkey']] == true){?>

@@ -75,6 +75,8 @@
 			$array['type'] = $type_value;
 	}
 
+	// Name pour le serialize
+	$array['name'] = 'input-'.$GLOBALS['editkey'];
 
 	//echo 'type_value: '.@$type_value." // ";
 	//echo 'types[type_value]: '.@$types[$type_value]." // ";

@@ -7,6 +7,7 @@
 - faire des test massif sur la modification et suppression d'élément
 - tester depuis une page vide
 - qd supp élément on doit informé de save
+- voir pour mettre un nom d'id 'checkbox-num' au lieu de 'input-num'
 - envoi mail : bien liée les textes au champs pour l'envoie en post et retrouver les infos dans le mail
 *****/
 
@@ -14,6 +15,7 @@
 - voir pour une version sans ul/li, mais visiblement complexe de changer le tag à la volé pour faire le tri une fois edit lancer
 - si choix tpl builder on regarde dans la base de donnée les pages qui l'uilisent et propose de reprendre la tpl
 - tous les attributs de l'édition ne sont pas dans les fonctions _event du coup l'edition n'est pas complete lors de l'ajout à la volé d'un élément editable
+- ajout d'un controler au save qui check si les radio et checkbox sont bien directement dans un fieldset
 *****/
 
 switch(@$_GET['mode'])
@@ -45,7 +47,7 @@ switch(@$_GET['mode'])
 
 					<div class="editable-hidden small grey mtm mbm">
 
-						<label for="email-to"><?php _e("Recipient email")?> (contact@test.fr)<span class="red">*</span> :</label>
+						<label for="email-to"><?php _e("Recipient email")?> (format attendu : contact@test.fr)<span class="red">*</span> :</label>
 						
 						<div>
 						<?input("email-to", array('name' => 'email-to', 'placeholder' => __("Recipient email")));?>
@@ -181,11 +183,39 @@ switch(@$_GET['mode'])
 						//$("#formulaire").off("submit");
 						$("#formulaire button").attr("aria-disabled", true);// => ne permet pas le focus sur le bt une fois envoyer
 
+
+						// Construction d'un tableau avec les labels pour les input, textearea, select
+						labels = {};
+						$("#formulaire label").each(function() {
+							labels[$(this).attr("for")] = $(this).text().trim();
+						});
+
+						// Les données du formulaire
+						data = $("#formulaire").serializeArray();
+
+						// On parcours les résultats pour associer des labels/noms
+						data.forEach(function(element) 
+						{
+							// Un champs à un label (et pas une checkbox) => on associe le label/nom au champ
+							if(labels[element.name] && element.name.indexOf("checkbox") == -1)
+								data[data.length] = { name: element.name+"-name", value: labels[element.name] };
+							// Une radio ou checkbox on associe la légende
+							else if(element.name.indexOf("radio") !== -1 || element.name.indexOf("checkbox") !== -1)	
+							{
+								var legend = $("[name='"+element.name+"']").parentsUntil("fieldset").parent().children("legend").children("span").text().trim()
+
+								data[data.length] = { name: element.name+"-name", value: legend };
+							}					
+						})
+						
+						//console.log(data);
+
+						// Envoi de la requette
 						$.ajax(
 							{
 								type: "POST",
 								url: path+"theme/"+theme+(theme?"/":"")+"tpl/formulaire.php?mode=send-mail",
-								data: $("#formulaire").serializeArray(),
+								data: data,
 								success: function(html){ $("body").append(html); }
 							});
 					}
@@ -303,14 +333,30 @@ switch(@$_GET['mode'])
 					// Parcours les radio/checkbox
 					$("#formulaire input[type='radio'], #formulaire input[type='checkbox']").each(function() 
 					{
-						// Affecte les id des radio/checkbox au for des labels
-						$(this).next("label").attr('for', $(this).attr("id"));
+						// On remonte au fieldset parent pour associer la legend à l'input
+						//var legend = $(this).parentsUntil("fieldset").parent().children("legend").children("span").attr("id");
 
-						// Si radio on affect un name commun en fonction du fieldset
+						// Associe la légende à l'input
+						//$(this).attr("data-legend", legend);
+
+						// Affecte les id des radio/checkbox au for des labels
+						$(this).next("label").attr("for", $(this).attr("id"));
+
+						// Ajoute en value le nom du filedset pour les infos dans le mail
+						$(this).attr("value", $(this).next("label").text().trim());
+
+						// Si radio 
 						if($(this).attr("type") == "radio") 
 						{
 							var fieldset = $(this).closest(".fieldset").data("fieldset");
-							if(fieldset != undefined) $(this).attr("name", "fieldset-"+ fieldset);
+							
+							// On affect un name commun en fonction du fieldset
+							if(fieldset != undefined) $(this).attr("name", "radios-"+ fieldset);
+						}
+						else if($(this).attr("type") == "checkbox") 
+						{
+							// Ajout d'un name au checkbox pour les retrouver dans le POST
+							$(this).attr("name", $(this).attr("id") );
 						}
 					});
 

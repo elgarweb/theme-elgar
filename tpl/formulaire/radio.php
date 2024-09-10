@@ -2,8 +2,8 @@
 
 <li data-builder="radio">
 	
-	<?radio('', 'fieldset-'.@$fieldset);?>
+	<?radio('');//, 'radios-'.@$fieldset?>
 
-	<label for="input-<?=$GLOBALS['editkey']?>"><?php txt('', array('tag' => 'span', 'placeholder' => 'Label radio'))?></label>
+	<label for="radio-<?=$GLOBALS['editkey']?>"><?php txt('', array('tag' => 'span', 'placeholder' => 'Label radio'))?></label>
 	
 </li>
