@@ -10,7 +10,7 @@
 		<?}?>
 	</label>
 
-	<textarea id="textarea-<?=$GLOBALS['editkey']?>"<?=(@$GLOBALS['content']['required-'.$GLOBALS['editkey']] == true?' required':'').(@$GLOBALS['content']['maxlength-'.$GLOBALS['editkey']]?' maxlength="'.(int)$GLOBALS['content']['maxlength-'.$GLOBALS['editkey']].'"':'')?>></textarea>
+	<textarea id="textarea-<?=$GLOBALS['editkey']?>" name="textarea-<?=$GLOBALS['editkey']?>" <?=(@$GLOBALS['content']['required-'.$GLOBALS['editkey']] == true?' required':'').(@$GLOBALS['content']['maxlength-'.$GLOBALS['editkey']]?' maxlength="'.(int)$GLOBALS['content']['maxlength-'.$GLOBALS['editkey']].'"':'')?>></textarea>
 	
 	<!-- Option -->
 	<div class="inbl vam small">

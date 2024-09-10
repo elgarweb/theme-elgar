@@ -811,6 +811,7 @@ header section:first-of-type { font-size: 1.4rem; }
 
 	#formulaire .required:not(ul) { color: #9f2d2d; }
 
+	#formulaire [data-builder=select] .editable-input { min-width: 350px; }
 
 /* FOOTER */
 footer #renseignement { 
