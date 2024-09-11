@@ -126,13 +126,20 @@ switch(@$_GET['mode'])
 					</ul>
 
 
+					<!-- Validation RGPD -->
+					<div class="mtm mbm">
+						<label for="rgpdcheckbox" class="inline"><?php _e("Please check your entry and tick the box to accept the storage and processing of this information")?><span class="red">*</span></label>
+						<input type="checkbox" name="rgpdcheckbox" id="rgpdcheckbox" required>
+					</div>
+
+
 					<!-- Bouton envoyer -->
-					<button type="submit" id="send" class="bt">
+					<button type="submit" id="send" class="bt" aria-describedby="texte-rgpd">
 						<?php _e("Send")?>
 					</button>
 
 
-					<!-- RGPB -->
+					<!-- Texte RGPB -->
 					<?php txt('texte-rgpd', 'mtl')?>
 
 					<input type="hidden" name="rgpd_text" value="<?=htmlspecialchars(@$GLOBALS['content']['texte-rgpd']);?>">
@@ -142,6 +149,17 @@ switch(@$_GET['mode'])
 
 
 				</form>
+
+
+				<div class="editable-hidden mtm tc">
+
+					<?php $iframe = '<iframe src="https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'" scrolling="yes" title="'.htmlspecialchars(@$GLOBALS['content']['title']).'"></iframe>'; ?>
+
+					<label for="iframe">Code HTML pour insérer le formulaire dans votre site :</label>
+
+					<input type="text" id="iframe" value="<?=htmlspecialchars($iframe);?>" onfocus="$(this).select();document.execCommand('copy')">
+
+				</div>
 
 			</article>
 
