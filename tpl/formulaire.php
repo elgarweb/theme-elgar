@@ -127,16 +127,18 @@ switch(@$_GET['mode'])
 
 
 					<!-- Validation RGPD -->
-					<div class="mtm mbm">
+					<div class="tc mtm mbm">
 						<label for="rgpdcheckbox" class="inline"><?php _e("Please check your entry and tick the box to accept the storage and processing of this information")?><span class="red">*</span></label>
 						<input type="checkbox" name="rgpdcheckbox" id="rgpdcheckbox" required>
 					</div>
 
 
 					<!-- Bouton envoyer -->
+					<div class="tc">
 					<button type="submit" id="send" class="bt" aria-describedby="texte-rgpd">
 						<?php _e("Send")?>
 					</button>
+					</div>
 
 
 					<!-- Texte RGPB -->
