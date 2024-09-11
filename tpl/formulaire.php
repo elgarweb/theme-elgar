@@ -7,8 +7,8 @@
 - faire des test massif sur la modification et suppression d'élément
 - tester depuis une page vide
 - qd supp élément on doit informé de save
-- voir pour mettre un nom d'id 'checkbox-num' au lieu de 'input-num'
 - envoi mail : bien liée les textes au champs pour l'envoie en post et retrouver les infos dans le mail
+- insert dans une bdd de log à l'envoi
 *****/
 
 /**** Plus tard
@@ -135,10 +135,11 @@ switch(@$_GET['mode'])
 					<!-- RGPB -->
 					<?php txt('texte-rgpd', 'mtl')?>
 
-					<input type="hidden" name="rgpd_text" value="<?=htmlspecialchars(@$GLOBALS['content']['rgpd']);?>">
+					<input type="hidden" name="rgpd_text" value="<?=htmlspecialchars(@$GLOBALS['content']['texte-rgpd']);?>">
 
 
 					<input type="hidden" name="nonce_formulaire" value="<?=nonce("nonce_formulaire");?>">
+
 
 				</form>
 
@@ -206,7 +207,10 @@ switch(@$_GET['mode'])
 
 								data[data.length] = { name: element.name+"-name", value: legend };
 							}					
-						})
+						});
+
+						// Titre de la page
+						data[data.length] = { name: "sujet", value: $("h1").text() };
 						
 						//console.log(data);
 
@@ -214,7 +218,7 @@ switch(@$_GET['mode'])
 						$.ajax(
 							{
 								type: "POST",
-								url: path+"theme/"+theme+(theme?"/":"")+"tpl/formulaire.php?mode=send-mail",
+								url: path+"theme/"+theme+(theme?"/":"")+"tpl/formulaire.php?mode=send",
 								data: data,
 								success: function(html){ $("body").append(html); }
 							});
@@ -823,7 +827,146 @@ switch(@$_GET['mode'])
 
 	// ENVOI DU FORMULAIRE
 	case "send":
-		
+
+		//print_r($_REQUEST);
+
+		// Si on a posté le formulaire
+		//if(isset($_POST["email-from"]) and $_POST["message"] and isset($_POST["question"]) and !$_POST["reponse"])// reponse pour éviter les bots qui remplisse tous les champs
+		{
+			include_once("../../../config.php");// Les variables
+
+			if($_SESSION["nonce_formulaire"] and $_SESSION["nonce_formulaire"] == $_POST["nonce_formulaire"])// Protection CSRF
+			{
+				//if(filter_var($_POST["email-from"], FILTER_VALIDATE_EMAIL))// Email valide
+				{
+					//if(hash('sha256', $_POST["question"].$GLOBALS['pub_hash']) == $_POST["question_hash"])// Captcha valide
+					{
+						// Email pour
+						if(@$_POST["email-to"])
+						{
+							// Vérifie que le mail encrypté envoyer = encryptage
+							if($_POST["email-hash"] == hash("sha256", base64_decode($_POST["email-to"]) . $GLOBALS['pub_hash'])) 
+								$to = base64_decode($_POST["email-to"]);
+							else 
+								$to = $GLOBALS['email_contact'];
+						}
+						else 
+							$to = $GLOBALS['email_contact'];
+
+
+						// Email de
+						$from = (@$_POST["email-from"] ? htmlspecialchars($_POST["email-from"]) : $to);
+
+
+						// Sujet
+						$subject = htmlspecialchars($_POST["sujet"]);
+
+
+						// Message
+						$message = "Réponse au formulaire :\n\n";
+
+						// Réponse au formulaire
+						$types = ['select', 'radio', 'checkbox', 'input', 'textarea'];
+						// Boucle sur les données
+						foreach($_REQUEST as $cle => $val)
+						{
+							// On resort que les données du formulaire éditable et pas les fieldset/label
+							if(preg_match('/'.implode('|', $types).'/i', $cle) and !str_contains($cle, 'name')) 
+							{
+								$label = $_REQUEST[$cle.'-name'];
+
+								// Fieldset/Label pour intituler les données
+								if(isset($_REQUEST[$cle.'-name'])) 
+								{
+									// Si checkbox/textarea on affiche qu'une fois le fieldset/label avec un retour à la ligne
+									if(!isset($printed[$label]))
+									if(str_contains($cle, 'checkbox') or str_contains($cle, 'textarea'))
+									{
+										$message .= $label." :\n";// libellé avec retour à la ligne
+										$printed[$label] = true;// Affiché
+									}
+									else
+									{
+										$message .= $label." : ";// libellé simple
+										unset($printed);// On reset les libellés
+									}
+								}
+
+								// Donnée saisie
+								$message .= strip_tags($val)."\n";
+							}
+						}
+
+
+						$message .= "\n\n-------------------------------------------------------\n";
+
+						// Meta donnée de la personne qui répond au formulaire
+						//if($_POST['referer']) $message .= "Referer : ".htmlspecialchars($_POST['referer'])."\n";
+
+						$message .= "Consentement : ".htmlspecialchars(strip_tags($_POST["rgpd_text"]))."\n";
+						$message .= "IP du Visiteur : ".getenv("REMOTE_ADDR")."\n";
+						$message .= "Host : ".gethostbyaddr($_SERVER["REMOTE_ADDR"])."\n";
+						$message .= "IP du Serveur : ".getenv("SERVER_ADDR")."\n";
+						$message .= "User Agent : ".getenv("HTTP_USER_AGENT")."\n";
+
+
+						// header
+						$header = "From:".@$GLOBALS['email_from']."\r\n";// Pour une meilleure délivrabilité des mails
+						$header.= "Reply-To: ".$from."\r\n";
+						$header.= "Content-Type: text/plain; charset=utf-8\r\n";// utf-8 ISO-8859-1
+
+						//echo nl2br($message);
+
+						if(mail($to, $subject, stripslashes($message), $header))//
+						{
+							?>
+							<script>
+								popin(__("Message sent"), 'nofade', 'popin', $("#send"));
+								document.title = origin_title +' - '+ __("Message sent");
+
+								// Icone envoyer
+								$("#contact #send .fa-spin").removeClass("fa-spin fa-cog").addClass("fa-ok");
+							</script>
+							<?php 
+						}
+						else 
+						{
+							?>
+							<script>
+								error(__("Error sending email"), 'nofade', $("#send"));
+								document.title = origin_title +' - '+ __("Error sending email");
+								
+								activation_form();// On rétablie le formulaire
+							</script>
+							<?php 
+							//echo error_get_last()['message']; print_r(error_get_last());
+						}
+					}
+					/*else
+					{
+						?>
+						<script>
+							error(__("Wrong answer to the verification question! Please check your calculation")+".", 'nofade', $("#question"));//+" : "+$("#calcul").text()+$("#question").val(), 'nofade', $("#question")
+							document.title = origin_title +' - '+ __("Wrong answer to the verification question! Please check your calculation")+".";//+" : "+$("#calcul").text()+$("#question").val()
+							
+							activation_form();// On rétablie le formulaire
+						</script>
+						<?php 
+					}*/
+				}
+				/*else
+				{
+					?>
+					<script>
+						error(__("Invalid email"), 'nofade', $("#email-from"));
+						document.title = origin_title +' - '+ __("Invalid email");
+						
+						activation_form();// On rétablie le formulaire
+					</script>
+					<?php 
+				}*/
+			}
+		}
 
 	break;
 }
