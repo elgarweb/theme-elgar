@@ -134,10 +134,10 @@
 	if(noAccess) $("#texte-aide-access").show();
 
 	// Si mobile on n'affiche pas le bouton d'accès au login admin
-	if(ismobile()) {
+	/*if(ismobile()) {
 		bt_login = false;
 		$(".bt.fixed.edit").remove();
-	}
+	}*/
 
 	<?php if(isset($GLOBALS['plausible_auth']) or ($intranet and $admin_intranet)){?>
 	$(function()
