@@ -78,7 +78,7 @@ foreach($page_site as $url => $label)
 asort($final);
 
 // Affichage
-echo'<ul>';
+echo'<h1>'.$site.'</h1><ul>';
 foreach($final as $label => $stat)
 {
 	echo'<li>'.$label.' - '.$stat.' hits</li>';
