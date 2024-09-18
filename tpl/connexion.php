@@ -72,6 +72,60 @@ if(!login('medium', null, 'true'))// true error
 			document.location.href = document.location.origin + direct;
 		}
 
+		// LOGIN
+		function login()
+		{
+			event.preventDefault();
+
+			// Désactive le submit
+			$("#public-login button").attr("disabled", true);
+			$("#public-login").off("submit");
+
+			if(typeof callback == 'undefined') 
+			{
+				<?php				
+				// Si referer dans le site interne on récupère le permalien
+				if(isset($_SERVER['HTTP_REFERER']) and strstr($_SERVER['HTTP_REFERER'], $GLOBALS['home'])) 
+					echo 'direction = path + "'.encode(get_url($_SERVER['HTTP_REFERER'])).'";';
+				else
+					echo'direction = path + permalink;';
+				?>
+
+				callback = "redirection";
+			}
+
+			$.ajax({ 
+				type: "POST",
+				url: path+"api/ajax.php?mode=login",
+				data: { 
+					email: $("#public-login #email").val(),
+					password: $("#public-login #password").val(),
+					rememberme: $("#public-login #rememberme").prop("checked"),
+					nonce: $("#public-login #nonce").val(),
+					quiet: 'error',
+					callback: callback
+				}
+			})
+			.done(function(html) { 
+				// On ferme le formulaire de login
+				//$("#public-login").fadeOut("fast");			
+				
+				// On exécute le retour
+				$("body").append(html);
+
+				// Si erreur de login (callback=null), on rétablit le formulaire
+				// /!\ => Non utiliser car le nonce est supprimer et créer donc un nonce error
+				/*if(!callback) 
+				{
+					// Re-Active le submit
+					$("#public-login button").attr("disabled", false);
+					$("#public-login").submit(function(event) {
+						login();
+					});
+				}*/
+			});
+		}
+
 		$(function()
 		{
 			// Update les nonces dans la page courante pour éviter de perdre le nonce
@@ -87,47 +141,11 @@ if(!login('medium', null, 'true'))// true error
 				email.setCustomValidity("");
 			}, false);
 
-			
-			// LOGIN
+
+			// Submit => login
 			$("#public-login").submit(function(event) 
 			{
-				event.preventDefault();
-
-				// Désactive le submit
-				$("#public-login button").attr("disabled", true);
-				$("#public-login").off("submit");
-
-				if(typeof callback == 'undefined') 
-				{
-					<?php				
-					// Si referer dans le site interne on récupère le permalien
-					if(isset($_SERVER['HTTP_REFERER']) and strstr($_SERVER['HTTP_REFERER'], $GLOBALS['home'])) 
-						echo 'direction = path + "'.encode(get_url($_SERVER['HTTP_REFERER'])).'";';
-					else
-						echo'direction = path + permalink;';
-					?>
-
-					callback = "redirection";
-				}
-
-				$.ajax({ 
-						type: "POST",
-						url: path+"api/ajax.php?mode=login",
-						data: { 
-							email: $("#public-login #email").val(),
-							password: $("#public-login #password").val(),
-							rememberme: $("#public-login #rememberme").prop("checked"),
-							nonce: $("#public-login #nonce").val(),
-							callback: callback
-						}
-					})
-					.done(function(html) { 
-						// On ferme le formulaire de login
-						$("#public-login").fadeOut("fast");			
-						
-						// On exécute le retour
-						$("body").append(html);
-					});
+				login();
 			});
 		});
 	</script>
@@ -146,6 +164,8 @@ else
 
 
 		<article class="tc pal">
+
+			<p><?_e("Vous êtes connecté")?></p>
 			
 			<button id="logout" class="bt">
 				<?_e("Log out")?>
