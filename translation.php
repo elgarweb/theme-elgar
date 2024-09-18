@@ -151,6 +151,7 @@ $add_translation = array(
 	"Subject" => array("fr" => "Sujet", "eu" => "Gaia"),
 	"Message" => array("fr" => "Message", "eu" => "Mezua"),
 	"Send" => array("fr" => "Envoyer", "eu" => "Bidali"),
+	"Message sent" => array("fr" => "Message envoyé", "eu" => "Bidali"),
 
 	"zero" => array("fr" => "zéro", "eu" => "huts"),
 	"one" => array("fr" => "un", "eu" => "bat"),
