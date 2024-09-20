@@ -2,11 +2,7 @@
 
 /**** @todo
 - lors du drag&drop masquer la toolbox et éviter les erreurs de memo_focus
-- le legend du fieldset n'a pas le bon id lors de la récup...
-- finalisé le tri et connexion entre les élément et le formulaire
 - tester depuis une page vide
-- insert dans une bdd de log à l'envoi
-- checkbox obligatoire n'affiche pas le message d'erreur si pas check => si la checkbox est hors screen ça n'affiche pas la bulle d'erreur ! voir pour forcer l'affichage ou/et ajouter un css invalid
 *****/
 
 /**** Plus tard
@@ -14,6 +10,8 @@
 - si choix tpl builder on regarde dans la base de donnée les pages qui l'uilisent et propose de reprendre la tpl
 - tous les attributs de l'édition ne sont pas dans les fonctions _event du coup l'edition n'est pas complete lors de l'ajout à la volé d'un élément editable
 - ajout d'un controler au save qui check si les radio et checkbox sont bien directement dans un fieldset
+- insert dans une bdd de log à l'envoi
+- export csv
 *****/
 
 switch(@$_GET['mode'])
@@ -246,6 +244,9 @@ switch(@$_GET['mode'])
 
 				$(function()
 				{
+					// Supprime le smooth scolling qui créer un bug sur Chrome pour l'affichage des erreurs de validation
+					$("html").css("scroll-behavior","auto");
+
 					// Champs avec message d'erreur/format custom
 					$("#formulaire .type").on("change", function(event)
 					{
@@ -325,7 +326,7 @@ switch(@$_GET['mode'])
 
 							// Message d'erreur personnalisé sur la 1er checkbox seulement
 							that[0].addEventListener("invalid", function() {
-								that[0].setCustomValidity("Veuillez cocher au moins une case si vous souhaitez continuer.")
+								that[0].setCustomValidity("Veuillez cocher au moins une case si vous souhaitez continuer.");
 							}, false);
 						}
 					});
@@ -386,6 +387,13 @@ switch(@$_GET['mode'])
 
 					// Affichage informatif s'il y a des champs requis
 					if($("#formulaire .required").length) $(".isrequired").show();
+
+
+					// Relis les Labels au editable-input et editable-checkbox
+					$("#formulaire .editable-input, #formulaire .editable-checkbox").each(function(index, element)
+					{
+						$(element).prev("label").attr("for", $(element).attr("id"));
+					});
 
 
 					// Soumettre le formulaire

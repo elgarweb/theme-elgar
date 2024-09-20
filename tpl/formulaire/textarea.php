@@ -17,7 +17,7 @@
 
 		<div class="editable-hidden">
 
-			<label for="required-<?=$GLOBALS['editkey'];?>">Champ obligatoire</label>
+			<label>Champ obligatoire</label>
 			<?checkbox("required-".($GLOBALS['editkey']));?>
 
 			<?//input("maxlength-".($GLOBALS['editkey']-1), array("type" => "number", "class" => "w50p"));?>
