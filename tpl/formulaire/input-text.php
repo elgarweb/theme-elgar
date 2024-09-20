@@ -3,21 +3,16 @@
 <li data-builder="input-text">
 
 	<!-- Label -->
-	<label for="input-<?=$GLOBALS['editkey']+1?>">
-		<?php txt('', array('tag' => 'span', 'placeholder' => 'Label'))?>
-
-		<?if(@$GLOBALS['content']['required-'.$GLOBALS['editkey']] == true){?>
-			<span class="required">*</span>
-		<?}?>
+	<label>
+		<?php txt('', array('tag' => 'span', 'placeholder' => 'Label'))?> <?if(@$GLOBALS['content']['required-'.$GLOBALS['editkey']] == true){?><span class="required">*</span><?}?>
 	</label>
-
-	<!-- Input -->
+	
 	<?php
+	// Variable du input
 	$array = null;
 
 	// Champ requis ?
 	if(@$GLOBALS['content']['required-'.$GLOBALS['editkey']] == true) $array['required'] = true;
-
 
 	// Format attendu
 	$formats = Array(
@@ -82,8 +77,11 @@
 	//echo 'types[type_value]: '.@$types[$type_value]." // ";
 	//echo 'type : '.@$array['type'].' // ';
 	//echo 'autoc : '.@$array['autocomplete'].' ';
+	?>
 
 
+	<!-- Input -->
+	<?php
 	input('', $array);//, array('builder' => 'input')
 	?>
 
@@ -98,7 +96,7 @@
 
 			<div class="inline mls">
 
-				<label for="required-<?=$GLOBALS['editkey']-1;?>">Champ obligatoire</label>
+				<label>Champ obligatoire</label>
 				<?checkbox("required-".($GLOBALS['editkey']-1));?>
 
 				|

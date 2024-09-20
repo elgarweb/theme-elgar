@@ -15,22 +15,14 @@
 	<!-- Option -->
 	<div class="inbl vam small">
 
-		<details class="editable-hidden">
+		<div class="editable-hidden">
 
-			<summary class="inline pointer">
-				<i class="fa fa-fw fa-cog o50" aria-hidden="true"></i>Option
-			</summary>
+			<label>Champ obligatoire</label>
+			<?checkbox("required-".($GLOBALS['editkey']));?>
 
-			<div class="inline mls">
-
-				<label for="required-<?=$GLOBALS['editkey'];?>">Champ obligatoire</label>
-				<?checkbox("required-".($GLOBALS['editkey']));?>
-
-				<?//input("maxlength-".($GLOBALS['editkey']-1), array("type" => "number", "class" => "w50p"));?>
-				
-			</div>
-
-		</details>
+			<?//input("maxlength-".($GLOBALS['editkey']-1), array("type" => "number", "class" => "w50p"));?>
+			
+		</div>
 
 	</div>
 

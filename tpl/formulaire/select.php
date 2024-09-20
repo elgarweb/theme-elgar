@@ -12,7 +12,7 @@
 	</label>
 
 	<select id="select-<?=$GLOBALS['editkey'];?>" name="select-<?=$GLOBALS['editkey'];?>"<?=(@$GLOBALS['content']['required-'.$GLOBALS['editkey']] == true?' required':'')?>>
-		<option></option>
+		<option><?_e("Selectionner une option")?></option>
 		<?php
 		// Des valeurs dans le input ? => on créer un tableau avec
 		if(isset($GLOBALS['content']['input-'.$GLOBALS['editkey']])) 
@@ -48,7 +48,7 @@
 
 		<div class="editable-hidden">
 
-			<label for="required-<?=$GLOBALS['editkey']-1;?>">Champ obligatoire</label>
+			<label>Champ obligatoire</label>
 			<?checkbox("required-".($GLOBALS['editkey']-1));?>
 	
 		</div>

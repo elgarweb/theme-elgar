@@ -22,7 +22,7 @@
 			<li class="exclude editable-hidden small grey">
 				Ensemble de champs
 				
-				(<label for="required-<?=$GLOBALS['editkey']-1;?>">radio/checkbox obligatoire</label>
+				(<label>radio/checkbox obligatoire</label>
 				<?checkbox("required-".($GLOBALS['editkey']-1));?>)
 			</li>
 

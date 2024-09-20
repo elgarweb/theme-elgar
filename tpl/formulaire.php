@@ -2,13 +2,7 @@
 
 /**** @todo
 - lors du drag&drop masquer la toolbox et éviter les erreurs de memo_focus
-- le legend du fieldset n'a pas le bon id lors de la récup...
-- finalisé le tri et connexion entre les élément et le formulaire
-- faire des test massif sur la modification et suppression d'élément
 - tester depuis une page vide
-- qd supp élément on doit informé de save
-- envoi mail : bien liée les textes au champs pour l'envoie en post et retrouver les infos dans le mail
-- insert dans une bdd de log à l'envoi
 *****/
 
 /**** Plus tard
@@ -16,6 +10,8 @@
 - si choix tpl builder on regarde dans la base de donnée les pages qui l'uilisent et propose de reprendre la tpl
 - tous les attributs de l'édition ne sont pas dans les fonctions _event du coup l'edition n'est pas complete lors de l'ajout à la volé d'un élément editable
 - ajout d'un controler au save qui check si les radio et checkbox sont bien directement dans un fieldset
+- insert dans une bdd de log à l'envoi
+- export csv
 *****/
 
 switch(@$_GET['mode'])
@@ -25,7 +21,8 @@ switch(@$_GET['mode'])
 		if(!$GLOBALS['domain']) exit;
 
 		// Encrypte le mail pour permettre des envois de mail que vers des mails ajoutés par l'admin
-		$GLOBALS['content']['email-hash'] = hash("sha256", base64_decode(@$GLOBALS['content']['email-to']) . $GLOBALS['pub_hash']);
+		if(isset($GLOBALS['content']['email-to']))
+			$GLOBALS['content']['email-hash'] = hash("sha256", base64_decode(@$GLOBALS['content']['email-to']) . $GLOBALS['pub_hash']);
 		?>
 
 		<section class="mw960p center">
@@ -144,7 +141,7 @@ switch(@$_GET['mode'])
 					<!-- Texte RGPB -->
 					<?php txt('texte-rgpd', 'mtl')?>
 
-					<input type="hidden" name="rgpd_text" value="<?=htmlspecialchars(@$GLOBALS['content']['texte-rgpd']);?>">
+					<input type="hidden" name="rgpd_text" value="<?=(isset($GLOBALS['content']['texte-rgpd'])?htmlspecialchars($GLOBALS['content']['texte-rgpd']):'');?>">
 
 
 					<input type="hidden" name="nonce_formulaire" value="<?=nonce("nonce_formulaire");?>">
@@ -157,7 +154,7 @@ switch(@$_GET['mode'])
 
 					<?php $iframe = '<iframe src="https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'" scrolling="yes" title="'.htmlspecialchars(@$GLOBALS['content']['title']).'"></iframe>'; ?>
 
-					<label for="iframe">Code HTML pour insérer le formulaire dans votre site :</label>
+					<label for="iframe"><i class="fa fa-code" aria-hidden="true"></i>Code HTML pour insérer le formulaire dans votre site :</label>
 
 					<input type="text" id="iframe" value="<?=htmlspecialchars($iframe);?>" onfocus="$(this).select();document.execCommand('copy')">
 
@@ -247,6 +244,9 @@ switch(@$_GET['mode'])
 
 				$(function()
 				{
+					// Supprime le smooth scolling qui créer un bug sur Chrome pour l'affichage des erreurs de validation
+					$("html").css("scroll-behavior","auto");
+
 					// Champs avec message d'erreur/format custom
 					$("#formulaire .type").on("change", function(event)
 					{
@@ -326,7 +326,7 @@ switch(@$_GET['mode'])
 
 							// Message d'erreur personnalisé sur la 1er checkbox seulement
 							that[0].addEventListener("invalid", function() {
-								that[0].setCustomValidity("Veuillez cocher au moins une case si vous souhaitez continuer.")
+								that[0].setCustomValidity("Veuillez cocher au moins une case si vous souhaitez continuer.");
 							}, false);
 						}
 					});
@@ -387,6 +387,13 @@ switch(@$_GET['mode'])
 
 					// Affichage informatif s'il y a des champs requis
 					if($("#formulaire .required").length) $(".isrequired").show();
+
+
+					// Relis les Labels au editable-input et editable-checkbox
+					$("#formulaire .editable-input, #formulaire .editable-checkbox").each(function(index, element)
+					{
+						$(element).prev("label").attr("for", $(element).attr("id"));
+					});
 
 
 					// Soumettre le formulaire
@@ -483,6 +490,10 @@ switch(@$_GET['mode'])
 
 			[data-builder] .fa-cancel { font-size: 1.4rem; }
 
+
+			#formulaire > ul {
+				border: 1px dotted #cccccc;
+			}
 
 			#formulaire li:not(.exclude), #builder li:not(.nodrag) {
 				/* display: block;
@@ -626,7 +637,7 @@ switch(@$_GET['mode'])
 
 				// Drag&drop Depuis la liste des éléments disponibles vers le formulaire
 				$("#builder li").draggable({
-					connectToSortable: "#formulaire ul",
+					connectToSortable: "#formulaire > ul",
 					handle: ".fa-move",
 					helper: "clone",
 					//revert: "invalid",// retourne à l'emplacement initial si pas dropé
@@ -730,6 +741,7 @@ switch(@$_GET['mode'])
 				remove_builder = function(that) {
 					$(that).closest("[data-builder]").slideUp("slow", function() {
 						this.remove();
+						tosave();
 					});
 				};
 
@@ -854,6 +866,11 @@ switch(@$_GET['mode'])
 		//if(isset($_POST["email-from"]) and $_POST["message"] and isset($_POST["question"]) and !$_POST["reponse"])// reponse pour éviter les bots qui remplisse tous les champs
 		{
 			include_once("../../../config.php");// Les variables
+			include_once("../../../api/function.php");// Fonction
+
+			$lang = get_lang();// Sélectionne  la langue
+			load_translation('api');// Chargement des traductions du système
+			load_translation('theme');// Traduction du thème
 
 			if($_SESSION["nonce_formulaire"] and $_SESSION["nonce_formulaire"] == $_POST["nonce_formulaire"])// Protection CSRF
 			{
@@ -891,15 +908,15 @@ switch(@$_GET['mode'])
 						foreach($_REQUEST as $cle => $val)
 						{
 							// On resort que les données du formulaire éditable et pas les fieldset/label
-							if(preg_match('/'.implode('|', $types).'/i', $cle) and !str_contains($cle, 'name')) 
+							if(preg_match('/'.implode('|', $types).'/i', $cle) and !str_contains($cle, 'name') and $cle!='rgpdcheckbox') 
 							{
-								$label = $_REQUEST[$cle.'-name'];
+								$label = strip_tags($_REQUEST[$cle.'-name']);
 
 								// Fieldset/Label pour intituler les données
 								if(isset($_REQUEST[$cle.'-name'])) 
 								{
 									// Si checkbox/textarea on affiche qu'une fois le fieldset/label avec un retour à la ligne
-									if(!isset($printed[$label]))
+									if(@$label and !isset($printed[$label]))
 									if(str_contains($cle, 'checkbox') or str_contains($cle, 'textarea'))
 									{
 										$message .= $label." :\n";// libellé avec retour à la ligne
@@ -941,8 +958,8 @@ switch(@$_GET['mode'])
 						{
 							?>
 							<script>
-								popin(__("Message sent"), 'nofade', 'popin', $("#send"));
-								document.title = origin_title +' - '+ __("Message sent");
+								popin("<?_e("Message sent")?>", 'nofade', 'popin', $("#send"));
+								document.title = origin_title +' - '+ "<?_e("Message sent")?>";
 
 								// Icone envoyer
 								$("#contact #send .fa-spin").removeClass("fa-spin fa-cog").addClass("fa-ok");
