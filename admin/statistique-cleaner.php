@@ -56,7 +56,7 @@ foreach($stats['results'] as $cle => $stat)
 }
 
 // Les contenus du site
-$sel = $connect->query("SELECT title, state, url, tpl, date_insert FROM ".$GLOBALS['table_content']." WHERE 1");
+$sel = $connect->query("SELECT title, state, url, type, tpl, date_insert FROM ".$GLOBALS['table_content']." WHERE 1");
 while($res = $sel->fetch_assoc()) 
 {
 	$debut = new DateTime($res['date_insert']);
@@ -64,7 +64,7 @@ while($res = $sel->fetch_assoc())
 
 	$jours = $fin->diff($debut)->format("%a");
 
-	$page_site[$res['url']] = '<a href="'.make_url($res['url'], array("domaine" => true)).'">'.$res['title'].'</a> <em><span class="grey">'.$res['state'].' - '.$jours.' jour'.($jours>1?'s':'').'</span></em>';
+	$page_site[$res['url']] = '<a href="'.make_url($res['url'], array("domaine" => true)).'">'.$res['title'].'</a> - <em>'.(@$GLOBALS['tpl_name'][$res['type']]?$GLOBALS['tpl_name'][$res['type']]:$res['type']).' - '.$res['state'].' - '.$jours.' jour'.($jours>1?'s':'').'</em>';
 }
 
 // Fusionne les tableaux
