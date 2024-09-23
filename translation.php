@@ -152,6 +152,7 @@ $add_translation = array(
 	"Message" => array("fr" => "Message", "eu" => "Mezua"),
 	"Send" => array("fr" => "Envoyer", "eu" => "Bidali"),
 	"Message sent" => array("fr" => "Message envoyé", "eu" => "Bidali"),
+	"Error sending email" => array("fr" => "Erreur lors de l'envoi de l'e-mail", "eu" => "Errorea"),
 
 	"zero" => array("fr" => "zéro", "eu" => "huts"),
 	"one" => array("fr" => "un", "eu" => "bat"),
