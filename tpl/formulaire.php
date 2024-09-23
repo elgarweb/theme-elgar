@@ -2,7 +2,6 @@
 
 /**** @todo
 - lors du drag&drop masquer la toolbox et éviter les erreurs de memo_focus
-- tester depuis une page vide
 *****/
 
 /**** Plus tard
@@ -687,6 +686,12 @@ switch(@$_GET['mode'])
 										// Insertion du contenu éditable
 										$($item).replaceWith(html);
 
+										// Relis les Labels au editable-input et editable-checkbox
+										$("#formulaire .editable-input, #formulaire .editable-checkbox").each(function(index, element)
+										{
+											$(element).prev("label").attr("for", $(element).attr("id"));
+										});
+
 										// Ajout de l'outil de suppression et déplacement
 										add_tools();
 
@@ -910,11 +915,11 @@ switch(@$_GET['mode'])
 							// On resort que les données du formulaire éditable et pas les fieldset/label
 							if(preg_match('/'.implode('|', $types).'/i', $cle) and !str_contains($cle, 'name') and $cle!='rgpdcheckbox') 
 							{
-								$label = strip_tags($_REQUEST[$cle.'-name']);
-
 								// Fieldset/Label pour intituler les données
 								if(isset($_REQUEST[$cle.'-name'])) 
 								{
+									$label = strip_tags($_REQUEST[$cle.'-name']);
+
 									// Si checkbox/textarea on affiche qu'une fois le fieldset/label avec un retour à la ligne
 									if(@$label and !isset($printed[$label]))
 									if(str_contains($cle, 'checkbox') or str_contains($cle, 'textarea'))
@@ -970,7 +975,7 @@ switch(@$_GET['mode'])
 						{
 							?>
 							<script>
-								error(__("Error sending email"), 'nofade', $("#send"));
+								error("<?_e("Error sending email")?>", 'nofade', $("#send"));
 								document.title = origin_title +' - '+ __("Error sending email");
 								
 								activation_form();// On rétablie le formulaire
