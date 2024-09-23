@@ -120,7 +120,7 @@
 					'text' => "Texte",
 				);	
 				?>
-				<label for="type-<?=$GLOBALS['editkey']-2;?>">Type de champ</label>
+				<label for="type-<?=$GLOBALS['editkey']-2;?>">Type</label>
 				<select id="type-<?=$GLOBALS['editkey']-2;?>" data-id="<?=$GLOBALS['editkey']-2;?>" class="editable-select type">
 					<?php
 					foreach($types as $cle => $val)

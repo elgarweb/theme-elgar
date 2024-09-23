@@ -247,7 +247,7 @@ switch(@$_GET['mode'])
 					$("html").css("scroll-behavior","auto");
 
 					// Champs avec message d'erreur/format custom
-					$("#formulaire .type").on("change", function(event)
+					$("#formulaire").on("change", ".type", function(event)
 					{
 						var input_id = $(this).data('id');
 						var parent = $(this).parentsUntil('[data-builder="input-text"]').last();
