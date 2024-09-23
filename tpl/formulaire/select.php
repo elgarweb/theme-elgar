@@ -12,7 +12,7 @@
 	</label>
 
 	<select id="select-<?=$GLOBALS['editkey'];?>" name="select-<?=$GLOBALS['editkey'];?>"<?=(@$GLOBALS['content']['required-'.$GLOBALS['editkey']] == true?' required':'')?>>
-		<option><?_e("Selectionner une option")?></option>
+		<option label="<?_e("Selectionner une option")?>"></option>
 		<?php
 		// Des valeurs dans le input ? => on créer un tableau avec
 		if(isset($GLOBALS['content']['input-'.$GLOBALS['editkey']])) 
