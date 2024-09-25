@@ -1,6 +1,8 @@
 <?php 
 
 /**** @todo
+- bug dans les mails sur les champs input spéciaux qui ne renvoi pas de label
+- réduire la sensibilité au drag&drop (éviter les sauts de lignes)
 - lors du drag&drop masquer la toolbox et éviter les erreurs de memo_focus
 *****/
 

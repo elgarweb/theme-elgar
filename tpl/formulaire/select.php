@@ -4,11 +4,7 @@
 	
 	<!-- Label -->
 	<label for="select-<?=$GLOBALS['editkey']+1?>">
-		<?php txt('', array('tag' => 'span', 'placeholder' => 'Label'))?>
-
-		<?if(@$GLOBALS['content']['required-'.$GLOBALS['editkey']] == true){?>
-			<span class="required">*</span>
-		<?}?>
+		<?php txt('', array('tag' => 'span', 'placeholder' => 'Label'))?> <?if(@$GLOBALS['content']['required-'.$GLOBALS['editkey']] == true){?><span class="required">*</span><?}?>
 	</label>
 
 	<select id="select-<?=$GLOBALS['editkey'];?>" name="select-<?=$GLOBALS['editkey'];?>"<?=(@$GLOBALS['content']['required-'.$GLOBALS['editkey']] == true?' required':'')?>>

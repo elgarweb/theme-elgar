@@ -17,7 +17,7 @@
 	// Format attendu
 	$formats = Array(
 		'date' => "Format attentu : jour/mois/année",
-		'datetime-local' => "Format attentu : jour/mois/année heure:minute",
+		'datetime-local' => "Format attendu : jour/mois/année heure:minute",
 		'time' => "Format attentu : heure:minute",
 		'email' => "Format attendu : dupont@exemple.com",
 	);
