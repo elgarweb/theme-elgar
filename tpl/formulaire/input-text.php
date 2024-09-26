@@ -17,7 +17,7 @@
 	// Format attendu
 	$formats = Array(
 		'date' => "Format attentu : jour/mois/année",
-		'datetime-local' => "Format attentu : jour/mois/année heure:minute",
+		'datetime-local' => "Format attendu : jour/mois/année heure:minute",
 		'time' => "Format attentu : heure:minute",
 		'email' => "Format attendu : dupont@exemple.com",
 	);
@@ -149,7 +149,7 @@
 			$(function()
 			{
 				// Message d'erreur en cas de mauvaise saisie du mail. Pour l'accessibilité
-				var error_<?=$editkey_2?> = document.getElementById("input-<?=$editkey_2?>");
+				var error_<?=$editkey_2?> = document.getElementById("<?=(@$array['type']?$array['type']:'input')?>-<?=$editkey_2?>");
 				error_<?=$editkey_2?>.addEventListener("invalid", function() {
 					error_<?=$editkey_2?>.setCustomValidity("<?=$GLOBALS['content']['error-'.$editkey_2]?>")
 				}, false);
