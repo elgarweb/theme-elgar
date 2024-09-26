@@ -215,9 +215,22 @@ switch(@$_GET['mode'])
 						// On parcours les résultats pour associer des labels/noms
 						data.forEach(function(element) 
 						{
-							// Un champs à un label (et pas une checkbox) => on associe le label/nom au champ
-							if(labels[element.name] && element.name.indexOf("checkbox") == -1)
-								data[data.length] = { name: element.name+"-name", value: labels[element.name] };
+							// On récupère l'id de l'input relier au label
+							var id_label = $("input[name="+element.name+"]").attr("id");
+
+							// On récupère les bons identifiants
+							if(labels[id_label]) 
+								var label = labels[id_label];							
+							else if(labels[element.name]) 							
+								var label = labels[element.name];
+							else 
+								var label = null;
+
+							// Un champs a un label (!=checkbox) => on associe le label/nom au champ
+							if(label && element.name.indexOf("checkbox") == -1)
+							{
+								data[data.length] = { name: element.name+"-name", value: label };
+							}
 							// Une radio ou checkbox on associe la légende
 							else if(element.name.indexOf("radio") !== -1 || element.name.indexOf("checkbox") !== -1)	
 							{
@@ -391,9 +404,9 @@ switch(@$_GET['mode'])
 
 
 					// Relis les Labels au editable-input et editable-checkbox
-					$("#formulaire .editable-input, #formulaire .editable-checkbox").each(function(index, element)
+					$("#formulaire .editable-input:not(.editable-hidden), #formulaire .editable-checkbox").each(function(index, element)
 					{
-						$(element).prev("label").attr("for", $(element).attr("id"));
+						$(element).prevAll("label").attr("for", $(element).attr("id"));
 					});
 
 
