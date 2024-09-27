@@ -1,18 +1,16 @@
 <?php 
 
 /**** @todo
-- bug dans les mails sur les champs input spéciaux qui ne renvoi pas de label
-- réduire la sensibilité au drag&drop (éviter les sauts de lignes)
-- lors du drag&drop masquer la toolbox et éviter les erreurs de memo_focus
+ * 
 *****/
 
 /**** Plus tard
-- voir pour une version sans ul/li, mais visiblement complexe de changer le tag à la volé pour faire le tri une fois edit lancer
-- si choix tpl builder on regarde dans la base de donnée les pages qui l'uilisent et propose de reprendre la tpl
-- tous les attributs de l'édition ne sont pas dans les fonctions _event du coup l'edition n'est pas complete lors de l'ajout à la volé d'un élément editable
-- ajout d'un controler au save qui check si les radio et checkbox sont bien directement dans un fieldset
-- insert dans une bdd de log à l'envoi
-- export csv
+ * - voir pour une version sans ul/li, mais visiblement complexe de changer le tag à la volé pour faire le tri une fois edit lancer
+ * - si choix tpl builder on regarde dans la base de donnée les pages qui l'uilisent et propose de reprendre la tpl
+ * - tous les attributs de l'édition ne sont pas dans les fonctions _event du coup l'edition n'est pas complete lors de l'ajout à la volé d'un élément editable
+ * - ajout d'un controler au save qui check si les radio et checkbox sont bien directement dans un fieldset
+ * - insert dans une bdd de log à l'envoi
+ * - export csv
 *****/
 
 switch(@$_GET['mode'])
@@ -618,19 +616,30 @@ switch(@$_GET['mode'])
 
 				// Tri
 				// Déplacement des éléments dans le formulaire, avec imbrication
-				$('#formulaire ul').nestedSortable({
+				$("#formulaire > ul").nestedSortable({
 					listType: 'ul',
 					items: 'li',
 					handle: '.fa-move',
-					placeholder: 'placeholder',
+					//placeholder: 'placeholder',// => créer un bug de sortie du ul master
 					isTree: true,// stabilise les déplacements
 					tolerance: "pointer",
 
+					scrollSensitivity: 150,// distance haut/bas à la quel on déclanche le scrooling
+					scrollSpeed: 3,
+
+					//containment: "#formulaire > ul",
 					//maxLevels: 3,
 					//toleranceElement: '> div'
+
+					stop: function (event, ui){
+						// Supprimes les class allowed/notallowed
+						$("#formulaire li").removeClass("allowed notallowed");
+					},
 					isAllowed: function (placeholder, placeholderParent, currentItem)
 					{						
-						//console.log(placeholderParent)
+						//console.log("isAllowed")
+						//console.log(placeholder)
+						//console.log(Date.now(), placeholderParent)//Date.now(), 
 						//console.log(currentItem)
 						//console.log(placeholderParent.data("builder"))
 
@@ -639,11 +648,13 @@ switch(@$_GET['mode'])
 						if(!placeholderParent || placeholderParent[0].nodeName == "FIELDSET")
 						{
 							$(currentItem).removeClass("notallowed").addClass("allowed");
+
 							return true;
 						}
 						else 
 						{
 							$(currentItem).removeClass("allowed").addClass("notallowed");
+
 							return false;
 						}
 					}
@@ -654,12 +665,15 @@ switch(@$_GET['mode'])
 					connectToSortable: "#formulaire > ul",
 					handle: ".fa-move",
 					helper: "clone",
+					//snap: true,
 					//revert: "invalid",// retourne à l'emplacement initial si pas dropé
-					scrollSensitivity: 100,// distance haut et bas à la quel on déclanche le scrooling
+					//scrollSensitivity: 100,// distance haut et bas à la quel on déclanche le scrooling
+					//scrollSpeed: 100,
+					//scroll: false,
 				});
 
 				// Quand on drop un élément depuis la liste des éléments disponibles
-				$("#formulaire ul").droppable({
+				$("#formulaire > ul").droppable({
 					//accept: "#builder li",
 					drop: function(event, ui)
 					{
