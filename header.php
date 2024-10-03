@@ -25,12 +25,37 @@
 
 			<!-- Changement de site en fonction de la langue -->
 			<?php
-			if($lang=='fr') $switch_lang='eu';
-			else $switch_lang='fr';
+			$list_domain_lang = $GLOBALS['domain_lang'];
 
-			if(isset($GLOBALS['domain_lang'][$switch_lang])){?>
-			<a href="<?=$GLOBALS['scheme'].$GLOBALS['domain_lang'][$switch_lang].$GLOBALS['path'];?>" lang="<?=$switch_lang?>" class="fr pbs" id="switch-lang"><?=$GLOBALS['translation']['home other language'][$switch_lang]?></a>
-			<?php }?>
+			// Supprime de la liste la langue courante
+			unset($list_domain_lang[$lang]);
+
+			// Liste les domaines des autres langues
+			if(count($list_domain_lang) > 1)
+			{
+				?>
+				<nav role="navigation" aria-label="<?php _e("Other language")?>" class="fr inline switch-lang">
+
+					<ul class="exclude">
+					<?php
+					foreach($list_domain_lang as $cle => $val)
+					{
+						echo'<li><a href="'.$GLOBALS['scheme'].$val.$GLOBALS['path'].'" lang="'.$cle.'">'.$GLOBALS['translation']['home language'][$cle].'</a></li>';
+					}
+					?>
+					</ul>
+
+				</nav>
+				<?php
+			}
+			// Un seul domaine
+			elseif(count($list_domain_lang) == 1 and isset($GLOBALS['domain_lang'][key($list_domain_lang)]))
+			{
+				?>
+				<a href="<?=$GLOBALS['scheme'].$GLOBALS['domain_lang'][key($list_domain_lang)].$GLOBALS['path'];?>" lang="<?=key($list_domain_lang)?>" class="fr pbs switch-lang"><?=$GLOBALS['translation']['home language'][key($list_domain_lang)]?></a>
+				<?php
+			}
+			?>
 
 		</div>
 
