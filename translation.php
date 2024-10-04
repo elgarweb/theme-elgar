@@ -181,7 +181,7 @@ $add_translation = array(
 	"Skip to content" => array("fr" => "Aller au contenu", "eu" => "Joan edukira", "en" => "Skip to content", "es" => "Ir al contenido"),
 
 	// Admin langue
-	"Language version" => array("fr" => "Version Française", "eu" => "Euskarazko bertsioa", "oc" => "Version en Gascon", "en" => "English version", "es" => "Versión en español"),
+	"Language version" => array("fr" => "Version Française", "eu" => "Euskarazko bertsioa", "oc" => "Version Gascon", "en" => "English version", "es" => "Versión español"),
 	"Language" => array("fr" => "Langue", "eu" => "Hizkuntza"),
 	"Duplicate" => array("fr" => "Dupliquer", "eu" => "Kopiak egin"),
 
