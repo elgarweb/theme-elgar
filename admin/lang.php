@@ -402,14 +402,54 @@ switch(@$_REQUEST['mode'])
 			// Création de la table de connexion des traductions si pas existante
 			creat_table_lang();
 
-			// Connexion table traduction
+
+			// Méthode pour 2 langues
+
+			/*// Connexion table traduction
 			$sql = "INSERT LOW_PRIORITY INTO ".$tl." (`id`, `trad`, `lang`) VALUES
 			('".(int)$_REQUEST['id']."', '".$id."', '".encode($_REQUEST['lang-dest'])."'),
 			('".$id."', '".(int)$_REQUEST['id']."', '".encode($_REQUEST['lang-source'])."')";
 
 			$connect->query($sql);
 
+			if($connect->error) echo $connect->error;*/
+
+
+
+			// Méthode pour x langues
+
+			// Connexion de la page courante avec la destination
+			$sql_insert = "REPLACE LOW_PRIORITY INTO ".$tl." (`id`, `trad`, `lang`) VALUES
+			('".(int)$_REQUEST['id']."', '".$id."', '".encode($_REQUEST['lang-dest'])."'), 
+			('".$id."', '".(int)$_REQUEST['id']."', '".encode($_REQUEST['lang-source'])."')";
+
+			// On connecte au autre langue existante qui son connecter à la page courante
+			$sql='SELECT '.$tc.'.id, '.$tc.'.lang FROM '.$tc;
+			$sql.=' JOIN '.$tl.'
+			ON
+			(
+				'.$tl.'.id = '.(int)$_REQUEST['id'].' AND
+				'.$tl.'.trad = '.$tc.'.id
+			)';
+			$sql.=' LIMIT '.count($GLOBALS['language']);
+			//echo $sql.'<br>';
+			$sel_lang = $connect->query($sql);
+			if(!empty($sel_lang->num_rows))// Si des résultat & que la table existe
+			{
+				while($res_lang = $sel_lang->fetch_assoc())
+				{
+					$sql_insert.= ",
+					('".$res_lang['id']."', '".$id."', '".encode($_REQUEST['lang-dest'])."'),
+					('".$id."', '".$res_lang['id']."', '".encode($res_lang['lang'])."')";
+				}
+			}
+
+			// Insert
+			//echo $sql_insert.'<br>';
+			$connect->query($sql_insert);
+
 			if($connect->error) echo $connect->error;
+			
 
 			
 			// Pose un cookie pour demander l'ouverture de l'admin automatiquement au chargement
@@ -464,7 +504,9 @@ switch(@$_REQUEST['mode'])
 		creat_table_lang();
 
 
-		// Méthode pour 2 langue
+
+		// Méthode pour 2 langues
+		
 		// Ajout de la connexion
 		/*$sql = "INSERT LOW_PRIORITY INTO ".$tl." (`id`, `trad`, `lang`) VALUES
 		('".(int)$_REQUEST['id-source']."', '".(int)$_REQUEST['id-dest']."', '".encode($_REQUEST['lang-dest'])."'),
@@ -475,7 +517,8 @@ switch(@$_REQUEST['mode'])
 		if($connect->error) echo $connect->error;*/
 
 
-		// Méthode pour x langue
+
+		// Méthode pour x langues
 
 		// Connexion de la page courante avec la destination
 		$sql_insert = "REPLACE LOW_PRIORITY INTO ".$tl." (`id`, `trad`, `lang`) VALUES
