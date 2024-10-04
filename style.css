@@ -1909,11 +1909,12 @@ div.editable {
 		
 			
 #accessibilite nav ul,
-.switch-lang ul
+.switch-home ul
 { min-height: unset; }
 	
 	#accessibilite nav > ul li,
-	.switch-lang > ul li {
+	.switch-home > ul li,
+	.switch-lang li {
 		display: inline;
 		min-height: unset;
 		max-width: unset;
@@ -1922,7 +1923,8 @@ div.editable {
 	}
 
 	#accessibilite nav > ul li:after,
-	.switch-lang > ul li:not(:last-child):after {
+	.switch-home > ul li:not(:last-child):after,
+	.switch-lang li:not(:last-child):after {
 		content: "|";
 		padding: 0 0.5em;
 	}
@@ -2070,7 +2072,7 @@ div.editable {
 			min-height: 30px;
 			margin-top: 1rem;
 		}
-		header nav:not(.switch-lang) li {
+		header nav:not(.switch-home) li {
 			float: none;
 			padding: 0;
 			margin-left: 0 !important;
@@ -2120,7 +2122,7 @@ div.editable {
 			#accessibilite nav > ul li:after { content: none }
 
 	header div > a,
-	.switch-lang { 
+	.switch-home { 
 		float: none !important; 
 		display: block !important; 
 		text-align: center; 

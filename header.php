@@ -34,7 +34,7 @@
 			if(count($list_domain_lang) > 1)
 			{
 				?>
-				<nav role="navigation" aria-label="<?php _e("Other language")?>" class="fr inline switch-lang">
+				<nav role="navigation" aria-label="<?php _e("Other language")?>" class="fr inline switch-home">
 
 					<ul class="exclude">
 					<?php
