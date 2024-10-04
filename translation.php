@@ -1,17 +1,19 @@
 <?php
 $add_translation = array(
 	// HEADER
-	"Menu" => array("fr" => "Menu", "eu" => "Menua"),
-	"Close" => array("fr" => "Fermer", "eu" => "Hetsi"),
+	"Menu" => array("fr" => "Menu", "eu" => "Menua", "en" => "Menu", "es" => "Menú"),
+	"Close" => array("fr" => "Fermer", "eu" => "Hetsi", "en" => "Close", "es" => "Cerca"),
 
-	"Accessibility" => array("fr" => "Accessibilité", "eu" => "Helgarritasuna"),
-	"Enhanced contrast" => array("fr" => "Contraste renforcé", "eu" => "Kontraste indartua"),
-	"Search" => array("fr" => "Rechercher", "eu" => "Bilatu"),
-	"Search the site" => array("fr" => "Rechercher sur le site", "eu" => "Webgunean bilatu"),
-	"Home other language" => array("fr" => "Accueil Français", "eu" => "Harrera euskaraz"),
-	"Contact" => array("fr" => "Contact", "eu" => "Harremanak"),
+	"Accessibility" => array("fr" => "Accessibilité", "eu" => "Helgarritasuna", "en" => "Accessibility", "es" => "Accesibilidad"),
+	"Enhanced contrast" => array("fr" => "Contraste renforcé", "eu" => "Kontraste indartua", "en" => "Enhanced contrast", "es" => "Contraste mejorado"),
+	"Search" => array("fr" => "Rechercher", "eu" => "Bilatu", "en" => "Search", "es" => "Investigar"),
+	"Search the site" => array("fr" => "Rechercher sur le site", "eu" => "Webgunean bilatu", "en" => "Search the site", "es" => "Buscar en el sitio"),
+	"Other language" => array("fr" => "Autre langue", "eu" => "Beste hizkuntza bat", "en" => "Other language", "es" => "Otro idioma"),
+	"Home language" => array("fr" => "Accueil Français", "eu" => "Harrera euskaraz", "en" => "English Home", "es" => "Inicio Español"),
+	"Contact" => array("fr" => "Contact", "eu" => "Harremanak", "en" => "Contact", "es" => "Contacto"),
 
 	// Ariane
+	"Navigation" => array("fr" => "Navigation", "eu" => "Nabigazioa"),
 	"Navigation" => array("fr" => "Navigation", "eu" => "Nabigazioa"),
 	"Upper menu" => array("fr" => "Menu supérieur", "eu" => "Goi-menua"),
 	"Breadcrumb" => array("fr" => "Fil d'Ariane", "eu" => "Hari gidaria"),
@@ -176,10 +178,10 @@ $add_translation = array(
 	"Link destination not accessible" => array("fr" => "Destination du lien non accessible", "eu" => "Destination du lien non accessible"),
 
 	// Accessibilité
-	"Skip to content" => array("fr" => "Aller au contenu", "eu" => "Joan edukira"),
+	"Skip to content" => array("fr" => "Aller au contenu", "eu" => "Joan edukira", "en" => "Skip to content", "es" => "Ir al contenido"),
 
 	// Admin langue
-	"Other language" => array("fr" => "Version Française", "eu" => "Euskarazko bertsioa", "oc" => "Version en Gascon"),
+	"Language version" => array("fr" => "Version Française", "eu" => "Euskarazko bertsioa", "oc" => "Version Gascon", "en" => "English version", "es" => "Versión español"),
 	"Language" => array("fr" => "Langue", "eu" => "Hizkuntza"),
 	"Duplicate" => array("fr" => "Dupliquer", "eu" => "Kopiak egin"),
 

@@ -1907,16 +1907,30 @@ div.editable {
 
 			#main-navigation { font-weight: bold; }
 		
- #accessibilite nav ul { min-height: unset;}
- #accessibilite nav > ul li {
- 	display: inline;
- 	min-height: unset;
- 	max-width: unset;
- 	padding: 0;
- 	align-items: unset;
- }
- #accessibilite nav > ul li:after{content: "|";padding: 0 0.5em;}
- #accessibilite nav > ul li a { color: #000}
+			
+#accessibilite nav ul,
+.switch-home ul
+{ min-height: unset; }
+	
+	#accessibilite nav > ul li,
+	.switch-home > ul li,
+	.switch-lang li {
+		display: inline;
+		min-height: unset;
+		max-width: unset;
+		padding: 0;
+		align-items: unset;
+	}
+
+	#accessibilite nav > ul li:after,
+	.switch-home > ul li:not(:last-child):after,
+	.switch-lang li:not(:last-child):after {
+		content: "|";
+		padding: 0 0.5em;
+	}
+
+		#accessibilite nav > ul li a { color: #000}
+
 
 	/* BOUTON BURGER & Animation */
 	header nav .burger {
@@ -2058,7 +2072,7 @@ div.editable {
 			min-height: 30px;
 			margin-top: 1rem;
 		}
-		header nav li {
+		header nav:not(.switch-home) li {
 			float: none;
 			padding: 0;
 			margin-left: 0 !important;
@@ -2107,9 +2121,10 @@ div.editable {
 		header #accessibilite nav > ul li { display: block; }
 			#accessibilite nav > ul li:after { content: none }
 
-	header div > a { 
+	header div > a,
+	.switch-home { 
 		float: none !important; 
-		display: block; 
+		display: block !important; 
 		text-align: center; 
 	}
 
