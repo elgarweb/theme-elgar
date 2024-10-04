@@ -96,7 +96,7 @@
 		{
 			// Si un domaine pour la langue existe
 			if(@$GLOBALS['domain_lang'][$res_lang['lang']])
-			echo'<li><a href="'.make_url($res_lang['url'], array('domaine' => $GLOBALS['scheme'].@$GLOBALS['domain_lang'][$res_lang['lang']].$GLOBALS['path'])).'" lang="'.$res_lang['lang'].'">'.$GLOBALS['translation']['language version'][$res_lang['lang']].'</a></li>';
+			echo'<li><a href="'.make_url($res_lang['url'], array('domaine' => $GLOBALS['scheme'].@$GLOBALS['domain_lang'][$res_lang['lang']].$GLOBALS['path'])).'" lang="'.$res_lang['lang'].'">'.@$GLOBALS['translation']['language version'][$res_lang['lang']].'</a></li>';
 		}
 		echo '</ul>';
 	}
