@@ -563,11 +563,11 @@ switch(@$_GET['mode'])
 				// Les tpl
 				$tpl_builder = array(
 					"h2" => "Titre niveau 2 (H2)",
-					"txt" => "Texte",
+					"txt" => "Texte libre",
 				
 					"fieldset" => "Ensemble de champs (fieldset)",
 					"checkbox" => "Case à cocher (checkbox)",
-					"radio" => "Case d'option (radio)",
+					"radio" => "Bouton radio (radio)",//Case d'option
 
 					"select" => "Liste déroulante (select)",
 
