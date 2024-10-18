@@ -230,7 +230,7 @@ $num_article = ($sel_article?$sel_article->num_rows:0);
 				if($sel_article)
 				while($res_article = $sel_article->fetch_assoc())
 				{
-					$content_article = json_decode($res_article['content'], true);
+					$content_article = json_decode((isset($res_article['content'])?$res_article['content']:''), true);
 
 					block(@$content_article['visuel'], $res_article['url'], $res_article['title'], @$content_article['description'], @$content_article['aaaa-mm-jj']);
 				}

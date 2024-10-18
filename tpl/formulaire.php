@@ -563,11 +563,11 @@ switch(@$_GET['mode'])
 				// Les tpl
 				$tpl_builder = array(
 					"h2" => "Titre niveau 2 (H2)",
-					"txt" => "Texte",
+					"txt" => "Texte libre",
 				
 					"fieldset" => "Ensemble de champs (fieldset)",
 					"checkbox" => "Case à cocher (checkbox)",
-					"radio" => "Case d'option (radio)",
+					"radio" => "Bouton radio (radio)",//Case d'option
 
 					"select" => "Liste déroulante (select)",
 
@@ -594,7 +594,7 @@ switch(@$_GET['mode'])
 		<!-- <a href='javascript:move_builder();' class="bt-move-builder" title="Déplacer les éléments">Déplacer <i class='fa fa-fw fa-move big'></i></a> -->
 
 
-		<script src='<?=$GLOBALS['path']."theme/".$GLOBALS['theme'];?>/admin/jquery-mjs.nestedSortable.js'></script>
+		<script src='<?=$GLOBALS['path']."theme/".$GLOBALS['theme'];?>/jquery-mjs.nestedSortable.js'></script>
 
 		<script>
 			$(function()

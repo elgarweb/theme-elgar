@@ -156,6 +156,8 @@ $add_translation = array(
 	"Message sent" => array("fr" => "Message envoyé", "eu" => "Bidali"),
 	"Error sending email" => array("fr" => "Erreur lors de l'envoi de l'e-mail", "eu" => "Errorea"),
 
+	"Fields marked with <span class='red'>*</span> are required." => array("fr" => "Les champs marqués d'une <span class='red'>*</span> sont obligatoires.", "eu" => ""),
+
 	"zero" => array("fr" => "zéro", "eu" => "huts"),
 	"one" => array("fr" => "un", "eu" => "bat"),
 	"two" => array("fr" => "deux", "eu" => "bi"),
