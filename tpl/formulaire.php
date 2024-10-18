@@ -594,7 +594,7 @@ switch(@$_GET['mode'])
 		<!-- <a href='javascript:move_builder();' class="bt-move-builder" title="Déplacer les éléments">Déplacer <i class='fa fa-fw fa-move big'></i></a> -->
 
 
-		<script src='<?=$GLOBALS['path']."theme/".$GLOBALS['theme'];?>/admin/jquery-mjs.nestedSortable.js'></script>
+		<script src='<?=$GLOBALS['path']."theme/".$GLOBALS['theme'];?>/jquery-mjs.nestedSortable.js'></script>
 
 		<script>
 			$(function()
