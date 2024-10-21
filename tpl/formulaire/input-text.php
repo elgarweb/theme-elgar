@@ -51,6 +51,7 @@
 		'organization' => 'text',
 		'street-address' => 'text',
 		'postal-code' => 'text',
+		'address-level2' => 'text',
 		'bday' => 'date',
 	);	
 
@@ -72,6 +73,9 @@
 
 	// Name pour le serialize
 	$array['name'] = 'input-'.$GLOBALS['editkey'];
+
+	// Placeholder vide pour ne pas les afficher en édition
+	$array['placeholder'] = '';
 
 	//echo 'type_value: '.@$type_value." // ";
 	//echo 'types[type_value]: '.@$types[$type_value]." // ";
@@ -116,6 +120,7 @@
 					'organization' => "Nom d'organisation",
 					'street-address' => "Adresse postale",
 					'postal-code' => "Code postal",
+					'address-level2' => "Ville",
 					'bday' => "Date de naissance",
 					'text' => "Texte",
 				);	
