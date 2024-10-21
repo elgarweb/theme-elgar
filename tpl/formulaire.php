@@ -1,5 +1,4 @@
 <?php 
-
 /**** @todo
  * 
 *****/
@@ -26,7 +25,7 @@ switch(@$_GET['mode'])
 
 		<section class="mw960p center">
 
-			<?php include('theme/'.$GLOBALS['theme'].'/ariane.php'); ?>
+			<?php @include('theme/'.$GLOBALS['theme'].'/ariane.php'); ?>
 
 			<article>
 
@@ -37,7 +36,7 @@ switch(@$_GET['mode'])
 
 				//highlight_string(print_r($GLOBALS['content'], true));
 				?>
-				<p class="none isrequired"><?_e("Les champs marqués d'une <span class='red'>*</span> sont obligatoires.")?></p>
+				<p class="none isrequired"><?_e("Fields marked with <span class='red'>*</span> are required.")?></p>
 
 				<form id="formulaire" method="post">
 
@@ -124,7 +123,7 @@ switch(@$_GET['mode'])
 
 					<!-- Validation RGPD -->
 					<div class="tc mtm mbm">
-						<label for="rgpdcheckbox" class="inline"><?php _e("Please check your entry and tick the box to accept the storage and processing of this information")?><span class="red">*</span></label>
+						<label for="rgpdcheckbox" class="inline"><?php txt("rgpd-check", array("tag" => "span", "default" => "Merci de vérifier votre saisie et de cocher la case afin d’accepter le stockage et le traitement de ces informations"))?><span class="red">*</span></label>
 						<input type="checkbox" name="rgpdcheckbox" id="rgpdcheckbox" required>
 					</div>
 
@@ -153,7 +152,7 @@ switch(@$_GET['mode'])
 
 					<?php $iframe = '<iframe src="https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'" scrolling="yes" title="'.htmlspecialchars(@$GLOBALS['content']['title']).'"></iframe>'; ?>
 
-					<label for="iframe"><i class="fa fa-code" aria-hidden="true"></i>Code HTML pour insérer le formulaire dans votre site :</label>
+					<label for="iframe"><i class="fa fa-code" aria-hidden="true"></i> Code HTML pour insérer le formulaire dans votre site :</label>
 
 					<input type="text" id="iframe" value="<?=htmlspecialchars($iframe);?>" onfocus="$(this).select();document.execCommand('copy')">
 
