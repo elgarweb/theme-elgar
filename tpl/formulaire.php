@@ -518,6 +518,7 @@ switch(@$_GET['mode'])
 				padding: 0.5rem;
 				margin: 1rem;
 			}
+				#formulaire .editable li { border: inherit; }
 				#formulaire li.placeholder {
 					position: relative;
 					margin: 0;
@@ -756,7 +757,7 @@ switch(@$_GET['mode'])
 				add_tools = function(that)
 				{
 					// On parcourt tous les éléments du formulaire
-					$("#formulaire li").each(function(key, val)//[data-builder]
+					$("#formulaire li[data-builder]").each(function(key, val)//[data-builder]
 					{
 						// Ajout du dragger, si pas déjà présent
 						if($(".fa-move", this).length <= 0)

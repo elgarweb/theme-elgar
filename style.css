@@ -813,6 +813,9 @@ header section:first-of-type { font-size: 1.4rem; }
 
 	#formulaire [data-builder=select] .editable-input { min-width: 350px; }
 
+	#formulaire .editable ul { padding: 0 0 0 2rem; }
+		#formulaire .editable li { list-style: initial; }
+
 /* FOOTER */
 footer #renseignement { 
 	background-color: #20828F;
