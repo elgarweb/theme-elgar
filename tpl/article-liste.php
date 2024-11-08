@@ -80,7 +80,10 @@ $url_back = encode($res['url']);
 		else $sql_state = "";
 
 		// Navigation par page
-		$num_pp = 6;
+		if(isset($GLOBALS['num-event'])) 
+			$num_pp = $GLOBALS['num-event'];
+		else 
+			$num_pp = 6;
 
 		if(isset($GLOBALS['filter']['page'])) $page = (int)$GLOBALS['filter']['page']; else $page = 1;
 
@@ -148,14 +151,7 @@ $url_back = encode($res['url']);
 
 		while($res_fiche = $sel_fiche->fetch_assoc())
 		{
-			// Affichage du message pour dire si l'article est invisible ou pas
-			if($res_fiche['state'] != "active") $state = " <span class='deactivate pat'>".__("Article d&eacute;sactiv&eacute;")."</span>";
-			else $state = "";
-
-			if(isset($res_fiche['content']))
-			$content_fiche = json_decode($res_fiche['content'], true);
-
-			block(@$content_fiche['visuel'], $res_fiche['url'], $res_fiche['title'], @$content_fiche['description'], @$content_fiche['aaaa-mm-jj'], @$content_fiche['aaaa-mm-jj-fin'], 'tags');
+			block($res_fiche);
 
 			$num_fiche++;
 		}
