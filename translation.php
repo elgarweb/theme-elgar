@@ -68,6 +68,7 @@ $add_translation = array(
 	"End date" => array("fr" => "Date de fin", "eu" => "Amaiera-data"),
 	"Publication end date" => array("fr" => "Date de fin de publication", "eu" => "Amaiera-data"),
 	"Website" => array("fr" => "Site web", "eu" => "Webgunea"),	
+	"Ticketing" => array("fr" => "Billetterie", "eu" => "Leihatila", "es" => "Taquilla"),	
 	"Click to display the" => array("fr" => "Cliquer pour afficher le", "eu" => "Egin klik bistaratzeko"),
 	"Telephone" => array("fr" => "Téléphone", "eu" => "Telefonoa"),
 	"Email" => array("fr" => "Courriel", "eu" => "E-mezua"),
