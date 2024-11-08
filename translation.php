@@ -74,6 +74,7 @@ $add_translation = array(
 	"Email" => array("fr" => "Courriel", "eu" => "E-mezua"),
 	"Mail" => array("fr" => "Mail", "eu" => "E-mezua"),
 	"Address" => array("fr" => "Adresse", "eu" => "Helbidea"),
+	"Full address" => array("fr" => "Adresse complète", "eu" => "Helbidea"),
 	"Filter by" => array("fr" => "Filtrer par", "eu" => "Irazi"),
 	"january" => array("fr" => "janvier", "eu" => "urtarrila"),
 	"february" => array("fr" => "février", "eu" => "otsaila"),

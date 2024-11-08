@@ -351,13 +351,12 @@ switch($res['tpl']) {
 						{
 							echo '<li class="bold pts pbn'.(!@$GLOBALS['content']['tag-lieu']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['tag-lieu']?' aria-hidden="true"':'').'><i class="fa fa-fw fa-location" aria-hidden="true"></i>';
 
-								tag('tag-lieu', array('tag' => 'span', 'href' => false, 'content' => true));
+								tag('tag-lieu', array('tag' => 'span', 'href' => false, 'placeholder' => "Filtre Lieu", 'content' => true));
 
 							echo'</li>';
-							
 						}
 
-						echo'<li class="bold pts pbn'.(!@$GLOBALS['content']['adresse']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['adresse']?' aria-hidden="true"':'').'><i class="fa fa-fw fa-location" aria-hidden="true"></i>'.__('Address');
+						echo'<li class="bold pts pbn'.(!@$GLOBALS['content']['adresse']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['adresse']?' aria-hidden="true"':'').'><i class="fa fa-fw fa-location" aria-hidden="true"></i>'.__('Full address');
 
 							txt('adresse', array('class'=>'plt mbt'));//,'tag'=>'p'
 
