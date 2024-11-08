@@ -5,9 +5,20 @@ if(!isset($GLOBALS['domain'])) exit;
 $GLOBALS['table_lang'] = $GLOBALS['tl'] = $GLOBALS['db_prefix'].'lang';
 
 // Fonction affichage blocs img + titre + extrait texte
-function block($url_img, $url_title, $title, $description, $date = null, $date_fin = null, $tags = null)
+function block($res_fiche)
 {
-	global $res, $res_fiche, $content_fiche, $state, $num_fiche;
+	global $res, $num_fiche;
+
+	// Affichage du message pour dire si l'article est invisible ou pas
+	if($res_fiche['state'] != "active") 
+		$state = " <span class='deactivate pat'>".__("Article d&eacute;sactiv&eacute;")."</span>";
+	else 
+		$state = "";
+
+	// Contenu de la fiche
+	if(isset($res_fiche['content']))
+		$content_fiche = json_decode($res_fiche['content'], true);
+
 
     /* Ajout espaces insécables */
     $search = array("« ", " »", " ?");
@@ -36,20 +47,23 @@ function block($url_img, $url_title, $title, $description, $date = null, $date_f
 		</div>
 	    
 		<?if(!$telechargement){?>
-		<a href="<?=make_url($url_title, array("domaine" => true));?>" class="tdn">
+		<a href="<?=make_url($res_fiche['url'], array("domaine" => true));?>" class="tdn">
 		<?}?>
 
 			<article class="h100">
+
 				<!-- Image -->
 				<?php //Affichage images des 3 premières actus seulement
-				if($num_fiche <= 3 and isset($url_img)) { ?>
+				if(($num_fiche <= 3 or isset($GLOBALS['img-event'])) and isset($content_fiche['visuel'])) { ?>
 					<figure>
-						<div class="nor" data-bg="<?=(isset(parse_url($url_img)['scheme'])?'':$GLOBALS['home']).$url_img?>" data-lazy="bg">
+						<div class="nor" data-bg="<?=(isset(parse_url($content_fiche['visuel'])['scheme'])?'':$GLOBALS['home']).$content_fiche['visuel']?>" data-lazy="bg">
 						</div>
 					</figure>
 				<?php } ?>
+
 				
-				<div class="pam<?= ($num_fiche <= 3 and isset($url_img)) ? ' brd-top' : '' ?>">				
+				<div class="pam<?= ($num_fiche <= 3 and isset($content_fiche['visuel'])) ? ' brd-top' : '' ?>">		
+									
 					<?php 
 					/* Affichage tags supprimé pour Elgarweb - laisser en commentaire si besoin pour autre mairie */
 					/* Tag  (que sur le listing des articles car query + longue)
@@ -68,50 +82,64 @@ function block($url_img, $url_title, $title, $description, $date = null, $date_f
 						</div>
 					<?php } */ 
 
+
 					// Titre H3 en home / H2 dans les listes
 					if($res['tpl'] == 'home') 
-						echo '<h3 class="pbm">'.str_replace($search, $replace, $title).'</h3>';
+						echo '<h3 class="pbm">'.str_replace($search, $replace, $res_fiche['title']).'</h3>';
 					else//if($res['tpl'] == 'article-liste' or $res['tpl'] == 'annuaire-liste' or $res['tpl'] == 'publication-liste')
-						echo '<h2 class="h3-like tl pbm">'.str_replace($search, $replace, $title).'</h2>';
+						echo '<h2 class="h3-like tl pbm">'.str_replace($search, $replace, $res_fiche['title']).'</h2>';
 
-					//Description
-					if(isset($description)) echo '<p class="description">'.word_cut($description, '80', '...').'</p>';
 
-					//Date évènement
-					if(isset($date)) 
+					// Description
+					if(isset($content_fiche['description']))
+						echo '<p class="description">'.word_cut($content_fiche['description'], '80', '...').'</p>';
+
+
+					// Date évènement
+					if(isset($content_fiche['aaaa-mm-jj'])) 
 					{
 						echo '<p class="date bold mbm">';
 					
-							if($GLOBALS['lang'] == 'eu') echo str_replace('-', '/', $date);
+							if($GLOBALS['lang'] == 'eu') echo str_replace('-', '/', $content_fiche['aaaa-mm-jj']);
 							else 
 							{
 								// On affiche en entier la date de début ?
-								$exp_date = explode('-', $date);
-								if(isset($date_fin)) 
+								$exp_date = explode('-', $content_fiche['aaaa-mm-jj']);
+								if(isset($content_fiche['aaaa-mm-jj-fin'])) 
 								{
-									$exp_date_fin = explode('-', $date_fin);
+									$exp_date_fin = explode('-', $content_fiche['aaaa-mm-jj-fin']);
 
 									// Si année et mois identique on affiche que le jour
 									if($exp_date[0] == $exp_date_fin[0] and $exp_date[1] == $exp_date_fin[1])
 										echo $exp_date[2];
 									else 
-										echo date_lang($date);
+										echo date_lang($content_fiche['aaaa-mm-jj']);
 								}
 								else 
-									echo date_lang($date);
+									echo date_lang($content_fiche['aaaa-mm-jj']);
 								
 							}
 
-							if(isset($date_fin))
+							if(isset($content_fiche['aaaa-mm-jj-fin']))
 							{
 								echo' '.__("to");
 
-								if($GLOBALS['lang'] == 'eu') echo str_replace('-', '/', $date_fin);
-								else echo ' '.date_lang($date_fin);
+								if($GLOBALS['lang'] == 'eu') 
+									echo str_replace('-', '/', $content_fiche['aaaa-mm-jj-fin']);
+
+								else echo ' '.date_lang($content_fiche['aaaa-mm-jj-fin']);
 							}
 
 						echo '</p>';
 					}
+
+
+					// Tag Lieu
+					if(isset($GLOBALS['tag-lieu']) and isset($content_fiche['tag-lieu'])) 
+					{
+						echo '<p class="lieu bold mbm">'.$content_fiche['tag-lieu'].'</p>';
+					}
+
 
 					// Affichage du lien de téléchargement pour les publications
 					if($telechargement)
@@ -121,7 +149,7 @@ function block($url_img, $url_title, $title, $description, $date = null, $date_f
 						
 						// Si texte explicatif ou admin => lien "lire la suite"
 						if(@$content_fiche['texte'] or @$_SESSION['auth']['edit-publication'])
-							echo'<p class="plus absolute bot15 bold tdu mbn"><a href="'.make_url($url_title, array("domaine" => true)).'" class="tdn">'.(@$_SESSION['auth']['edit-publication']?"Modifier la fiche":__("Read more")).'</a></p>';
+							echo'<p class="plus absolute bot15 bold tdu mbn"><a href="'.make_url($res_fiche['url'], array("domaine" => true)).'" class="tdn">'.(@$_SESSION['auth']['edit-publication']?"Modifier la fiche":__("Read more")).'</a></p>';
 					}
 					else
 					{?>
@@ -132,6 +160,7 @@ function block($url_img, $url_title, $title, $description, $date = null, $date_f
 					<?}?>
 
 				</div>
+				
 			</article>
 
 		<?if(!$telechargement){?>

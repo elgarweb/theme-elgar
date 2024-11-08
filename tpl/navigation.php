@@ -223,9 +223,7 @@ switch(@$_GET['mode'])
 
 							while($res_event = $sel_event->fetch_assoc())
 							{
-								$content_event = json_decode($res_event['content'], true);
-
-								block(@$content_event['visuel'], $res_event['url'], $res_event['title'], @$content_event['description'], @$content_event['aaaa-mm-jj'], @$content_event['aaaa-mm-jj-fin']);
+								block($res_event);
 							}
 							?>
 
