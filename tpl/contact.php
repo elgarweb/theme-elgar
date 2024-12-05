@@ -127,11 +127,11 @@ switch(@$_GET['mode'])
 					<?php txt('texte-rgpd', 'mtl')?>
 
 
-					<input type="hidden" name="rgpd_text" value="<?=htmlspecialchars(@$GLOBALS['content']['rgpd']);?>">
+					<input type="hidden" name="rgpd_text" value="<?=htmlspecialchars((isset($GLOBALS['content']['rgpd'])?$GLOBALS['content']['rgpd']:''));?>">
 
 					<input type="hidden" name="nonce_contact" value="<?=nonce("nonce_contact");?>">
 
-					<input type="hidden" name="referer" value="<?=htmlspecialchars((isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:""));?>">
+					<input type="hidden" name="referer" value="<?=htmlspecialchars((isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:''));?>">
 
 				</form>
 

@@ -813,6 +813,9 @@ header section:first-of-type { font-size: 1.4rem; }
 
 	#formulaire [data-builder=select] .editable-input { min-width: 350px; }
 
+	#formulaire .editable ul { padding: 0 0 0 2rem; }
+		#formulaire .editable li { list-style: initial; }
+
 /* FOOTER */
 footer #renseignement { 
 	background-color: #20828F;
@@ -988,7 +991,7 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
 
 button[disabled], html input[disabled], .disabled { 
 	background-color: buttonface !important;
-	color: graytext !important;
+	color: #6b6b6b !important;
 	box-shadow: none;
 	cursor: default;
 }
@@ -2518,6 +2521,7 @@ div.editable {
 .fa-superscript:before { content: '\f12b'; } /* '' */
 .fa-calendar-empty:before { content: '\f133'; } /* '' */
 .fa-play-circled:before { content: '\f144'; } /* '' */
+.fa-ticket:before { content: '\f145'; } /* '' */
 .fa-doc-inv:before { content: '\f15b'; } /* '' */
 .fa-youtube:before { content: '\f167'; } /* '' */
 .fa-instagram:before { content: '\f16d'; } /* '' */

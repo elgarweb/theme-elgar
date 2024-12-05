@@ -306,6 +306,7 @@ switch($res['tpl']) {
 				if($infos) 
 				{ 
 					if(!@$GLOBALS['content']['url-site-web'] and
+						!@$GLOBALS['content']['url-billetterie'] and
 						!@$GLOBALS['content']['telephone'] and
 						!@$GLOBALS['content']['mail-contact'] and
 						!@$GLOBALS['content']['adresse'])
@@ -315,21 +316,49 @@ switch($res['tpl']) {
 
 					echo '<ul class="unstyled pln'.($hidden?' editable-hidden':'').'">';
 
-						echo '<li class="bold pts pbn'.(!@$GLOBALS['content']['url-site-web']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['url-site-web']?' aria-hidden="true"':'').'><i class="fa fa-fw fa-globe" aria-hidden="true"></i> '.(@$GLOBALS['content']['url-site-web']?'<a href="'.@$GLOBALS['content']['url-site-web'].'" target="_blank">'.__('Website').'</a>':'').'';
+						echo '<li class="bold pts pbn'.(!@$GLOBALS['content']['url-site-web']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['url-site-web']?' aria-hidden="true"':'').'><i class="fa fa-fw fa-globe" aria-hidden="true"></i>'.(@$GLOBALS['content']['url-site-web']?'<a href="'.@$GLOBALS['content']['url-site-web'].'" target="_blank">'.__('Website').'</a>':'').'';
 
-						input('url-site-web', array('type' => 'hidden'));
+							input('url-site-web', array('type' => 'hidden'));
 
-					  	echo '</li><li class="pbn'.(!@$GLOBALS['content']['telephone']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['telephone']?' aria-hidden="true"':'').'><details class="pts" aria-live="polite"><summary class="tel color pointer tdu bold  inbl" data-encode="'.@$GLOBALS['content']['telephone'].'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary>'.(@$GLOBALS['content']['telephone']?'<p class="inline pls bold"></p>':'').'</details>';
+					  	echo'</li>';
 
-					  	input('telephone', array('type' => 'hidden', 'class' => 'encode'));
+
+						if(isset($GLOBALS['url-billetterie']))
+						{
+							echo '<li class="bold pts pbn'.(!@$GLOBALS['content']['url-billetterie']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['url-billetterie']?' aria-hidden="true"':'').'><i class="fa fa-fw fa-ticket" aria-hidden="true"></i>'.(@$GLOBALS['content']['url-billetterie']?'<a href="'.@$GLOBALS['content']['url-billetterie'].'" target="_blank">'.__('Ticketing').'</a>':'').'';
+
+								input('url-billetterie', array('type' => 'hidden'));
+
+							echo'</li>';
+						}
+
+						
+						echo'<li class="pbn'.(!@$GLOBALS['content']['telephone']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['telephone']?' aria-hidden="true"':'').'><details class="pts" aria-live="polite"><summary class="tel color pointer tdu bold  inbl" data-encode="'.@$GLOBALS['content']['telephone'].'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary>'.(@$GLOBALS['content']['telephone']?'<p class="inline pls bold"></p>':'').'</details>';
+
+					  		input('telephone', array('type' => 'hidden', 'class' => 'encode'));
 		
-					  	echo '</li><li class="pbn'.(!@$GLOBALS['content']['mail-contact']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['mail-contact']?' aria-hidden="true"':'').'><details class="pts" aria-live="polite"><summary class="tel color pointer tdu bold inbl" data-encode="'.@$GLOBALS['content']['mail-contact'].'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary>'.(@$GLOBALS['content']['mail-contact']?'<p class="inline pls bold"></p>':'').'</details>';
+					  	echo'</li>';
 
-						input('mail-contact', array('type' => 'hidden', 'class' => 'encode'));
+						
+						echo'<li class="pbn'.(!@$GLOBALS['content']['mail-contact']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['mail-contact']?' aria-hidden="true"':'').'><details class="pts" aria-live="polite"><summary class="tel color pointer tdu bold inbl" data-encode="'.@$GLOBALS['content']['mail-contact'].'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary>'.(@$GLOBALS['content']['mail-contact']?'<p class="inline pls bold"></p>':'').'</details>';
 
-						echo '</li><li class="bold pts pbn'.(!@$GLOBALS['content']['adresse']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['adresse']?' aria-hidden="true"':'').'><i class="fa fa-fw fa-location" aria-hidden="true"></i>'.__('Address');
+							input('mail-contact', array('type' => 'hidden', 'class' => 'encode'));
 
-						txt('adresse', array('class'=>'plt mbt'));//,'tag'=>'p'
+						echo'</li>';
+
+
+						if(isset($GLOBALS['tag-lieu']))
+						{
+							echo '<li class="bold pts pbn'.(!@$GLOBALS['content']['tag-lieu']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['tag-lieu']?' aria-hidden="true"':'').'><i class="fa fa-fw fa-location" aria-hidden="true"></i>';
+
+								tag('tag-lieu', array('tag' => 'span', 'href' => false, 'placeholder' => "Filtre Lieu", 'content' => true));
+
+							echo'</li>';
+						}
+
+						echo'<li class="bold pts pbn'.(!@$GLOBALS['content']['adresse']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['adresse']?' aria-hidden="true"':'').'><i class="fa fa-fw fa-location" aria-hidden="true"></i>'.__('Full address');
+
+							txt('adresse', array('class'=>'plt mbt'));//,'tag'=>'p'
 
 					echo '</li></ul>';
 				}

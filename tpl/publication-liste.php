@@ -227,13 +227,7 @@ if($sel_tag_list->num_rows <= 0 or isset($tag))
 
 		while($res_fiche = $sel_fiche->fetch_assoc())
 		{
-			// Affichage du message pour dire si l'article est invisible ou pas
-			if($res_fiche['state'] != "active") $state = " <span class='deactivate pat'>".__("Article d&eacute;sactiv&eacute;")."</span>";
-			else $state = "";
-
-			$content_fiche = json_decode($res_fiche['content'], true);
-
-			block(@$content_fiche['visuel'], $res_fiche['url'], $res_fiche['title'], @$content_fiche['description'], @$content_fiche['aaaa-mm-jj-publication']);				
+			block($res_fiche);				
 		}
 		?>
 
