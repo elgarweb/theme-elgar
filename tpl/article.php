@@ -347,11 +347,21 @@ switch($res['tpl']) {
 						echo'</li>';
 
 
+						if(isset($GLOBALS['tag-public']))
+						{
+							echo '<li class="bold pts pbn'.(!@$GLOBALS['content']['public']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['public']?' aria-hidden="true"':'').'><i class="fa fa-fw fa-users" aria-hidden="true"></i>';
+
+								tag('public', array('tag' => 'span', 'href' => false, 'placeholder' => "Filtre public", 'content' => true));
+
+							echo'</li>';
+						}
+
+
 						if(isset($GLOBALS['tag-lieu']))
 						{
-							echo '<li class="bold pts pbn'.(!@$GLOBALS['content']['tag-lieu']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['tag-lieu']?' aria-hidden="true"':'').'><i class="fa fa-fw fa-location" aria-hidden="true"></i>';
+							echo '<li class="bold pts pbn'.(!@$GLOBALS['content']['lieu']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['lieu']?' aria-hidden="true"':'').'><i class="fa fa-fw fa-home" aria-hidden="true"></i>';
 
-								tag('tag-lieu', array('tag' => 'span', 'href' => false, 'placeholder' => "Filtre Lieu", 'content' => true));
+								tag('lieu', array('tag' => 'span', 'href' => false, 'placeholder' => "Filtre Lieu", 'content' => true));
 
 							echo'</li>';
 						}

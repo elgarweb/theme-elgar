@@ -49,20 +49,105 @@ $url_back = encode($res['url']);
 
 			//echo $connect->error;
 
-			if($sel_tag_list->num_rows > 0) {
+
+			// Filtre la liste de l'agenda (tag/public/lieu)
+			if(isset($GLOBALS['filtre-agenda']) and $res['url'] == 'agenda')
+			{
 			?>
-				<nav role="navigation" aria-label="<?php _e("Filter by")?>" class="flex wrap space jcc tc ptl pbm">
-					<ul class="unstyled pln">
-						<?php 
-						while($res_tag_list = $sel_tag_list->fetch_assoc()) {
-							echo'<li class="inbl prs"><a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="bt-tag'.($tag==$res_tag_list['encode']?' selected':'').'">'.$res_tag_list['name'].'</a></li>';
-						}
-						?>
-					</ul>
-				</nav>
-			<?}?>
+				<form id="filtre-agenda" class="">
+
+					<div class="grid">
+
+						<div class="mbs">
+							<label for="tag"><?_e("Type d'événement")?></label>
+							<select id="tag" class="block">
+								<option value="" <?=(!@$tag?'selected':'')?>><?_e("Tous les types")?></option>
+								<?php 
+								while($res_tag_list = $sel_tag_list->fetch_assoc())
+								{ 
+									echo'<option value="'.$res_tag_list['encode'].'"'.(@$tag == $res_tag_list['encode']?' selected':'').'>'.$res_tag_list['name'].'</option>';
+								}
+								?>
+							</select>
+						</div>
+
+						<div class="mbs">
+							<label for="public"><?_e("Public")?></label>
+							<select id="public" class="block">
+								<option value="" <?=(!@$GLOBALS['filter']['public']?'selected':'')?>><?_e("Tous les publics")?></option>
+								<?php 
+								$sel_tag_list = $connect->query("SELECT distinct encode, name FROM ".$table_tag." WHERE zone='public' AND lang='".$lang."' GROUP BY encode, name ORDER BY encode ASC");
+								echo "SELECT distinct encode, name FROM ".$table_tag." WHERE zone='public' AND lang='".$lang."' GROUP BY encode, name ORDER BY encode ASC";
+								while($res_tag_list = $sel_tag_list->fetch_assoc())
+								{
+									echo'<option value="'.$res_tag_list['encode'].'"'.(@$GLOBALS['filter']['public'] == $res_tag_list['encode']?' selected':'').'>'.$res_tag_list['name'].'</option>';
+								}
+								?>
+							</select>
+						</div>
+
+						<div class="mbs">
+							<label for="lieu"><?_e("Lieu")?></label>
+							<select id="lieu" class="block">
+								<option value="" <?=(!@$GLOBALS['filter']['lieu']?'selected':'')?>><?_e("Tous les lieux")?></option>
+								<?php 
+								$sel_tag_list = $connect->query("SELECT distinct encode, name FROM ".$table_tag." WHERE zone='lieu' AND lang='".$lang."' GROUP BY encode, name ORDER BY encode ASC");
+								while($res_tag_list = $sel_tag_list->fetch_assoc())				
+								{
+									echo'<option value="'.$res_tag_list['encode'].'"'.(@$GLOBALS['filter']['lieu'] == $res_tag_list['encode']?' selected':'').'>'.$res_tag_list['name'].'</option>';
+								}
+								?>
+							</select>
+						</div>
+
+					</div>
+
+					<div class="tc mtm">
+						<button type="submit" class="bt" title="<?_e("Filter (reloads the page)")?>"><?_e("Filtrer les événements")?></button>
+					</div>
+
+				</form>
+
+				<script>
+				$("#filtre-agenda").on("submit", function(event) {
+					event.preventDefault();
+
+					var url = "/<?=encode($res['url'])?>";
+
+					//if(tag) url = url+'/'+tag;
+
+					if($("#tag").val()) url = url + '/' + $("#tag").val();
+					if($("#public").val()) url = url + '/public_' + $("#public").val();
+					if($("#lieu").val()) url = url + '/lieu_' + $("#lieu").val();
+
+					document.location.href = url;
+				});
+				</script>
+
+			<?php
+			}
+			else
+			{
+				// Que les tags
+				if($sel_tag_list->num_rows > 0) {
+				?>
+					<nav role="navigation" aria-label="<?php _e("Filter by")?>" class="flex wrap space jcc tc ptl pbm">
+						<ul class="unstyled pln">
+							<?php 
+							while($res_tag_list = $sel_tag_list->fetch_assoc()) {
+								echo'<li class="inbl prs"><a href="'.make_url($res['url'], array($res_tag_list['encode'], 'domaine' => true)).'" class="bt-tag'.($tag==$res_tag_list['encode']?' selected':'').'">'.$res_tag_list['name'].'</a></li>';
+							}
+							?>
+						</ul>
+					</nav>
+				<?php 
+				}
+			}
+			?>
+
 			
 			<?php txt('description', array('class'=>'ptm'));//tc ?>
+
 
 		</div>
 
@@ -102,7 +187,31 @@ $url_back = encode($res['url']);
 			".$tt.".zone = '".$res['url']."' AND
 			".$tt.".lang = '".$lang."' AND
 			".$tt.".encode = '".$tag."'
+		)";		
+		
+
+		// Si filtre public
+		if(@$GLOBALS['filter']['public'])
+		$sql.=" JOIN ".$tt." AS tag_public
+		ON
+		(
+			tag_public.id = ".$tc.".id AND
+			tag_public.zone = 'public' AND
+			tag_public.lang = '".$lang."' AND
+			tag_public.encode = '".encode($GLOBALS['filter']['public'])."'
 		)";
+
+		// Si filtre lieu
+		if(@$GLOBALS['filter']['lieu'])
+		$sql.=" JOIN ".$tt." AS tag_lieu
+		ON
+		(
+			tag_lieu.id = ".$tc.".id AND
+			tag_lieu.zone = 'lieu' AND
+			tag_lieu.lang = '".$lang."' AND
+			tag_lieu.encode = '".encode($GLOBALS['filter']['lieu'])."'
+		)";
+
 
 		// Pour le tri par date pour les events
 		if($res['url']=='agenda'){

@@ -91,8 +91,15 @@ function block($res_fiche)
 
 
 					// Description
-					if(isset($content_fiche['description']))
+					if(isset($content_fiche['description']) and $GLOBALS['description-blocks'])
 						echo '<p class="description">'.word_cut($content_fiche['description'], '80', '...').'</p>';
+
+					
+					// Tag
+					if(isset($GLOBALS['tag-blocks']) and isset($content_fiche['agenda'])) 
+					{
+						echo '<p class="tag">'.$content_fiche['agenda'].'</p>';
+					}
 
 
 					// Date évènement
@@ -135,9 +142,9 @@ function block($res_fiche)
 
 
 					// Tag Lieu
-					if(isset($GLOBALS['tag-lieu']) and isset($content_fiche['tag-lieu'])) 
+					if(isset($GLOBALS['tag-lieu']) and isset($content_fiche['lieu'])) 
 					{
-						echo '<p class="lieu bold mbm">'.$content_fiche['tag-lieu'].'</p>';
+						echo '<p class="lieu mbm">'.$content_fiche['lieu'].'</p>';
 					}
 
 
