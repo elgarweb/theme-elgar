@@ -258,6 +258,10 @@ $url_back = encode($res['url']);
 
 		$num_fiche = 1;
 
+		// Pas de résultats
+		if($sel_fiche->num_rows == 0) echo'<p class="mtl tc">'.__("No result").'.</p>';
+
+		// Liste des articles/events
 		while($res_fiche = $sel_fiche->fetch_assoc())
 		{
 			block($res_fiche);
