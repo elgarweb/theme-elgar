@@ -23,40 +23,42 @@ if(@$content['intranet'] != 'true' or (@$content['intranet'] == 'true' and (isse
 
 			<?php if($res['tpl'] == 'page-sommaire-grille'){?>
 				
-				
+
 				<article class="mw960p minw320p">
 
 					<?php txt('description'); ?>
 
-					<div>
-					<ul id="groupe" class="module unstyled pan">
-					<?php
-					$groupe = module("groupe");
-					//highlight_string(print_r($groupe, true));
-					foreach($groupe as $i => $val)
-					{ ?>
-						<li>
+					<div id="texte">
 
-							<?php
-							h2('groupe-titre-'.$i);
-							txt('groupe-texte-'.$i);
-							?>
+						<ul id="groupe" class="module unstyled pan">
+						<?php
+						$groupe = module("groupe");
+						//highlight_string(print_r($groupe, true));
+						foreach($groupe as $i => $val)
+						{ ?>
+							<li>
 
-							<ul id="grille-<?=$i?>" class="module unstyled pan end grid-4 space-xl">
-							<?php 
-							$grille = module('grille-'.$i);
-							//highlight_string(print_r($grille, true));
-							foreach($grille as $k => $val) { ?>
-								<li>
-									<?php media('grille-'.$i.'-visuel-'.$k, array('size' => '150x150', 'lazy' => true));?>
-									<?php txt('grille-'.$i.'-texte-'.$k, array("class" => ""));?>
-								</li>
-							<?php }	?>
-							</ul>		
+								<?php
+								h2('groupe-titre-'.$i);
+								txt('groupe-texte-'.$i);
+								?>
 
-						</li>
-					<?php } ?>
-					</ul>
+								<ul id="grille-<?=$i?>" class="module unstyled pan end grid-4 space-xl">
+								<?php 
+								$grille = module('grille-'.$i);
+								//highlight_string(print_r($grille, true));
+								foreach($grille as $k => $val) { ?>
+									<li>
+										<?php media('grille-'.$i.'-visuel-'.$k, array('size' => '150x150', 'lazy' => true));?>
+										<?php txt('grille-'.$i.'-texte-'.$k, array("class" => ""));?>
+									</li>
+								<?php }	?>
+								</ul>		
+
+							</li>
+						<?php } ?>
+						</ul>
+
 					</div>
 
 				</article>
