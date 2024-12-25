@@ -146,7 +146,7 @@
 		{
 			<?php
 			// Statistique Plausible
-			if(isset($GLOBALS['plausible_auth'])){?>
+			if(isset($GLOBALS['plausible_auth']) and @$GLOBALS['plausible_auth']){?>
 				// Bouton admin Statistique
 				if(get_cookie('auth').indexOf('view-stats') !== -1)
 					$("#admin-bar").append("<button id='statistique' class='fl mat small t5 popin'><i class='fa fa-chart-bar big vatt'></i> <span class='no-small-screen'>Statistique</span></button>");

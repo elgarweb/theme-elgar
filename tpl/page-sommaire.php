@@ -20,11 +20,62 @@ if(@$content['intranet'] != 'true' or (@$content['intranet'] == 'true' and (isse
 				</nav>
 			</div>
 
-			<article class="mw960p">
 
-				<?php txt('texte', array('lazy' => true)); ?>
+			<?php if($res['tpl'] == 'page-sommaire-grille'){?>
+				
 
-			</article>
+				<article class="mw960p minw320p">
+
+					<?php txt('description'); ?>
+
+					<div id="texte">
+
+						<ul id="groupe" class="module unstyled pan">
+						<?php
+						$groupe = module("groupe");
+						//highlight_string(print_r($groupe, true));
+						foreach($groupe as $i => $val)
+						{ ?>
+							<li>
+
+								<?php
+								h2('groupe-titre-'.$i);
+								txt('groupe-texte-'.$i);
+								?>
+
+								<ul id="grille-<?=$i?>" class="module unstyled pan end grid-4 space-xl">
+								<?php 
+								$grille = module('grille-'.$i);
+								//highlight_string(print_r($grille, true));
+								foreach($grille as $k => $val) { ?>
+									<li>
+										<?php media('grille-'.$i.'-visuel-'.$k, array('size' => '150x150', 'lazy' => true));?>
+										<?php txt('grille-'.$i.'-texte-'.$k, array("class" => ""));?>
+									</li>
+								<?php }	?>
+								</ul>		
+
+							</li>
+						<?php } ?>
+						</ul>
+
+					</div>
+
+				</article>
+
+
+			<?php }else{?>
+
+
+				<article class="mw960p">
+
+					<?php txt('texte', array('lazy' => true)); ?>
+
+				</article>
+
+
+			<?php }?>
+
 
 		</div>
 

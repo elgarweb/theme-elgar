@@ -38,6 +38,7 @@
 
 </section>
 <script>
+	// Masque les titres vides
 	const allTitles = document.querySelectorAll('h2, h3, h4');
 	allTitles.forEach(function(theTitle) {
 		contentTitle = theTitle.innerHTML

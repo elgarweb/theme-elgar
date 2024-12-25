@@ -9,7 +9,7 @@ $add_translation = array(
 	"Search" => array("fr" => "Rechercher", "eu" => "Bilatu", "en" => "Search", "es" => "Investigar"),
 	"Search the site" => array("fr" => "Rechercher sur le site", "eu" => "Webgunean bilatu", "en" => "Search the site", "es" => "Buscar en el sitio"),
 	"Other language" => array("fr" => "Autre langue", "eu" => "Beste hizkuntza bat", "en" => "Other language", "es" => "Otro idioma"),
-	"Home language" => array("fr" => "Accueil Français", "eu" => "Harrera euskaraz", "en" => "English Home", "es" => "Inicio Español"),
+	"Home language" => array("fr" => "Accueil Français", "eu" => "Harrera euskaraz", "en" => "English", "es" => "Español"),
 	"Contact" => array("fr" => "Contact", "eu" => "Harremanak", "en" => "Contact", "es" => "Contacto"),
 
 	// Ariane
