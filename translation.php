@@ -61,6 +61,7 @@ $add_translation = array(
 	"Read more" => array("fr" => "Lire la suite", "eu" => "Segida irakurri"),
 	"Go back to the news" => array("fr" => "Retour aux actualités", "eu" => "Itzuli aktualitateetara"),
 	"Go back to the agenda" => array("fr" => "Retour à l'agenda", "eu" => "Itzuli agendara"),
+	"Go back to the unavoidable" => array("fr" => "Retour aux incontournables", "eu" => "Itzuli funtsezkoetara"),
 	"Edit event" => array("fr" => "Edition d'un événement", "eu" => "Gertakari baten argitalpena"),
 	"Event" => array("fr" => "Événement", "eu" => "Agenda"),
 	"Categories" => array("fr" => "Catégories/Tags", "eu" => "Sailak/Tags"),
@@ -95,6 +96,11 @@ $add_translation = array(
 	"at" => array("fr" => "à", "eu" => ""),// Traduction EU
 	"to" => array("fr" => "au", "eu" => "-"),// Traduction EU
 	"Browsing by page" => array("fr" => "Pagination", "eu" => "Nabigazioa orrika"),
+
+
+	// INCONTOURNABLE
+	"Add incontournable" => array("fr" => "Ajouter un incontournable"),
+	"Edit incontournable" => array("fr" => "Edition d'un incontournable"),
 
 
 	// RECHERCHE
@@ -203,6 +209,8 @@ $add_translation = array(
 		"actualites" => array("fr" => "Actualités"),
 
 	"Agenda" => array("fr" => "Agenda", "eu" => "Agenda"),
+
+	"Unavoidable" => array("fr" => "Incontournables", "eu" => "Ezinbestekoa"),
 
 	"Directory" => array("fr" => "Annuaire", "eu" => "Aurkitegia"),
 		"annuaire" => array("fr" => "Annuaire"),
