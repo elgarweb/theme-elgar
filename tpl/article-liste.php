@@ -235,7 +235,7 @@ $url_back = encode($res['url']);
 			$sql.=" AND (event_fin.cle >= '".date("Y-m-d")."' OR event_deb.cle >= '".date("Y-m-d")."')";
 		}
 		else {
-			$sql.=" AND (".$tc.".type='article' OR ".$tc.".type='article-intramuros')";
+			$sql.=" AND (".$tc.".type='article' OR ".$tc.".type='article-intramuros' OR ".$tc.".type='incontournable')";
 
 			// Que les actu en cours (avec date de fin), ou pas documentés sur la date de fin
 			$sql.=" AND (actu_fin.id IS NULL OR actu_fin.cle >= '".date("Y-m-d")."')";

@@ -31,6 +31,20 @@ switch($res['tpl']) {
 		$infos = true;
 	break;
 
+	case 'incontournable':
+		$type = 'incontournable';
+		$media = true;
+		$dir = encode(__('Unavoidable'));
+		$url_back = encode(__('Unavoidable'));
+		$text_back = __("Go back to the unavoidable");
+		$infos = true;
+
+		$GLOBALS['url-billetterie'] = null;
+		$GLOBALS['tag-public'] = null;
+		$GLOBALS['tag-lieu'] = null;
+		
+	break;
+
 	case 'annuaire':
 		$type = 'annuaire';
 		$media = true;
@@ -316,6 +330,7 @@ switch($res['tpl']) {
 
 					echo '<ul class="unstyled pln'.($hidden?' editable-hidden':'').'">';
 
+						// Site web
 						echo '<li class="bold pts pbn'.(!@$GLOBALS['content']['url-site-web']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['url-site-web']?' aria-hidden="true"':'').'><i class="fa fa-fw fa-globe" aria-hidden="true"></i>'.(@$GLOBALS['content']['url-site-web']?'<a href="'.@$GLOBALS['content']['url-site-web'].'" target="_blank">'.__('Website').'</a>':'').'';
 
 							input('url-site-web', array('type' => 'hidden'));
@@ -323,6 +338,7 @@ switch($res['tpl']) {
 					  	echo'</li>';
 
 
+						// Billetterie
 						if(isset($GLOBALS['url-billetterie']))
 						{
 							echo '<li class="bold pts pbn'.(!@$GLOBALS['content']['url-billetterie']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['url-billetterie']?' aria-hidden="true"':'').'><i class="fa fa-fw fa-ticket" aria-hidden="true"></i>'.(@$GLOBALS['content']['url-billetterie']?'<a href="'.@$GLOBALS['content']['url-billetterie'].'" target="_blank">'.__('Ticketing').'</a>':'').'';
@@ -332,7 +348,8 @@ switch($res['tpl']) {
 							echo'</li>';
 						}
 
-						
+
+						// Téléphone
 						echo'<li class="pbn'.(!@$GLOBALS['content']['telephone']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['telephone']?' aria-hidden="true"':'').'><details class="pts" aria-live="polite"><summary class="tel color pointer tdu bold  inbl" data-encode="'.@$GLOBALS['content']['telephone'].'"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>'.__('Telephone').'</summary>'.(@$GLOBALS['content']['telephone']?'<p class="inline pls bold"></p>':'').'</details>';
 
 					  		input('telephone', array('type' => 'hidden', 'class' => 'encode'));
@@ -340,6 +357,7 @@ switch($res['tpl']) {
 					  	echo'</li>';
 
 						
+						// Mail
 						echo'<li class="pbn'.(!@$GLOBALS['content']['mail-contact']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['mail-contact']?' aria-hidden="true"':'').'><details class="pts" aria-live="polite"><summary class="tel color pointer tdu bold inbl" data-encode="'.@$GLOBALS['content']['mail-contact'].'"><i class="fa fa-fw fa-mail-alt" aria-hidden="true"></i>'.__('Email').'</summary>'.(@$GLOBALS['content']['mail-contact']?'<p class="inline pls bold"></p>':'').'</details>';
 
 							input('mail-contact', array('type' => 'hidden', 'class' => 'encode'));
@@ -347,6 +365,7 @@ switch($res['tpl']) {
 						echo'</li>';
 
 
+						// Public
 						if(isset($GLOBALS['tag-public']))
 						{
 							echo '<li class="bold pts pbn'.(!@$GLOBALS['content']['public']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['public']?' aria-hidden="true"':'').'><i class="fa fa-fw fa-users" aria-hidden="true"></i>';
@@ -357,6 +376,7 @@ switch($res['tpl']) {
 						}
 
 
+						// Lieu
 						if(isset($GLOBALS['tag-lieu']))
 						{
 							echo '<li class="bold pts pbn'.(!@$GLOBALS['content']['lieu']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['lieu']?' aria-hidden="true"':'').'><i class="fa fa-fw fa-home" aria-hidden="true"></i>';
@@ -366,6 +386,8 @@ switch($res['tpl']) {
 							echo'</li>';
 						}
 
+
+						// Adresse
 						echo'<li class="bold pts pbn'.(!@$GLOBALS['content']['adresse']?' editable-hidden':'').'"'.(!@$GLOBALS['content']['adresse']?' aria-hidden="true"':'').'><i class="fa fa-fw fa-location" aria-hidden="true"></i>'.__('Full address');
 
 							txt('adresse', array('class'=>'plt mbt'));//,'tag'=>'p'
