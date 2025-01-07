@@ -1,7 +1,5 @@
-# Sortir des GAFAM
+# Déménagement de Elgarweb
 
-Dans l'optique de se dégafamisé le plus possible, nous avons décidé de déménager le thème Elgarweb sur une plateforme qui n'appartient pas à un GAFAM (Github a été racheté par Microsoft) et qui promeut le logiciel libre.
-
-Le projet se trouve désormais sur [FramaGit](https://framagit.org/translucide/themes/Elgar), une instance de GitLab (programme basé sur Git, dans sa version Community Edition, sous licence MIT), tenu par Framasoft (association qui soutient le logiciel libre).
+Le thème Elgarweb est désormais sur [FramaGit](https://framagit.org/translucide/themes/Elgar).
 
 https://framagit.org/translucide/themes/Elgar
